@@ -121,6 +121,66 @@ export default class CreateJob extends React.Component {
   handleValidate = _ => {
     const { values, errors } = this.state;
     const { jobTitle, employmentType, category, primarySkill, experienceReqFrom, experienceReqTo, annualSalaryFrom, annualSalaryTo, noOfPositionsAvailable, country, state, city } = values;
+    if (!jobTitle) {
+      errors.jobTitle = 'Job Title cannot be left blank'
+    } else {
+      errors && delete errors.jobTitle;
+    }
+    if (!employmentType) {
+      errors.employmentType = 'Employment Type cannot be left blank'
+    } else {
+      errors && delete errors.employmentType;
+    }
+    if (!category) {
+      errors.category = 'Category cannot be left blank'
+    } else {
+      errors && delete errors.category;
+    }
+    if (!primarySkill) {
+      errors.primarySkill = 'Primary SKill cannot be left blank'
+    } else {
+      errors && delete errors.primarySkill;
+    }
+    if (!experienceReqFrom) {
+      errors.experienceReqFrom = 'Experience cannot be left blank'
+    } else {
+      errors && delete errors.experienceReqFrom;
+    }
+    if (!experienceReqTo) {
+      errors.experienceReqTo = 'Experience cannot be left blank'
+    } else {
+      errors && delete errors.experienceReqTo;
+    }
+    if (!noOfPositionsAvailable) {
+      errors.noOfPositionsAvailable = 'No Of Positions cannot be left blank'
+    } else {
+      errors && delete errors.noOfPositionsAvailable;
+    }
+    if (!annualSalaryFrom) {
+      errors.annualSalaryFrom = 'Salary cannot be left blank'
+    } else {
+      errors && delete errors.annualSalaryFrom;
+    }
+    if (!annualSalaryTo) {
+      errors.annualSalaryTo = 'Salary cannot be left blank'
+    } else {
+      errors && delete errors.annualSalaryTo;
+    }
+    if (!country) {
+      errors.country = 'Country cannot be left blank'
+    } else {
+      errors && delete errors.country;
+    }
+    if (!state) {
+      errors.state = 'State cannot be left blank'
+    } else {
+      errors && delete errors.state;
+    }
+    if (!city) {
+      errors.city = 'City cannot be left blank'
+    } else {
+      errors && delete errors.city;
+    }
     const isEmploymentTypeFocus = !errors.jobTitle;
     const isCategoryFocus = !errors.jobTitle && !errors.employmentType;
     const isPrimarySkillFocus = !errors.jobTitle && !errors.employmentType && !errors.category;
@@ -132,79 +192,17 @@ export default class CreateJob extends React.Component {
     const isCountryFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo;
     const isStateFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo && !errors.country;
     const isCityFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo && !errors.country && !errors.state;
-    debugger
-    if (!jobTitle) {
-      errors.jobTitle = 'Job Title cannot be left blank'
-      this.jobTitle.focus();
-    } else {
-      errors && delete errors.jobTitle;
-    }
-    if (!employmentType) {
-      errors.employmentType = 'Employment Type cannot be left blank'
-      if (isEmploymentTypeFocus) this.employmentType.focus();
-    } else {
-      errors && delete errors.employmentType;
-    }
-    if (!category) {
-      errors.category = 'Category cannot be left blank'
-      if (isCategoryFocus) this.category.focus();
-    } else {
-      errors && delete errors.category;
-    }
-    if (!primarySkill) {
-      errors.primarySkill = 'Primary SKill cannot be left blank'
-      if (isPrimarySkillFocus) this.primarySkill.focus();
-    } else {
-      errors && delete errors.primarySkill;
-    }
-    if (!experienceReqFrom) {
-      errors.experienceReqFrom = 'Experience cannot be left blank'
-      if (isExperienceReqFromFocus) this.experienceReqFrom.focus();
-    } else {
-      errors && delete errors.experienceReqFrom;
-    }
-    if (!experienceReqTo) {
-      errors.experienceReqTo = 'Experience cannot be left blank'
-      if (isExperienceReqToFocus) this.experienceReqTo.focus();
-    } else {
-      errors && delete errors.experienceReqTo;
-    }
-    if (!noOfPositionsAvailable) {
-      errors.noOfPositionsAvailable = 'No Of Positions cannot be left blank'
-      if (isNoOfPositionsAvailableFocus) this.noOfPositionsAvailable.focus();
-    } else {
-      errors && delete errors.noOfPositionsAvailable;
-    }
-    if (!annualSalaryFrom) {
-      errors.annualSalaryFrom = 'Salary cannot be left blank'
-      if (isAnnualSalaryFromFocus) this.annualSalaryFrom.focus();
-    } else {
-      errors && delete errors.annualSalaryFrom;
-    }
-    if (!annualSalaryTo) {
-      errors.annualSalaryTo = 'Salary cannot be left blank'
-      if (isAnnualSalaryToFocus) this.annualSalaryTo.focus();
-    } else {
-      errors && delete errors.annualSalaryTo;
-    }
-    if (!country) {
-      errors.country = 'Country cannot be left blank'
-      if (isCountryFocus) this.country.focus();
-    } else {
-      errors && delete errors.country;
-    }
-    if (!state) {
-      errors.state = 'State cannot be left blank'
-      if (isStateFocus) this.stateElement.focus();
-    } else {
-      errors && delete errors.state;
-    }
-    if (!city) {
-      errors.city = 'City cannot be left blank'
-      if (isCityFocus) this.city.focus();
-    } else {
-      errors && delete errors.city;
-    }
+    if (!jobTitle) this.jobTitle.focus();
+    if (!employmentType && isEmploymentTypeFocus) this.employmentType.focus();
+    if (!category && isCategoryFocus) this.category.focus();
+    if (!primarySkill && isPrimarySkillFocus) this.primarySkill.focus();
+    if (!experienceReqFrom && isExperienceReqFromFocus) this.experienceReqFrom.focus();
+    if (!experienceReqTo && isExperienceReqToFocus) this.experienceReqTo.focus();
+    if (!noOfPositionsAvailable && isNoOfPositionsAvailableFocus) this.noOfPositionsAvailable.focus();
+    if (!annualSalaryFrom && isAnnualSalaryFromFocus) this.annualSalaryFrom.focus();
+    if (!annualSalaryTo && isAnnualSalaryToFocus) this.annualSalaryTo.focus();
+    if (!country && isCountryFocus) this.country.focus();
+    if (!state && isStateFocus) this.stateElement.focus();
     this.setState({
       errors: errors
     }, () => {
