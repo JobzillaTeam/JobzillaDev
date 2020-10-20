@@ -18,7 +18,8 @@ export default class CreateJob extends React.Component {
         jobDescription: MAX_LENGTH,
         responsibilities: MAX_LENGTH
       },
-      categories: []
+      categories: [],
+      isFormValid: false
     }
   }
 
@@ -105,26 +106,23 @@ export default class CreateJob extends React.Component {
   handleValidate = _ => {
     const {values, errors} = this.state;
     const { jobTitle, employmentType, category, primarySkill } = values;
-    if (!jobTitle) {
-      errors.jobTitle = 'Job Title cannot be left blank';
-    }
-    if (!employmentType) {
-      errors.employmentType = 'Employment Type cannot be left blank';
-    }
-    if (!category) {
-      errors.category = 'Category cannot be left blank';
-    }
-    if (!primarySkill) {
-      errors.primarySkill = 'Primary SKill cannot be left blank';
-    }
+    !jobTitle ? errors.jobTitle = 'Job Title cannot be left blank' : delete errors.jobTitle;
+    !employmentType ? errors.employmentType = 'Employment Type cannot be left blank' : delete errors.employmentType;
+    !category ? errors.category = 'Category cannot be left blank' : delete errors.employmentType;
+    !primarySkill ? errors.primarySkill = 'Primary SKill cannot be left blank' : delete errors.primarySkill;
     if ((Object.keys(errors).length === 0 && errors.constructor === Object)) {
-      console.log('pass')
-      ApiServicesOrgRecruiter.addJobDetails(values).then(res => {
-        console.log(res);
-        this.props.history.push('/activeJob');
+      this.setState({
+        isFormValid: true
+      }, () => {
+        ApiServicesOrgRecruiter.addJobDetails(values).then(res => {
+          console.log(res);
+          this.props.history.push('/activeJob');
+        });
       });
     } else {
-      return false;
+      this.setState({
+        isFormValid: false
+      })
     }
   }
 
@@ -171,14 +169,14 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Job Title</label></div>
                           <input
-                            class={`form-control ${errors && errors.jobTitle ? 'is-valid' : ''}`}
+                            class={`form-control ${errors && errors.jobTitle ? 'is-invalid' : ''}`}
                             type="text"
                             name="jobTitle"
                             value={jobTitle}
                             onChange={this.handleChange}
                             placeholder='Enter Job Title'
                           />
-                          <div>{errors && errors.jobTitle}</div>
+                          <div class="invalid-feedback">{errors && errors.jobTitle}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Employment Type</label></div>
@@ -189,7 +187,7 @@ export default class CreateJob extends React.Component {
                             placeholder="Select Employment type"
                             onChange={obj => this.handleSelect({ name: 'employmentType', value: obj.value })}
                           />
-                          <div>{errors && errors.employmentType}</div>
+                          <div class="invalid-feedback" >{errors && errors.employmentType}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Category</label></div>
@@ -200,7 +198,7 @@ export default class CreateJob extends React.Component {
                             placeholder="Select Category"
                             onChange={obj => this.handleSelect({ name: 'category', value: obj.value })}
                           />
-                          <div>{errors && errors.category}</div>
+                          <div class="invalid-feedback" >{errors && errors.category}</div>
                         </div>
                       </div>
                     </div>
@@ -223,7 +221,7 @@ export default class CreateJob extends React.Component {
                             placeholder="Select Primary Skill"
                             onChange={value => this.handleMultipleSelect({ name: 'primarySkills', value: value })}
                           />
-                          <div>{errors && errors.employmentType}</div>
+                          <div class="invalid-feedback" >{errors && errors.employmentType}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Secondary Skill</label></div>
@@ -247,7 +245,7 @@ export default class CreateJob extends React.Component {
                                 placeholder="Select"
                                 onChange={obj => this.handleSelect({ name: 'experienceReqFrom', value: obj.value })}
                               />
-                              <div>{errors && errors.experienceReqFrom}</div>
+                              <div class="invalid-feedback" >{errors && errors.experienceReqFrom}</div>
                             </div>
                             <span>To</span>
                             <div class="col-md-6 pl-4">
@@ -258,7 +256,7 @@ export default class CreateJob extends React.Component {
                                 placeholder="Select"
                                 onChange={obj => this.handleSelect({ name: 'experienceReqTo', value: obj.value })}
                               />
-                              <div>{errors && errors.experienceReqTo}</div>
+                              <div class="invalid-feedback" >{errors && errors.experienceReqTo}</div>
                             </div>
                           </div>
                         </div>
@@ -340,7 +338,7 @@ export default class CreateJob extends React.Component {
                             onChange={this.handleChange}
                             placeholder='Number of Positions Available'
                           />
-                          <div>{errors && errors.noOfPositionsAvailable}</div>
+                          <div class="invalid-feedback" >{errors && errors.noOfPositionsAvailable}</div>
                           <div class="pt-3"><label>Visa</label></div>
                           <input
                             class="form-control"
@@ -380,7 +378,7 @@ export default class CreateJob extends React.Component {
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryFrom', value: obj.value })}
                               />
                               <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
-                              <div>{errors && errors.annualSalaryFrom}</div>
+                              <div class="invalid-feedback" >{errors && errors.annualSalaryFrom}</div>
                             </div>
                             <span>To</span>
                             <div class="col-md-6 pl-4">
@@ -392,7 +390,7 @@ export default class CreateJob extends React.Component {
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryTo', value: obj.value })}
                               />
                               <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
-                              <div>{errors && errors.annualSalaryTo}</div>
+                              <div class="invalid-feedback" >{errors && errors.annualSalaryTo}</div>
                             </div>
                           </div>
                         </div>
@@ -436,7 +434,7 @@ export default class CreateJob extends React.Component {
                             placeholder="Select Country"
                             onChange={obj => this.handleSelect({ name: 'country', value: obj.value })}
                           />
-                          <div>{errors && errors.country}</div>
+                          <div class="invalid-feedback" >{errors && errors.country}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>State</label></div>
@@ -447,7 +445,7 @@ export default class CreateJob extends React.Component {
                             placeholder="Select State"
                             onChange={obj => this.handleSelect({ name: 'state', value: obj.value })}
                           />
-                          <div>{errors && errors.country}</div>
+                          <div class="invalid-feedback" >{errors && errors.country}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>City</label></div>
@@ -458,7 +456,7 @@ export default class CreateJob extends React.Component {
                             placeholder="Select City"
                             onChange={obj => this.handleSelect({ name: 'city', value: obj.value })}
                           />
-                          <div>{errors && errors.city}</div>
+                          <div class="invalid-feedback" >{errors && errors.city}</div>
                         </div>
                       </div>
                     </div>
@@ -472,7 +470,7 @@ export default class CreateJob extends React.Component {
                       <h5>Job Description</h5>
                       <div className="col-md-12 pt-3 pl-0 recruiterForm__rightSpaceForTextArea">
                         <textarea
-                          class={`form-control ${errors && errors.jobDescription ? 'is-valid' : ''} mb-1`}
+                          class={`form-control ${errors && errors.jobDescription ? 'is-invalid' : ''} mb-1`}
                           rows="8"
                           name="jobDescription"
                           value={jobDescription}
@@ -480,13 +478,13 @@ export default class CreateJob extends React.Component {
                           onChange={this.handleChange}
                         >
                         </textarea>
-                        <span className='float-right'>{remainingTextLength.jobDescription} Character(s) Left</span>
+           class="invalid-feedback"              <span className='float-right'>{remainingTextLength.jobDescription} Character(s) Left</span>
                       </div>
                     </div>
                     <div className="col-md-12 pt-4 pb-4 pl-3 recruiterForm__rightSpaceForTextArea">
                       <h5>Responsibilities</h5>
                       <textarea
-                        class={`form-control ${errors && errors.responsibilities ? 'is-valid' : ''} mb-1`}
+                        class={`form-control ${errors && errors.responsibilities ? 'is-invalid' : ''} mb-1`}
                         rows="8"
                         name="responsibilities"
                         value={responsibilities}
@@ -494,7 +492,7 @@ export default class CreateJob extends React.Component {
                         onChange={this.handleChange}
                       >
                       </textarea>
-                      <span className='float-right'>{remainingTextLength.responsibilities} Character(s) Left</span>
+         class="invalid-feedback"              <span className='float-right'>{remainingTextLength.responsibilities} Character(s) Left</span>
                     </div>
                   </div>
                 </div>
