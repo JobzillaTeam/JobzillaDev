@@ -202,11 +202,11 @@ export default class CreateJob extends React.Component {
     if (!employmentType && isEmploymentTypeFocus) this.employmentType.focus();
     if (!category && isCategoryFocus) this.category.focus();
     if (!primarySkill && isPrimarySkillFocus) this.primarySkill.focus();
-    if (!experienceReqFrom && isExperienceReqFromFocus) this.experienceReqFrom.focus();
-    if (!experienceReqTo && isExperienceReqToFocus) this.experienceReqTo.focus();
+    if (experienceReqFrom !== 0 && !experienceReqFrom && isExperienceReqFromFocus) this.experienceReqFrom.focus();
+    if (experienceReqTo !== 0 && !experienceReqTo && isExperienceReqToFocus) this.experienceReqTo.focus();
     if (!noOfPositionsAvailable && isNoOfPositionsAvailableFocus) this.noOfPositionsAvailable.focus();
-    if (!annualSalaryFrom && isAnnualSalaryFromFocus) this.annualSalaryFrom.focus();
-    if (!annualSalaryTo && isAnnualSalaryToFocus) this.annualSalaryTo.focus();
+    if (annualSalaryFrom !== 0 && !annualSalaryFrom && isAnnualSalaryFromFocus) this.annualSalaryFrom.focus();
+    if (annualSalaryTo !== 0 && !annualSalaryTo && isAnnualSalaryToFocus) this.annualSalaryTo.focus();
     if (!country && isCountryFocus) this.country.focus();
     if (!state && isStateFocus) this.stateElement.focus();
     this.setState({
