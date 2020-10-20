@@ -151,7 +151,14 @@ class LoginComp extends Component {
     return formIsValid;
   }
   /* Render functionation  */
+  isSignupButtonVisible = () => {
+    const {location} = this.props;
+    const {search} = location;
+    return search && search.includes('role=candidate') ? false : true;
+  }
+
   render() {
+    const isSignupButtonVisible = this.isSignupButtonVisible();
     return (
       <Fragment>
         <div className="content">
@@ -200,9 +207,10 @@ class LoginComp extends Component {
                     <div className="col-6">
                       <button className="btn btn-blue mr-3 w-100" onClick={this.onLogin} disabled={this.state.submitDisabled} value="Register">Login</button>
                     </div>
-                    <div className="col-6">
+                    {isSignupButtonVisible ? <div className="col-6">
                       <button className="btn btn-border w-100" onClick={() => this.onSignUp()}>Sign Up</button>
-                    </div>
+                    </div> : null }
+                    
                   </div>
                 </div>
                 {/* Terms and policy */}
