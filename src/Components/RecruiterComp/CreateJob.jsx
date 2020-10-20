@@ -121,18 +121,90 @@ export default class CreateJob extends React.Component {
   handleValidate = _ => {
     const { values, errors } = this.state;
     const { jobTitle, employmentType, category, primarySkill, experienceReqFrom, experienceReqTo, annualSalaryFrom, annualSalaryTo, noOfPositionsAvailable, country, state, city } = values;
-    !jobTitle ? errors.jobTitle = 'Job Title cannot be left blank' : errors && delete errors.jobTitle;
-    !employmentType ? errors.employmentType = 'Employment Type cannot be left blank' : errors && delete errors.employmentType;
-    !category ? errors.category = 'Category cannot be left blank' : errors && delete errors.employmentType;
-    !primarySkill ? errors.primarySkill = 'Primary SKill cannot be left blank' : errors && delete errors.primarySkill;
-    !experienceReqFrom ? errors.experienceReqFrom = 'Experience cannot be left blank' : errors && delete errors.experienceReqFrom;
-    !experienceReqTo ? errors.experienceReqTo = 'Experience cannot be left blank' : errors && delete errors.experienceReqTo;
-    !noOfPositionsAvailable ? errors.noOfPositionsAvailable = 'No Of Positions cannot be left blank' : errors && delete errors.noOfPositionsAvailable;
-    !annualSalaryFrom ? errors.annualSalaryFrom = 'Salary cannot be left blank' : errors && delete errors.annualSalaryFrom;
-    !annualSalaryTo ? errors.annualSalaryTo = 'Salary cannot be left blank' : errors && delete errors.annualSalaryTo;
-    !country ? errors.country = 'Country cannot be left blank' : errors && delete errors.country;
-    !state ? errors.state = 'State cannot be left blank' : errors && delete errors.state;
-    !city ? errors.city = 'City cannot be left blank' : errors && delete errors.city;
+    const isEmploymentTypeFocus = !errors.jobTitle;
+    const isCategoryFocus = !errors.jobTitle && !errors.employmentType;
+    const isPrimarySkillFocus = !errors.jobTitle && !errors.employmentType && !errors.category;
+    const isExperienceReqFromFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill;
+    const isExperienceReqToFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom;
+    const isNoOfPositionsAvailableFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo;
+    const isAnnualSalaryFromFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable;
+    const isAnnualSalaryToFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom;
+    const isCountryFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo;
+    const isStateFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo && !errors.country;
+    const isCityFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo && !errors.country && !errors.state;
+    debugger
+    if (!jobTitle) {
+      errors.jobTitle = 'Job Title cannot be left blank'
+      this.jobTitle.focus();
+    } else {
+      errors && delete errors.jobTitle;
+    }
+    if (!employmentType) {
+      errors.employmentType = 'Employment Type cannot be left blank'
+      if (isEmploymentTypeFocus) this.employmentType.focus();
+    } else {
+      errors && delete errors.employmentType;
+    }
+    if (!category) {
+      errors.category = 'Category cannot be left blank'
+      if (isCategoryFocus) this.category.focus();
+    } else {
+      errors && delete errors.category;
+    }
+    if (!primarySkill) {
+      errors.primarySkill = 'Primary SKill cannot be left blank'
+      if (isPrimarySkillFocus) this.primarySkill.focus();
+    } else {
+      errors && delete errors.primarySkill;
+    }
+    if (!experienceReqFrom) {
+      errors.experienceReqFrom = 'Experience cannot be left blank'
+      if (isExperienceReqFromFocus) this.experienceReqFrom.focus();
+    } else {
+      errors && delete errors.experienceReqFrom;
+    }
+    if (!experienceReqTo) {
+      errors.experienceReqTo = 'Experience cannot be left blank'
+      if (isExperienceReqToFocus) this.experienceReqTo.focus();
+    } else {
+      errors && delete errors.experienceReqTo;
+    }
+    if (!noOfPositionsAvailable) {
+      errors.noOfPositionsAvailable = 'No Of Positions cannot be left blank'
+      if (isNoOfPositionsAvailableFocus) this.noOfPositionsAvailable.focus();
+    } else {
+      errors && delete errors.noOfPositionsAvailable;
+    }
+    if (!annualSalaryFrom) {
+      errors.annualSalaryFrom = 'Salary cannot be left blank'
+      if (isAnnualSalaryFromFocus) this.annualSalaryFrom.focus();
+    } else {
+      errors && delete errors.annualSalaryFrom;
+    }
+    if (!annualSalaryTo) {
+      errors.annualSalaryTo = 'Salary cannot be left blank'
+      if (isAnnualSalaryToFocus) this.annualSalaryTo.focus();
+    } else {
+      errors && delete errors.annualSalaryTo;
+    }
+    if (!country) {
+      errors.country = 'Country cannot be left blank'
+      if (isCountryFocus) this.country.focus();
+    } else {
+      errors && delete errors.country;
+    }
+    if (!state) {
+      errors.state = 'State cannot be left blank'
+      if (isStateFocus) this.stateElement.focus();
+    } else {
+      errors && delete errors.state;
+    }
+    if (!city) {
+      errors.city = 'City cannot be left blank'
+      if (isCityFocus) this.city.focus();
+    } else {
+      errors && delete errors.city;
+    }
     this.setState({
       errors: errors
     }, () => {
@@ -214,6 +286,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Job Title</label></div>
                           <input
+                            ref={inputEl => (this.jobTitle = inputEl)}
                             class={`form-control ${errors && errors.jobTitle ? 'is-invalid' : ''}`}
                             type="text"
                             name="jobTitle"
@@ -226,6 +299,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Employment Type</label></div>
                           <Select
+                            ref={inputEl => (this.employmentType = inputEl)}
                             styles={this.customStyles(errors && errors.employmentType)}
                             name="employmentType"
                             className="selectone"
@@ -238,10 +312,11 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Category</label></div>
                           <Select
+                            ref={inputEl => (this.category = inputEl)}
                             styles={this.customStyles(errors && errors.category)}
                             name="category"
                             className="selectone"
-                            options={categories}
+                            options={employmentTypes}
                             placeholder="Select Category"
                             onChange={obj => this.handleSelect({ name: 'category', value: obj.value })}
                           />
@@ -261,6 +336,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Primary Skill</label></div>
                           <Select
+                            ref={inputEl => (this.primarySkill = inputEl)}
                             styles={this.customStyles(errors && errors.primarySkill)}
                             name="primarySkills"
                             isMulti={true}
@@ -287,6 +363,7 @@ export default class CreateJob extends React.Component {
                           <div style={{ display: 'flex', alignItems: 'center' }}>
                             <div class="col-md-6 p-0 pr-4">
                               <Select
+                                ref={inputEl => (this.experienceReqFrom = inputEl)}
                                 styles={this.customStyles(errors && errors.experienceReqFrom)}
                                 name="experienceReqFrom"
                                 className="selectone"
@@ -298,6 +375,7 @@ export default class CreateJob extends React.Component {
                             <span>To</span>
                             <div class="col-md-6 pl-4">
                               <Select
+                                ref={inputEl => (this.experienceReqTo = inputEl)}
                                 styles={this.customStyles(errors && errors.experienceReqTo)}
                                 name="experienceReqTo"
                                 className="selectone"
@@ -379,6 +457,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Number of Positions Available</label></div>
                           <input
+                            ref={inputEl => (this.noOfPositionsAvailable = inputEl)}
                             class={`form-control ${errors && errors.noOfPositionsAvailable ? 'is-invalid' : ''}`}
                             type="number"
                             min={0}
@@ -420,6 +499,7 @@ export default class CreateJob extends React.Component {
                           <div class="pt-2" style={{ display: 'flex', alignItems: 'center' }}>
                             <div class="col-md-6 p-0 pr-4">
                               <Select
+                                ref={inputEl => (this.annualSalaryFrom = inputEl)}
                                 styles={this.customStyles(errors && errors.annualSalaryFrom)}
                                 name="annualSalaryFrom"
                                 className="selectone"
@@ -432,6 +512,7 @@ export default class CreateJob extends React.Component {
                             <span>To</span>
                             <div class="col-md-6 pl-4">
                               <Select
+                                ref={inputEl => (this.annualSalaryTo = inputEl)}
                                 styles={this.customStyles(errors && errors.annualSalaryTo)}
                                 name="annualSalaryTo"
                                 className="selectone"
@@ -458,6 +539,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Country</label></div>
                           <Select
+                            ref={inputEl => (this.country = inputEl)}
                             styles={this.customStyles(errors && errors.country)}
                             name="country"
                             className="selectone"
@@ -470,6 +552,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>State</label></div>
                           <Select
+                            ref={inputEl => (this.stateElement = inputEl)}
                             styles={this.customStyles(errors && errors.state)}
                             name="state"
                             className="selectone"
@@ -482,6 +565,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>City</label></div>
                           <Select
+                            ref={inputEl => (this.city = inputEl)}
                             styles={this.customStyles(errors && errors.city)}
                             name="city"
                             className="selectone"
@@ -503,7 +587,7 @@ export default class CreateJob extends React.Component {
                       <h5>Job Description</h5>
                       <div className="col-md-12 pt-3 pl-0 recruiterForm__rightSpaceForTextArea">
                         <textarea
-                          class={`form-control ${errors && errors.jobDescription ? 'is-invalid' : ''} mb-1`}
+                          class="form-control mb-1"
                           rows="8"
                           name="jobDescription"
                           value={jobDescription}
@@ -517,7 +601,7 @@ export default class CreateJob extends React.Component {
                     <div className="col-md-12 pt-4 pb-4 pl-3 recruiterForm__rightSpaceForTextArea">
                       <h5>Responsibilities</h5>
                       <textarea
-                        class={`form-control ${errors && errors.responsibilities ? 'is-invalid' : ''} mb-1`}
+                        class="form-control mb-1"
                         rows="8"
                         name="responsibilities"
                         value={responsibilities}
