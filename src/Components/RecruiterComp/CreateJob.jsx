@@ -19,7 +19,7 @@ export default class CreateJob extends React.Component {
         responsibilities: MAX_LENGTH
       },
       categories: [],
-      isFormValid: false
+      isFormValid: true
     }
   }
 
@@ -39,7 +39,7 @@ export default class CreateJob extends React.Component {
 
   handleChange = e => {
     const { name, value } = e.target;
-    const { values, errors, remainingTextLength } = this.state;
+    const { values, errors, remainingTextLength, isFormValid } = this.state;
     if (name === 'jobDescription' || name === 'responsibilities') {
       this.setState({
         remainingTextLength: { ...remainingTextLength, [name]: value ? MAX_LENGTH - value.length : MAX_LENGTH }
@@ -47,6 +47,8 @@ export default class CreateJob extends React.Component {
     }
     if (value) {
       delete errors[name];
+    } else {
+      if (!isFormValid) errors[name] = `${name} cannot be left blank`
     }
     this.setState({
       values: { ...values, [name]: value },
@@ -56,9 +58,11 @@ export default class CreateJob extends React.Component {
 
   handleSelect = obj => {
     const { name, value } = obj;
-    const { values, errors } = this.state;
-    if (value) {
+    const { values, errors, isFormValid } = this.state;
+    if (value || value === 0) {
       delete errors[name];
+    } else {
+      if (!isFormValid) errors[name] = `${name} cannot be left blank`
     }
     this.setState({
       values: { ...values, [name]: value },
@@ -69,9 +73,11 @@ export default class CreateJob extends React.Component {
   handleMultipleSelect = (obj) => {
     const { name } = obj;
     const value = obj && obj.value && obj.value.map(ob => ob.value).join(',');
-    const { values, errors } = this.state;
+    const { values, errors, isFormValid } = this.state;
     if (value) {
       delete errors[name];
+    } else {
+      if (!isFormValid) errors[name] = `${name} cannot be left blank`
     }
     this.setState({
       values: { ...values, [name]: value },
@@ -141,12 +147,12 @@ export default class CreateJob extends React.Component {
     } else {
       errors && delete errors.primarySkill;
     }
-    if (!experienceReqFrom) {
+    if (experienceReqFrom !== 0 && !experienceReqFrom) {
       errors.experienceReqFrom = 'Experience cannot be left blank'
     } else {
       errors && delete errors.experienceReqFrom;
     }
-    if (!experienceReqTo) {
+    if (experienceReqTo !== 0 && !experienceReqTo) {
       errors.experienceReqTo = 'Experience cannot be left blank'
     } else {
       errors && delete errors.experienceReqTo;
@@ -156,12 +162,12 @@ export default class CreateJob extends React.Component {
     } else {
       errors && delete errors.noOfPositionsAvailable;
     }
-    if (!annualSalaryFrom) {
+    if (annualSalaryFrom !== 0 && !annualSalaryFrom) {
       errors.annualSalaryFrom = 'Salary cannot be left blank'
     } else {
       errors && delete errors.annualSalaryFrom;
     }
-    if (!annualSalaryTo) {
+    if (annualSalaryTo !== 0 && !annualSalaryTo) {
       errors.annualSalaryTo = 'Salary cannot be left blank'
     } else {
       errors && delete errors.annualSalaryTo;
@@ -207,9 +213,17 @@ export default class CreateJob extends React.Component {
       errors: errors
     }, () => {
       if ((Object.keys(this.state.errors).length === 0 && this.state.constructor === Object)) {
-        ApiServicesOrgRecruiter.addJobDetails(values).then(res => {
-          console.log(res);
-          this.props.history.push('/activeJob');
+        this.setState({
+          isFormValid: true
+        }, () => {
+          ApiServicesOrgRecruiter.addJobDetails(values).then(res => {
+            console.log(res);
+            this.props.history.push('/activeJob');
+          });
+        });
+      } else {
+        this.setState({
+          isFormValid: false
         });
       }
     })
@@ -336,12 +350,12 @@ export default class CreateJob extends React.Component {
                           <Select
                             ref={inputEl => (this.primarySkill = inputEl)}
                             styles={this.customStyles(errors && errors.primarySkill)}
-                            name="primarySkills"
+                            name="primarySkill"
                             isMulti={true}
                             className="selectone"
                             options={employmentTypes}
                             placeholder="Select Primary Skill"
-                            onChange={value => this.handleMultipleSelect({ name: 'primarySkills', value: value })}
+                            onChange={value => this.handleMultipleSelect({ name: 'primarySkill', value: value })}
                           />
                           <div class="error-message" >{errors && errors.primarySkill}</div>
                         </div>
