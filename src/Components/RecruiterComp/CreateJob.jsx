@@ -39,31 +39,43 @@ export default class CreateJob extends React.Component {
 
   handleChange = e => {
     const { name, value } = e.target;
-    const { values, remainingTextLength } = this.state;
+    const { values, errors, remainingTextLength } = this.state;
     if (name === 'jobDescription' || name === 'responsibilities') {
       this.setState({
         remainingTextLength: { ...remainingTextLength, [name]: value ? MAX_LENGTH - value.length : MAX_LENGTH }
       })
     }
+    if (value) {
+      delete errors[name];
+    }
     this.setState({
-      values: { ...values, [name]: value }
+      values: { ...values, [name]: value },
+      errors: errors
     });
   }
 
   handleSelect = obj => {
     const { name, value } = obj;
-    const { values } = this.state;
+    const { values, errors } = this.state;
+    if (value) {
+      delete errors[name];
+    }
     this.setState({
-      values: { ...values, [name]: value }
+      values: { ...values, [name]: value },
+      errors: errors
     });
   }
 
   handleMultipleSelect = (obj) => {
     const { name } = obj;
     const value = obj && obj.value && obj.value.map(ob => ob.value).join(',');
-    const { values } = this.state;
+    const { values, errors } = this.state;
+    if (value) {
+      delete errors[name];
+    }
     this.setState({
-      values: { ...values, [name]: value }
+      values: { ...values, [name]: value },
+      errors: errors
     });
   }
 
