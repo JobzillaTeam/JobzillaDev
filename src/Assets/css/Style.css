@@ -2997,3 +2997,11 @@ textarea {
     background-image: none !important;
     padding-right: inherit !important;
 }
+
+
+.recruiterForm__rightSpace {
+    padding-right: 150px !important;
+}
+.recruiterForm__rightSpaceForTextArea {
+    padding-right: 75px !important;
+}
