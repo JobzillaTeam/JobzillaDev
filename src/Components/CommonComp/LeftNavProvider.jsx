@@ -59,14 +59,14 @@ const LeftNavProvider = () => {
                     {localStorage.getItem('status') === "recruiter" ?
                         (
                      <li data-toggle="tooltip" data-placement="right" title="Jobs">
-                        <Link class="subMenu collapsed" id="navbarDropdown" role="button"
+                        <Link className="subMenu collapsed" id="navbarDropdown" role="button"
                             data-toggle="collapse" data-target="#submenu1sub1">
                             <i><img src="/images/Candidate-Navbar-assets/job-offers.svg" aria-hidden="true" /></i>
                              <span className="menuText">Jobs</span>
                         </Link>
                         <div className="collapse" id="submenu1sub1" aria-expanded="false">
                             <ul className="flex-column nav submenuLink">
-                                <li class="dropdown-item" data-toggle="tooltip" data-placement="right" title="Active Jobs">
+                                <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Active Jobs">
                                     <Link  to="/activeJob" 
                                     activeClassName="active"
                                     isActive={isActive.bind(this,'/activeJob')}

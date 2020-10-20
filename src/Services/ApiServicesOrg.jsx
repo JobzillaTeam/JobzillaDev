@@ -101,7 +101,10 @@ class ApiServicesOrg extends Component {
         }
 
         //4.2 Add User-  Admin/User
+        
         postAddUser(fields){
+            
+            console.log(fields)
             return(
                 axios
                 .post(ApiBaseUrl +"/user/user" , fields, this.getToken())

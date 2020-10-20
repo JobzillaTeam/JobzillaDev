@@ -69,7 +69,7 @@ showError= (e) => {
       fields["email"] = "";
       fields["contactNumber"] = "";
       fields["userRole"] = "";
-      
+           
 
       this.setState({ 
         fields:fields,
@@ -77,14 +77,16 @@ showError= (e) => {
       });
 
       this.state.fields['orgnaizationId'] = localStorage.getItem('organizationId');
-      //this.state.fields['supervisorId']=0;
+      const superID = JSON.parse(localStorage.getItem('userDetails')).supervisorId;
+      this.state.fields['supervisorId']= superID
       //this.state.fields['password']= "Test@1234";
         
    // Calling Add user Service from Service file:-   
         this.addUser.postAddUser(this.state.fields)
          .then(Response=>{
               this.hideModal()
-         window.location.reload()})
+        window.location.reload()
+        })
           .catch(error=>{
             this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},20000);})
             

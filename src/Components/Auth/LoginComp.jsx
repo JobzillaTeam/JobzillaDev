@@ -206,7 +206,9 @@ class LoginComp extends Component {
                   </div>
                 </div>
                 {/* Terms and policy */}
-                <div className="terms"><Link to="/termsofUse">Terms of use</Link>.<Link to="/privacyPolicy">Privacy Policy</Link></div>
+                <div className="terms"><Link to="/termsofUse">Terms of use</Link>.. <Link to="/privacyPolicy">Privacy Policy</Link>
+                </div>
+                {/*  */}
               </div>
               <div className="col-md-7">
                 <div className="text-right d-none d-md-block">

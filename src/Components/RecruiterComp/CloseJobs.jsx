@@ -102,7 +102,7 @@ class CloseJobs extends Component{
                                                     <td>19 June, 2020</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="5" className="job-full-detail text-right"><a href="">VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow"/></a></td>
+                                                    <td colSpan="5" className="job-full-detail text-right"><a href="">VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow"/></a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -165,7 +165,7 @@ class CloseJobs extends Component{
                                                     <td>19 June, 2020</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="5" className="job-full-detail text-right"><a href="">VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow"/></a></td>
+                                                    <td colSpan="5" className="job-full-detail text-right"><a href="">VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow"/></a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
