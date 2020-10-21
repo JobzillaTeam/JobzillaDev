@@ -66,12 +66,65 @@ export default class CreateJob extends React.Component {
     if (value) {
       delete errors[name];
     } else {
-      if (!isFormValid) errors[name] = `${name} cannot be left blank`
+      if (!isFormValid) errors[name] = this.getErrorMsg(name)
     }
     this.setState({
       values: { ...values, [name]: value },
       errors: errors
     });
+  }
+
+  getErrorMsg = (name) => {
+    switch(name) {
+      case 'jobTitle': {
+        return 'Job Title cannot be left blank'
+      }
+      break
+      case 'employmentType': {
+        return 'Employment Type cannot be left blank'
+      }
+      break
+      case 'category': {
+        return 'Category cannot be left blank'
+      }
+      break
+      case 'primarySkill': {
+        return 'Primary SKill cannot be left blank'
+      }
+      break
+      case 'experienceReqFrom': {
+        return 'Experience cannot be left blank'
+      }
+      break
+      case 'experienceReqTo': {
+        return 'Experience cannot be left blank'
+      }
+      break
+      case 'annualSalaryFrom': {
+        return 'Salary cannot be left blank'
+      }
+      break
+      case 'annualSalaryTo': {
+        return 'Salary cannot be left blank'
+      }
+      break
+      case 'noOfPositionsAvailable': {
+        return 'No Of Positions cannot be left blank'
+      }
+      break
+      case 'country': {
+        return 'Country cannot be left blank'
+      }
+      break
+      case 'state': {
+        return 'State cannot be left blank'
+      }
+      break
+      case 'city': {
+        return 'City cannot be left blank'
+      }
+      break
+    }
   }
 
   handleSelect = obj => {
@@ -80,7 +133,7 @@ export default class CreateJob extends React.Component {
     if (value || value === 0) {
       delete errors[name];
     } else {
-      if (!isFormValid) errors[name] = `${name} cannot be left blank`
+      if (!isFormValid) errors[name] = this.getErrorMsg(name)
     }
     this.setState({
       values: { ...values, [name]: value },
@@ -106,7 +159,7 @@ export default class CreateJob extends React.Component {
     if (value) {
       delete errors[name];
     } else {
-      if (!isFormValid) errors[name] = `${name} cannot be left blank`
+      if (!isFormValid) errors[name] = this.getErrorMsg(name)
     }
     this.setState({
       values: { ...values, [name]: value },
@@ -157,62 +210,62 @@ export default class CreateJob extends React.Component {
     const { values, errors } = this.state;
     const { jobTitle, employmentType, category, primarySkill, experienceReqFrom, experienceReqTo, annualSalaryFrom, annualSalaryTo, noOfPositionsAvailable, country, state, city } = values;
     if (!jobTitle) {
-      errors.jobTitle = 'Job Title cannot be left blank'
+      errors.jobTitle = this.getErrorMsg('jobTitle')
     } else {
       errors && delete errors.jobTitle;
     }
     if (!employmentType) {
-      errors.employmentType = 'Employment Type cannot be left blank'
+      errors.employmentType = this.getErrorMsg('employmentType')
     } else {
       errors && delete errors.employmentType;
     }
     if (!category) {
-      errors.category = 'Category cannot be left blank'
+      errors.category = this.getErrorMsg('category')
     } else {
       errors && delete errors.category;
     }
     if (!primarySkill) {
-      errors.primarySkill = 'Primary SKill cannot be left blank'
+      errors.primarySkill = this.getErrorMsg('primarySkill')
     } else {
       errors && delete errors.primarySkill;
     }
     if (experienceReqFrom !== 0 && !experienceReqFrom) {
-      errors.experienceReqFrom = 'Experience cannot be left blank'
+      errors.experienceReqFrom = this.getErrorMsg('experienceReqFrom')
     } else {
       errors && delete errors.experienceReqFrom;
     }
     if (experienceReqTo !== 0 && !experienceReqTo) {
-      errors.experienceReqTo = 'Experience cannot be left blank'
+      errors.experienceReqTo = this.getErrorMsg('experienceReqTo')
     } else {
       errors && delete errors.experienceReqTo;
     }
     if (!noOfPositionsAvailable) {
-      errors.noOfPositionsAvailable = 'No Of Positions cannot be left blank'
+      errors.noOfPositionsAvailable = this.getErrorMsg('noOfPositionsAvailable')
     } else {
       errors && delete errors.noOfPositionsAvailable;
     }
     if (annualSalaryFrom !== 0 && !annualSalaryFrom) {
-      errors.annualSalaryFrom = 'Salary cannot be left blank'
+      errors.annualSalaryFrom = this.getErrorMsg('annualSalaryFrom')
     } else {
       errors && delete errors.annualSalaryFrom;
     }
     if (annualSalaryTo !== 0 && !annualSalaryTo) {
-      errors.annualSalaryTo = 'Salary cannot be left blank'
+      errors.annualSalaryTo = this.getErrorMsg('annualSalaryTo')
     } else {
       errors && delete errors.annualSalaryTo;
     }
     if (!country) {
-      errors.country = 'Country cannot be left blank'
+      errors.country = this.getErrorMsg('country')
     } else {
       errors && delete errors.country;
     }
     if (!state) {
-      errors.state = 'State cannot be left blank'
+      errors.state = this.getErrorMsg('state')
     } else {
       errors && delete errors.state;
     }
     if (!city) {
-      errors.city = 'City cannot be left blank'
+      errors.city = this.getErrorMsg('city')
     } else {
       errors && delete errors.city;
     }
@@ -572,7 +625,7 @@ export default class CreateJob extends React.Component {
                           <div class="pt-0" style={{ display: 'flex', alignItems: 'center' }}>
                             <div class="col-md-6 p-0 pr-4">
                               <div style={{ display: 'flex' }}>
-                                <div class="error-message" >{errors && (errors.annualSalaryFrom || errors.annualSalaryTo)}</div>
+                                <div class="error-message pr-4" >{errors && (errors.annualSalaryFrom || errors.annualSalaryTo)}</div>
                                 <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
                               </div>
                             </div>
