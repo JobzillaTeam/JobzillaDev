@@ -5,6 +5,7 @@ class ApiServicesOrgRecruiter {
   addJobDetails(resourceInfo) {
     const authToken = localStorage.getItem('authToken')
     console.log(resourceInfo);
+    // new file
     return (
       axios
         .post(`${ApiBaseUrl}/recruiter/addJobDetails`, resourceInfo, {

@@ -205,7 +205,7 @@ export default class Signup extends Component {
                                 {/* Mobile/Landline */}
                                 <div className="form-group">
                                     <label htmlFor="signup_mobilenumber">Mobile/Landline</label>
-                                    <input type="number" id="signup_mobilenumber" className="form-control" name="phoneNumber"  value={this.state.fields.phoneNumber}  onChange={ (e) => {this.handleChange(e);this.validateForm();} }
+                                    <input type="text" id="signup_mobilenumber" className="form-control" name="phoneNumber"  value={this.state.fields.phoneNumber}  onChange={ (e) => {this.handleChange(e);this.validateForm();} }
                                         onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
                                         {
                                             this.state.formSubmitted || this.state.touched.phoneNumber?<div className="errorMsg">{this.state.errors.phoneNumber}</div>:''                     
@@ -254,10 +254,10 @@ export default class Signup extends Component {
                             <div className="col-md-5">
                                 {/* Terms checkbox */}
                                 <div className="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="agreeTerms" required/>
-                                            <label class="form-check-label" for="agreeTerms">
-                                                I agree to terms and conditions and privacy policy of Jobzilla
+                                        <div className="form-check">
+                                            <input className="form-check-input" type="checkbox" id="agreeTerms" required/>
+                                            <label className="form-check-label" htmlFor="agreeTerms">
+                                                I agree to terms and conditions
                                             </label>
                                         </div>  
                                     </div>
@@ -265,7 +265,7 @@ export default class Signup extends Component {
                                 <div className="form-group mt-5">
                                     <button className="btn btn-blue w-50"  >Create</button>
                                 </div>  
-                                <div className="terms" ><Link to="/termsofUse">Terms of use</Link>.<Link to="/privacyPolicy">Privacy Policy</Link></div> 
+                                <div className="terms" ><Link to="/termsofUse">Terms of use</Link></div> 
                             </div>
                             {/* image on sign up */}
                             <div className="col-md-7">
