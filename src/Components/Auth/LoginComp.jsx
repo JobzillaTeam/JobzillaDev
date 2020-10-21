@@ -154,7 +154,7 @@ class LoginComp extends Component {
   isSignupButtonVisible = () => {
     const {location} = this.props;
     const {search} = location;
-    return search && search.includes('role=candidate') ? false : true;
+    return search && search.toLowerCase().includes('role=candidate') ? false : true;
   }
 
   render() {
