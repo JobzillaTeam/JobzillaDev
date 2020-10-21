@@ -3011,3 +3011,7 @@ textarea {
     font-size: 80%;
     color: #dc3545;
 }
+
+.recruiterForm__noOfPositionsAvailable .was-validated .form-control:invalid, .form-control.is-invalid {
+    padding-right: 12px !important;
+}

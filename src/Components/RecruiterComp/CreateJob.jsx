@@ -7,6 +7,7 @@ import ApiServicesOrgRecruiter from "../../Services/ApiServicesOrgRecruiter";
 import { MAX_LENGTH } from "../../Utils/AppConst";
 import { CURRENCY_TYPE_ENUM } from '../../Utils/AppConst';
 import { Link } from 'react-router-dom';
+import ApiServicesOrgCandidate from "../../Services/ApiServicesOrgCandidate";
 
 export default class CreateJob extends React.Component {
   constructor() {
@@ -19,6 +20,7 @@ export default class CreateJob extends React.Component {
         responsibilities: MAX_LENGTH
       },
       categories: [],
+      primarySkills: [],
       isFormValid: true
     }
   }
@@ -34,7 +36,15 @@ export default class CreateJob extends React.Component {
       this.setState({
         categories: categoriesList
       })
-    })
+    });
+    ApiServicesOrgCandidate.getListOfSkills().then((response) => {
+      if (response) {
+        const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].skills);
+        this.setState({primarySkills: result});
+      } else {
+        this.setState({primarySkills: []});
+      }
+    });
   }
 
   handleChange = e => {
@@ -186,6 +196,12 @@ export default class CreateJob extends React.Component {
       errors.city = 'City cannot be left blank'
     } else {
       errors && delete errors.city;
+    }
+    if (annualSalaryFrom > annualSalaryTo) {
+      errors.annualSalaryFrom = 'Min salary always be less than to max salary'
+    }
+    if (experienceReqFrom > experienceReqTo) {
+      errors.annualSalaryFrom = 'Min experience always be less than to max experience'
     }
     const isEmploymentTypeFocus = !errors.jobTitle;
     const isCategoryFocus = !errors.jobTitle && !errors.employmentType;
@@ -467,7 +483,7 @@ export default class CreateJob extends React.Component {
                           </div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
-                          <div><label>Number of Positions Available</label></div>
+                          <div class="recruiterForm__noOfPositionsAvailable"><label>Number of Positions Available</label></div>
                           <input
                             ref={inputEl => (this.noOfPositionsAvailable = inputEl)}
                             class={`form-control ${errors && errors.noOfPositionsAvailable ? 'is-invalid' : ''}`}
@@ -519,7 +535,6 @@ export default class CreateJob extends React.Component {
                                 placeholder="Select"
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryFrom', value: obj.value })}
                               />
-                              <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
                             </div>
                             <span>To</span>
                             <div class="col-md-6 pl-4">
@@ -532,10 +547,20 @@ export default class CreateJob extends React.Component {
                                 placeholder="Select"
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryTo', value: obj.value })}
                               />
+                            </div>
+                          </div>
+                          <div class="pt-0" style={{ display: 'flex', alignItems: 'center' }}>
+                            <div class="col-md-6 p-0 pr-4">
+                              <div style={{ display: 'flex' }}>
+                                <div class="error-message" >{errors && (errors.annualSalaryFrom || errors.annualSalaryTo)}</div>
+                                <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
+                              </div>
+                            </div>
+                            <div class="col-md-6 p-0 pl-4">
                               <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
                             </div>
                           </div>
-                          <div class="error-message" >{errors && (errors.annualSalaryFrom || errors.annualSalaryTo)}</div>
+
                         </div>
                       </div>
                     </div>
