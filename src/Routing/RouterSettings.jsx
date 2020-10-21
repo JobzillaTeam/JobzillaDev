@@ -53,6 +53,7 @@ class RouterSettings extends Component {
             <Route path="/privacyPolicy" component={PrivacyPolicy} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={LoginComp} />
+            <Route path="/login" component={LoginComp} />
             <Route path="/providerDashboard" component={ProviderDashboard} />
             <Route path="/uploadProfile" component={UploadProfile} />
             <Route path="/addUser" component={AddUser} />

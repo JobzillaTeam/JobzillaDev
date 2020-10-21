@@ -2997,3 +2997,21 @@ textarea {
     background-image: none !important;
     padding-right: inherit !important;
 }
+
+
+.recruiterForm__rightSpace {
+    padding-right: 150px !important;
+}
+.recruiterForm__rightSpaceForTextArea {
+    padding-right: 75px !important;
+}
+.error-message {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.recruiterForm__noOfPositionsAvailable .was-validated .form-control:invalid, .form-control.is-invalid {
+    padding-right: 12px !important;
+}
