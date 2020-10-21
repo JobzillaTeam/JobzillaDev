@@ -171,7 +171,7 @@ class ApiServicesOrg extends Component {
                     )
                 }
             
-        //5.4 View Shortlisted Candidate list- Job Details Component
+        //5.4 View Shortlisted Candidate list- Job Details 
             getViewAllShortlistedCandidate() {
                 const jobId = JSON.parse(localStorage.getItem('userDetails')).id;
                     return (
@@ -181,6 +181,17 @@ class ApiServicesOrg extends Component {
                     )
                 }
 
+        //5.5 View Candidate profile 
+                getCandidateInfo() {
+                    // const userId = JSON.parse(localStorage.getItem('candidateId'));
+                    const userId=126
+                    return (
+                        axios
+                        .get(ApiBaseUrl + '/candidate/profileview/'+ userId , this.getToken())
+                        .then(Response => Response)
+                    )
+                }
+        
 
 }
 export default ApiServicesOrg

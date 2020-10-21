@@ -1,187 +1,45 @@
 import React, { Component, createRef } from 'react';
-import '../../Assets/css/Candidate.css'
-import { Link } from 'react-router-dom';
-import Education from '../Candidate/Profile/updation/Education';
-import Dropzone from 'react-dropzone'
-import Employment from '../Candidate/Profile/updation/Employment';
-import About from '../Candidate/Profile/updation/About';
-import CTC from '../Candidate/Profile/updation/CTC';
-import Personal from '../Candidate/Profile/updation/Personal';
-import Skill from '../Candidate/Profile/updation/Skill';
-import ProfileName from '../Candidate/Profile/updation/ProfileName';
-import CareerProfile from '../Candidate/Profile/updation/CareerProfile';
-import Certification from '../Candidate/Profile/updation/Certification';
-import Popup from '../CommonComp/Popup';
-import Language from '../Candidate/Profile/updation/Language';
-import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
-import '../Candidate/Profile/profile.css';
-import { EDIT_PROFILE_NAME, EDIT_ABOUT, EDIT_CTC, EDIT_SKILL, EDIT_CERTIFICATE, EDIT_EMPLOYMENT, EDIT_EDUCATION, EDIT_PERSONAL, EDIT_DESIRED_PROFILE, EDIT_LANGUAGE } from '../../Utils/AppConst';
-import Footer from '../CommonComp/Footer';
-import HeaderAll from '../CommonComp/HeaderAll';
+import { Link } from 'react-router-dom'
 import LeftNavProvider from '../CommonComp/LeftNavProvider';
+import HeaderAll from '../CommonComp/HeaderAll'
+import Footer from '../CommonComp/Footer'
+import { Breadcrumbs } from '../CommonComp/breadcrumbs/index';
 import ScrollUpButton from "react-scroll-up-button";
+import '../Candidate/Profile/profile.css';
+import '../../Assets/css/Candidate.css'
+import ApiServicesOrg from '../../Services/ApiServicesOrg'
+import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
+import Dropzone from 'react-dropzone'
 
 class CandidateProfileToOpen extends Component {
 
-  constructor() {
-    super()
-    this.state = {
-      isEducationPopupShow: true,
-      isPopupShow: false,
-      title: '',
-      body: ''
+    constructor() {
+      super()
+      this.profileService = new ApiServicesOrg()
+      this.state = {
+        CandidateDetails: {},
+      }
     }
-  }
 
-  editName = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_PROFILE_NAME
-    })
-  }
+    componentDidMount() {
+        
+        this.profileService.getCandidateInfo()
+        .then(Response =>
+          
+          this.setState({
+            CandidateDetails: Response.data.responseObject,
+            
+          }, () => { console.log(this.state.CandidateDetails) },
 
-  editAbout = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_ABOUT
-    })
-  }
-  editCTC = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_CTC
-    })
-  }
-  editSkill = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_SKILL
-    })
-  }
-  editCertificate = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_CERTIFICATE
-    })
-  }
-  editEmployment = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_EMPLOYMENT
-    })
-  }
-  editEducation = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_EDUCATION
-    })
-  }
-  editPersonal = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_PERSONAL
-    })
-  }
-  editDesiredProfile = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_DESIRED_PROFILE
-    })
-  }
-  editLanguage = () => {
-    this.setState({
-      isPopupShow: true,
-      title: EDIT_LANGUAGE
-    })
-  }
-  downLoadResume(){
+          ),
+        ) 
+   }
+
+   downLoadResume(){
     alert(`Hii`)
 }
-  renderPopup = () => {
-    const { title, body } = this.state;
-    switch (title) {
-      case EDIT_PROFILE_NAME:
-        return (<Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<ProfileName />}
-        />);
-        break;
-      case EDIT_ABOUT:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<About />}
-        />;
-        break;
-      case EDIT_CTC:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<CTC />}
-        />;
-        break;
-      case EDIT_SKILL:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<Skill />}
-        />
-        break;
-      case EDIT_CERTIFICATE:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<Certification />}
-        />
-      case EDIT_EMPLOYMENT:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<Employment />}
-        />
-        break;
-      case EDIT_EDUCATION:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<Education />}
-        />
-        break;
-      case EDIT_PERSONAL:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<Personal />}
-        />
-        break;
-      case EDIT_DESIRED_PROFILE:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<CareerProfile />}
-        />
-        break;
-      case EDIT_LANGUAGE:
-        return <Popup
-          showPopup={this.showPopup}
-          title={title}
-          body={<Language />}
-        />
-        break;
 
-      default: return;
-    }
-    // const { title, body } = this.state;
-    // return (
-    //   <Popup
-    //     showPopup={this.showPopup}
-    //     title={title}
-    //     body={body}
-    //   />
-    // )
-  }
-  renderAbout = () => {
+renderAbout = () => {
     return (
       <div class="card border-0">
         <div class="row profile-row-fashion">
@@ -290,6 +148,134 @@ class CandidateProfileToOpen extends Component {
       </div>
     );
   }
+  renderSkills = () => {
+    return (
+      <div class="row profile-row-fashion">
+     
+        <div class="col-12" >
+          <table class="table">
+            <thead class="table-thead">
+              <tr>
+                <th class="normal-text-medium">SKILLS</th>
+                <th class="normal-text-medium">VERSION</th>
+                <th class="normal-text-medium">EXPERIENCE</th>
+                <th class="normal-text-medium">PROFICIENCY</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Skill 1</td>
+                <td>V5.1</td>
+                <td>5 Years</td>
+                <td>Expert</td>
+                
+              </tr>
+              <tr>
+                <td>Skill 2</td>
+                <td>V2.1</td>
+                <td>1 Years</td>
+                <td>Expert</td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-12">
+          <div class="row row-pad-row">
+            <div class="profile-col-left mt30">
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    )
+  }
+  renderEducation = () => {
+    return (
+      <div>
+        <div class="row profile-row-fashion">
+          <div class="profile-col-left left-sec-heading">
+            <img src="/images/Dashboard-assets/candidate/education.png" alt="Cinque Terre" class="left-sec-icon" />
+            <span class="subtitle-semi-bold left-sec-heading-text">Education</span>
+
+          </div>
+          
+          <div class="col-12">
+            <div class="row row-pad-row">
+              <div class="profile-col-left mt30 pad-left">
+                <div><span class="normal-text-semi-bold">Bachelor of Technology </span></div>
+                <div><span class="small-text-light">Bachelor of Technology (2011-2015)</span></div>
+                <div><span class="small-text-light">University Name</span></div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="row profile-row-fashion">
+          <div class="profile-col-left left-sec-heading">
+            <img src="/images/Dashboard-assets/candidate/certification.png" alt="Cinque Terre" class="left-sec-icon" />
+            <span class="subtitle-semi-bold left-sec-heading-text">Certifications</span>
+
+          </div>
+          <div class="profile-col-right right-sec">
+            
+            <div><span class="normal-text-light">XYZ Certifications</span></div>
+            <div><span class="normal-text-light">TCS Issued on Sept 2019 </span></div>
+          </div>
+          <div class="col-12">
+            <div class="row row-pad-row">
+              <div class="profile-col-left mt30">
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>);
+  }
+
+  renderEmployment = () => {
+    return (<div class="row profile-row-fashion employment">
+      {/* <div class="profile-col-left left-sec-heading">
+        <img src="/images/Dashboard-assets/candidate/employment.png" alt="Cinque Terre" class="left-sec-icon" />
+        <span class="subtitle-semi-bold left-sec-heading-text">Employment</span>
+
+      </div> */}
+      <div class="profile-col-right right-sec">
+
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12 mt30">
+            <div>
+              
+              <span class="subtitle-semi-bold">Software Developer</span>
+            </div>
+            <div><span class="normal-text-light">TCS-FullTime</span></div>
+            <div><span class="normal-text-light">Sept 2008 present</span></div>
+            <p class="mt25 normal-text-light">Senior Python Developer responsibilities include participating in all phases of the software development lifecycle lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you.</p>
+          </div>
+          <div class="col-12 mt30">
+            <div>
+              
+              <span class="subtitle-semi-bold">Software Developer</span>
+            </div>
+            <div><span class="normal-text-light">TCS-FullTime</span></div>
+            <div><span class="normal-text-light">Sept 2008 present</span></div>
+            <p class="mt25 normal-text-light">Senior Python Developer responsibilities include participating in all phases of the software development lifecycle lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row row-pad-row">
+          <div class="profile-col-left mt30">
+          </div>
+         
+        </div>
+      </div>
+    </div>);
+  }
+
   renderOther = () => {
     return (
       <div>
@@ -393,142 +379,9 @@ class CandidateProfileToOpen extends Component {
       </div>
     );
   }
-  renderSkills = () => {
-    return (
-      <div class="row profile-row-fashion">
-     
-        <div class="col-12" >
-          <table class="table">
-            <thead class="table-thead">
-              <tr>
-                <th class="normal-text-medium">SKILLS</th>
-                <th class="normal-text-medium">VERSION</th>
-                <th class="normal-text-medium">EXPERIENCE</th>
-                <th class="normal-text-medium">PROFICIENCY</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Skill 1</td>
-                <td>V5.1</td>
-                <td>5 Years</td>
-                <td>Expert</td>
-                
-              </tr>
-              <tr>
-                <td>Skill 2</td>
-                <td>V2.1</td>
-                <td>1 Years</td>
-                <td>Expert</td>
-                
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-12">
-          <div class="row row-pad-row">
-            <div class="profile-col-left mt30">
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    )
-  }
 
-  renderEducation = () => {
-    return (
-      <div>
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/education.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Education</span>
+render() {
 
-          </div>
-          
-          <div class="col-12">
-            <div class="row row-pad-row">
-              <div class="profile-col-left mt30 pad-left">
-                <div><span class="normal-text-semi-bold">Bachelor of Technology </span></div>
-                <div><span class="small-text-light">Bachelor of Technology (2011-2015)</span></div>
-                <div><span class="small-text-light">University Name</span></div>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/certification.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Certifications</span>
-
-          </div>
-          <div class="profile-col-right right-sec">
-            
-            <div><span class="normal-text-light">XYZ Certifications</span></div>
-            <div><span class="normal-text-light">TCS Issued on Sept 2019 </span></div>
-          </div>
-          <div class="col-12">
-            <div class="row row-pad-row">
-              <div class="profile-col-left mt30">
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>);
-  }
-
-  renderEmployment = () => {
-    return (<div class="row profile-row-fashion employment">
-      {/* <div class="profile-col-left left-sec-heading">
-        <img src="/images/Dashboard-assets/candidate/employment.png" alt="Cinque Terre" class="left-sec-icon" />
-        <span class="subtitle-semi-bold left-sec-heading-text">Employment</span>
-
-      </div> */}
-      <div class="profile-col-right right-sec">
-
-      </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-12 mt30">
-            <div>
-              
-              <span class="subtitle-semi-bold">Software Developer</span>
-            </div>
-            <div><span class="normal-text-light">TCS-FullTime</span></div>
-            <div><span class="normal-text-light">Sept 2008 present</span></div>
-            <p class="mt25 normal-text-light">Senior Python Developer responsibilities include participating in all phases of the software development lifecycle lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you.</p>
-          </div>
-          <div class="col-12 mt30">
-            <div>
-              
-              <span class="subtitle-semi-bold">Software Developer</span>
-            </div>
-            <div><span class="normal-text-light">TCS-FullTime</span></div>
-            <div><span class="normal-text-light">Sept 2008 present</span></div>
-            <p class="mt25 normal-text-light">Senior Python Developer responsibilities include participating in all phases of the software development lifecycle lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="row row-pad-row">
-          <div class="profile-col-left mt30">
-          </div>
-         
-        </div>
-      </div>
-    </div>);
-  }
-  showPopup = () => {
-    this.setState({ isPopupShow: false })
-  }
-
-  render() {
-
-    const { isPopupShow } = this.state;
-    const details = localStorage.getItem('emaildetails');
     return (
       <div>
         <LeftNavProvider></LeftNavProvider>
@@ -548,9 +401,6 @@ class CandidateProfileToOpen extends Component {
                     </ol>
                 </div>
                 <div class="container-fashion">
-                  {
-                    isPopupShow ? this.renderPopup() : null
-                  }
                   <div class="row profile-details">
                     <div class="profile-summary-col-left">
                       <div class="camera-container">
@@ -559,8 +409,8 @@ class CandidateProfileToOpen extends Component {
                       <img src="/images/Dashboard-assets/candidate/profile-pic.png" class="rounded-circle" alt="Cinque Terre" />
                     </div>
                     <div class="profile-summary-col-right">
-                    <a class="download-right" href="" onClick={this.downLoadResume}><img alt="" class="edit-icon" src="../images/ActiveJob-JobDetails/Group 555.svg"></img> Download Resume</a>
-                      <h4 class="h4-fashion">John Doe</h4>
+                    {/* <a class="download-right" href="" onClick={this.downLoadResume}><img alt="" class="edit-icon" src="../images/ActiveJob-JobDetails/Group 555.svg"></img> Download Resume</a> */}
+    <h4 class="h4-fashion">John Doe</h4>
                       <span class="subtitle-medium">Software Developer at TCS</span>
                       <hr class="border" />
                       <div class="row">
