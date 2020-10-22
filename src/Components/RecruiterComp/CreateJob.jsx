@@ -21,29 +21,37 @@ export default class CreateJob extends React.Component {
       },
       categories: [],
       primarySkills: [],
+      states: [],
+      cities: [],
       isFormValid: true
     }
   }
 
   componentDidMount() {
     ApiServicesOrgRecruiter.getListOfCategories().then((response) => {
+      console.log(response.data.responseObject)
       let categoriesList = [];
       if (response) {
-        const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].categories);
-        categoriesList = result.map(category => ({ value: category, label: category }));
-      } else {
+        categoriesList = response.data.responseObject.map(category => ({ value: category && category.category, label: category && category.category }));
       }
       this.setState({
         categories: categoriesList
       })
     });
     ApiServicesOrgCandidate.getListOfSkills().then((response) => {
+      let skillsList = [];
       if (response) {
-        const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].skills);
-        this.setState({primarySkills: result});
-      } else {
-        this.setState({primarySkills: []});
+        skillsList = response.data.responseObject.map(skill => ({ value: skill.skills, label: skill.skills }));
       }
+      this.setState({primarySkills: skillsList});
+    });
+    ApiServicesOrgCandidate.getListOfStates().then((response) => {
+      let statesList = [];
+      if (response) {
+        console.log(response.data.responseObject)
+        statesList = response.data.responseObject.map(state => ({ value: state.stateName, label: state.stateName, stateCode: state.stateCode }));
+      }
+      this.setState({states: statesList});
     });
   }
 
@@ -58,7 +66,7 @@ export default class CreateJob extends React.Component {
     if (value) {
       delete errors[name];
     } else {
-      if (!isFormValid) errors[name] = `${name} cannot be left blank`
+      if (!isFormValid) errors[name] = this.getErrorMsg(name)
     }
     this.setState({
       values: { ...values, [name]: value },
@@ -66,17 +74,81 @@ export default class CreateJob extends React.Component {
     });
   }
 
+  getErrorMsg = (name) => {
+    switch(name) {
+      case 'jobTitle': {
+        return 'Job Title cannot be left blank'
+      }
+      break
+      case 'employmentType': {
+        return 'Employment Type cannot be left blank'
+      }
+      break
+      case 'category': {
+        return 'Category cannot be left blank'
+      }
+      break
+      case 'primarySkill': {
+        return 'Primary SKill cannot be left blank'
+      }
+      break
+      case 'experienceReqFrom': {
+        return 'Experience cannot be left blank'
+      }
+      break
+      case 'experienceReqTo': {
+        return 'Experience cannot be left blank'
+      }
+      break
+      case 'annualSalaryFrom': {
+        return 'Salary cannot be left blank'
+      }
+      break
+      case 'annualSalaryTo': {
+        return 'Salary cannot be left blank'
+      }
+      break
+      case 'noOfPositionsAvailable': {
+        return 'No Of Positions cannot be left blank'
+      }
+      break
+      case 'country': {
+        return 'Country cannot be left blank'
+      }
+      break
+      case 'state': {
+        return 'State cannot be left blank'
+      }
+      break
+      case 'city': {
+        return 'City cannot be left blank'
+      }
+      break
+    }
+  }
+
   handleSelect = obj => {
-    const { name, value } = obj;
+    const { name, value, stateCode } = obj;
     const { values, errors, isFormValid } = this.state;
     if (value || value === 0) {
       delete errors[name];
     } else {
-      if (!isFormValid) errors[name] = `${name} cannot be left blank`
+      if (!isFormValid) errors[name] = this.getErrorMsg(name)
     }
     this.setState({
       values: { ...values, [name]: value },
       errors: errors
+    }, () => {
+      if (name === 'state') {
+        ApiServicesOrgCandidate.getListOfCity(stateCode).then((response) => {
+          let citiesList = [];
+          if (response) {
+            console.log(response.data.responseObject)
+            citiesList = response.data.responseObject.map(city => ({ value: city.city_name, label: city.city_name }));
+          }
+          this.setState({cities: citiesList});
+        });
+      }
     });
   }
 
@@ -87,7 +159,7 @@ export default class CreateJob extends React.Component {
     if (value) {
       delete errors[name];
     } else {
-      if (!isFormValid) errors[name] = `${name} cannot be left blank`
+      if (!isFormValid) errors[name] = this.getErrorMsg(name)
     }
     this.setState({
       values: { ...values, [name]: value },
@@ -138,62 +210,62 @@ export default class CreateJob extends React.Component {
     const { values, errors } = this.state;
     const { jobTitle, employmentType, category, primarySkill, experienceReqFrom, experienceReqTo, annualSalaryFrom, annualSalaryTo, noOfPositionsAvailable, country, state, city } = values;
     if (!jobTitle) {
-      errors.jobTitle = 'Job Title cannot be left blank'
+      errors.jobTitle = this.getErrorMsg('jobTitle')
     } else {
       errors && delete errors.jobTitle;
     }
     if (!employmentType) {
-      errors.employmentType = 'Employment Type cannot be left blank'
+      errors.employmentType = this.getErrorMsg('employmentType')
     } else {
       errors && delete errors.employmentType;
     }
     if (!category) {
-      errors.category = 'Category cannot be left blank'
+      errors.category = this.getErrorMsg('category')
     } else {
       errors && delete errors.category;
     }
     if (!primarySkill) {
-      errors.primarySkill = 'Primary SKill cannot be left blank'
+      errors.primarySkill = this.getErrorMsg('primarySkill')
     } else {
       errors && delete errors.primarySkill;
     }
     if (experienceReqFrom !== 0 && !experienceReqFrom) {
-      errors.experienceReqFrom = 'Experience cannot be left blank'
+      errors.experienceReqFrom = this.getErrorMsg('experienceReqFrom')
     } else {
       errors && delete errors.experienceReqFrom;
     }
     if (experienceReqTo !== 0 && !experienceReqTo) {
-      errors.experienceReqTo = 'Experience cannot be left blank'
+      errors.experienceReqTo = this.getErrorMsg('experienceReqTo')
     } else {
       errors && delete errors.experienceReqTo;
     }
     if (!noOfPositionsAvailable) {
-      errors.noOfPositionsAvailable = 'No Of Positions cannot be left blank'
+      errors.noOfPositionsAvailable = this.getErrorMsg('noOfPositionsAvailable')
     } else {
       errors && delete errors.noOfPositionsAvailable;
     }
     if (annualSalaryFrom !== 0 && !annualSalaryFrom) {
-      errors.annualSalaryFrom = 'Salary cannot be left blank'
+      errors.annualSalaryFrom = this.getErrorMsg('annualSalaryFrom')
     } else {
       errors && delete errors.annualSalaryFrom;
     }
     if (annualSalaryTo !== 0 && !annualSalaryTo) {
-      errors.annualSalaryTo = 'Salary cannot be left blank'
+      errors.annualSalaryTo = this.getErrorMsg('annualSalaryTo')
     } else {
       errors && delete errors.annualSalaryTo;
     }
     if (!country) {
-      errors.country = 'Country cannot be left blank'
+      errors.country = this.getErrorMsg('country')
     } else {
       errors && delete errors.country;
     }
     if (!state) {
-      errors.state = 'State cannot be left blank'
+      errors.state = this.getErrorMsg('state')
     } else {
       errors && delete errors.state;
     }
     if (!city) {
-      errors.city = 'City cannot be left blank'
+      errors.city = this.getErrorMsg('city')
     } else {
       errors && delete errors.city;
     }
@@ -225,6 +297,7 @@ export default class CreateJob extends React.Component {
     if (annualSalaryTo !== 0 && !annualSalaryTo && isAnnualSalaryToFocus) this.annualSalaryTo.focus();
     if (!country && isCountryFocus) this.country.focus();
     if (!state && isStateFocus) this.stateElement.focus();
+    if (!city && isCityFocus) this.city.focus();
     this.setState({
       errors: errors
     }, () => {
@@ -280,7 +353,7 @@ export default class CreateJob extends React.Component {
 
   render() {
     console.log(this.state)
-    const { values, errors, categories, remainingTextLength } = this.state;
+    const { values, errors, categories, remainingTextLength, primarySkills, states, cities } = this.state;
     const { jobTitle, secondarySkills, noOfPositionsAvailable, currency, visa, mustHavePasport, jobDescription, responsibilities } = values;
     const employmentTypes = Array.from(Array('PART TIME', 'FULL TIME', 'INTERNSHIP')).map(el => ({ value: el, label: el }));
     const expRequired = Array.from(Array(31).keys()).map(el => ({ value: el, label: el }))
@@ -345,7 +418,7 @@ export default class CreateJob extends React.Component {
                             styles={this.customStyles(errors && errors.category)}
                             name="category"
                             className="selectone"
-                            options={employmentTypes}
+                            options={categories}
                             placeholder="Select Category"
                             onChange={obj => this.handleSelect({ name: 'category', value: obj.value })}
                           />
@@ -370,7 +443,7 @@ export default class CreateJob extends React.Component {
                             name="primarySkill"
                             isMulti={true}
                             className="selectone"
-                            options={employmentTypes}
+                            options={primarySkills}
                             placeholder="Select Primary Skill"
                             onChange={value => this.handleMultipleSelect({ name: 'primarySkill', value: value })}
                           />
@@ -553,7 +626,7 @@ export default class CreateJob extends React.Component {
                           <div class="pt-0" style={{ display: 'flex', alignItems: 'center' }}>
                             <div class="col-md-6 p-0 pr-4">
                               <div style={{ display: 'flex' }}>
-                                <div class="error-message" >{errors && (errors.annualSalaryFrom || errors.annualSalaryTo)}</div>
+                                <div class="error-message pr-4" >{errors && (errors.annualSalaryFrom || errors.annualSalaryTo)}</div>
                                 <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
                               </div>
                             </div>
@@ -581,7 +654,7 @@ export default class CreateJob extends React.Component {
                             styles={this.customStyles(errors && errors.country)}
                             name="country"
                             className="selectone"
-                            options={employmentTypes}
+                            options={[{value: 'India', label: 'India'}]}
                             placeholder="Select Country"
                             onChange={obj => this.handleSelect({ name: 'country', value: obj.value })}
                           />
@@ -594,9 +667,9 @@ export default class CreateJob extends React.Component {
                             styles={this.customStyles(errors && errors.state)}
                             name="state"
                             className="selectone"
-                            options={employmentTypes}
+                            options={states}
                             placeholder="Select State"
-                            onChange={obj => this.handleSelect({ name: 'state', value: obj.value })}
+                            onChange={obj => this.handleSelect({ name: 'state', value: obj.value, stateCode: obj.stateCode })}
                           />
                           <div class="error-message" >{errors && errors.state}</div>
                         </div>
@@ -607,7 +680,7 @@ export default class CreateJob extends React.Component {
                             styles={this.customStyles(errors && errors.city)}
                             name="city"
                             className="selectone"
-                            options={employmentTypes}
+                            options={cities}
                             placeholder="Select City"
                             onChange={obj => this.handleSelect({ name: 'city', value: obj.value })}
                           />
