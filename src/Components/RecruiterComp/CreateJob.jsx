@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Select from "react-select";
 import HeaderAll from "../CommonComp/HeaderAll";
 import Footer from "../CommonComp/Footer";
@@ -20,7 +20,7 @@ export default class CreateJob extends React.Component {
         responsibilities: MAX_LENGTH
       },
       categories: [],
-      primarySkills: [],
+      primarySkillsList: [],
       states: [],
       cities: [],
       isFormValid: true
@@ -29,7 +29,6 @@ export default class CreateJob extends React.Component {
 
   componentDidMount() {
     ApiServicesOrgRecruiter.getListOfCategories().then((response) => {
-      console.log(response.data.responseObject)
       let categoriesList = [];
       if (response) {
         categoriesList = response.data.responseObject.map(category => ({ value: category && category.category, label: category && category.category }));
@@ -43,12 +42,11 @@ export default class CreateJob extends React.Component {
       if (response) {
         skillsList = response.data.responseObject.map(skill => ({ value: skill.skills, label: skill.skills }));
       }
-      this.setState({primarySkills: skillsList});
+      this.setState({primarySkillsList: skillsList});
     });
     ApiServicesOrgCandidate.getListOfStates().then((response) => {
       let statesList = [];
       if (response) {
-        console.log(response.data.responseObject)
         statesList = response.data.responseObject.map(state => ({ value: state.stateName, label: state.stateName, stateCode: state.stateCode }));
       }
       this.setState({states: statesList});
@@ -79,51 +77,40 @@ export default class CreateJob extends React.Component {
       case 'jobTitle': {
         return 'Job Title cannot be left blank'
       }
-      break
       case 'employmentType': {
         return 'Employment Type cannot be left blank'
       }
-      break
       case 'category': {
         return 'Category cannot be left blank'
       }
-      break
-      case 'primarySkill': {
+      case 'primarySkills': {
         return 'Primary SKill cannot be left blank'
       }
-      break
       case 'experienceReqFrom': {
         return 'Experience cannot be left blank'
       }
-      break
       case 'experienceReqTo': {
         return 'Experience cannot be left blank'
       }
-      break
       case 'annualSalaryFrom': {
         return 'Salary cannot be left blank'
       }
-      break
       case 'annualSalaryTo': {
         return 'Salary cannot be left blank'
       }
-      break
       case 'noOfPositionsAvailable': {
         return 'No Of Positions cannot be left blank'
       }
-      break
-      case 'country': {
+      case 'jobCountry': {
         return 'Country cannot be left blank'
       }
-      break
-      case 'state': {
+      case 'jobState': {
         return 'State cannot be left blank'
       }
-      break
-      case 'city': {
+      case 'jobCity': {
         return 'City cannot be left blank'
       }
-      break
+      default:
     }
   }
 
@@ -139,11 +126,10 @@ export default class CreateJob extends React.Component {
       values: { ...values, [name]: value },
       errors: errors
     }, () => {
-      if (name === 'state') {
+      if (name === 'jobState') {
         ApiServicesOrgCandidate.getListOfCity(stateCode).then((response) => {
           let citiesList = [];
           if (response) {
-            console.log(response.data.responseObject)
             citiesList = response.data.responseObject.map(city => ({ value: city.city_name, label: city.city_name }));
           }
           this.setState({cities: citiesList});
@@ -208,7 +194,7 @@ export default class CreateJob extends React.Component {
 
   handleValidate = _ => {
     const { values, errors } = this.state;
-    const { jobTitle, employmentType, category, primarySkill, experienceReqFrom, experienceReqTo, annualSalaryFrom, annualSalaryTo, noOfPositionsAvailable, country, state, city } = values;
+    const { jobTitle, employmentType, category, primarySkills, experienceReqFrom, experienceReqTo, annualSalaryFrom, annualSalaryTo, noOfPositionsAvailable, jobCountry, jobState, jobCity } = values;
     if (!jobTitle) {
       errors.jobTitle = this.getErrorMsg('jobTitle')
     } else {
@@ -224,10 +210,10 @@ export default class CreateJob extends React.Component {
     } else {
       errors && delete errors.category;
     }
-    if (!primarySkill) {
-      errors.primarySkill = this.getErrorMsg('primarySkill')
+    if (!primarySkills) {
+      errors.primarySkills = this.getErrorMsg('primarySkills')
     } else {
-      errors && delete errors.primarySkill;
+      errors && delete errors.primarySkills;
     }
     if (experienceReqFrom !== 0 && !experienceReqFrom) {
       errors.experienceReqFrom = this.getErrorMsg('experienceReqFrom')
@@ -254,20 +240,20 @@ export default class CreateJob extends React.Component {
     } else {
       errors && delete errors.annualSalaryTo;
     }
-    if (!country) {
-      errors.country = this.getErrorMsg('country')
+    if (!jobCountry) {
+      errors.jobCountry = this.getErrorMsg('jobCountry')
     } else {
-      errors && delete errors.country;
+      errors && delete errors.jobCountry;
     }
-    if (!state) {
-      errors.state = this.getErrorMsg('state')
+    if (!jobState) {
+      errors.jobState = this.getErrorMsg('jobState')
     } else {
-      errors && delete errors.state;
+      errors && delete errors.jobState;
     }
-    if (!city) {
-      errors.city = this.getErrorMsg('city')
+    if (!jobCity) {
+      errors.jobCity = this.getErrorMsg('jobCity')
     } else {
-      errors && delete errors.city;
+      errors && delete errors.jobCity;
     }
     if (annualSalaryFrom > annualSalaryTo) {
       errors.annualSalaryFrom = 'Min salary always be less than to max salary'
@@ -278,26 +264,26 @@ export default class CreateJob extends React.Component {
     const isEmploymentTypeFocus = !errors.jobTitle;
     const isCategoryFocus = !errors.jobTitle && !errors.employmentType;
     const isPrimarySkillFocus = !errors.jobTitle && !errors.employmentType && !errors.category;
-    const isExperienceReqFromFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill;
-    const isExperienceReqToFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom;
-    const isNoOfPositionsAvailableFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo;
-    const isAnnualSalaryFromFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable;
-    const isAnnualSalaryToFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom;
-    const isCountryFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo;
-    const isStateFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo && !errors.country;
-    const isCityFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkill && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo && !errors.country && !errors.state;
+    const isExperienceReqFromFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkills;
+    const isExperienceReqToFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkills && !errors.experienceReqFrom;
+    const isNoOfPositionsAvailableFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkills && !errors.experienceReqFrom && !errors.experienceReqTo;
+    const isAnnualSalaryFromFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkills && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable;
+    const isAnnualSalaryToFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkills && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom;
+    const isCountryFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkills && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo;
+    const isStateFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkills && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo && !errors.jobCountry;
+    const isCityFocus = !errors.jobTitle && !errors.employmentType && !errors.category && !errors.primarySkills && !errors.experienceReqFrom && !errors.experienceReqTo && !errors.noOfPositionsAvailable && !errors.annualSalaryFrom && !errors.annualSalaryTo && !errors.jobCountry && !errors.jobState;
     if (!jobTitle) this.jobTitle.focus();
     if (!employmentType && isEmploymentTypeFocus) this.employmentType.focus();
     if (!category && isCategoryFocus) this.category.focus();
-    if (!primarySkill && isPrimarySkillFocus) this.primarySkill.focus();
+    if (!primarySkills && isPrimarySkillFocus) this.primarySkills.focus();
     if (experienceReqFrom !== 0 && !experienceReqFrom && isExperienceReqFromFocus) this.experienceReqFrom.focus();
     if (experienceReqTo !== 0 && !experienceReqTo && isExperienceReqToFocus) this.experienceReqTo.focus();
     if (!noOfPositionsAvailable && isNoOfPositionsAvailableFocus) this.noOfPositionsAvailable.focus();
     if (annualSalaryFrom !== 0 && !annualSalaryFrom && isAnnualSalaryFromFocus) this.annualSalaryFrom.focus();
     if (annualSalaryTo !== 0 && !annualSalaryTo && isAnnualSalaryToFocus) this.annualSalaryTo.focus();
-    if (!country && isCountryFocus) this.country.focus();
-    if (!state && isStateFocus) this.stateElement.focus();
-    if (!city && isCityFocus) this.city.focus();
+    if (!jobCountry && isCountryFocus) this.jobCountry.focus();
+    if (!jobState && isStateFocus) this.jobState.focus();
+    if (!jobCity && isCityFocus) this.jobCity.focus();
     this.setState({
       errors: errors
     }, () => {
@@ -306,7 +292,6 @@ export default class CreateJob extends React.Component {
           isFormValid: true
         }, () => {
           ApiServicesOrgRecruiter.addJobDetails(values).then(res => {
-            console.log(res);
             this.props.history.push('/activeJob');
           });
         });
@@ -320,8 +305,6 @@ export default class CreateJob extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { values } = this.state;
-    const { errors } = this.state;
     this.handleValidate();
   }
 
@@ -352,8 +335,7 @@ export default class CreateJob extends React.Component {
 
 
   render() {
-    console.log(this.state)
-    const { values, errors, categories, remainingTextLength, primarySkills, states, cities } = this.state;
+    const { values, errors, categories, remainingTextLength, primarySkillsList, states, cities } = this.state;
     const { jobTitle, secondarySkills, noOfPositionsAvailable, currency, visa, mustHavePasport, jobDescription, responsibilities } = values;
     const employmentTypes = Array.from(Array('PART TIME', 'FULL TIME', 'INTERNSHIP')).map(el => ({ value: el, label: el }));
     const expRequired = Array.from(Array(31).keys()).map(el => ({ value: el, label: el }))
@@ -437,16 +419,16 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Primary Skill</label></div>
                           <Select
-                            ref={inputEl => (this.primarySkill = inputEl)}
-                            styles={this.customStyles(errors && errors.primarySkill)}
-                            name="primarySkill"
+                            ref={inputEl => (this.primarySkills = inputEl)}
+                            styles={this.customStyles(errors && errors.primarySkills)}
+                            name="primarySkills"
                             isMulti={true}
                             className="selectone"
-                            options={primarySkills}
+                            options={primarySkillsList}
                             placeholder="Select Primary Skill"
-                            onChange={value => this.handleMultipleSelect({ name: 'primarySkill', value: value })}
+                            onChange={value => this.handleMultipleSelect({ name: 'primarySkills', value: value })}
                           />
-                          <div class="error-message" >{errors && errors.primarySkill}</div>
+                          <div class="error-message" >{errors && errors.primarySkills}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Secondary Skill</label></div>
@@ -649,41 +631,41 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Country</label></div>
                           <Select
-                            ref={inputEl => (this.country = inputEl)}
-                            styles={this.customStyles(errors && errors.country)}
-                            name="country"
+                            ref={inputEl => (this.jobCountry = inputEl)}
+                            styles={this.customStyles(errors && errors.jobCountry)}
+                            name="jobCountry"
                             className="selectone"
                             options={[{value: 'India', label: 'India'}]}
                             placeholder="Select Country"
-                            onChange={obj => this.handleSelect({ name: 'country', value: obj.value })}
+                            onChange={obj => this.handleSelect({ name: 'jobCountry', value: obj.value })}
                           />
-                          <div class="error-message" >{errors && errors.country}</div>
+                          <div class="error-message" >{errors && errors.jobCountry}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>State</label></div>
                           <Select
-                            ref={inputEl => (this.stateElement = inputEl)}
-                            styles={this.customStyles(errors && errors.state)}
-                            name="state"
+                            ref={inputEl => (this.jobState = inputEl)}
+                            styles={this.customStyles(errors && errors.jobState)}
+                            name="jobState"
                             className="selectone"
                             options={states}
                             placeholder="Select State"
-                            onChange={obj => this.handleSelect({ name: 'state', value: obj.value, stateCode: obj.stateCode })}
+                            onChange={obj => this.handleSelect({ name: 'jobState', value: obj.value, stateCode: obj.stateCode })}
                           />
-                          <div class="error-message" >{errors && errors.state}</div>
+                          <div class="error-message" >{errors && errors.jobState}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>City</label></div>
                           <Select
-                            ref={inputEl => (this.city = inputEl)}
-                            styles={this.customStyles(errors && errors.city)}
-                            name="city"
+                            ref={inputEl => (this.jobCity = inputEl)}
+                            styles={this.customStyles(errors && errors.jobCity)}
+                            name="jobCity"
                             className="selectone"
                             options={cities}
-                            placeholder="Select City"
-                            onChange={obj => this.handleSelect({ name: 'city', value: obj.value })}
+                            placeholder="Select city"
+                            onChange={obj => this.handleSelect({ name: 'jobCity', value: obj.value })}
                           />
-                          <div class="error-message" >{errors && errors.city}</div>
+                          <div class="error-message" >{errors && errors.jobCity}</div>
                         </div>
                       </div>
                     </div>
