@@ -3,6 +3,7 @@ import LeftNavProvider from '../CommonComp/LeftNavProvider'
 import HeaderAll from '../CommonComp/HeaderAll'
 import Footer from '../CommonComp/Footer'
 import { Toast } from 'primereact/toast'
+import {Link} from 'react-router-dom'
 
 class CloseJobs extends Component{
     render(){
@@ -20,11 +21,12 @@ class CloseJobs extends Component{
                                 {/* top title */}
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <h5>Closed Jobs</h5>
+                                            <h5 className="active_job_heading active_padding">Closed Jobs</h5>
                                             <div className="sub-title1">You have 2 closed jobs, View <a href="#">ACTIVE</a></div>
                                         </div>
                                         <div className="col-md-6 text-md-right">
-                                            <button className="btn btn-blue">Create New Job</button>
+                                            {/* <button className="btn btn-blue">Create New Job</button> */}
+                                            <Link to="/createJob"><button className="btn btn-blue">Create New Job</button></Link>
                                         </div>
                                     </div>
                                     {/* main content display area */}

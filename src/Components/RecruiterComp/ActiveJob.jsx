@@ -64,18 +64,7 @@ class ActiveJob extends Component {
 
 
   }
-  // sortAscending = () => {
-  //   const { activity } = this.state;
-  //   activity.sort((a, b) => a - b)    
-  //   this.setState({ activity })
-  // }
-
-  // sortDescending = () => {
-  //   const { prices } = this.state;
-  //   prices.sort((a, b) => a - b).reverse()
-  //   this.setState({ prices })
-  // }
-
+  
 
   cardDelete(task, index) {
     if (window.confirm("Are you sure you want to delete this task?")) {
@@ -127,7 +116,7 @@ class ActiveJob extends Component {
               {/* top title */}
               <div className="row">
                 <div className="col-md-6 ml-10 mt-4 mb-4">
-                  <div class="active_job_heading active_padding">Active Jobs</div>
+                  <div className="active_job_heading active_padding">Active Jobs</div>
                   <div className="active_job_subtitle active_padding">You have 2 active jobs, View <Link to="/closedJobs" className="font-blue">Closed</Link></div>
                 </div>
                 <div className="col-md-6 text-md-right mt-4 mb-4">
