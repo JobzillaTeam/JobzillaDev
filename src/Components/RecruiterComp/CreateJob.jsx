@@ -355,7 +355,8 @@ export default class CreateJob extends React.Component {
               {/* top title */}
               <div className="row">
                 <div className="col-md-12 ml-10 mt-4 mb-4">
-                  <div class="active_job_heading active_padding">Active Jobs > Create Job</div>
+                  {/* <div class="active_job_heading active_padding">Active Jobs > Create Job</div> */}
+                  <div class="active_job_heading active_padding">Create Job</div>
                 </div>
               </div>
             </div>

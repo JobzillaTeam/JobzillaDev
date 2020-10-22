@@ -77,7 +77,7 @@ showError= (e) => {
       });
 
       this.state.fields['orgnaizationId'] = localStorage.getItem('organizationId');
-      const superID = JSON.parse(localStorage.getItem('userDetails')).supervisorId;
+      const superID = JSON.parse(localStorage.getItem('userDetails')).id;
       this.state.fields['supervisorId']= superID
       //this.state.fields['password']= "Test@1234";
         
