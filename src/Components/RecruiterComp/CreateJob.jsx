@@ -513,24 +513,24 @@ export default class CreateJob extends React.Component {
                             <div class="col-md-5 pt-0 pl-0 pr-0">
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <Select
+                                  placeholder="HRS"
                                   name="fromHour"
                                   className="selectone w-100"
                                   options={hours}
-                                  placeholder="Select"
                                   onChange={obj => this.handleExpectedHoursChange({ name: 'fromHour', value: obj.value })}
                                 />
                                 <Select
+                                  placeholder="MIN"
                                   name="fromMin"
                                   className="selectone w-100 ml-5 mr-5"
                                   options={mins}
-                                  placeholder="Select"
                                   onChange={obj => this.handleExpectedHoursChange({ name: 'fromMin', value: obj.value })}
                                 />
                                 <Select
+                                  placeholder=""
                                   name="fromMode"
                                   className="selectone w-100"
                                   options={modes}
-                                  placeholder="Select"
                                   onChange={obj => this.handleExpectedHoursChange({ name: 'fromMode', value: obj.value })}
                                 />
                               </div>
@@ -539,24 +539,24 @@ export default class CreateJob extends React.Component {
                             <div class="col-md-5 pt-0 pl-0 pr-0">
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <Select
+                                  placeholder="HRS"
                                   name="toHour"
                                   className="selectone w-100"
                                   options={hours}
-                                  placeholder="Select"
                                   onChange={obj => this.handleExpectedHoursChange({ name: 'toHour', value: obj.value })}
                                 />
                                 <Select
+                                  placeholder="MIN"
                                   name="toMin"
                                   className="selectone w-100 ml-5 mr-5"
                                   options={mins}
-                                  placeholder="Select"
                                   onChange={obj => this.handleExpectedHoursChange({ name: 'toMin', value: obj.value })}
                                 />
                                 <Select
+                                  placeholder=""
                                   name="toMode"
                                   className="selectone w-100"
                                   options={modes}
-                                  placeholder="Select"
                                   onChange={obj => this.handleExpectedHoursChange({ name: 'toMode', value: obj.value })}
                                 />
                               </div>
@@ -634,11 +634,11 @@ export default class CreateJob extends React.Component {
                             <div class="col-md-6 p-0 pr-4">
                               <div style={{ display: 'flex' }}>
                                 <div class="error-message pr-4" >{errors && (errors.annualSalaryFrom || errors.annualSalaryTo)}</div>
-                                <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
+                                <small class="pull-right pt-1">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</small>
                               </div>
                             </div>
                             <div class="col-md-6 p-0 pl-4">
-                              <span class="pull-right pt-2">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</span>
+                              <small class="pull-right pt-1">{currency === CURRENCY_TYPE_ENUM.INR ? 'Lakh' : 'Thousands'}</small>
                             </div>
                           </div>
 
@@ -662,7 +662,7 @@ export default class CreateJob extends React.Component {
                             name="jobCountry"
                             className="selectone"
                             options={[{value: 'India', label: 'India'}]}
-                            placeholder="Select Country"
+                            placeholder="Select"
                             onChange={obj => this.handleSelect({ name: 'jobCountry', value: obj.value })}
                           />
                           <div class="error-message" >{errors && errors.jobCountry}</div>
@@ -675,7 +675,7 @@ export default class CreateJob extends React.Component {
                             name="jobState"
                             className="selectone"
                             options={states}
-                            placeholder="Select State"
+                            placeholder="Select"
                             onChange={obj => this.handleSelect({ name: 'jobState', value: obj.value, stateCode: obj.stateCode })}
                           />
                           <div class="error-message" >{errors && errors.jobState}</div>
@@ -688,7 +688,7 @@ export default class CreateJob extends React.Component {
                             name="jobCity"
                             className="selectone"
                             options={cities}
-                            placeholder="Select city"
+                            placeholder="Select"
                             onChange={obj => this.handleSelect({ name: 'jobCity', value: obj.value })}
                           />
                           <div class="error-message" >{errors && errors.jobCity}</div>
@@ -701,10 +701,11 @@ export default class CreateJob extends React.Component {
               <div className="active_padding">
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
-                    <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
+                    <div className="col-md-12 pt-4 pb-3 pl-4 pr-3">
                       <h5 class="recruiterForm__sectionHeading">Job Description</h5>
                       <div className="col-md-12 pt-3 pl-0 recruiterForm__rightSpaceForTextArea">
                         <textarea
+                          placeholder='Describe your job profile...'
                           class="form-control mb-1"
                           rows="8"
                           name="jobDescription"
@@ -713,21 +714,24 @@ export default class CreateJob extends React.Component {
                           onChange={this.handleChange}
                         >
                         </textarea>
-                        <span className='float-right'>{remainingTextLength.jobDescription} Character(s) Left</span>
+                        <small className='float-right'>{remainingTextLength.jobDescription} Character(s) Left</small>
                       </div>
                     </div>
-                    <div className="col-md-12 pt-4 pb-4 pl-4 recruiterForm__rightSpaceForTextArea">
+                    <div className="col-md-12 pt-3 pb-4 pl-4">
                       <h5 class="recruiterForm__sectionHeading">Responsibilities</h5>
-                      <textarea
-                        class="form-control mb-1"
-                        rows="8"
-                        name="responsibilities"
-                        value={responsibilities}
-                        maxLength={MAX_LENGTH}
-                        onChange={this.handleChange}
-                      >
-                      </textarea>
-                      <span className='float-right'>{remainingTextLength.responsibilities} Character(s) Left</span>
+                      <div className="d-12 pt-3 pl-0 recruiterForm__rightSpaceForTextArea">
+                        <textarea
+                          placeholder='Describe your job responsibilities...'
+                          class="form-control mb-1"
+                          rows="8"
+                          name="responsibilities"
+                          value={responsibilities}
+                          maxLength={MAX_LENGTH}
+                          onChange={this.handleChange}
+                        >
+                        </textarea>
+                        <small className='float-right'>{remainingTextLength.responsibilities} Character(s) Left</small>
+                      </div>
                     </div>
                   </div>
                 </div>
