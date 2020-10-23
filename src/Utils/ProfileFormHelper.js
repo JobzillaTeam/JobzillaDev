@@ -1,5 +1,14 @@
 import moment from 'moment';
 
+export const profileNameFormDefaultValues = () => ({
+  company: '',
+  currentRole: '',
+  emailId: '',
+  firstName: '',
+  lastName: '',
+  mobileNumber: '',
+});
+
 export const certificationFormDefaultValues = () => ({
   issueMonth: '',
   issueYear: '',
