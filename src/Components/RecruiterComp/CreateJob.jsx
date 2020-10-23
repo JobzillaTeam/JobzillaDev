@@ -389,8 +389,8 @@ export default class CreateJob extends React.Component {
               <div className="active_padding">
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
-                    <div className="col-md-12 pt-4 pb-4 pl-3 pr-3">
-                      <h5>Basic Information</h5>
+                    <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
+                      <h5 class="recruiterForm__sectionHeading">Basic Information</h5>
                       <div class="row col">
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Job Title</label></div>
@@ -439,8 +439,8 @@ export default class CreateJob extends React.Component {
               <div className="active_padding">
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
-                    <div className="col-md-12 pt-4 pb-4 pl-3 pr-3">
-                      <h5>Skills and Experience</h5>
+                    <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
+                      <h5 class="recruiterForm__sectionHeading">Skills and Experience</h5>
                       <div class="row col">
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Primary Skill</label></div>
@@ -504,13 +504,13 @@ export default class CreateJob extends React.Component {
               <div className="active_padding">
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
-                    <div className="col-md-12 pt-4 pb-4 pl-3 pr-3">
-                      <h5>Others</h5>
+                    <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
+                      <h5 class="recruiterForm__sectionHeading">Others</h5>
                       <div class="row col">
                         <div className="col-md-12 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Expected Working Hours</label></div>
                           <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div class="col-md-5 pt-3 pl-0 pr-0">
+                            <div class="col-md-5 pt-0 pl-0 pr-0">
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <Select
                                   name="fromHour"
@@ -536,7 +536,7 @@ export default class CreateJob extends React.Component {
                               </div>
                             </div>
                             <div class="col-md-2 text-center"><span>To</span></div>
-                            <div class="col-md-5 pt-3 pl-0 pr-0">
+                            <div class="col-md-5 pt-0 pl-0 pr-0">
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <Select
                                   name="toHour"
@@ -592,7 +592,7 @@ export default class CreateJob extends React.Component {
                               onChange={this.handleCheckbox}
                               value={mustHavePasport}
                             />
-                            <label>Must have passport</label>
+                            <label class="mb-0">Must have passport</label>
                           </div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
@@ -630,7 +630,7 @@ export default class CreateJob extends React.Component {
                               />
                             </div>
                           </div>
-                          <div class="pt-0" style={{ display: 'flex', alignItems: 'center' }}>
+                          <div class="pt-0" style={{ display: 'flex' }}>
                             <div class="col-md-6 p-0 pr-4">
                               <div style={{ display: 'flex' }}>
                                 <div class="error-message pr-4" >{errors && (errors.annualSalaryFrom || errors.annualSalaryTo)}</div>
@@ -651,8 +651,8 @@ export default class CreateJob extends React.Component {
               <div className="active_padding">
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
-                    <div className="col-md-12 pt-4 pb-4 pl-3 pr-3">
-                      <h5>Hiring Location</h5>
+                    <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
+                      <h5 class="recruiterForm__sectionHeading">Hiring Location</h5>
                       <div class="row col">
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Country</label></div>
@@ -701,8 +701,8 @@ export default class CreateJob extends React.Component {
               <div className="active_padding">
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
-                    <div className="col-md-12 pt-4 pb-4 pl-3 pr-3">
-                      <h5>Job Description</h5>
+                    <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
+                      <h5 class="recruiterForm__sectionHeading">Job Description</h5>
                       <div className="col-md-12 pt-3 pl-0 recruiterForm__rightSpaceForTextArea">
                         <textarea
                           class="form-control mb-1"
@@ -716,8 +716,8 @@ export default class CreateJob extends React.Component {
                         <span className='float-right'>{remainingTextLength.jobDescription} Character(s) Left</span>
                       </div>
                     </div>
-                    <div className="col-md-12 pt-4 pb-4 pl-3 recruiterForm__rightSpaceForTextArea">
-                      <h5>Responsibilities</h5>
+                    <div className="col-md-12 pt-4 pb-4 pl-4 recruiterForm__rightSpaceForTextArea">
+                      <h5 class="recruiterForm__sectionHeading">Responsibilities</h5>
                       <textarea
                         class="form-control mb-1"
                         rows="8"
@@ -732,8 +732,8 @@ export default class CreateJob extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="right2">
-                <Link to="/activeJob" class="btn btn-light float-right   border border-primary">
+              <div className="pull-right">
+                <Link to="/activeJob" class="ml-4 btn btn-light float-right   border border-primary">
                   Cancel
                 </Link>
                 <button
@@ -744,8 +744,10 @@ export default class CreateJob extends React.Component {
                 </button>
               </div>
             </form>
+            <div class="pt-5" />
+            <div class="pt-3" />
             <Footer></Footer>
-          </div>
+            </div>
         </div>
       </div>
     );
