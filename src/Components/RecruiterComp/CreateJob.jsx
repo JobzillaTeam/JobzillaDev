@@ -118,7 +118,32 @@ export default class CreateJob extends React.Component {
     const { name, value, stateCode } = obj;
     const { values, errors, isFormValid } = this.state;
     if (value || value === 0) {
-      delete errors[name];
+      if (!isFormValid) {
+        if (['annualSalaryFrom','annualSalaryTo','experienceReqFrom','experienceReqTo'].includes(name)) {
+          if (['annualSalaryFrom','annualSalaryTo'].includes(name)) {
+            const annualSalaryFrom = name === 'annualSalaryFrom' ? value : values.annualSalaryFrom;
+            const annualSalaryTo = name === 'annualSalaryTo' ? value : values.annualSalaryTo;
+            if (annualSalaryFrom > annualSalaryTo) {
+              errors[name] = 'Min salary always be less than to max salary'
+            } else {
+              delete errors.annualSalaryFrom;
+              delete errors.annualSalaryTo;
+            }
+          } else {
+            const experienceReqFrom = name === 'experienceReqFrom' ? value : values.experienceReqFrom;
+            const experienceReqTo = name === 'experienceReqTo' ? value : values.experienceReqTo;
+            if (experienceReqFrom > experienceReqTo) {
+              errors[name] = 'Min experience always be less than to max experience'
+            } else {
+              delete errors.experienceReqFrom;
+              delete errors.experienceReqTo;
+            }
+          }
+        }
+        else {
+          delete errors[name];
+        }
+      }
     } else {
       if (!isFormValid) errors[name] = this.getErrorMsg(name)
     }
@@ -134,7 +159,7 @@ export default class CreateJob extends React.Component {
           }
           this.setState({cities: citiesList});
         });
-      }
+      } 
     });
   }
 
@@ -259,7 +284,7 @@ export default class CreateJob extends React.Component {
       errors.annualSalaryFrom = 'Min salary always be less than to max salary'
     }
     if (experienceReqFrom > experienceReqTo) {
-      errors.annualSalaryFrom = 'Min experience always be less than to max experience'
+      errors.experienceReqFrom = 'Min experience always be less than to max experience'
     }
     const isEmploymentTypeFocus = !errors.jobTitle;
     const isCategoryFocus = !errors.jobTitle && !errors.employmentType;
