@@ -2,12 +2,19 @@ import React from 'react'
 import ApiServicesOrg from '../../../../../Services/ApiServicesOrg';
 import { EDIT_PROFILE_NAME } from '../../../../../Utils/AppConst'
 import RenderLoader from '../../../../CommonComp/Loader';
+import { Context } from '../../../../../Context/ProfileContext';
 
 const InformationComponent = ({ showPopup, candidateProfile }) => {
+  const { state } = React.useContext(Context);
+  const [candidateInfo, setCandidateInfo] = React.useState();
+  if (state instanceof Promise) {
+    state.then((data) => {
+      setCandidateInfo(data.candidateInfo)
+    })
+  }
   const apiServicesOrg = new ApiServicesOrg();
   const [imagUrl, setImageUrl] = React.useState();
   const uploadHandler = (e) => {
-    console.log(e.target.files)
     const files = e.target.files;
     const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
     const formData = new FormData()
@@ -40,8 +47,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
       setImageUrl(Response.data.responseObject)
     })
   }, [])
-  if (candidateProfile) {
-    const { candidateInfo } = candidateProfile;
+  if (candidateInfo) {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
     return (
       <div class="bg-white pl-3 pr-5 py-5 section-divider align-items-center">
