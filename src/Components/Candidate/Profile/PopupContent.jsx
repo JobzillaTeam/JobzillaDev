@@ -15,7 +15,9 @@ export const PopupContentComponent = ({ title, showPopup, dataAttributes, id }) 
   let bodyComponent;
   switch (title) {
     case EDIT_PROFILE_NAME:
-      bodyComponent = <ProfileName />
+      bodyComponent = <ProfileName
+        showPopup={showPopup}
+      />
       break;
     case EDIT_ABOUT:
       bodyComponent = <About
