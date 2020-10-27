@@ -191,6 +191,27 @@ class ApiServicesOrg extends Component {
                         .then(Response => Response)
                     )
                 }
+
+          //5.6 Uploading Profile Photo
+                postProfilePhoto (formData, formheader){
+                    const userId=JSON.parse(localStorage.getItem('userDetails')).id
+                return(
+                    axios
+                    .post(ApiBaseUrl + "/user/uploadImage/"+ userId, formData, formheader)
+                    .then(Response => Response)
+                )
+            }
+  
+            //5.7 view Profile Photo
+                viewProfileImage (){
+                   const userId=JSON.parse(localStorage.getItem('userDetails')).id
+                   return(
+                       axios
+                       .get (ApiBaseUrl + "/user/viewImage/"+ userId, this.getToken())
+                       .then(Response => Response)
+                   )
+               }
+
         
 
 }
