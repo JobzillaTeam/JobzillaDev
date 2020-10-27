@@ -31,14 +31,13 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
 
     apiServicesOrg.postProfilePhoto(formData, formheader)
       .then(Response => {
-          console.log(Response)
-          window.location.reload();
-          // this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully'},60000);
-          // window.location.reload();
+        apiServicesOrg.viewProfileImage()
+        .then(Response => {
+          setImageUrl(Response.data.responseObject)
+        })
       })
       .catch(error => {
           console.log(error)
-          // this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},50000)
       })
   }
   React.useEffect(() => {
