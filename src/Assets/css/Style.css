@@ -3021,3 +3021,8 @@ textarea {
     font-family: 'Montserrat-Medium';
 }
 
+.uploadIcon {
+    position: relative;
+    top: 60px;
+    left: -45px;
+}

@@ -57,7 +57,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
             <label htmlFor='picture'>
               <img src="/images/Dashboard-assets/ar_camera.svg" style={{ cursor: "pointer" }}
                 data-toggle="tooltip" data-placement="right" title="Upload profile Photo"
-                className="rounded-circle" width="30px" height="30px" />
+                className="rounded-circle uploadIcon" width="30px" height="30px" />
             </label>
             <form style={{ display: "none" }}>
               <input type="file" name="imageFile"
@@ -66,7 +66,6 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
                 onChange={uploadHandler}
               />
             </form>
-
           </div>
           <div class="col col-md-9 col-xs-12 align-items-center">
             <div>
