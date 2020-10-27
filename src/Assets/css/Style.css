@@ -3017,3 +3017,14 @@ textarea {
 .form-control.is-invalid {
     padding-right: 12px !important;
 }
+.recruiterForm__sectionHeading {
+    font-size: 16px;
+    color: #52575C;
+    font-family: 'Montserrat-Medium';
+}
+
+.uploadIcon {
+    position: relative;
+    top: 60px;
+    left: -45px;
+}

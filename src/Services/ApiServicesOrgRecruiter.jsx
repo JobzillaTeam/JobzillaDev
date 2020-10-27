@@ -5,10 +5,12 @@ class ApiServicesOrgRecruiter {
   addJobDetails(resourceInfo) {
     const authToken = localStorage.getItem('authToken')
     console.log(resourceInfo);
+    const organizationId = localStorage.getItem('organizationId')
+
     // new file
     return (
       axios
-        .post(`${ApiBaseUrl}/recruiter/addJobDetails`, resourceInfo, {
+        .post(`${ApiBaseUrl}/recruiter/addJobDetails`, {...resourceInfo, orgId: organizationId}, {
           headers: {'Authorization': `Bearer ${authToken}`}
         })
         .then(Response => Response).catch(error => {

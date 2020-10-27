@@ -1,14 +1,12 @@
-import React,{useRef} from 'react'
+import React from 'react'
 import ApiServicesOrg from '../../../../../Services/ApiServicesOrg';
 import { EDIT_PROFILE_NAME } from '../../../../../Utils/AppConst'
 import RenderLoader from '../../../../CommonComp/Loader';
 import { Context } from '../../../../../Context/ProfileContext';
-import { Toast } from 'primereact/toast';
 
 const InformationComponent = ({ showPopup, candidateProfile }) => {
   const { state } = React.useContext(Context);
   const [candidateInfo, setCandidateInfo] = React.useState();
-  const toast = useRef(null);
   if (state instanceof Promise) {
     state.then((data) => {
       setCandidateInfo(data.candidateInfo)
@@ -33,13 +31,13 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
 
     apiServicesOrg.postProfilePhoto(formData, formheader)
       .then(Response => {
-          console.log(Response)
-           toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully'},60000);
-          window.location.reload();
+        apiServicesOrg.viewProfileImage()
+        .then(Response => {
+          setImageUrl(Response.data.responseObject)
+        })
       })
       .catch(error => {
           console.log(error)
-          toast.current.show({severity: 'error', summary: 'Error', detail: 'Server Error '},50000)
       })
   }
   React.useEffect(() => {
@@ -55,9 +53,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
         <Toast ref={toast} /> 
         <div class="row align-items-center">
           <div class="col col-md-3 col-xs-12 align-items-center">
-          {imagUrl ? <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
-         : <img src="/images/Dashboard-assets/user-f.jpg" height="175" width="175" class="rounded-circle" alt="User profile"/>}
-
+            <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
             <label htmlFor='picture'>
               <img src="/images/Dashboard-assets/ar_camera.svg" style={{ cursor: "pointer" }}
                 data-toggle="tooltip" data-placement="right" title="Upload profile Photo"
