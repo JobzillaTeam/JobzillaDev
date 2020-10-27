@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-//import axios from 'axios'
+import ApiServicesOrg from '../../Services/ApiServicesOrg'
 
 class HeaderAll extends Component {
   constructor() {
@@ -8,10 +8,11 @@ class HeaderAll extends Component {
     this.state = {
       userData: [],
       userId: localStorage.getItem('candidateId'),
-      status: ''
+      status: '',
+      imageUrl:''
     }
     this.toggleHandeler = this.toggleHandeler.bind(this)
-
+    this.viewImage = new ApiServicesOrg()
   }
   /** To handle Recruiter and Provider Toggle button **/
   toggleHandeler = (status) => {
@@ -21,29 +22,16 @@ class HeaderAll extends Component {
     const providerRecruiterStatus = status;
   }
 
-/* To Get Username */
+  componentDidMount(){
+    this.viewImage.viewProfileImage()
+    .then(Response => {
+        //console.log(Response.data.responseObject)
+        this.setState({
+            imageUrl: Response.data.responseObject
+        })
+         })
+}
 
-  // componentDidMount() {
-  //   const options = {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     }
-  //   };
-  //   axios
-  //     .get("https://techm-jobzilla.herokuapp.com/jobs/user/user/" + this.state.userId, options)
-  //     .then(Response => {
-  //       if (Response) {
-  //         // console.log(Response.data.responseObject)
-  //         this.setState({
-  //           userData: Response.data.responseObject
-  //         })
-  //         // console.log(this.state.userData)
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     })
-  // }
 
   render() {
     const { isCandidate } = this.props;
@@ -86,7 +74,8 @@ class HeaderAll extends Component {
             </div> : null}
           <ul className="nav mr-3">
             <li>
-              <img className="rounded-circle profile-icon mr-2" src="/images/Dashboard-assets/user-f.jpg" width="35" height="35"  />
+            {this.state.imageUrl ? <img className="rounded-circle profile-icon mr-2" src={`data:image/jpeg;base64,${this.state.imageUrl}`} width="35" height="35"/>
+            : <img className="rounded-circle profile-icon mr-2" src="/images/Dashboard-assets/user-f.jpg"width="35" height="35" alt="User profile"/>}
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#" data-toggle="dropdown">

@@ -35,21 +35,21 @@ const LeftNavCandidate = () => {
                         </NavLink>
                     </li>
                      <li data-toggle="tooltip" data-placement="right" title="Interviews">
-                        <Link class="subMenu collapsed" id="navbarDropdown" role="button"
+                        <Link className="subMenu collapsed" id="navbarDropdown" role="button"
                             data-toggle="collapse" data-target="#submenu1sub1">
                             <i><img src="/images/Candidate-Navbar-assets/interviews-icon.svg" aria-hidden="true" /></i>
                              <span className="menuText">Interviews</span>
                         </Link>
                         <div className="collapse" id="submenu1sub1" aria-expanded="false">
                             <ul className="flex-column nav submenuLink">
-                                <li class="dropdown-item" data-toggle="tooltip" data-placement="right" title="Invites"
+                                <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Invites"
                                 >
                                     <NavLink  to="/candidate/Interviews/InterviewInvites" >
                                         {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}
                                         <span className="menuText">Invites</span>
                                     </NavLink>
                                 </li>
-                                <li class="dropdown-item" data-toggle="tooltip" data-placement="right" title="Accepted">
+                                <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Accepted">
                                     <NavLink  to="/candidate/Interviews/AcceptedInterviews"
                                     activeClassName="active"
                                     isActive={isActive.bind(this,'/Candidate/Interviews/Accepted')}

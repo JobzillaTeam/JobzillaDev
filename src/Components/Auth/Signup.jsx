@@ -78,6 +78,7 @@ export default class Signup extends Component {
             })
             this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User is Signed up Successfully'},50000); 
         }
+            this.refs.check.checked= false ;
         }
     validateForm = () => {
         let fields = this.state.fields;
@@ -255,7 +256,7 @@ export default class Signup extends Component {
                                 {/* Terms checkbox */}
                                 <div className="form-group">
                                         <div className="form-check">
-                                            <input className="form-check-input" type="checkbox" id="agreeTerms" required/>
+                                            <input className="form-check-input" type="checkbox" id="agreeTerms" ref="check" required/>
                                             <label className="form-check-label" htmlFor="agreeTerms">
                                                 I agree to terms and conditions
                                             </label>
