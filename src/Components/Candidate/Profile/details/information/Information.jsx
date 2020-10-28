@@ -36,9 +36,8 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
 
     apiServicesOrg.postProfilePhoto(formData, formheader)
       .then(Response => {
-          console.log(Response)
-           toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully'},60000);
-          window.location.reload();
+          toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully'},60000);
+          setAvatar();
       })
       .catch(error => {
           console.log(error)
@@ -46,10 +45,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
       })
   }
   React.useEffect(() => {
-    apiServicesOrg.viewProfileImage()
-    .then(Response => {
-      setImageUrl(Response.data.responseObject)
-    })
+    setAvatar();
   }, [])
 
   React.useEffect(() => {
@@ -60,11 +56,18 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
     })
   }, [])
 
+  const setAvatar = () => {
+    apiServicesOrg.viewProfileImage()
+    .then(Response => {
+      setImageUrl(Response.data.responseObject)
+    })
+  }
+
   if (candidateInfo) {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
     return (
       <div class="bg-white pl-3 pr-5 py-5 section-divider align-items-center">
-        {/* <Toast ref={toast} />  */}
+        <Toast ref={toast} /> 
         <div class="row align-items-center">
           <div class="col col-md-3 col-xs-12 align-items-center">
           {imagUrl ? <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
