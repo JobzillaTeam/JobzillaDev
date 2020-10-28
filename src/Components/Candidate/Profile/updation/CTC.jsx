@@ -37,9 +37,16 @@ const CTCComponent = ({ showPopup }) => {
     })
   }, []);
 
-  const submitForm = e => {
+  const onSubmit = values => {
     if (values.currentCtcInLakh || values.currentCtcInThousand) {
-      clearErrors('currentCtcInLakh')
+      clearErrors('currentCtcInLakh');
+      const data = {
+        currencyType: customInputValues.currencyType,
+        currentCTC: getCTCInFormat(values.currentCtcInLakh, values.currentCtcInThousand),
+        expectedCTC: getCTCInFormat(values.expectedCtcInLakh, values.expectedCtcInThousand),
+        candidateId: CANDIDATE_ID
+      }
+      ApiServicesOrgCandidate.updateProfileInfo(data, getProfileInfo, showPopup);
     } else {
       setError('currentCtcInLakh', {
         type: 'manual',
@@ -47,19 +54,6 @@ const CTCComponent = ({ showPopup }) => {
       })
     }
   }
-
-  const onSubmit = values => {
-    const data = {
-      currencyType: customInputValues.currencyType,
-      currentCTC: getCTCInFormat(values.currentCtcInLakh, values.currentCtcInThousand),
-      expectedCTC: getCTCInFormat(values.expectedCtcInLakh, values.expectedCtcInThousand),
-      candidateId: CANDIDATE_ID
-    }
-    ApiServicesOrgCandidate.updateProfileInfo(data, getProfileInfo, showPopup);
-  }
-  
-  console.log(values)
-  console.log(customInputValues)
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div class="form-group">
@@ -107,7 +101,11 @@ const CTCComponent = ({ showPopup }) => {
                 <option>{i}</option>
               ))}
             </select>
-            <label class="w-100 text-right small-text-light mt-2" htmlFor="University">Lakhs</label>
+            <div style={{ display: 'flex', height: 30 }}>
+              <div class="error-message pr-4" >{errors && errors.currentCtcInLakh && errors.currentCtcInLakh.message}</div>
+              <small class="pull-right pt-1">Lakh</small>
+            </div>
+            {/* <label class="w-100 text-right small-text-light mt-2" htmlFor="University">Lakhs</label> */}
             
           </div>
           <div className="col  ml-4">
@@ -123,9 +121,10 @@ const CTCComponent = ({ showPopup }) => {
                 <option value={i * 5}>{i * 5}</option>
               ))}
             </select>
-            <label class="w-100 text-right small-text-light mt-2" htmlFor="University">Thousand</label>
+            <small class="pull-right pt-1">Thousand</small>
+            {/* <label class="w-100 text-right small-text-light mt-2" htmlFor="University">Thousand</label> */}
           </div>
-          <div class="errorMsg mt-2">{errors.currentCtcInLakh && errors.currentCtcInLakh.message}</div>
+          {/* <div class="errorMsg mt-2">{errors.currentCtcInLakh && errors.currentCtcInLakh.message}</div> */}
         </div>
       </div>
       <div className="form-group">
@@ -143,8 +142,7 @@ const CTCComponent = ({ showPopup }) => {
                 <option>{i}</option>
               ))}
             </select>
-            <label class="w-100 text-right small-text-light mt-2" htmlFor="University">Lakhs</label>
-            {errors.expectedCtcInLakh && <div class="errorMsg mt-2">{errors.expectedCtcInLakh.message}</div>}
+            <small class="pull-right pt-1">Lakh</small>
           </div>
           <div className="col ml-4">
             <select
@@ -158,12 +156,11 @@ const CTCComponent = ({ showPopup }) => {
                 <option value={i * 5}>{i * 5}</option>
               ))}
             </select>
-            <label class="w-100 text-right small-text-light mt-2" htmlFor="University">Thousand</label>
-            {errors.expectedCtcInThousand && <div class="errorMsg mt-2">{errors.expectedCtcInThousand.message}</div>}
+            <small class="pull-right pt-1">Thousand</small>
           </div>
         </div>
       </div>
-      <button class="btn lightBlue float-right px-5" onClick={submitForm}>Save</button>
+      <button class="btn lightBlue float-right px-5">Save</button>
     </form>
   );
 }
