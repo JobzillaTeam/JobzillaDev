@@ -4,6 +4,7 @@ import { ApiBaseUrl } from '../Config.jsx'
 import React, { Component, useContext } from 'react';
 import { Context } from '../Context/ProfileContext';
 import { AUTH_HEADER } from '../Utils/AppConst.jsx';
+import Resume from '../Components/Candidate/Profile/details/resume/Resume.jsx';
 
 class ApiServicesOrgCandidate {
   
@@ -355,6 +356,37 @@ class ApiServicesOrgCandidate {
             .then(Response => Response)
         )
       }
+
+      //Candidate ResumeUpload Service
+      postResumeFile (formdata, formheader){
+        const candidateId = JSON.parse(localStorage.getItem('candidateId'));
+        return(
+            axios
+            .post(ApiBaseUrl + "/user/uplaodResume/" + candidateId, formdata, formheader)
+            .then(Response => Response)
+         
+        )
+        }
+
+      //Candidate ResumeDelete Service
+      deleteSampleFile (){
+        const candidateId = JSON.parse(localStorage.getItem('candidateId'));
+        return(
+          axios
+          .delete(ApiBaseUrl + "/user/deleteResume/"+ candidateId, this.getToken())
+          .then(Response => Response)
+        )
+      }
+
+    //dowload candidate Resume
+    fetchResumeFile (){
+      const candidateId = JSON.parse(localStorage.getItem('candidateId'));
+        return(
+       axios
+         .get (ApiBaseUrl +"/user/viewResume/" + candidateId ,this.getToken())
+         .then(Response => Response)
+     )
+ }
 
 }
 

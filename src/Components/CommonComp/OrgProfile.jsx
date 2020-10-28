@@ -2,13 +2,29 @@ import React,{Component} from 'react'
 import HeaderAll from './HeaderAll'
 import Footer from './Footer'
 import {Link} from 'react-router-dom'
-// import ProviderDashboard from '../ProviderComp/ProviderDashboard'
-// import EditOrgProfile from '../CommonComp/EditOrgProfile'
+import ApiServicesOrg from '../../Services/ApiServicesOrg'
 
 class Profile extends Component{
-
+constructor(){
+    super()
+    this.state={
+        imageUrl:''
+    }
+    this.viewImage = new ApiServicesOrg()
+}
     editProfileCall= ()=> {
         this.props.history.push("/editOrgProfile")
+    }
+
+
+    componentDidMount(){
+        this.viewImage.viewProfileImage()
+        .then(Response => {
+            //console.log(Response.data.responseObject)
+            this.setState({
+                imageUrl: Response.data.responseObject
+            })
+             })
     }
 
     render(){
@@ -30,7 +46,8 @@ class Profile extends Component{
                     <section className="white-middle-section mt-4">
                     <div className="profile text-center">
                         <div className="text-center">
-                        <img className="mr-3 rounded-circle" src="images/Dashboard-assets/user-f.jpg" alt="User profile"/>
+                        {this.state.imageUrl ? <img className="mr-3 rounded-circle" src={`data:image/png;base64,${this.state.imageUrl}`} alt="User profile" width="133px" height="133px"/>
+                        : <img className="mr-3 rounded-circle" src="images/Dashboard-assets/user-f.jpg" alt="User profile" width="133px" height="133px"/>}
                         </div>
                         
                         <div className= "pt-3">Rosa Dodson</div>

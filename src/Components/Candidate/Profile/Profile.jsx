@@ -34,14 +34,14 @@ export const Profile = () => {
             <LeftNavCandidate />
             <div className="maincontent">
                 <HeaderAll isCandidate={true} />
-                <div class='container-fluid px-5 py-4 right-panel'>
+                <div className='container-fluid px-5 py-4 right-panel'>
                     {isPopupVisible ? <PopupContent
                         title={popupTitle}
                         showPopup={setPopupVisible}
                         id={id}
                         dataAttributes={dataAttributes}
                     /> : null}
-                    <div class="pb-2 mt-5">
+                    <div className="pb-2 mt-5">
                         <Breadcrumbs />
                     </div>
                     <Information

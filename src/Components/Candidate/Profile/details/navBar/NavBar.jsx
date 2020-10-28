@@ -5,7 +5,7 @@ import { About, CTC, DesiredProfile } from '../about';
 import { Certifications, Education } from '../education';
 import { Employment } from '../employment';
 import { LanguageKnown, PersonalDetails } from '../personalDetails';
-import { Resume } from '../resume';
+import Resume from '../resume/Resume';
 import { Skills } from '../skills';
 
 export class NavBar extends React.Component {

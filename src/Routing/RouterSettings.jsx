@@ -40,6 +40,7 @@ import AcceptedInviteJobDetails from "../Components/Candidate/Interviews/Accepte
 import SearchJobsDetails from "../Components/Candidate/SearchJobsDetails"
 import CloseJobs from "../Components/RecruiterComp/CloseJobs"
 import CandidateProfileToOpen from "../Components/RecruiterComp/CandidateProfileToOpen"
+//import Resume from '../Components/Candidate/Resume'
 
 class RouterSettings extends Component {
 
