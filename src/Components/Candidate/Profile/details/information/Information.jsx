@@ -98,11 +98,11 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
                 <img src="/images/Dashboard-assets/candidate/location.png" alt="Cinque Terre" />
                 <span class="normal-text-medium mgl-10">{address}</span>
               </div>
-              <div class="col col-md-4 col-xs-12">
+              <div class="col col-md-4 col-xs-12 pl-0">
                 <img src="/images/Dashboard-assets/candidate/mobile.png" alt="Cinque Terre" />
                 <span class="normal-text-medium mgl-10">{mobileNumber}</span>
               </div>
-              <div class="col col-md-4 col-xs-12">
+              <div class="col col-md-4 col-xs-12 pl-0">
                 <img src="/images/Dashboard-assets/candidate/message.png" alt="Cinque Terre" />
                 <span class="normal-text-medium mgl-10">{emailId}</span>
               </div>
