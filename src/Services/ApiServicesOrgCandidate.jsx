@@ -388,6 +388,16 @@ class ApiServicesOrgCandidate {
      )
  }
 
+ // Candidate Profile Progressbar
+        candidateGetProfileInfo() {
+            //const authToken = localStorage.getItem("authToken");
+            const userId = JSON.parse(localStorage.getItem('userDetails')).id
+            return axios
+            .get(ApiBaseUrl + "/candidate/profileview/" + userId ,this.getToken())
+            .then((Response) => Response)
+          }
+
+
 }
 
 export default new ApiServicesOrgCandidate();

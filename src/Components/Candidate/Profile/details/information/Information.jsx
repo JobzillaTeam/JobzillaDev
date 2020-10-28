@@ -1,20 +1,24 @@
-import React from 'react'
+import React,{useRef,useState} from 'react'
 import ApiServicesOrg from '../../../../../Services/ApiServicesOrg';
 import { EDIT_PROFILE_NAME } from '../../../../../Utils/AppConst'
 import RenderLoader from '../../../../CommonComp/Loader';
 import { Context } from '../../../../../Context/ProfileContext';
-// import { Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast';
+import ApiServicesOrgCandidate from '../../../../../Services/ApiServicesOrgCandidate';
 
 const InformationComponent = ({ showPopup, candidateProfile }) => {
   const { state } = React.useContext(Context);
   const [candidateInfo, setCandidateInfo] = React.useState();
+  const toast = useRef(null);
   if (state instanceof Promise) {
     state.then((data) => {
       setCandidateInfo(data.candidateInfo)
     })
   }
   const apiServicesOrg = new ApiServicesOrg();
+  const apiServicesOrgCandidate = ApiServicesOrgCandidate;
   const [imagUrl, setImageUrl] = React.useState();
+  const [progressbar,setProgressbar] = useState();
   const uploadHandler = (e) => {
     const files = e.target.files;
     const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
@@ -32,13 +36,13 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
 
     apiServicesOrg.postProfilePhoto(formData, formheader)
       .then(Response => {
-        apiServicesOrg.viewProfileImage()
-        .then(Response => {
-          setImageUrl(Response.data.responseObject)
-        })
+          console.log(Response)
+           toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully'},60000);
+          window.location.reload();
       })
       .catch(error => {
           console.log(error)
+          toast.current.show({severity: 'error', summary: 'Error', detail: 'Server Error '},50000)
       })
   }
   React.useEffect(() => {
@@ -47,6 +51,15 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
       setImageUrl(Response.data.responseObject)
     })
   }, [])
+
+  React.useEffect(() => {
+    apiServicesOrgCandidate.candidateGetProfileInfo()
+    .then(Response => {
+      setProgressbar(Response.data.responseObject.progressBarCompletion)
+      //window.location.reload();
+    })
+  }, [])
+
   if (candidateInfo) {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
     return (
@@ -54,7 +67,9 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
         {/* <Toast ref={toast} />  */}
         <div class="row align-items-center">
           <div class="col col-md-3 col-xs-12 align-items-center">
-            <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
+          {imagUrl ? <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
+         : <img src="/images/Dashboard-assets/user-f.jpg" height="175" width="175" class="rounded-circle" alt="User profile"/>}
+
             <label htmlFor='picture'>
               <img src="/images/Dashboard-assets/ar_camera.svg" style={{ cursor: "pointer" }}
                 data-toggle="tooltip" data-placement="right" title="Upload profile Photo"
@@ -91,7 +106,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
             </div>
             <div class="col-9 pl-0">
               <div class="progress progress-fashion">
-                <div class="progress-bar bg-success" role="progressbar" style={{ width: '80%' }} aria-valuenow="80%" aria-valuemin="0" aria-valuemax="100">80%</div>
+              <div class="progress-bar bg-success" role="progressbar" style={{ width :`${progressbar}%` }} aria-valuenow={progressbar} aria-valuemin="0" aria-valuemax="100">{progressbar}%</div>
               </div>
             </div>
           </div>
