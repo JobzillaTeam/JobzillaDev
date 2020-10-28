@@ -3,6 +3,7 @@ import ApiServicesOrg from '../../../../../Services/ApiServicesOrg';
 import { EDIT_PROFILE_NAME } from '../../../../../Utils/AppConst'
 import RenderLoader from '../../../../CommonComp/Loader';
 import { Context } from '../../../../../Context/ProfileContext';
+// import { Toast } from 'primereact/toast';
 
 const InformationComponent = ({ showPopup, candidateProfile }) => {
   const { state } = React.useContext(Context);
@@ -50,7 +51,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
     return (
       <div class="bg-white pl-3 pr-5 py-5 section-divider align-items-center">
-        <Toast ref={toast} /> 
+        {/* <Toast ref={toast} />  */}
         <div class="row align-items-center">
           <div class="col col-md-3 col-xs-12 align-items-center">
             <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
