@@ -212,6 +212,21 @@ class ApiServicesOrg extends Component {
                    )
                }
 
+               updateAcceptedTC(){
+                const userID = localStorage.getItem('userId')
+                const authToken = localStorage.getItem('authToken')
+
+                return(
+                    axios
+                    .put(`${ApiBaseUrl}/user/acceptedTC/${userID}`, {}, {
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`
+                        }
+                      })
+                    .then(Response => Response)
+                )
+            }
+
         
 
 }
