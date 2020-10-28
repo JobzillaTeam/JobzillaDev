@@ -127,13 +127,13 @@ class Resume extends Component {
    
                     if(this.state.DraggedFile){
                     formData.append( 
-                        "Resume", 
+                        "file", 
                         this.state.DraggedFile,
                     );   
                     }
                     else{
                         formData.append( 
-                            "Resume", 
+                            "file", 
                             this.state.selectedFile,
                         ); 
             }
