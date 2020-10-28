@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import LoginComp from '../Components/Auth/LoginComp'
 import Signup from '../Components/Auth/Signup'
 import ChangePasswordOrg from '../Components/Auth/ChangePasswordOrg'
@@ -64,7 +64,11 @@ class RouterSettings extends Component {
             <Route path="/orgProfile" component={OrgProfile} />
             <Route path="/editOrgProfile" component={EditOrgProfile} />
             <Route path="/leftnavcandidate" component={LeftNavCandidate} />
-            <Route path="/logout" component={Logout} />
+            <Route path="/logout">
+              {() => {
+                return <Redirect to="/login" />
+              }}
+            </Route>
             <Route path="/changePasswordOrg" component={ChangePasswordOrg}/>
 
 

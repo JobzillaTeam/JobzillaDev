@@ -12,7 +12,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
   });
   const { state, getProfileInfo } = React.useContext(Context);
   const resourceId = dataAttributes && dataAttributes.resourceId;
-  const initialCustomInputValues = {}
+  const initialCustomInputValues = {isPrimarySkill: true}
   const [skills, setSkills] = React.useState([]);
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   React.useEffect(() => {
@@ -30,12 +30,12 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
           return resObj.skillId === resourceId
         })[0]
         if (resourceObj) {
-          const { skillName, experience, proficiency, version, primarySkill } = resourceObj;
+          const { skillName, experience, proficiency, version, isPrimarySkill } = resourceObj;
           setValue("experienceInYear", getExperienceInYear(experience));
           setValue("experienceInMonth", getExperienceInMonth(experience));
           setValue("proficiency", proficiency);
           setValue("version", version);
-          setCustomInputValues({ skillName: skillName, primarySkill: primarySkill });
+          setCustomInputValues({ skillName: skillName, isPrimarySkill: isPrimarySkill });
         }
       }
     })
@@ -68,7 +68,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
   }
 
   const handlePrimarySkill = e => {
-    setCustomInputValues({...customInputValues, primarySkill: e.target.checked})
+    setCustomInputValues({...customInputValues, isPrimarySkill: e.target.checked})
   }
 
   const onSubmit = values => {
@@ -77,7 +77,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
       experience: getExperienceInFormat(values.experienceInYear, values.experienceInMonth),
       proficiency: values.proficiency,
       version: values.version,
-      primarySkill: customInputValues.primarySkill
+      isPrimarySkill: customInputValues.isPrimarySkill
     }
     if (resourceId) {
       ApiServicesOrgCandidate.updateSkill({ ...data, skillId: resourceId }, getProfileInfo, showPopup);
@@ -105,8 +105,8 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
         </div>
         <div className="form-group">
           <div class="custom-control custom-checkbox mr-sm-2">
-            <input type="checkbox" class="custom-control-input" name="primarySkill" id="primarySkill" checked={customInputValues.primarySkill} onChange={(e) => handlePrimarySkill(e)} />
-            <label class="custom-control-label" for="primarySkill">Primary Skill</label>
+            <input type="checkbox" class="custom-control-input" name="isPrimarySkill" id="isPrimarySkill" checked={customInputValues.isPrimarySkill} onChange={(e) => handlePrimarySkill(e)} />
+            <label class="custom-control-label" for="isPrimarySkill">Primary Skill</label>
           </div>
         </div>
         <div className="form-group">
