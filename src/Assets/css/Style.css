@@ -3028,3 +3028,29 @@ textarea {
     top: 60px;
     left: -45px;
 }
+
+/*  Terms and Condition Check Start */
+
+.btn-outline-button {
+    color: #007EFF !important;
+    border-color: #007EFF !important;
+}
+
+.btn-outline-button:hover {
+    background-color: #007EFF !important;
+    color: white !important;
+}
+
+.modal-body-title {
+    font-size: 16px;
+    color: '#2E2E2EE6';
+    font-family: Montserrat-SemiBold !important;
+}
+
+.modal-body-content {
+    font-size: 14px;
+    color: '#3E3E3E';
+    font-family: Montserrat-Medium !important;
+}
+
+/*  Terms and Condition Check End */

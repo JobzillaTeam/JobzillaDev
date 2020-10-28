@@ -17,28 +17,30 @@ class Popup extends Component {
 
   render() {
     const { isPopupShow } = this.state;
-    const { title, body } = this.props;
+    const { title, body, showPopup, size, hideCloseButton } = this.props;
 
     return (
       <>
         <Modal
+          size={size}
           show={isPopupShow}
           onHide={() => this.showModal()}
           aria-labelledby="contained-modal-title-vcenter"
+          backdrop="static"
         >
           <Modal.Header closeButton={false}>
-            <Modal.Title class="sub-title modal-title h4" id="contained-modal-title-vcenter">
+            <Modal.Title class="sub-title modal-title h4 pl-0" id="contained-modal-title-vcenter">
               <div class="popup-header-row">
-                <div className="col">
+                <div className="col pl-0">
                   {title}
                 </div>
-                <div className="col-1 pt-2">
+                {!hideCloseButton ? <div className="col-1 pt-2">
                   <img
                     src="/images/Dashboard-assets/Close-Icon.svg"
                     class="float-right header-close-popup" alt="Cinque Terre"
                     onClick={() => { this.showModal() }}
                   />
-                </div>
+                </div> : null}
               </div>
             </Modal.Title>
           </Modal.Header>
