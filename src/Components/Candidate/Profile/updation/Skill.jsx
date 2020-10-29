@@ -12,7 +12,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
   });
   const { state, getProfileInfo } = React.useContext(Context);
   const resourceId = dataAttributes && dataAttributes.resourceId;
-  const initialCustomInputValues = {isPrimarySkill: true}
+  const initialCustomInputValues = { isPrimarySkill: true }
   const [skills, setSkills] = React.useState([]);
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   React.useEffect(() => {
@@ -42,7 +42,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
   }, []);
 
   const handleTypeheadErrorOnInputChange = (e, input, name, message) => {
-    const {value} = e.target;
+    const { value } = e.target;
     if (value) {
       setCustomInputValues({ ...customInputValues, [name]: value });
       clearErrors(name)
@@ -58,31 +58,30 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
     clearErrors(name)
   }
 
-  const submitForm = (e) => {
-    if (!customInputValues.skillName) {
+  const handlePrimarySkill = e => {
+    setCustomInputValues({ ...customInputValues, isPrimarySkill: e.target.checked })
+  }
+
+  const onSubmit = values => {
+    if (customInputValues.skillName) {
+      clearErrors('skillName');
+      const data = {
+        skillName: customInputValues.skillName,
+        experience: getExperienceInFormat(values.experienceInYear, values.experienceInMonth),
+        proficiency: values.proficiency,
+        version: values.version,
+        isPrimarySkill: customInputValues.isPrimarySkill
+      }
+      if (resourceId) {
+        ApiServicesOrgCandidate.updateSkill({ ...data, skillId: resourceId }, getProfileInfo, showPopup);
+      } else {
+        ApiServicesOrgCandidate.addSkill(data, getProfileInfo, showPopup);
+      }
+    } else {
       setError('skillName', {
         type: "manual",
         message: 'Skill Name cannot be left blank'
       });
-    }
-  }
-
-  const handlePrimarySkill = e => {
-    setCustomInputValues({...customInputValues, isPrimarySkill: e.target.checked})
-  }
-
-  const onSubmit = values => {
-    const data = {
-      skillName: customInputValues.skillName,
-      experience: getExperienceInFormat(values.experienceInYear, values.experienceInMonth),
-      proficiency: values.proficiency,
-      version: values.version,
-      isPrimarySkill: customInputValues.isPrimarySkill
-    }
-    if (resourceId) {
-      ApiServicesOrgCandidate.updateSkill({ ...data, skillId: resourceId }, getProfileInfo, showPopup);
-    } else {
-      ApiServicesOrgCandidate.addSkill(data, getProfileInfo, showPopup);
     }
   }
 
@@ -181,7 +180,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
           </select>
           {errors.proficiency && <div class="errorMsg mt-2">{errors.proficiency.message}</div>}
         </div>
-        <button type="submit" class="btn lightBlue float-right px-5" onClick={submitForm}>Save</button>
+        <button type="submit" class="btn lightBlue float-right px-5">Save</button>
       </div>
     </form>
   );
