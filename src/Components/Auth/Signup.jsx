@@ -230,14 +230,28 @@ export default class Signup extends Component {
                                      />
                                 </div>
                                 {/* Password */}
-                                <div className="form-group">
+                                <div className="form-group ">
+                                    <label htmlFor="signup_pwd">Password</label>
+                                    <div className="input-group">
+                                    <input type="password" id="signup_pwd" className="form-control" name="password"  value={this.state.fields.password}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                    onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
+                                    
+                                    <span className="input-group-append">
+                                       <img src="../images/login/tooltip.png" alt="tooltip" className="input-group-text" title="Password must contain atleast 8 characters 
+                                       including Uppercase,lowercase and numbers."/></span></div>
+                                    { 
+                                        this.state.formSubmitted || this.state.touched.password?<div className="errorMsg">{this.state.errors.password}</div>:''                    
+                                    }
+                                </div>
+
+                                {/* <div className="form-group">
                                     <label htmlFor="signup_pwd">Password</label>
                                     <input type="password" id="signup_pwd" className="form-control" name="password"  value={this.state.fields.password}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
                                     {
                                        this.state.formSubmitted || this.state.touched.password?<div className="errorMsg">{this.state.errors.password}</div>:''                    
                                     }
-                                </div>
+                                </div> */}
                                 {/* Confirm Password */}
                                 <div className="form-group">
                                     <label htmlFor="signup_cnfpwd">Confirm Password</label>
