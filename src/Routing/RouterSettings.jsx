@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import LoginComp from '../Components/Auth/LoginComp'
 import Signup from '../Components/Auth/Signup'
 import ChangePasswordOrg from '../Components/Auth/ChangePasswordOrg'
@@ -41,6 +41,7 @@ import SearchJobsDetails from "../Components/Candidate/SearchJobsDetails"
 import CloseJobs from "../Components/RecruiterComp/CloseJobs"
 import CandidateProfileToOpen from "../Components/RecruiterComp/CandidateProfileToOpen"
 //import Resume from '../Components/Candidate/Resume'
+import CandidateLayout from '../Layouts/CandidateLayout'
 
 class RouterSettings extends Component {
 
@@ -64,28 +65,32 @@ class RouterSettings extends Component {
             <Route path="/orgProfile" component={OrgProfile} />
             <Route path="/editOrgProfile" component={EditOrgProfile} />
             <Route path="/leftnavcandidate" component={LeftNavCandidate} />
-            <Route path="/logout" component={Logout} />
+            <Route path="/logout">
+              {() => {
+                return <Redirect to="/login" />
+              }}
+            </Route>
             <Route path="/changePasswordOrg" component={ChangePasswordOrg}/>
 
 
 
-            <Route path="/candidate/dashboard" component={Dashboard} />
-            {/* <Route path="/candidate/interviews/invites" component={Invites} />
-            <Route path="/candidate/interviews/accepted" component={Accepted} /> */}
-            <Route path="/candidate/jobOffers" component={JobOffers} />
-            <Route path="/candidate/searchJobs" component={SearchJobs} />
-            <Route path="/candidate/searchJobsDetails" component={SearchJobsDetails} />
-            <Route path="/candidate/profile" component={CandidateProfile} />
-            <Route path="/candidate/profile1" component={Profile1} />
-            {/* <Route path="/candidate/recentMatches" component={RecentMatches}/> */}
-            <Route path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>
-            <Route path="/candidate/interviews/InterviewInvitesJobdetails" component={InterviewInvitesJobdetails}/> 
-            <Route path="/candidate/interviews/acceptedInterviews" component={AcceptedInterviews}/>
-            <Route path="/candidate/interviews/AcceptedInviteJobDetails" component={AcceptedInviteJobDetails}/>
-            <Route path="/candidate/changePassword" component={ChangePassword}/>
-            <Route path="/candidate/candidateEmailsetting" component={CandidateEmailsetting}/>
-            <Route path="/candidate/recentMatchesJobDetails" component={RecentMatchesJobDetails}/>
-            <Route path="/candidate/jobOfferDetails" component={JobOfferDetails}/>
+            <CandidateLayout path="/candidate/dashboard" component={Dashboard} />
+            {/* <CandidateLayout path="/candidate/interviews/invites" component={Invites} />
+            <CandidateLayout path="/candidate/interviews/accepted" component={Accepted} /> */}
+            <CandidateLayout path="/candidate/jobOffers" component={JobOffers} />
+            <CandidateLayout path="/candidate/searchJobs" component={SearchJobs} />
+            <CandidateLayout path="/candidate/searchJobsDetails" component={SearchJobsDetails} />
+            <CandidateLayout path="/candidate/profile" component={CandidateProfile} />
+            <CandidateLayout path="/candidate/profile1" component={Profile1} />
+            {/* <CandidateLayout path="/candidate/recentMatches" component={RecentMatches}/> */}
+            <CandidateLayout path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>
+            <CandidateLayout path="/candidate/interviews/InterviewInvitesJobdetails" component={InterviewInvitesJobdetails}/> 
+            <CandidateLayout path="/candidate/interviews/acceptedInterviews" component={AcceptedInterviews}/>
+            <CandidateLayout path="/candidate/interviews/AcceptedInviteJobDetails" component={AcceptedInviteJobDetails}/>
+            <CandidateLayout path="/candidate/changePassword" component={ChangePassword}/>
+            <CandidateLayout path="/candidate/candidateEmailsetting" component={CandidateEmailsetting}/>
+            <CandidateLayout path="/candidate/recentMatchesJobDetails" component={RecentMatchesJobDetails}/>
+            <CandidateLayout path="/candidate/jobOfferDetails" component={JobOfferDetails}/>
             
 
             <Route path="/recruiterDashboard" component={RecruiterDashboard} />
