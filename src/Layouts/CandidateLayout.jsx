@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import TermsCandidate from '../Components/CommonComp/DashboardComp/TermsCandidate';
 import Popup from '../Components/CommonComp/Popup';
+import { AppHelper } from '../Utils/AppHelper';
+
 
 const CandidateLayoutView = ({ children }) => {
   const [isPopupVisible, setPopupVisible] = React.useState(false);
@@ -29,12 +31,18 @@ const CandidateLayoutView = ({ children }) => {
 }
 
 const CandidateLayout = ({ component: Component, ...rest }) => {
+  const isLoggedIn = AppHelper.isLoggedIn('candidate');
+
   return (
-    <Route {...rest} render={matchProps => (
-      <CandidateLayoutView>
-        <Component {...matchProps} />
-      </CandidateLayoutView>
-    )} />
+    <React.Fragment>
+    {
+      isLoggedIn ? <Route {...rest} render={matchProps => (
+        <CandidateLayoutView>
+          <Component {...matchProps} />
+        </CandidateLayoutView>
+      )} /> : <Redirect to="/login" />
+    }
+    </React.Fragment>
   )
 };
 

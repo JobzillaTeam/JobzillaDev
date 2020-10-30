@@ -43,6 +43,7 @@ import CandidateProfileToOpen from "../Components/RecruiterComp/CandidateProfile
 //import Resume from '../Components/Candidate/Resume'
 import CandidateLayout from '../Layouts/CandidateLayout'
 import OrganizationLayout from "../Layouts/OrganizationLayout";
+import { AppHelper } from "../Utils/AppHelper";
 
 class RouterSettings extends Component {
 
@@ -68,6 +69,7 @@ class RouterSettings extends Component {
             <Route path="/leftnavcandidate" component={LeftNavCandidate} />
             <Route path="/logout">
               {() => {
+                AppHelper.onLogout();
                 return <Redirect to="/login" />
               }}
             </Route>

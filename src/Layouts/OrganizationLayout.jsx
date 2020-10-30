@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
+import { AppHelper } from '../Utils/AppHelper';
 
 const OrganizationLayoutView = ({ children }) => {
   return (
@@ -10,12 +11,17 @@ const OrganizationLayoutView = ({ children }) => {
 }
 
 const OrganizationLayout = ({ component: Component, ...rest }) => {
+  const isLoggedIn = AppHelper.isLoggedIn('organization');
   return (
-    <Route {...rest} render={matchProps => (
-      <OrganizationLayoutView>
-        <Component {...matchProps} />
-      </OrganizationLayoutView>
-    )} />
+    <React.Fragment>
+    {
+      isLoggedIn ? <Route {...rest} render={matchProps => (
+        <OrganizationLayoutView>
+          <Component {...matchProps} />
+        </OrganizationLayoutView>
+      )} /> : <Redirect to="/login" />
+    }
+    </React.Fragment>
   )
 };
 
