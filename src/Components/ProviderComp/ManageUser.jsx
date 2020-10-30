@@ -60,18 +60,36 @@ class ManageUser extends Component{
         }
         componentDidMount() {
             // Calling Download Sample File Service from Service file:-
+      
             this.userService.getViewAllUser()
-            .then(Response => this.setState({ users: Response.data.responseObject }
-            ));
+            .then(Response => {
+                const myUser = JSON.parse(localStorage.getItem('userDetails')).id;
+               
+                const selfUser= Response.data.responseObject; 
+                
+                this.setState(
+                { users: selfUser.filter(selfUserId=> selfUserId.id != myUser)}
+            )});
+            
        }
 
        componentDidUpdate(){
             // Calling Download Sample File Service from Service file:-
             this.userService.getViewAllUser()
-            .then(Response => this.setState({ users: Response.data.responseObject }
-                ));
+            .then(Response => {
+                const myUser = JSON.parse(localStorage.getItem('userDetails')).id;
+               
+                const selfUser= Response.data.responseObject; 
+               
+                this.setState(
+                { users: selfUser.filter(selfUserId=> selfUserId.id != myUser)}
+            )});
+            // .then(Response => this.setState({ users: Response.data.responseObject }
+            //     ));
 
        }
+
+
        editUser(user){
         this.setState({
             user: { ...user },
@@ -127,6 +145,7 @@ class ManageUser extends Component{
         
     let users = this.state.users.filter(val => 
         !this.state.selectedUsers.includes(val));
+        
     this.setState({
         //arr:{...selectedUsers},
         users,

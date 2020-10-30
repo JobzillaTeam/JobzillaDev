@@ -12,7 +12,7 @@ const Header = ()=>{
             <ul>
                 <li><img src="../images/login/iconfinder_phone.svg"/><span className="header_telephone pl-2">58000 45000</span></li>
                 <li className="mx-0">|</li>
-                <li><img src="../images/login/iconfinder_icon-email_211660.svg"/><a href="#" target="_blank"><span className="header_email pl-2"></span>info@jobzilla.com</a></li>
+                <li><img src="../images/login/iconfinder_icon-email_211660.svg"/><span className="header_email pl-2"></span>info@jobzilla.com</li>
             </ul>
         </div>
 
