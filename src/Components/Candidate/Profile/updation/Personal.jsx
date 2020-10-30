@@ -53,24 +53,26 @@ const PersonalComponent = ({ showPopup }) => {
   const data = [];
   useEffect(() => {
     state.then((response) => {
-      setStartDate(new Date(response.candidateInfo.dob))
-      if (response.candidateInfo.workPermit !== null) {
-        const workPermit = response.candidateInfo.workPermit.split(',');
-        let intersection = COUNTRY_LIST.filter(x => workPermit.includes(x.name));
-        setTags(intersection);
-        setGender(response.candidateInfo.gender)
-        intersection.map((val) => setWorkPermit(oldArray => [...oldArray, val.name]))
+      if (response && response.candidateInfo) {
+        setStartDate(new Date(response.candidateInfo.dob))
+        if (response.candidateInfo.workPermit !== null) {
+          const workPermit = response.candidateInfo.workPermit?.split(',');
+          let intersection = COUNTRY_LIST.filter(x => workPermit.includes(x.name));
+          setTags(intersection);
+          setGender(response.candidateInfo.gender)
+          intersection.map((val) => setWorkPermit(oldArray => [...oldArray, val.name]))
+        }
+        setFormInputData({
+          "gender": response.candidateInfo.gender,
+          "passportId": response.candidateInfo.passportId,
+          "address": response.candidateInfo.address,
+          "maritalStatus": response.candidateInfo.maritalStatus,
+          "pincode": response.candidateInfo.pincode,
+          "city": response.candidateInfo.city,
+          "state": response.candidateInfo.state,
+          "country": response.candidateInfo.country
+        });
       }
-      setFormInputData({
-        "gender": response.candidateInfo.gender,
-        "passportId": response.candidateInfo.passportId,
-        "address": response.candidateInfo.address,
-        "maritalStatus": response.candidateInfo.maritalStatus,
-        "pincode": response.candidateInfo.pincode,
-        "city": response.candidateInfo.city,
-        "state": response.candidateInfo.state,
-        "country": response.candidateInfo.country
-      });
     });
     ApiServicesOrgCandidate.getListOfStates().then((response) => {
       setStateName(response.data.responseObject);

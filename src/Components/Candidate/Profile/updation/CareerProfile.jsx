@@ -47,7 +47,7 @@ const CareerProfileComponent = ({ showPopup }) => {
         setCustomInputValues({ preferredShift: preferredShift });
         setValue('employmentType', employmentType);
         if (response.candidateInfo.preferredLocation !== null) {
-          const preferredLocation = response.candidateInfo.preferredLocation.split(',');
+          const preferredLocation = response.candidateInfo.preferredLocation?.split(',');
           if (cities) {
             let intersection = cities.filter(x => preferredLocation.includes(x.name));
             console.log(intersection)
