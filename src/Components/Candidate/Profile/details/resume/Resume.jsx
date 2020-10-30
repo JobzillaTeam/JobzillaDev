@@ -59,7 +59,8 @@ class Resume extends Component {
             // Calling Download Sample File Service from Service file:-
          this.fileService1.deleteSampleFile()
             .then(response => 
-                    { window.location.reload()
+                    { 
+                        window.location.reload()
              this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User Deleted Successfully'},60000);
             })
              .catch(error=>{
@@ -207,7 +208,7 @@ class Resume extends Component {
 
                      <span>Last updated on 10 sept 2020</span>
 
-                     <a className="download_sample_link d-block text-center" href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>
+                     <a className="download_sample_link d-block  text-right" href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>
 
                    </div>
 
