@@ -53,12 +53,12 @@ class CloseJobsViewDetails extends Component{
                                         </div>
                                         <div>
                                             <ul className="job-skills">
-                                                <li><img src="images/Dashboard-assets/recent-matches/category.svg" />Development</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/experience.svg" />5-6 years</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/job_role.svg" />Permanent</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/location.svg" />Mumbai, India</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/technology.svg" /> Java, J2EE</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/vaccency.svg" />2</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/category.svg" />Development</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/experience.svg" />5-6 years</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/job_role.svg" />Permanent</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/location.svg" />Mumbai, India</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/technology.svg" /> Java, J2EE</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/vaccency.svg" />2</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -116,12 +116,12 @@ class CloseJobsViewDetails extends Component{
                                         </div>
                                         <div>
                                             <ul className="job-skills">
-                                                <li><img src="images/Dashboard-assets/recent-matches/category.svg" />Development</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/experience.svg" />5-6 years</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/job_role.svg" />Permanent</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/location.svg" />Mumbai, India</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/technology.svg" /> Java, J2EE</li>
-                                                <li><img src="images/Dashboard-assets/recent-matches/vaccency.svg" />2</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/category.svg" />Development</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/experience.svg" />5-6 years</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/job_role.svg" />Permanent</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/location.svg" />Mumbai, India</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/technology.svg" /> Java, J2EE</li>
+                                                <li><img src="/images/Dashboard-assets/recent-matches/vaccency.svg" />2</li>
                                             </ul>
                                         </div>
                                     </div>

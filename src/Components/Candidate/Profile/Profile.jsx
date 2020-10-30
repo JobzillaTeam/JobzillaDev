@@ -20,6 +20,9 @@ export const Profile = () => {
     useEffect(() => {
         getProfileInfo();
         ApiServicesOrgCandidate.fetchProfileInfo().then(response => {
+            if (response && response.candidateInfo) {
+                localStorage.setItem('candidateId', response.candidateInfo.candidateId);
+            }
             setCandidateProfile(response)
         }).catch(error => { });
     }, [])

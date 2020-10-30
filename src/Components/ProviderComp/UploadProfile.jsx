@@ -137,7 +137,7 @@ class UploadProfile extends Component {
                                             {({getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles}) => {
                                             return (
                                                 <div {...getRootProps({className:"dropzone"})}>
-                                                    <img src="images/Dashboard-assets/cloud-upload.svg" alt="cloud upload" className="cloud_upload_logo pb-2" />
+                                                    <img src="/images/Dashboard-assets/cloud-upload.svg" alt="cloud upload" className="cloud_upload_logo pb-2" />
                                                 <input {...getInputProps() }   />
                                                 
                                                 {!isDragActive && 'Click here or drop a file to upload!'}
@@ -169,7 +169,7 @@ class UploadProfile extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="d-flex-inline">
-                                                    <img src="images/Dashboard-assets/csv.svg" className="pt-1" alt="csv icon" />
+                                                    <img src="/images/Dashboard-assets/csv.svg" className="pt-1" alt="csv icon" />
                                                     <span className="pl-2 fontMiddle">CSV File</span>
                                                 </div>
                                             

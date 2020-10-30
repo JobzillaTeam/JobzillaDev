@@ -152,12 +152,12 @@ class ActiveJob extends Component {
                       </div>
                       <div>
                         <ul className="job-skills">
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/category.svg" />Development</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/experience.svg" />5-6 years</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/job_role.svg" />Permanent</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/location.svg" />Mumbai, India</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/technology.svg" /> Java, J2EE</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/vaccency.svg" />2</li>
+                          <li className="job-skills-text"><img src="/images/Dashboard-assets/recent-matches/category.svg" />Development</li>
+                          <li className="job-skills-text"><img src="/images/Dashboard-assets/recent-matches/experience.svg" />5-6 years</li>
+                          <li className="job-skills-text"><img src="/images/Dashboard-assets/recent-matches/job_role.svg" />Permanent</li>
+                          <li className="job-skills-text"><img src="/images/Dashboard-assets/recent-matches/location.svg" />Mumbai, India</li>
+                          <li className="job-skills-text"><img src="/images/Dashboard-assets/recent-matches/technology.svg" /> Java, J2EE</li>
+                          <li className="job-skills-text"><img src="/images/Dashboard-assets/recent-matches/vaccency.svg" />2</li>
                         </ul>
                       </div>
                       <div className="row">

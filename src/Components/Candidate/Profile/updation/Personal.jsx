@@ -56,7 +56,7 @@ const PersonalComponent = ({ showPopup }) => {
       if (response && response.candidateInfo) {
         setStartDate(new Date(response.candidateInfo.dob))
         if (response.candidateInfo.workPermit !== null) {
-          const workPermit = response.candidateInfo.workPermit?.split(',');
+          const workPermit = response.candidateInfo.workPermit.split(',');
           let intersection = COUNTRY_LIST.filter(x => workPermit.includes(x.name));
           setTags(intersection);
           setGender(response.candidateInfo.gender)
