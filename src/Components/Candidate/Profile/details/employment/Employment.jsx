@@ -11,12 +11,22 @@ const EmploymentComponent = ({ showPopup }) => {
   })
   const { employmentDetailsList } = employmentInfo;
   const employmentDetailsListSorted = employmentDetailsList && employmentDetailsList.sort((empA, empB) => {
-    if (empA.currentCompany) return true;
+    const newDate = new Date();
+    const fullMonth = newDate.getMonth() -1;
+    const fullYear = newDate.getFullYear();
+    if (empA.currentCompany) {
+      empA.workedTillMonth = fullMonth;
+      empA.workedTillYear = fullYear
+    }
+    if (empB.currentCompany) {
+      empB.workedTillMonth = fullMonth;
+      empB.workedTillYear = fullYear
+    }
     if (empA.workedTillMonth && empA.workedTillYear && empB.workedTillMonth, empB.workedTillYear) {
       const startMonthValue = parseInt(moment().month(empA.workedTillMonth).format("M")) - 1;
       const endMonthValue = parseInt(moment().month(empB.workedTillMonth).format("M")) - 1;
-      const startDate = new Date(parseInt(empA.workedTillYear), startMonthValue).getTime();
-      const endDate = new Date(parseInt(empB.workedTillYear), endMonthValue).getTime();
+      const startDate = new Date(parseInt(empA.workedTillYear), empA.currentCompany ? empA.workedTillMonth : startMonthValue).getTime();
+      const endDate = new Date(parseInt(empB.workedTillYear), empB.currentCompany ? empB.workedTillMonth : endMonthValue).getTime();
       return endDate - startDate;
     }
   })

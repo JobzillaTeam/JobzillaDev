@@ -172,9 +172,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
                 id="issueYear"
                 class={`form-control ${(errors.issueYear || errors.startDate) && 'is-invalid'}`}
                 name="issueYear"
-                ref={register({
-                  required: false
-                })}
+                ref={register}
                 onChange={monthAndDateOnChange}
               >
                 <option value="" selected>Select Year</option>
@@ -189,9 +187,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
                 id="issueMonth"
                 class={`form-control ${(errors.issueMonth || errors.startDate) && 'is-invalid'}`}
                 name="issueMonth"
-                ref={register({
-                  required: false
-                })}
+                ref={register}
                 onChange={e => monthAndDateOnChange(e)}
               >
                 <option value="" selected>Select Month</option>
@@ -212,9 +208,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
                   id="expirationYear"
                   class={`form-control ${(errors.expirationYear || errors.endDate) && 'is-invalid'}`}
                   name="expirationYear"
-                  ref={register({
-                    required: false
-                  })}
+                  ref={register}
                   onChange={monthAndDateOnChange}
                 >
                   <option value="" selected>Select Year</option>
@@ -230,9 +224,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
                   id="expirationMonth"
                   class={`form-control ${(errors.expirationMonth || errors.endDate) && 'is-invalid'}`}
                   name="expirationMonth"
-                  ref={register({
-                    required: false
-                  })}
+                  ref={register}
                   onChange={monthAndDateOnChange}
                 >
                   <option value="" selected>Select Month</option>
@@ -265,7 +257,6 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
             id="credentialURL"
             name="credentialURL"
             ref={register({
-              required: false,
               pattern: {
                 value: HTTP_REGX,
                 message: "Please enter a valid Credential URL"

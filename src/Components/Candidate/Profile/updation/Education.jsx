@@ -14,6 +14,32 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
     }
   });
   const { state, getProfileInfo } = React.useContext(Context);
+  const [educationTypes, setEducationTypes] = React.useState([
+    {
+      value: '',
+      label: 'Select Education Type'
+    },
+    {
+      value: 'Doctorate/PhD',
+      label: 'Doctorate/PhD'
+    },
+    {
+      value: 'Masters/Post-Graduation',
+      label: 'Masters/Post-Graduation'
+    },
+    {
+      value: 'Graduation/Diploma',
+      label: 'Graduation/Diploma'
+    },
+    {
+      value: '12th',
+      label: '12th'
+    },
+    {
+      value: '10th',
+      label: '10th'
+    },
+  ]);
   const resourceId = dataAttributes && dataAttributes.resourceId;
   const [boards, setBoards] = React.useState([]);
   const [institutes, setInstitutes] = React.useState([]);
@@ -38,20 +64,33 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
       }
     })
     state.then((response) => {
-      if (response && response.educationDetailsList && resourceId) {
-        const resourceObj = response.educationDetailsList.filter(resObj => {
-          return resObj.educationId === resourceId
-        })[0]
-        if (resourceObj) {
-          setValue("educationType", resourceObj.educationType);
-          setValue("course", resourceObj.course);
-          setValue("specialization", resourceObj.specialization);
-          setValue("educationType", resourceObj.educationType);
-          setValue("passingOutYear", resourceObj.passingOutYear);
-          setValue("marks", resourceObj.marks);
-          changeIsSchoolForm(resourceObj.educationType);
-          setCustomInputValues({ board: resourceObj.board, university: resourceObj.university, courseType: resourceObj.courseType });
+      if (response && response.educationDetailsList) {
+        let existingEducationTypes = response.educationDetailsList.map(education => (
+          education.educationType
+        ));
+        let defaultEducationTypes = educationTypes;
+        let is10thExist = existingEducationTypes.includes('10th');
+        let is12thExist = existingEducationTypes.includes('12th');
+        if (resourceId) {
+          const resourceObj = response.educationDetailsList.filter(resObj => {
+            return resObj.educationId === resourceId
+          })[0]
+          if (resourceObj) {
+            setValue("educationType", resourceObj.educationType);
+            setValue("course", resourceObj.course);
+            setValue("specialization", resourceObj.specialization);
+            setValue("educationType", resourceObj.educationType);
+            setValue("passingOutYear", resourceObj.passingOutYear);
+            setValue("marks", resourceObj.marks);
+            changeIsSchoolForm(resourceObj.educationType);
+            setCustomInputValues({ board: resourceObj.board, university: resourceObj.university, courseType: resourceObj.courseType });
+          }
+          if (resourceObj.educationType === '10th') is10thExist = false;
+          if (resourceObj.educationType === '12th') is12thExist = false;
         }
+        defaultEducationTypes = educationTypes.filter(eduType => !(is10thExist && eduType.value === '10th'))
+        defaultEducationTypes = defaultEducationTypes.filter(eduType => !(is12thExist && eduType.value === '12th'))
+        setEducationTypes(defaultEducationTypes);
       }
     })
   }, []);
@@ -149,12 +188,9 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
               required: "Education Type cannot be left blank"
             })}
           >
-            <option value="" selected>Select Education Type</option>
-            <option value="Doctorate/PhD">Doctorate/PhD</option>
-            <option value="Masters/Post-Graduation">Masters/Post-Graduation</option>
-            <option value="Graduation/Diploma">Graduation/Diploma</option>
-            {<option value="12th">12th</option>}
-            {<option value="10th">10th</option>}
+            {educationTypes && educationTypes.map(edu => (
+              <option value={edu.value} selected>{edu.label}</option>
+            ))}
           </select>
           {errors.educationType && <div class="errorMsg mt-2">{errors.educationType.message}</div>}
         </div>

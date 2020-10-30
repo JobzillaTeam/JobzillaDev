@@ -243,7 +243,6 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
                   <option key={`${i}_years`}>{parseInt(new Date().getFullYear()) - i}</option>
                 ))}
               </select>
-              {errors.startedWorkingFromYear && <div class="errorMsg mt-2">{errors.startedWorkingFromYear.message}</div>}
             </div>
             <div className="col ml-3">
               <select
@@ -260,8 +259,8 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
                   <option key={`monthName`}>{monthName}</option>
                 ))}
               </select>
-              {errors.startedWorkingFromMonth && <div class="errorMsg mt-2">{errors.startedWorkingFromMonth.message}</div>}
             </div>
+            <div class="col-12">{(errors.startedWorkingFromMonth || errors.startedWorkingFromYear) && <div class="errorMsg mt-2">Started working from cannot be left blank</div>}</div>
             <div class="col-12">{errors.startDate && <div class="errorMsg mt-2">{errors.startDate.message}</div>}</div>
           </div>
         </div>
@@ -284,7 +283,6 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
                     <option key={`${i}_years`}>{parseInt(new Date().getFullYear()) - i}</option>
                   ))}
                 </select>
-                {errors.workedTillYear && <div class="errorMsg mt-2">{errors.workedTillYear.message}</div>}
               </div>
               <div className="col ml-3">
                 <select
@@ -302,8 +300,8 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
                     <option key={`monthName`}>{monthName}</option>
                   ))}
                 </select>
-                {errors.workedTillMonth && <div class="errorMsg mt-2">{errors.workedTillMonth.message}</div>}
               </div>
+              <div class="col-12">{(errors.workedTillMonth || errors.workedTillYear) && <div class="errorMsg mt-2">Worked Till cannot be left blank</div>}</div>
               <div class="col-12">{errors.endDate && <div class="errorMsg mt-2">{errors.endDate.message}</div>}</div>
             </div>
           </div></div> : ''}
@@ -315,9 +313,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
             name="description"
             onChange={onInputChange}
             maxLength={MAX_LENGTH}
-            ref={register({
-              required: false,
-            })}
+            ref={register}
           ></textarea>
           <div class="row m-0 p-0 mt-2">
             <div class="col-6 m-0 p-0">{errors.description && <span class="errorMsg">{errors.description.message}</span>}</div>
