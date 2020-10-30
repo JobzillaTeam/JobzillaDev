@@ -92,7 +92,7 @@ class EditProfile extends Component {
                         <div className="profile text-center">
                                     <div className="img-wrapper">
                                         <label htmlFor='picture'>
-                                            <img src="images/Dashboard-assets/ar_camera.svg" style={{ cursor: "pointer" }}
+                                            <img src="/images/Dashboard-assets/ar_camera.svg" style={{ cursor: "pointer" }}
                                                 data-toggle="tooltip" data-placement="right" title="Upload profile Photo"
                                                 className="rounded-circle" width="20px" height="20px" />
                                         </label>

@@ -70,7 +70,7 @@ class RecentMatches extends Component {
                     <div className="row row-cols-2">
                     <div className="col">
                             <div className="content_headings">
-                            <span><img src="images/Dashboard-assets/Group 374.svg"/></span>
+                            <span><img src="/images/Dashboard-assets/Group 374.svg"/></span>
                                 <h6 >Job Description</h6>
                                 <p>We are looking for a Senior Python Developer to build functional and efficient server-side applications.</p>
                                 <p>Senior Python Developer responsibilities include participating in all phases of the software development lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you.</p>

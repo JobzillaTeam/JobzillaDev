@@ -193,7 +193,7 @@ class UploadProfile extends Component {
                                             </div>
                                             {/* ZIp file upload section */}
                                             {/* <div className="col-md-6  p-4">
-                                            <img src="images/Dashboard-assets/cloud-upload.svg" alt="cloud upload icon" className="cloud_upload_logo"/>
+                                            <img src="/images/Dashboard-assets/cloud-upload.svg" alt="cloud upload icon" className="cloud_upload_logo"/>
                                             <p className="text-center pt-4 mb-0">Drag and Drop a file here</p>
                                             <p className="text-center">or</p>                                        
                                             <div className="text-center d-flex justify-content-center">
@@ -208,7 +208,7 @@ class UploadProfile extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="d-flex-inline">
-                                                    <img src="images/Dashboard-assets/csv.svg" className="pt-1" alt="csv icon" />
+                                                    <img src="/images/Dashboard-assets/csv.svg" className="pt-1" alt="csv icon" />
                                                     <span class="pl-2 fontMiddle">ZIP File</span>
                                                 </div>
                                             
