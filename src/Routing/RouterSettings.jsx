@@ -42,6 +42,7 @@ import CloseJobs from "../Components/RecruiterComp/CloseJobs"
 import CandidateProfileToOpen from "../Components/RecruiterComp/CandidateProfileToOpen"
 //import Resume from '../Components/Candidate/Resume'
 import CandidateLayout from '../Layouts/CandidateLayout'
+import OrganizationLayout from "../Layouts/OrganizationLayout";
 
 class RouterSettings extends Component {
 
@@ -56,33 +57,28 @@ class RouterSettings extends Component {
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={LoginComp} />
             <Route path="/login" component={LoginComp} />
-            <Route path="/providerDashboard" component={ProviderDashboard} />
-            <Route path="/uploadProfile" component={UploadProfile} />
-            <Route path="/addUser" component={AddUser} />
-            <Route path="/editUser" component={EditUser} />
-            <Route path="/emailSetting" component={EmailSetting} />
-            <Route path="/ManageUser" component={ManageUser} />
-            <Route path="/orgProfile" component={OrgProfile} />
-            <Route path="/editOrgProfile" component={EditOrgProfile} />
+            <OrganizationLayout path="/providerDashboard" component={ProviderDashboard} />
+            <OrganizationLayout path="/uploadProfile" component={UploadProfile} />
+            <OrganizationLayout path="/addUser" component={AddUser} />
+            <OrganizationLayout path="/editUser" component={EditUser} />
+            <OrganizationLayout path="/emailSetting" component={EmailSetting} />
+            <OrganizationLayout path="/ManageUser" component={ManageUser} />
+            <OrganizationLayout path="/orgProfile" component={OrgProfile} />
+            <OrganizationLayout path="/editOrgProfile" component={EditOrgProfile} />
             <Route path="/leftnavcandidate" component={LeftNavCandidate} />
             <Route path="/logout">
               {() => {
                 return <Redirect to="/login" />
               }}
             </Route>
-            <Route path="/changePasswordOrg" component={ChangePasswordOrg}/>
-
-
+            <OrganizationLayout path="/changePasswordOrg" component={ChangePasswordOrg}/>
 
             <CandidateLayout path="/candidate/dashboard" component={Dashboard} />
-            {/* <CandidateLayout path="/candidate/interviews/invites" component={Invites} />
-            <CandidateLayout path="/candidate/interviews/accepted" component={Accepted} /> */}
             <CandidateLayout path="/candidate/jobOffers" component={JobOffers} />
             <CandidateLayout path="/candidate/searchJobs" component={SearchJobs} />
             <CandidateLayout path="/candidate/searchJobsDetails" component={SearchJobsDetails} />
             <CandidateLayout path="/candidate/profile" component={CandidateProfile} />
             <CandidateLayout path="/candidate/profile1" component={Profile1} />
-            {/* <CandidateLayout path="/candidate/recentMatches" component={RecentMatches}/> */}
             <CandidateLayout path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>
             <CandidateLayout path="/candidate/interviews/InterviewInvitesJobdetails" component={InterviewInvitesJobdetails}/> 
             <CandidateLayout path="/candidate/interviews/acceptedInterviews" component={AcceptedInterviews}/>
@@ -91,14 +87,13 @@ class RouterSettings extends Component {
             <CandidateLayout path="/candidate/candidateEmailsetting" component={CandidateEmailsetting}/>
             <CandidateLayout path="/candidate/recentMatchesJobDetails" component={RecentMatchesJobDetails}/>
             <CandidateLayout path="/candidate/jobOfferDetails" component={JobOfferDetails}/>
-            
 
-            <Route path="/recruiterDashboard" component={RecruiterDashboard} />
-            <Route path="/activeJob" component={ActiveJob} />
-            <Route path="/createJob" component={CreateJob} />
-            <Route path="/jobPostingCollection" component={JobPostingCollection} />
-            <Route path="/closeJobs" component={CloseJobs}/>
-            <Route path="/candidateProfileToOpen" component={CandidateProfileToOpen}/>
+            <OrganizationLayout path="/recruiterDashboard" component={RecruiterDashboard} />
+            <OrganizationLayout path="/activeJob" component={ActiveJob} />
+            <OrganizationLayout path="/createJob" component={CreateJob} />
+            <OrganizationLayout path="/jobPostingCollection" component={JobPostingCollection} />
+            <OrganizationLayout path="/closeJobs" component={CloseJobs}/>
+            <OrganizationLayout path="/candidateProfileToOpen" component={CandidateProfileToOpen}/>
 
           </Switch>
         </div>
