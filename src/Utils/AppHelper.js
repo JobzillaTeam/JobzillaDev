@@ -8,9 +8,9 @@ const onLogout = _ => {
   localStorage.removeItem('candidateId');
   localStorage.removeItem('isLoggedIn');
   localStorage.removeItem('status');
+  localStorage.removeItem('userName');
   const rememberme = localStorage.getItem('rememberme');
   if (!(localStorage.hasOwnProperty('rememberme') && (typeof rememberme === 'string' || rememberme instanceof String) && rememberme.toLowerCase().includes('true'))) {
-    localStorage.removeItem('userName');
     localStorage.removeItem('emailId');
     localStorage.removeItem('rememberme');
   }
