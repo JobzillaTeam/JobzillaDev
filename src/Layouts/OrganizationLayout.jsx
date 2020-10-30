@@ -11,7 +11,7 @@ const OrganizationLayoutView = ({ children }) => {
 }
 
 const OrganizationLayout = ({ component: Component, ...rest }) => {
-  const isLoggedIn = AppHelper.isLoggedIn('organization');
+  const isLoggedIn = AppHelper.isLoggedIn('organization', true);
   return (
     <React.Fragment>
     {

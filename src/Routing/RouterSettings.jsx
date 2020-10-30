@@ -43,6 +43,7 @@ import CandidateProfileToOpen from "../Components/RecruiterComp/CandidateProfile
 //import Resume from '../Components/Candidate/Resume'
 import CandidateLayout from '../Layouts/CandidateLayout'
 import OrganizationLayout from "../Layouts/OrganizationLayout";
+import AuthLayout from "../Layouts/AuthLayout";
 import { AppHelper } from "../Utils/AppHelper";
 
 class RouterSettings extends Component {
@@ -55,9 +56,9 @@ class RouterSettings extends Component {
           <Switch>
             <Route path="/termsOfUse" component={TermsOfUse} />
             <Route path="/privacyPolicy" component={PrivacyPolicy} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/" component={LoginComp} />
-            <Route path="/login" component={LoginComp} />
+            <AuthLayout path="/signup" component={Signup} />
+            <AuthLayout exact path="/" component={LoginComp} />
+            <AuthLayout path="/login" component={LoginComp} />
             <OrganizationLayout path="/providerDashboard" component={ProviderDashboard} />
             <OrganizationLayout path="/uploadProfile" component={UploadProfile} />
             <OrganizationLayout path="/addUser" component={AddUser} />

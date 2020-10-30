@@ -15,14 +15,14 @@ const onLogout = _ => {
     localStorage.removeItem('rememberme');
   }
 }
-const isLoggedIn = (userType) => {
+const isLoggedIn = (userType, isAuthorizationCheck) => {
   let isLoggedIn = true;
   if (!localStorage.hasOwnProperty("authToken")) isLoggedIn = false;
   if (!localStorage.hasOwnProperty("acceptedTC")) isLoggedIn = false;
-  if (userType === 'candidate') {
+  if (userType === 'candidate' && isAuthorizationCheck) {
     if (localStorage.getItem('userRole') !== 'candidate_role') isLoggedIn = false;
   }
-  if (userType === 'organization') {
+  if (userType === 'organization' && isAuthorizationCheck) {
     if (localStorage.getItem('userRole') !== 'Owner') isLoggedIn = false;
   }
   return isLoggedIn;

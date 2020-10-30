@@ -31,7 +31,7 @@ const CandidateLayoutView = ({ children }) => {
 }
 
 const CandidateLayout = ({ component: Component, ...rest }) => {
-  const isLoggedIn = AppHelper.isLoggedIn('candidate');
+  const isLoggedIn = AppHelper.isLoggedIn('candidate', true);
 
   return (
     <React.Fragment>
