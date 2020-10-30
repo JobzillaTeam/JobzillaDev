@@ -9,7 +9,6 @@ const SkillsComponent = ({ showPopup }) => {
   const [skill, setSkill] = React.useState('');
   state.then((data) => {
     setSkill(data);
-    localStorage.setItem('candidateId', JSON.stringify(data.candidateInfo.candidateId));
   })
   const { getProfileInfo } = useContext(Context);
   const deleteSkill = (id) => {
