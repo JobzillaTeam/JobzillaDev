@@ -102,7 +102,7 @@ class UploadProfile extends Component {
 
                         .catch(error=>{
                                     console.log(error)
-                                    this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},50000);})
+                                    this.toast.show({severity: 'error', summary: 'Error', detail: 'Please fill data in each coloumn of CSV file '},50000);})
         }
 
     }

@@ -171,7 +171,7 @@ class LoginComp extends Component {
             <div className="row">
               <div className="col-md-5">
                 <h2>Login</h2>
-                <p className="small-title">Welcome back! Please login to your account.</p>
+                <p className="small-title">Welcome!! Please login to your account.</p>
                 {/* User Name */}
                 <div className="form-group">
                   <label htmlFor="emailid">EmailId</label>

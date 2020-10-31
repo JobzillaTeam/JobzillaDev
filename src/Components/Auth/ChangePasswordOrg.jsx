@@ -1,7 +1,8 @@
 import { Button,Modal } from 'react-bootstrap'
 import React,{ Component } from 'react';
 //import axios from 'axios'
-//import { Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast';
+import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate';
 
 class ChangePasswordOrg extends Component{
     constructor(props) {
@@ -13,12 +14,31 @@ class ChangePasswordOrg extends Component{
         touched: {},
         show: false,
         formSubmitted: false,
-        submitDisabled: true    
+        submitDisabled: true,
+        revealOldPassword: false,
+        revealNewPassword: false
+         
       }
-
+      this.oldPasswordRef = React.createRef();
+      this.newPasswordRef = React.createRef();
+      this.confirmPasswordRef = React.createRef();
       this.handleChange = this.handleChange.bind(this);
+      this.updatePassword = ApiServicesOrgCandidate;
       this.onChangePassword = this.onChangePassword.bind(this);
     }
+
+    
+    
+    
+    
+
+    toggleOldPassword = event => {
+      this.setState({revealOldPassword: !this.state.revealOldPassword});
+      }
+      
+      toggleNewPassword = event => {
+      this.setState({revealNewPassword: !this.state.revealNewPassword});
+      }
     showModal = () => {
         this.setState({ 
           fields:{},
@@ -29,6 +49,7 @@ class ChangePasswordOrg extends Component{
       hideModal = () => {
         this.setState({ show: false });
       }
+
       handleChange = (e) => {
         let fields = this.state.fields;
         fields[e.target.name] = e.target.value;
@@ -46,25 +67,31 @@ class ChangePasswordOrg extends Component{
            });
         }
       }
+      //change password
       onChangePassword = (e) => {
         e.preventDefault();
         this.setState({
           formSubmitted: true,
         });
         if(this.validateForm()){
-          let fields = {};
-          fields["oldPassword"] = "";
-          fields["password"] = "";
-          fields["confirmPassword"] = "";
-          
-          this.setState({ 
-            fields: fields,
-          });
-          
+                    
           this.hideModal()
-          localStorage.setItem("Jobzilla",JSON.stringify([this.state.fields]))
-          window.location.reload()
-          alert("Password Updated successfully")
+          // change password API
+            return(
+              this.updatePassword.getChangePassword(this.state.fields.oldPassword, this.state.fields.password)
+              .then(Response => {console.log(Response)
+                alert("Done")
+              })
+              .catch(error => {
+                  console.log("Error Occured..", error)
+                  alert("Some Error Occured")
+                   //this.toast.show({ severity: 'error',summary: 'Error', detail: 'Something Went Wrong', life: 4000 });
+              })
+              (this.toast.show({ severity: 'success',summary: 'Success Message', detail: 'Password Updated Successfully', life: 4000 })  )
+           ) 
+                     
+          }
+          
            // Calling Edit user Service from Service file:-  
         //         this.editUserService.putEditUser(this.state.fields)
         //          .then(Response=>{
@@ -74,7 +101,7 @@ class ChangePasswordOrg extends Component{
         //          })     
         //   this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User is edited Successfully'},20000);
         }
-      }    
+          
 
       validateForm = () => {
         let fields = this.state.fields;
@@ -119,15 +146,18 @@ class ChangePasswordOrg extends Component{
     }
 
       render(){
+        const {oldPasswordValue, newPasswordValue, confirmPasswordValue, revealOldPassword, revealNewPassword } = this.state;
         return (
-          <>
+          
+          <div>
           {/* Below button is used to call the modal popup .please remove once you call this from manage user */}
           {/*<Button onClick={() =>this.showModal(true)}>Small modal</Button>*/}
-          {/* <Toast ref={(el) => this.toast = el} /> */}
+           <Toast ref={(el) => this.toast = el} /> 
           <Modal className="modal-dialog"
         show={this.state.show}
         onHide={() => this.hideModal(false)}
         aria-labelledby="contained-modal-title-vcenter"> 
+          <Toast ref={(el) => this.toast = el} />
           <Modal.Header closeButton>
             <Modal.Title className="sub-title" id="contained-modal-title-vcenter">
             Change Password 
@@ -136,14 +166,23 @@ class ChangePasswordOrg extends Component{
           <Modal.Body>
 
           <form>
-                        <div className="row">
-                            <div className="col-md-6">
+                        <div className="row password-card">
+                        
+                            <div className="col">
                                 {/* Old Password */}
                                 <div className="form-group">
                                     <label htmlFor="oldPassword">Old Password</label>
-                                    <input type="password" id="oldPassword" className="form-control" name="oldPassword"
+                                    <input ref={this.oldPasswordRef} onChange={this.onChange} type={revealOldPassword ? "text":"password"}  id="oldPassword" className="form-control" name="oldPassword"
                                         value={this.state.fields.oldPassword} onChange={ (e) => {this.handleChange(e);this.validateForm();} }
                                         onBlur = {(e) => {this.handleTouch(e);this.validateForm();} } />
+                                        <span onClick={this.toggleOldPassword}>
+                                      <span>
+                                      {revealOldPassword ? 
+                                      <i className="pi pi-eye showOldPasswordIcon"/>:
+                                      <i className="pi pi-eye-slash showOldPasswordIcon"/>
+                                      }
+                                      </span>
+                                      </span>
                                         {
                                             this.state.formSubmitted || this.state.touched.oldPassword?<div className="errorMsg">{this.state.errors.oldPassword}</div>:''                   
                                         }
@@ -151,22 +190,35 @@ class ChangePasswordOrg extends Component{
 
                                   {/* New Password */}
                                   <div className="form-group">
+                                  
                                     <label htmlFor="password">New Password</label>
-                                    <input type="password" id="password" className="form-control" name="password"  value={this.state.fields.password}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text":"password"} id="password" className="form-control" name="password"  value={this.state.fields.password}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
+                                    <span className= "input-group-append" onClick={this.toggleNewPassword}>
+                                    <span>
+                                    {revealNewPassword ? 
+                                    <i className="pi pi-eye showNewPasswordIcon"/>:
+                                    <i className="pi pi-eye-slash showNewPasswordIcon"/>
+                                    }
+                                    </span>
+                                    </span>
                                     {
                                        this.state.formSubmitted || this.state.touched.password?<div className="errorMsg">{this.state.errors.password}</div>:''                    
                                     }
+                                   
                                 </div>
                                 {/* Confirm Password */}
                                 <div className="form-group">
+                                  
                                     <label htmlFor="confirmPassword">Confirm Password</label>
-                                    <input type="password" id="confirmPassword" className="form-control" name="confirmPassword"  value={this.state.fields.confirmPassword} onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                    <input ref={this.confirmPasswordRef} onChange={this.onChange} type="password" id="confirmPassword" className="form-control" name="confirmPassword"  value={this.state.fields.confirmPassword} 
+                                    onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
                                     {
                                        this.state.formSubmitted || this.state.touched.password?
                                           <div className="errorMsg">{this.state.errors.password}</div>:''                    
                                     }
+                                    
                                 </div>
 
                                 <button className="btn btn-blue float-right px-4" disabled={this.state.submitDisabled}  onClick={this.onChangePassword}>Update Password</button> 
@@ -177,7 +229,7 @@ class ChangePasswordOrg extends Component{
                                 </form>
           </Modal.Body>
       </Modal>
-      </>
+      </div>
     )
   }
 }
