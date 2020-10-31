@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { EDIT_CTC } from '../../../../../Utils/AppConst'
 import { Context } from '../../../../../Context/ProfileContext';
+import { getCTCInLakhAndThousand } from '../../../../../Utils/ProfileFormHelper';
 
 const CTCComponent = ({ showPopup }) => {
   const { state } = useContext(Context);
@@ -20,7 +21,7 @@ const CTCComponent = ({ showPopup }) => {
               <span class="subtitle-semi-bold ml-4">Current CTC</span>
             </div>
             <div class="px-4">
-              <span class="normal-text-medium">{ctc.candidateInfo.currencyType} {currentCTC}</span>
+              <span class="normal-text-medium">{ctc.candidateInfo.currencyType} {getCTCInLakhAndThousand(currentCTC)}</span>
             </div>
           </div>
         </div>
@@ -31,7 +32,7 @@ const CTCComponent = ({ showPopup }) => {
               <span class="subtitle-semi-bold">Expected CTC</span>
             </div>
             <div >
-              <span class="normal-text-medium">{ctc.candidateInfo.currencyType} {expectedCTC}</span>
+              <span class="normal-text-medium">{ctc.candidateInfo.currencyType} {getCTCInLakhAndThousand(expectedCTC)}</span>
             </div>
           </div>
         </div>

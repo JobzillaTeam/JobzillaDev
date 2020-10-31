@@ -3,13 +3,13 @@ import ApiServicesOrg from '../../../../../Services/ApiServicesOrg';
 import { EDIT_PROFILE_NAME } from '../../../../../Utils/AppConst'
 import RenderLoader from '../../../../CommonComp/Loader';
 import { Context } from '../../../../../Context/ProfileContext';
-//import { Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast';
 import ApiServicesOrgCandidate from '../../../../../Services/ApiServicesOrgCandidate';
 
 const InformationComponent = ({ showPopup, candidateProfile }) => {
   const { state } = React.useContext(Context);
   const [candidateInfo, setCandidateInfo] = React.useState();
-  //const toast = useRef(null);
+  const toast = useRef(null);
   if (state instanceof Promise) {
     state.then((data) => {
       setCandidateInfo(data.candidateInfo)
@@ -37,12 +37,13 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
     apiServicesOrg.postProfilePhoto(formData, formheader)
       .then(Response => {
           console.log(Response)
-           //toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully'},60000);
-          window.location.reload();
+          toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully'},60000);
+          setAvatar();
+          // window.location.reload();
       })
       .catch(error => {
           console.log(error)
-          //toast.current.show({severity: 'error', summary: 'Error', detail: 'Server Error '},50000)
+          toast.current.show({severity: 'error', summary: 'Error', detail: 'Server Error '},50000)
       })
   }
   React.useEffect(() => {
@@ -68,7 +69,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
     return (
       <div class="bg-white pl-3 pr-5 py-5 section-divider align-items-center">
-         {/* <Toast ref={toast} /> */}
+         <Toast ref={toast} />
         <div class="row align-items-center">
           <div class="col col-md-3 col-xs-12 align-items-center">
           {imagUrl ? <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
