@@ -44,8 +44,9 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
   const [boards, setBoards] = React.useState([]);
   const [institutes, setInstitutes] = React.useState([]);
   const [isSchoolForm, setIsSchoolForm] = React.useState(false);
-  const initialCustomInputValues = { courseType: COURSE_TYPE_ENUM.FULL_TIME }
+  const initialCustomInputValues = { board: [], university: [], courseType: COURSE_TYPE_ENUM.FULL_TIME }
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
+  const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   React.useEffect(() => {
     ApiServicesOrgCandidate.getListOfInstitutes().then((response) => {
       if (response) {
@@ -76,14 +77,15 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
             return resObj.educationId === resourceId
           })[0]
           if (resourceObj) {
-            setValue("educationType", resourceObj.educationType);
-            setValue("course", resourceObj.course);
-            setValue("specialization", resourceObj.specialization);
-            setValue("educationType", resourceObj.educationType);
-            setValue("passingOutYear", resourceObj.passingOutYear);
-            setValue("marks", resourceObj.marks);
-            changeIsSchoolForm(resourceObj.educationType);
-            setCustomInputValues({ board: resourceObj.board, university: resourceObj.university, courseType: resourceObj.courseType });
+            const {educationType, board, university, course, specialization, passingOutYear, marks} = resourceObj;
+            setValue("educationType", educationType);
+            setValue("course", course);
+            setValue("specialization", specialization);
+            setValue("passingOutYear", passingOutYear);
+            setValue("marks", marks);
+            changeIsSchoolForm(educationType);
+            setCustomInputValues({ board: board ? [board] : [], university: university ? [university] : [], courseType: resourceObj.courseType });
+            setIsTypeHeadInputReady(true);
           }
           if (resourceObj.educationType === '10th') is10thExist = false;
           if (resourceObj.educationType === '12th') is12thExist = false;
@@ -102,35 +104,19 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
       setIsSchoolForm(false);
     }
   }
-
-  const handleTypeheadErrorOnInputChange = (input, name, message) => {
-    const value = input;
-    if (value) {
-      setCustomInputValues({ ...customInputValues, [name]: value });
-    } else {
-      handleTypeheadError(value, name, message, false);
-    }
-  }
-
-  const handlecustomInputValues = (value, name) => {
-    setCustomInputValues({ ...customInputValues, [name]: value });
-  }
-
-  const handleTypeheadErrorOnChange = (selected, name) => {
-    handlecustomInputValues(selected[0], name);
-    clearErrors(name)
-  }
-
-  const handleTypeheadError = (value, name, message, isBlur) => {
-    if (!value) {
-      setError(name, {
-        type: "manual",
-        message: message
-      });
-    } else {
+  const handleTypeheadOnChange = (selected, name) => {
+    let selectedValue = selected[0]
+    if (selectedValue) {
+      if (typeof (selectedValue) === "object" && selectedValue.customOption) {
+        selectedValue = selectedValue.label
+      }
+      setCustomInputValues({ ...customInputValues, [name]: [selectedValue] })
       clearErrors(name);
+    } else {
+      setCustomInputValues({ ...customInputValues, [name]: [] })
     }
   }
+
   const onChangeEducationType = e => {
     const value = e.target.value;
     if (value) {
@@ -140,13 +126,15 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
     changeIsSchoolForm(value)
   }
   const submitForm = (e) => {
-    if (isSchoolForm && !customInputValues.board) {
+    const board = customInputValues.board && customInputValues.board[0];
+    const university = customInputValues.university && customInputValues.university[0];
+    if (isSchoolForm && !board) {
       setError('board', {
         type: "manual",
         message: 'Board cannot be left blank'
       });
     }
-    if (!isSchoolForm && !customInputValues.university) {
+    if (!isSchoolForm && !university) {
       setError('university', {
         type: "manual",
         message: 'University/Institute cannot be left blank'
@@ -168,10 +156,14 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
   }
   const values = getValues();
   const onSubmit = values => {
+    const board = customInputValues.board && customInputValues.board[0];
+    const university = customInputValues.university && customInputValues.university[0];
+    if (board) clearErrors('board');
+    if (university) clearErrors('university');
     if (resourceId) {
-      ApiServicesOrgCandidate.updateEducation({ ...values, board: customInputValues.board, university: customInputValues.university, courseType: customInputValues.courseType, educationId: resourceId }, getProfileInfo, showPopup);
+      ApiServicesOrgCandidate.updateEducation({ ...values, board: board, university: university, courseType: customInputValues.courseType, educationId: resourceId }, getProfileInfo, showPopup);
     } else {
-      ApiServicesOrgCandidate.addEducation({ ...values, board: customInputValues.board, university: customInputValues.university, courseType: customInputValues.courseType }, getProfileInfo, showPopup);
+      ApiServicesOrgCandidate.addEducation({ ...values, board: board, university: university, courseType: customInputValues.courseType }, getProfileInfo, showPopup);
     }
   }
   return (
@@ -196,16 +188,17 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
         </div>
         {isSchoolForm ? <div className="form-group">
           <label htmlFor="board">Board<span >*</span></label>
-          <Typeahead
+          {isTypeHeadInputReady ? <Typeahead
+            allowNew
+            newSelectionPrefix="Add a new Board: "
             id="board"
             className={errors.board && 'is-invalid'}
             isInvalid={errors.board}
-            onInputChange={(input, e) => handleTypeheadErrorOnInputChange(input, 'board', 'Board cannot be left blank')}
-            onChange={selected => handleTypeheadErrorOnChange(selected, 'board')}
+            onChange={selected => handleTypeheadOnChange(selected, 'board')}
             options={boards}
             placeholder="Choose a Board..."
-            selected={customInputValues.board ? [customInputValues.board] : null}
-          />
+            defaultSelected={customInputValues.board}
+          /> : null}
           {errors.board && <div class="errorMsg mt-2">{errors.board.message}</div>}
         </div> :
           <div>
@@ -237,16 +230,17 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
             </div>
             <div className="form-group">
               <label htmlFor="university">University/Institute<span >*</span></label>
-              <Typeahead
+              {isTypeHeadInputReady ? <Typeahead
+                allowNew
+                newSelectionPrefix="Add a new University/Institute: "
                 id="university"
                 className={errors.university && 'is-invalid'}
                 isInvalid={errors.university}
-                onInputChange={(input, e) => handleTypeheadErrorOnInputChange(input, 'university', 'University/Institute cannot be left blank')}
-                onChange={selected => handleTypeheadErrorOnChange(selected, 'university')}
+                onChange={selected => handleTypeheadOnChange(selected, 'university')}
                 options={institutes}
                 placeholder="Choose a University/Institute..."
-                selected={customInputValues.university ? [customInputValues.university] : null}
-              />
+                defaultSelected={customInputValues.university}
+              /> : null}
               {errors.university && <div class="errorMsg mt-2">{errors.university.message}</div>}
             </div>
             <div class="form-group">

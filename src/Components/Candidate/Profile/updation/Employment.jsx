@@ -17,8 +17,9 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
   });
   const values = getValues();
   const [organizations, setOrganizations] = React.useState([]);
-  const initialCustomInputValues = {}
+  const initialCustomInputValues = {organization: []}
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
+  const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   React.useEffect(() => {
     ApiServicesOrgCandidate.getListOfOrganizations().then((response) => {
       if (response) {
@@ -44,7 +45,8 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
           setValue("startedWorkingFromYear", startedWorkingFromYear);
           setValue("workedTillMonth", workedTillMonth);
           setValue("workedTillYear", workedTillYear);
-          setCustomInputValues({ currentCompany: currentCompany, organization: organization });
+          setCustomInputValues({ currentCompany: currentCompany, organization: organization ? [organization] : [] });
+          setIsTypeHeadInputReady(true);
         }
       }
     });
@@ -54,32 +56,26 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
     setDescriptionLength(MAX_LENGTH - e.target.value.length);
   }
 
+  const handleTypeheadOnChange = (selected, name) => {
+    let selectedValue = selected[0]
+    if (selectedValue) {
+      if (typeof(selectedValue) === "object" && selectedValue.customOption) {
+        selectedValue = selectedValue.label
+      }
+      setCustomInputValues({ ...customInputValues, [name]: [selectedValue] })
+      clearErrors(name);
+    } else {
+      setCustomInputValues({ ...customInputValues, [name]: [] })
+    }
+  }
+
   const onSubmit = values => {
-
+    const organization = customInputValues.organization && customInputValues.organization[0]
     if (resourceId) {
-      ApiServicesOrgCandidate.updateEmployment({ ...values, currentCompany: customInputValues.currentCompany, organization: customInputValues.organization, employmentId: resourceId }, getProfileInfo, showPopup);
+      ApiServicesOrgCandidate.updateEmployment({ ...values, currentCompany: customInputValues.currentCompany, organization: organization, employmentId: resourceId }, getProfileInfo, showPopup);
     } else {
-      ApiServicesOrgCandidate.addEmployment({ ...values, currentCompany: customInputValues.currentCompany, organization: customInputValues.organization }, getProfileInfo, showPopup);
+      ApiServicesOrgCandidate.addEmployment({ ...values, currentCompany: customInputValues.currentCompany, organization: organization }, getProfileInfo, showPopup);
     }
-  }
-
-  const handleTypeheadErrorOnInputChange = (input, name, message) => {
-    const value = input;
-    if (value) {
-      setCustomInputValues({ ...customInputValues, [name]: value });
-    } else {
-      handleTypeheadError(value, name, message, false);
-    }
-  }
-
-  const handlecustomInputValues = (value, name) => {
-    setCustomInputValues({ ...customInputValues, [name]: value });
-  }
-
-
-  const handleTypeheadErrorOnChange = (selected, name) => {
-    handlecustomInputValues(selected[0], name);
-    clearErrors(name)
   }
 
   const starDateEndDateValidation = (startMonth, startYear, endMonth, endYear, isEndDateChange) => {
@@ -100,16 +96,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
     }
   }
 
-  const handleTypeheadError = (value, name, message, isBlur) => {
-    if (!value) {
-      setError(name, {
-        type: "manual",
-        message: message
-      });
-    } else {
-      clearErrors(name);
-    }
-  }
+
 
   const onChangeIsCurrentCompany = (e) => {
     const value = JSON.parse(e.target.value.toLowerCase());
@@ -129,7 +116,8 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
   }
 
   const submitForm = (e) => {
-    if (!customInputValues.organization) {
+    const organization = customInputValues.organization && customInputValues.organization[0]
+    if (!organization) {
       setError('organization', {
         type: "manual",
         message: 'Organization cannot be left blank'
@@ -161,16 +149,17 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
         </div>
         <div className="form-group">
           <label htmlFor="organization">Organization<span >*</span></label>
-          <Typeahead
+          {isTypeHeadInputReady ? <Typeahead
+            allowNew
+            newSelectionPrefix="Add a new Organization: "
             id="_organization"
             className={errors.organization && 'is-invalid'}
             isInvalid={errors.organization}
-            onInputChange={(input, e) => handleTypeheadErrorOnInputChange(input, 'organization', 'Organization cannot be left blank')}
-            onChange={selected => handleTypeheadErrorOnChange(selected, 'organization')}
+            onChange={selected => handleTypeheadOnChange(selected, 'organization')}
             options={organizations}
-            placeholder="Choose a Organization..."
-            selected={customInputValues.organization ? [customInputValues.organization] : null}
-          />
+            placeholder="Choose a Organization Name..."
+            defaultSelected={customInputValues.organization}
+          /> : null}
           {errors.organization && <div class="errorMsg mt-2">{errors.organization.message}</div>}
         </div>
         <div className="form-group">

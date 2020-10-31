@@ -6,14 +6,15 @@ import ApiServicesOrgCandidate from "../../../../Services/ApiServicesOrgCandidat
 import { languageFormDefaultValues } from "../../../../Utils/ProfileFormHelper";
 
 const LanguageComponent = ({ dataAttributes, showPopup }) => {
-  const { handleSubmit, register, errors, setValue,  setError, clearErrors } = useForm({
+  const { handleSubmit, register, errors, setValue, setError, clearErrors } = useForm({
     mode: 'onSubmit',
     defaultValues: languageFormDefaultValues
   });
   const { state, getProfileInfo } = React.useContext(Context);
   const resourceId = dataAttributes && dataAttributes.resourceId;
-  const initialCustomInputValues = {canRead: false, canWrite: false, canSpeak: false}
+  const initialCustomInputValues = { language: [], canRead: false, canWrite: false, canSpeak: false };
   const [languages, setLanguages] = React.useState([]);
+  const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   React.useEffect(() => {
     ApiServicesOrgCandidate.getListOfLanguages().then((response) => {
@@ -32,60 +33,34 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
         if (resourceObj) {
           const { language, proficiency, canWrite, canSpeak, canRead } = resourceObj;
           setValue("proficiency", proficiency);
-          setCustomInputValues({ language: language, canWrite: canWrite, canSpeak: canSpeak, canRead: canRead });
+          setCustomInputValues({ language: language ? [language] : [], canWrite: canWrite, canSpeak: canSpeak, canRead: canRead });
+          setIsTypeHeadInputReady(true);
         }
       }
     })
   }, []);
 
-  const handleTypeheadErrorOnInputChange = (e, input, name, message) => {
-    const {value} = e.target;
-    if (value) {
-      console.log(value)
-      setCustomInputValues({ ...customInputValues, [name]: value });
-    } else {
-      handleTypeheadError(value, name, message, false);
-    }
-  }
-
-  const handlecustomInputValues = (value, name) => {
-      setCustomInputValues({ ...customInputValues, [name]: value });
-  }
-
-  const handleTypeheadErrorOnBlur = (e, name, message) => {
-    const value = e.target.value;
-    handleTypeheadError(value, name, message, true)
-  }
-
-  const handleTypeheadErrorOnChange = (selected, name) => {
-    handlecustomInputValues(selected[0], name);
-    clearErrors(name)
-  }
-
-  const handleTypeheadError = (value, name, message, isBlur) => {
-    if (!value) {
-      setError(name, {
-        type: "manual",
-        message: message
-      });
-    } else {
-      if (!isBlur) {
-        const messageText = name === 'language' ? 'Please enter a valid Language' : '';
-        setError(name, {
-          type: "manual",
-          message: messageText
-        });
+  const handleTypeheadOnChange = (selected, name) => {
+    let selectedValue = selected[0]
+    if (selectedValue) {
+      if (typeof (selectedValue) === "object" && selectedValue.customOption) {
+        selectedValue = selectedValue.label
       }
+      setCustomInputValues({ ...customInputValues, [name]: [selectedValue] })
+      clearErrors(name);
+    } else {
+      setCustomInputValues({ ...customInputValues, [name]: [] })
     }
   }
 
   const handleAbilityOnChange = e => {
     const { name } = e.target;
-    setCustomInputValues({...customInputValues, [name]: e.target.checked ? true : false})
+    setCustomInputValues({ ...customInputValues, [name]: e.target.checked ? true : false })
   }
 
   const submitForm = (e) => {
-    if (!customInputValues.language) {
+    const language = customInputValues.language && customInputValues.language[0]
+    if (!language) {
       setError('language', {
         type: "manual",
         message: 'Language cannot be left blank'
@@ -94,13 +69,15 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
   }
 
   const onSubmit = values => {
+    const language = customInputValues.language && customInputValues.language[0];
     const data = {
-      language: customInputValues.language,
+      language: language,
       proficiency: values.proficiency,
       canRead: customInputValues.canRead,
       canWrite: customInputValues.canWrite,
       canSpeak: customInputValues.canSpeak
     }
+    if (language) clearErrors('language');
     if (resourceId) {
       ApiServicesOrgCandidate.updateLanguage({ ...data, languageId: resourceId }, getProfileInfo, showPopup);
     } else {
@@ -112,17 +89,17 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
       <div class="mb-4">
         <div className="form-group">
           <label htmlFor="language">Language<span >*</span></label>
-          <Typeahead
+          {isTypeHeadInputReady ? <Typeahead
+            allowNew
+            newSelectionPrefix="Add a new Language: "
             id="language"
             className={errors.language && 'is-invalid'}
             isInvalid={errors.language}
-            onBlur={e => handleTypeheadErrorOnBlur(e, 'language', 'Language cannot be left blank')}
-            onInputChange={(input, e) => handleTypeheadErrorOnInputChange(e, input, 'language', 'Language cannot be left blank')}
-            onChange={selected => handleTypeheadErrorOnChange(selected, 'language')}
+            onChange={selected => handleTypeheadOnChange(selected, 'language')}
             options={languages}
             placeholder="Choose a Language..."
-            selected={customInputValues.language ? [customInputValues.language] : null}
-          />
+            defaultSelected={customInputValues.language}
+          /> : null}
           {errors.language && <div class="errorMsg mt-2">{errors.language.message}</div>}
         </div>
         <div className="form-group">

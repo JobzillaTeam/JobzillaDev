@@ -12,8 +12,9 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
   });
   const { state, getProfileInfo } = React.useContext(Context);
   const resourceId = dataAttributes && dataAttributes.resourceId;
-  const initialCustomInputValues = { isPrimarySkill: true }
+  const initialCustomInputValues = { skillName: [], isPrimarySkill: true };
   const [skills, setSkills] = React.useState([]);
+  const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   React.useEffect(() => {
     ApiServicesOrgCandidate.getListOfSkills().then((response) => {
@@ -35,49 +36,33 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
           setValue("experienceInMonth", getExperienceInMonth(experience));
           setValue("proficiency", proficiency);
           setValue("version", version);
-          setCustomInputValues({ skillName: skillName, isPrimarySkill: isPrimarySkill });
+          setCustomInputValues({ skillName: skillName ? [skillName] : [], isPrimarySkill: isPrimarySkill });
+          setIsTypeHeadInputReady(true);
         }
       }
     })
   }, []);
 
-  const handleTypeheadErrorOnInputChange = (e, input, name, message) => {
-    const { value } = e.target;
-    if (value) {
-      setCustomInputValues({ ...customInputValues, [name]: value });
-      clearErrors(name)
+  const handleTypeheadOnChange = (selected, name) => {
+    let selectedValue = selected[0]
+    if (selectedValue) {
+      if (typeof (selectedValue) === "object" && selectedValue.customOption) {
+        selectedValue = selectedValue.label
+      }
+      setCustomInputValues({ ...customInputValues, [name]: [selectedValue] })
+      clearErrors(name);
+    } else {
+      setCustomInputValues({ ...customInputValues, [name]: [] })
     }
-  }
-
-  const handlecustomInputValues = (value, name) => {
-    setCustomInputValues({ ...customInputValues, [name]: value });
-  }
-
-  const handleTypeheadErrorOnChange = (selected, name) => {
-    handlecustomInputValues(selected[0], name);
-    clearErrors(name)
   }
 
   const handlePrimarySkill = e => {
     setCustomInputValues({ ...customInputValues, isPrimarySkill: e.target.checked })
   }
 
-  const onSubmit = values => {
-    if (customInputValues.skillName) {
-      clearErrors('skillName');
-      const data = {
-        skillName: customInputValues.skillName,
-        experience: getExperienceInFormat(values.experienceInYear, values.experienceInMonth),
-        proficiency: values.proficiency,
-        version: values.version,
-        isPrimarySkill: customInputValues.isPrimarySkill
-      }
-      if (resourceId) {
-        ApiServicesOrgCandidate.updateSkill({ ...data, skillId: resourceId }, getProfileInfo, showPopup);
-      } else {
-        ApiServicesOrgCandidate.addSkill(data, getProfileInfo, showPopup);
-      }
-    } else {
+  const submitForm = (e) => {
+    const skillName = customInputValues.skillName && customInputValues.skillName[0]
+    if (!skillName) {
       setError('skillName', {
         type: "manual",
         message: 'Skill Name cannot be left blank'
@@ -85,21 +70,38 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
     }
   }
 
+  const onSubmit = values => {
+    const skillName = customInputValues.skillName && customInputValues.skillName[0];
+    if (skillName) clearErrors('skillName');
+    const data = {
+      skillName: skillName,
+      experience: getExperienceInFormat(values.experienceInYear, values.experienceInMonth),
+      proficiency: values.proficiency,
+      version: values.version,
+      isPrimarySkill: customInputValues.isPrimarySkill
+    }
+    if (resourceId) {
+      ApiServicesOrgCandidate.updateSkill({ ...data, skillId: resourceId }, getProfileInfo, showPopup);
+    } else {
+      ApiServicesOrgCandidate.addSkill(data, getProfileInfo, showPopup);
+    }
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div class="mb-4">
         <div className="form-group">
           <label htmlFor="skillName">Skill Name<span >*</span></label>
-          <Typeahead
+          {isTypeHeadInputReady ? <Typeahead
+            allowNew
+            newSelectionPrefix="Add a new skill: "
             id="skillName"
             className={errors.skillName && 'is-invalid'}
             isInvalid={errors.skillName}
-            onInputChange={(input, e) => handleTypeheadErrorOnInputChange(e, input, 'skillName', 'Skill Name cannot be left blank')}
-            onChange={selected => handleTypeheadErrorOnChange(selected, 'skillName')}
+            onChange={selected => handleTypeheadOnChange(selected, 'skillName')}
             options={skills}
             placeholder="Choose a Skill Name..."
-            selected={customInputValues.skillName ? [customInputValues.skillName] : null}
-          />
+            defaultSelected={customInputValues.skillName}
+          /> : null}
           {errors.skillName && <div class="errorMsg mt-2">{errors.skillName.message}</div>}
         </div>
         <div className="form-group">
@@ -180,7 +182,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
           </select>
           {errors.proficiency && <div class="errorMsg mt-2">{errors.proficiency.message}</div>}
         </div>
-        <button type="submit" class="btn lightBlue float-right px-5">Save</button>
+        <button type="submit" onClick={submitForm} class="btn lightBlue float-right px-5">Save</button>
       </div>
     </form>
   );

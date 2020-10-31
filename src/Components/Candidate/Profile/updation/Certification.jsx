@@ -16,9 +16,10 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
   const { state, getProfileInfo } = React.useContext(Context);
   const resourceId = dataAttributes && dataAttributes.resourceId;
   const [certificates, setCertificates] = React.useState([]);
-  const initialCustomInputValues = {}
+  const initialCustomInputValues = { certificationName: [] };
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   const [hasNoExpirationDate, setHasNoExpirationDate] = React.useState(false);
+  const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   React.useEffect(() => {
     ApiServicesOrgCandidate.getListOfCertificates().then((response) => {
       if (response) {
@@ -35,60 +36,36 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
           return resObj.certificationId === resourceId
         })[0]
         if (resourceObj) {
-          setValue("issueMonth", resourceObj.issueMonth);
-          setValue("issueYear", resourceObj.issueYear);
-          setValue("expirationMonth", resourceObj.expirationMonth);
-          setValue("expirationYear", resourceObj.expirationYear);
-          setValue("credentialId", resourceObj.credentialId);
-          setValue("credentialURL", resourceObj.credentialURL);
-          setCustomInputValues({ certificationName: resourceObj.certificationName });
+          const {issueMonth, issueYear, expirationMonth, expirationYear, credentialId, credentialURL, certificationName} = resourceObj;
+          setValue("issueMonth", issueMonth);
+          setValue("issueYear", issueYear);
+          setValue("expirationMonth", expirationMonth);
+          setValue("expirationYear", expirationYear);
+          setValue("credentialId", credentialId);
+          setValue("credentialURL", credentialURL);
+          setCustomInputValues({ certificationName: certificationName ? [certificationName] : [] });
+          setIsTypeHeadInputReady(true);
         }
       }
     })
   }, []);
 
-  const handleTypeheadErrorOnInputChange = (input, name, message) => {
-    const value = input;
-    if (value) {
-      setCustomInputValues({ ...customInputValues, [name]: value });
-    } else {
-      handleTypeheadError(value, name, message, false);
-    }
-  }
-
-  const handlecustomInputValues = (value, name) => {
-    setCustomInputValues({ ...customInputValues, [name]: value });
-  }
-
-  const handleTypeheadErrorOnBlur = (e, name, message) => {
-    const value = e.target.value;
-    handleTypeheadError(value, name, message, true)
-  }
-
-  const handleTypeheadErrorOnChange = (selected, name) => {
-    handlecustomInputValues(selected[0], name);
-    clearErrors(name)
-  }
-
-  const handleTypeheadError = (value, name, message, isBlur) => {
-    if (!value) {
-      setError(name, {
-        type: "manual",
-        message: message
-      });
-    } else {
-      if (!isBlur) {
-        const messageText = name === 'certificationName' ? 'Please enter a valid Certification Name' : '';
-        setError(name, {
-          type: "manual",
-          message: messageText
-        });
+  const handleTypeheadOnChange = (selected, name) => {
+    let selectedValue = selected[0]
+    if (selectedValue) {
+      if (typeof (selectedValue) === "object" && selectedValue.customOption) {
+        selectedValue = selectedValue.label
       }
+      setCustomInputValues({ ...customInputValues, [name]: [selectedValue] })
+      clearErrors(name);
+    } else {
+      setCustomInputValues({ ...customInputValues, [name]: [] })
     }
   }
 
   const submitForm = (e) => {
-    if (!customInputValues.certificationName) {
+    const certificationName = customInputValues.certificationName && customInputValues.certificationName[0]
+    if (!certificationName) {
       setError('certificationName', {
         type: "manual",
         message: 'Certification Name cannot be left blank'
@@ -136,10 +113,12 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
   }
 
   const onSubmit = values => {
+    const certificationName = customInputValues.certificationName && customInputValues.certificationName[0]
+    if (certificationName) clearErrors('certificationName');
     if (resourceId) {
-      ApiServicesOrgCandidate.updateCertification({ ...values, certificationName: customInputValues.certificationName, certificationId: resourceId }, getProfileInfo, showPopup);
+      ApiServicesOrgCandidate.updateCertification({ ...values, certificationName: certificationName, certificationId: resourceId }, getProfileInfo, showPopup);
     } else {
-      ApiServicesOrgCandidate.addCertification({ ...values, certificationName: customInputValues.certificationName }, getProfileInfo, showPopup);
+      ApiServicesOrgCandidate.addCertification({ ...values, certificationName: certificationName }, getProfileInfo, showPopup);
     }
   }
   return (
@@ -147,17 +126,17 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
       <div class="mb-4">
         <div className="form-group">
           <label htmlFor="certificationName">Certification Name<span >*</span></label>
-          <Typeahead
+          {isTypeHeadInputReady ? <Typeahead
+            allowNew
+            newSelectionPrefix="Add a new Certification: "
             id="certificationName"
             className={errors.certificationName && 'is-invalid'}
             isInvalid={errors.certificationName}
-            onBlur={e => handleTypeheadErrorOnBlur(e, 'certificationName', 'Certification Name cannot be left blank')}
-            onInputChange={(input, e) => handleTypeheadErrorOnInputChange(input, 'certificationName', 'Certification Name cannot be left blank')}
-            onChange={selected => handleTypeheadErrorOnChange(selected, 'certificationName')}
+            onChange={selected => handleTypeheadOnChange(selected, 'certificationName')}
             options={certificates}
             placeholder="Choose a Certification Name..."
-            selected={customInputValues.certificationName ? [customInputValues.certificationName] : null}
-          />
+            defaultSelected={customInputValues.certificationName}
+          /> : null}
           {errors.certificationName && <div class="errorMsg mt-2">{errors.certificationName.message}</div>}
         </div>
         <div class="custom-control custom-checkbox mr-sm-2">
