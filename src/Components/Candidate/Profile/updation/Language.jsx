@@ -100,7 +100,7 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
             placeholder="Choose a Language..."
             defaultSelected={customInputValues.language}
           /> : null}
-          {errors.language && <div class="errorMsg mt-2">{errors.language.message}</div>}
+          {errors.language && <div class="error-message">{errors.language.message}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="proficiency">Proficiency<span>*</span></label>
@@ -117,7 +117,7 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
             <option value="Proficient">Proficient</option>
             <option value="Expert">Expert</option>
           </select>
-          {errors.proficiency && <div class="errorMsg mt-2">{errors.proficiency.message}</div>}
+          {errors.proficiency && <div class="error-message">{errors.proficiency.message}</div>}
         </div>
         <div class="form-group">
           <div class="form-row">

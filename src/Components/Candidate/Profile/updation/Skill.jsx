@@ -102,7 +102,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
             placeholder="Choose a Skill Name..."
             defaultSelected={customInputValues.skillName}
           /> : null}
-          {errors.skillName && <div class="errorMsg mt-2">{errors.skillName.message}</div>}
+          {errors.skillName && <div class="error-message">{errors.skillName.message}</div>}
         </div>
         <div className="form-group">
           <div class="custom-control custom-checkbox mr-sm-2">
@@ -122,7 +122,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
             })}
             placeholder="Version"
           />
-          {errors.version && <div class="errorMsg mt-2">{errors.version.message}</div>}
+          {errors.version && <div class="error-message">{errors.version.message}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="experienceInYear" class="mt-2">Experience</label>
@@ -139,10 +139,10 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
               >
                 <option value="" selected>Select Year</option>
                 {Array(31).fill().map((_, i) => (
-                  <option value={i} key={`${i}_years`}>{i} {i === 1 ? 'Year' : 'Years'} </option>
+                  <option value={('0' + i).slice(-2)} key={`${i}_years`}>{i} {i===0 || i ===1 ? 'Year' : 'Years'} </option>
                 ))}
               </select>
-              {errors.experienceInYear && <div class="errorMsg mt-2">{errors.experienceInYear.message}</div>}
+              {errors.experienceInYear && <div class="error-message">{errors.experienceInYear.message}</div>}
             </div>
             <div className="col ml-3">
               <select
@@ -156,12 +156,12 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
               >
                 <option value="" selected>Select Month</option>
                 {Array(12).fill().map((_, i) => (
-                  <option value={i < 10 ? `0${i}` : i} key={`${i}_months`}>{i} {i === 1 ? 'Month' : 'Months'} </option>
+                  <option value={i < 10 ? `0${i}` : i} key={`${i}_months`}>{i} {i === 0 || i === 1 ? 'Month' : 'Months'} </option>
                 ))}
               </select>
-              {errors.experienceInMonth && <div class="errorMsg mt-2">{errors.experienceInMonth.message}</div>}
+              {errors.experienceInMonth && <div class="error-message">{errors.experienceInMonth.message}</div>}
             </div>
-            <div class="col-12">{errors.startDate && <div class="errorMsg mt-2">{errors.startDate.message}</div>}</div>
+            <div class="col-12">{errors.startDate && <div class="error-message">{errors.startDate.message}</div>}</div>
           </div>
         </div>
         <div className="form-group">
@@ -180,7 +180,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
             <option value="Proficient">Proficient</option>
             <option value="Expert">Expert</option>
           </select>
-          {errors.proficiency && <div class="errorMsg mt-2">{errors.proficiency.message}</div>}
+          {errors.proficiency && <div class="error-message">{errors.proficiency.message}</div>}
         </div>
         <button type="submit" onClick={submitForm} class="btn lightBlue float-right px-5">Save</button>
       </div>

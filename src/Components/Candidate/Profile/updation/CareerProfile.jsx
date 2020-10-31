@@ -117,7 +117,7 @@ const CareerProfileComponent = ({ showPopup }) => {
             <option>Permanent</option>
             <option>Contractual</option>
           </select>
-          {errors.employmentType && <div class="errorMsg mt-2">{errors.employmentType.message}</div>}
+          {errors.employmentType && <div class="error-message">{errors.employmentType.message}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="University">Preferred Locations</label>

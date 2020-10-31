@@ -10,6 +10,8 @@ const CTCComponent = ({ showPopup }) => {
     setCtc(data)
   })
   if (ctc && ctc.candidateInfo) {
+    const currentCTC = ctc && ctc.candidateInfo && ctc.candidateInfo.currentCTC ? ctc.candidateInfo.currentCTC : 0;
+    const expectedCTC = ctc && ctc.candidateInfo && ctc.candidateInfo.expectedCTC ? ctc.candidateInfo.expectedCTC : 0;
     return (
       <div class="bg-white section-divider align-items-center row mx-0">
         <div class="col-6 px-4 py-4 section-divider" style={{ borderRight: '1px solid #F1F1F1' }}>
@@ -18,7 +20,7 @@ const CTCComponent = ({ showPopup }) => {
               <span class="subtitle-semi-bold ml-4">Current CTC</span>
             </div>
             <div class="px-4">
-              <span class="normal-text-medium">{ctc.candidateInfo.currencyType} {ctc.candidateInfo.currentCTC}</span>
+              <span class="normal-text-medium">{ctc.candidateInfo.currencyType} {currentCTC}</span>
             </div>
           </div>
         </div>
@@ -29,7 +31,7 @@ const CTCComponent = ({ showPopup }) => {
               <span class="subtitle-semi-bold">Expected CTC</span>
             </div>
             <div >
-              <span class="normal-text-medium">{ctc.candidateInfo.currencyType} {ctc.candidateInfo.expectedCTC}</span>
+              <span class="normal-text-medium">{ctc.candidateInfo.currencyType} {expectedCTC}</span>
             </div>
           </div>
         </div>

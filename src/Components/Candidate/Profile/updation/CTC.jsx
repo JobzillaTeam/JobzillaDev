@@ -30,7 +30,7 @@ const CTCComponent = ({ showPopup }) => {
         const { currencyType, currentCTC, expectedCTC } = candidateInfo;
         setCustomInputValues({ currencyType: currencyType });
         setValue('currentCtcInLakh', getCTCInLakh(currentCTC));
-        setValue('currentCtcInThousand', getCTCInThousand(expectedCTC));
+        setValue('currentCtcInThousand', getCTCInThousand(currentCTC));
         setValue('expectedCtcInLakh', getCTCInLakh(expectedCTC));
         setValue('expectedCtcInThousand', getCTCInThousand(expectedCTC));
       }
@@ -83,7 +83,7 @@ const CTCComponent = ({ showPopup }) => {
             <label class="modal-label radio-inline form-check-label" for="materialChecked2">USD</label>
           </div>
         </div>
-        {errors.currencyType && <div class="errorMsg mt-2">{errors.currencyType.message}</div>}
+        {errors.currencyType && <div class="error-message">{errors.currencyType.message}</div>}
       </div>
       <div className="form-group">
         <label htmlFor="University">Current Salary<span>*</span></label>
@@ -118,13 +118,13 @@ const CTCComponent = ({ showPopup }) => {
             >
               <option value="" selected>Select in Thousand</option>
               {Array(20).fill().map((_, i) => (
-                <option value={i * 5}>{i * 5}</option>
+                <option value={('0' + (i * 5)).slice(-2)}>{('0' + (i * 5)).slice(-2)}</option>
               ))}
             </select>
             <small class="pull-right pt-1">Thousand</small>
             {/* <label class="w-100 text-right small-text-light mt-2" htmlFor="University">Thousand</label> */}
           </div>
-          {/* <div class="errorMsg mt-2">{errors.currentCtcInLakh && errors.currentCtcInLakh.message}</div> */}
+          {/* <div class="error-message">{errors.currentCtcInLakh && errors.currentCtcInLakh.message}</div> */}
         </div>
       </div>
       <div className="form-group">
@@ -153,7 +153,7 @@ const CTCComponent = ({ showPopup }) => {
             >
               <option value="" selected>Select in Thousand</option>
               {Array(20).fill().map((_, i) => (
-                <option value={i * 5}>{i * 5}</option>
+                <option value={('0' + (i * 5)).slice(-2)}>{('0' + (i * 5)).slice(-2)}</option>
               ))}
             </select>
             <small class="pull-right pt-1">Thousand</small>

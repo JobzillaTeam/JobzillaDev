@@ -184,7 +184,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
               <option value={edu.value} selected>{edu.label}</option>
             ))}
           </select>
-          {errors.educationType && <div class="errorMsg mt-2">{errors.educationType.message}</div>}
+          {errors.educationType && <div class="error-message">{errors.educationType.message}</div>}
         </div>
         {isSchoolForm ? <div className="form-group">
           <label htmlFor="board">Board<span >*</span></label>
@@ -199,7 +199,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
             placeholder="Choose a Board..."
             defaultSelected={customInputValues.board}
           /> : null}
-          {errors.board && <div class="errorMsg mt-2">{errors.board.message}</div>}
+          {errors.board && <div class="error-message">{errors.board.message}</div>}
         </div> :
           <div>
             <div className="form-group">
@@ -213,7 +213,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
                 })}
                 placeholder="Enter Course"
               />
-              {errors.course && <div class="errorMsg mt-2">{errors.course.message}</div>}
+              {errors.course && <div class="error-message">{errors.course.message}</div>}
             </div>
             <div className="form-group">
               <label htmlFor="specialization">Specialization<span>*</span></label>
@@ -226,7 +226,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
                 })}
                 placeholder="Enter Specialization"
               />
-              {errors.specialization && <div class="errorMsg mt-2">{errors.specialization.message}</div>}
+              {errors.specialization && <div class="error-message">{errors.specialization.message}</div>}
             </div>
             <div className="form-group">
               <label htmlFor="university">University/Institute<span >*</span></label>
@@ -241,7 +241,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
                 placeholder="Choose a University/Institute..."
                 defaultSelected={customInputValues.university}
               /> : null}
-              {errors.university && <div class="errorMsg mt-2">{errors.university.message}</div>}
+              {errors.university && <div class="error-message">{errors.university.message}</div>}
             </div>
             <div class="form-group">
               <label htmlFor="University">Course Type</label>
@@ -283,7 +283,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
                   <label class="modal-label radio-inline form-check-label" for="materialChecked2">Correspondence/Distance Learning</label>
                 </div>
               </div>
-              {errors.courseType && <div class="errorMsg mt-2">{errors.courseType.message}</div>}
+              {errors.courseType && <div class="error-message">{errors.courseType.message}</div>}
             </div>
           </div>}
         <div className="form-group">
@@ -301,7 +301,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
               <option key={`${i}_years`}>{parseInt(new Date().getFullYear()) - i}</option>
             ))}
           </select>
-          {errors.passingOutYear && <div class="errorMsg mt-2">{errors.passingOutYear.message}</div>}
+          {errors.passingOutYear && <div class="error-message">{errors.passingOutYear.message}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="marks">Passing % Or Grade<span>*</span></label>
@@ -314,7 +314,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
             })}
             placeholder="Enter Marks"
           />
-          {errors.marks && <div class="errorMsg mt-2">{errors.marks.message}</div>}
+          {errors.marks && <div class="error-message">{errors.marks.message}</div>}
         </div>
         <button type="submit" class="btn lightBlue float-right px-5" onClick={submitForm}>Save</button>
       </div>

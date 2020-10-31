@@ -70,7 +70,7 @@ const ProfileNameComponent = ({ showPopup }) => {
           })}
           placeholder="Enter First Name"
         />
-        {errors.firstName && <div class="errorMsg mt-2">{errors.firstName.message}</div>}
+        {errors.firstName && <div class="error-message">{errors.firstName.message}</div>}
       </div>
       <div className="form-group">
         <label htmlFor="lastName">Last Name<span>*</span></label>
@@ -83,7 +83,7 @@ const ProfileNameComponent = ({ showPopup }) => {
           })}
           placeholder="Enter Last Name"
         />
-        {errors.lastName && <div class="errorMsg mt-2">{errors.lastName.message}</div>}
+        {errors.lastName && <div class="error-message">{errors.lastName.message}</div>}
       </div>
       <div className="form-group">
         <label htmlFor="company">Company Name<span>*</span></label>
@@ -96,7 +96,7 @@ const ProfileNameComponent = ({ showPopup }) => {
           })}
           placeholder="Enter Company Name"
         />
-        {errors.company && <div class="errorMsg mt-2">{errors.company.message}</div>}
+        {errors.company && <div class="error-message">{errors.company.message}</div>}
       </div>
       <div className="form-group">
         <label htmlFor="currentRole">Current Location<span>*</span></label>
@@ -109,7 +109,7 @@ const ProfileNameComponent = ({ showPopup }) => {
           })}
           placeholder="Enter Current Location"
         />
-        {errors.address && <div class="errorMsg mt-2">{errors.address.message}</div>}
+        {errors.address && <div class="error-message">{errors.address.message}</div>}
       </div>
       <div className="form-group">
         <label htmlFor="currentRole">Mobile Number<span>*</span></label>
@@ -127,7 +127,7 @@ const ProfileNameComponent = ({ showPopup }) => {
           value={customInputValues.mobileNumber}
           onChange={handleMobileNumberChange}
         />
-        {errors.mobileNumber && <div class="errorMsg mt-2">{errors.mobileNumber.message}</div>}
+        {errors.mobileNumber && <div class="error-message">{errors.mobileNumber.message}</div>}
       </div>
       <div className="form-group">
         <label htmlFor="currentRole">Current Role<span>*</span></label>
@@ -140,7 +140,7 @@ const ProfileNameComponent = ({ showPopup }) => {
           })}
           placeholder="Enter Current Role"
         />
-        {errors.currentRole && <div class="errorMsg mt-2">{errors.currentRole.message}</div>}
+        {errors.currentRole && <div class="error-message">{errors.currentRole.message}</div>}
       </div>
       <div className="form-group">
         <label htmlFor="email">Email<span>*</span></label>
@@ -154,7 +154,7 @@ const ProfileNameComponent = ({ showPopup }) => {
           placeholder="Enter Email"
           disabled
         />
-        {errors.emailId && <div class="errorMsg mt-2">{errors.emailId.message}</div>}
+        {errors.emailId && <div class="error-message">{errors.emailId.message}</div>}
       </div>
       <button type="submit" class="btn lightBlue float-right px-5" onClick={submitForm}>Save</button>
     </form>

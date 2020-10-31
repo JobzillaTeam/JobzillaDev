@@ -137,7 +137,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
             placeholder="Choose a Certification Name..."
             defaultSelected={customInputValues.certificationName}
           /> : null}
-          {errors.certificationName && <div class="errorMsg mt-2">{errors.certificationName.message}</div>}
+          {errors.certificationName && <div class="error-message">{errors.certificationName.message}</div>}
         </div>
         <div class="custom-control custom-checkbox mr-sm-2">
           <input type="checkbox" class="custom-control-input" name="hasNoExpirationDate" id="hasNoExpirationDate" checked={hasNoExpirationDate} onChange={(e) => handleHasNoExpirationDate(e)} />
@@ -159,7 +159,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
                   <option key={`${i}_years`}>{parseInt(new Date().getFullYear()) - i}</option>
                 ))}
               </select>
-              {errors.issueYear && <div class="errorMsg mt-2">{errors.issueYear.message}</div>}
+              {errors.issueYear && <div class="error-message">{errors.issueYear.message}</div>}
             </div>
             <div className="col ml-3">
               <select
@@ -174,9 +174,9 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
                   <option key={`monthName`}>{monthName}</option>
                 ))}
               </select>
-              {errors.issueMonth && <div class="errorMsg mt-2">{errors.issueMonth.message}</div>}
+              {errors.issueMonth && <div class="error-message">{errors.issueMonth.message}</div>}
             </div>
-            <div class="col-12">{errors.startDate && <div class="errorMsg mt-2">{errors.startDate.message}</div>}</div>
+            <div class="col-12">{errors.startDate && <div class="error-message">{errors.startDate.message}</div>}</div>
           </div>
         </div>
         {!hasNoExpirationDate ? <div> <label htmlFor="expirationYear">Expiration Date</label>
@@ -196,7 +196,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
                     }  </option>
                   ))}
                 </select>
-                {errors.expirationYear && <div class="errorMsg mt-2">{errors.expirationYear.message}</div>}
+                {errors.expirationYear && <div class="error-message">{errors.expirationYear.message}</div>}
               </div>
               <div className="col ml-3">
                 <select
@@ -211,9 +211,9 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
                     <option key={`monthName`}>{monthName}</option>
                   ))}
                 </select>
-                {errors.expirationMonth && <div class="errorMsg mt-2">{errors.expirationMonth.message}</div>}
+                {errors.expirationMonth && <div class="error-message">{errors.expirationMonth.message}</div>}
               </div>
-              <div class="col-12">{errors.endDate && <div class="errorMsg mt-2">{errors.endDate.message}</div>}</div>
+              <div class="col-12">{errors.endDate && <div class="error-message">{errors.endDate.message}</div>}</div>
             </div>
           </div></div> : <div class="col text-right mt-2 px-0">
             <span class="small-text-light ">This certification does not expire</span>
@@ -227,7 +227,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
             ref={register}
             placeholder="Credential ID"
           />
-          {errors.credentialId && <div class="errorMsg mt-2">{errors.credentialId.message}</div>}
+          {errors.credentialId && <div class="error-message">{errors.credentialId.message}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="credentialURL">Credential URL</label>
@@ -243,7 +243,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
             })}
             placeholder="Enter Credential URL"
           />
-          {errors.credentialURL && <div class="errorMsg mt-2">{errors.credentialURL.message}</div>}
+          {errors.credentialURL && <div class="error-message">{errors.credentialURL.message}</div>}
         </div>
         <button type="submit" class="btn lightBlue float-right px-5" onClick={submitForm}>Save</button>
       </div>

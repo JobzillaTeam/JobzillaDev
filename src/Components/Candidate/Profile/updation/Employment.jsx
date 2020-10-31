@@ -145,7 +145,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
             })}
             placeholder="Enter Designation"
           />
-          {errors.designation && <div class="errorMsg mt-2">{errors.designation.message}</div>}
+          {errors.designation && <div class="error-message">{errors.designation.message}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="organization">Organization<span >*</span></label>
@@ -160,7 +160,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
             placeholder="Choose a Organization Name..."
             defaultSelected={customInputValues.organization}
           /> : null}
-          {errors.organization && <div class="errorMsg mt-2">{errors.organization.message}</div>}
+          {errors.organization && <div class="error-message">{errors.organization.message}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="employmentType">Employment Type<span >*</span></label>
@@ -179,7 +179,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
                 <option>Contractual</option>
                 <option>Internship</option>
               </select>
-              {errors.employmentType && <div class="errorMsg mt-2">{errors.employmentType.message}</div>}
+              {errors.employmentType && <div class="error-message">{errors.employmentType.message}</div>}
             </div>
           </div>
         </div>
@@ -212,7 +212,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
               <label class="modal-label radio-inline form-check-label" for="materialChecked2">No</label>
             </div>
           </div>
-          {errors.currentCompany && <div class="errorMsg mt-2">{errors.currentCompany.message}</div>}
+          {errors.currentCompany && <div class="error-message">{errors.currentCompany.message}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="startedWorkingFromYear" class="mt-2">Started working from</label>
@@ -249,8 +249,8 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
                 ))}
               </select>
             </div>
-            <div class="col-12">{(errors.startedWorkingFromMonth || errors.startedWorkingFromYear) && <div class="errorMsg mt-2">Started working from cannot be left blank</div>}</div>
-            <div class="col-12">{errors.startDate && <div class="errorMsg mt-2">{errors.startDate.message}</div>}</div>
+            <div class="col-12">{(errors.startedWorkingFromMonth || errors.startedWorkingFromYear) && <div class="error-message">Started working from cannot be left blank</div>}</div>
+            <div class="col-12">{errors.startDate && <div class="error-message">{errors.startDate.message}</div>}</div>
           </div>
         </div>
         {!customInputValues.currentCompany ? <div> <label htmlFor="workedTillYear">Worked Till</label>
@@ -290,8 +290,8 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
                   ))}
                 </select>
               </div>
-              <div class="col-12">{(errors.workedTillMonth || errors.workedTillYear) && <div class="errorMsg mt-2">Worked Till cannot be left blank</div>}</div>
-              <div class="col-12">{errors.endDate && <div class="errorMsg mt-2">{errors.endDate.message}</div>}</div>
+              <div class="col-12">{(errors.workedTillMonth || errors.workedTillYear) && <div class="error-message">Worked Till cannot be left blank</div>}</div>
+              <div class="col-12">{errors.endDate && <div class="error-message">{errors.endDate.message}</div>}</div>
             </div>
           </div></div> : ''}
         <div className="form-group">
