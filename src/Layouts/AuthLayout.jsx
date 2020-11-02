@@ -14,7 +14,7 @@ const AuthLayout = ({ component: Component, ...rest }) => {
   const isLoggedIn = AppHelper.isLoggedIn(null, false);
   if (isLoggedIn && localStorage.getItem('userRole') === 'candidate_role') {
     return <Redirect to="/candidate/dashboard" />
-  } else if (isLoggedIn && localStorage.getItem('userRole') === 'Owner') {
+  } else if (isLoggedIn && AppHelper.isOrganizationRelatedUser()) {
     return <Redirect to="/providerDashboard" />
   } else {
     return (
