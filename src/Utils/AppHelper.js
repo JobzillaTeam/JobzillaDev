@@ -1,3 +1,4 @@
+const orgRoles = ['owner', 'admin', 'user'];
 const onLogout = _ => {
   localStorage.removeItem('userDetails');
   localStorage.removeItem('userId');
@@ -23,12 +24,22 @@ const isLoggedIn = (userType, isAuthorizationCheck) => {
     if (localStorage.getItem('userRole') !== 'candidate_role') isLoggedIn = false;
   }
   if (userType === 'organization' && isAuthorizationCheck) {
-    if (localStorage.getItem('userRole') !== 'Owner') isLoggedIn = false;
+    if (!isOrganizationRelatedUser()) isLoggedIn = false;
   }
   return isLoggedIn;
 }
 
+const isOrganizationRelatedUser = () => {
+  return localStorage.hasOwnProperty('userRole') &&
+  localStorage.getItem('userRole')[0] && (
+    typeof localStorage.getItem('userRole') === 'string' ||
+    localStorage.getItem('userRole') instanceof String
+  ) &&
+  orgRoles.includes(localStorage.getItem('userRole').toLocaleLowerCase());
+}
+
 export const AppHelper = {
   onLogout,
-  isLoggedIn
+  isLoggedIn,
+  isOrganizationRelatedUser
 }
