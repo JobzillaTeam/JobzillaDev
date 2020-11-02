@@ -40,6 +40,7 @@ const CTCComponent = ({ showPopup }) => {
   const onSubmit = values => {
     if (values.currentCtcInLakh || values.currentCtcInThousand) {
       clearErrors('currentCtcInLakh');
+      if (!values.currentCtcInLakh || values.currentCtcInLakh[0]) values.currentCtcInLakh = "0"
       const data = {
         currencyType: customInputValues.currencyType,
         currentCTC: getCTCInFormat(values.currentCtcInLakh, values.currentCtcInThousand),

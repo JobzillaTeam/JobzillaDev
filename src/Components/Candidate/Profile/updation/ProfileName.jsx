@@ -78,9 +78,7 @@ const ProfileNameComponent = ({ showPopup }) => {
           class={`form-control ${errors.lastName && 'is-invalid'}`}
           id="lastName"
           name="lastName"
-          ref={register({
-            required: "Last Name cannot be left blank",
-          })}
+          ref={register}
           placeholder="Enter Last Name"
         />
         {errors.lastName && <div class="error-message">{errors.lastName.message}</div>}

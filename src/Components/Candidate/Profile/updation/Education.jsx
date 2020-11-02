@@ -10,6 +10,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
   const { handleSubmit, getValues, register, errors, setValue, reset, setError, clearErrors } = useForm({
     mode: 'onSubmit',
     defaultValues: {
+      educationType: '',
       passingOutYear: ''
     }
   });

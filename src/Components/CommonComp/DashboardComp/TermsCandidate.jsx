@@ -10,7 +10,7 @@ const TermsCandidate = ({ showPopup }) => {
   const apiServicesOrg = new ApiServicesOrg();
   const handleOnDecline = e => {
     showPopup(false);
-    history.replace({ pathname: "/login" })
+    history.replace({ pathname: "/logout" })
   }
   const handleOnAccepted = e => {
     apiServicesOrg.updateAcceptedTC().then(Response => {
