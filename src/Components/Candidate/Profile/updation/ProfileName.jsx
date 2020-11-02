@@ -119,9 +119,6 @@ const ProfileNameComponent = ({ showPopup }) => {
             name: 'phone',
             required: true,
           }}
-          ref={register({
-            required: "Mobile cannot be left blank",
-          })}
           value={customInputValues.mobileNumber}
           onChange={handleMobileNumberChange}
         />
