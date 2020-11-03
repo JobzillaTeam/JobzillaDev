@@ -16,7 +16,7 @@ class EmailSetting extends Component {
             canOfferMadeToTheirCandidate: false,
             canAllowNotificationForRecruite: false,
             canSuccessfulJobPost: false,
-            camNewApplicationOnPostedJobs: false,
+            canNewApplicationOnPostedJobs: false,
             canInterviewInviteAcceptedDeclinedByCandidate: false
         };
         this.emailSetting = new ApiServicesOrg();
@@ -53,7 +53,7 @@ class EmailSetting extends Component {
         this.setState({
             canAllowNotificationForRecruite: true,
             canSuccessfulJobPost: true,
-            camNewApplicationOnPostedJobs: true,
+            canNewApplicationOnPostedJobs: true,
             canInterviewInviteAcceptedDeclinedByCandidate: true
         })
         /*If Provider allow notifications toggler is disabled then all child togglers are disabled*/
@@ -61,7 +61,7 @@ class EmailSetting extends Component {
             this.setState({
                 canAllowNotificationForRecruite: false,
                 canSuccessfulJobPost: false,
-                camNewApplicationOnPostedJobs: false,
+                canNewApplicationOnPostedJobs: false,
                 canInterviewInviteAcceptedDeclinedByCandidate: false,
             })
         }
@@ -78,7 +78,7 @@ class EmailSetting extends Component {
                     canCandidateHasAcceptedTermsAndConditions: Response.data.responseObject.canCandidateHasAcceptedTermsAndConditions,
                     canOfferMadeToTheirCandidate: Response.data.responseObject.canOfferMadeToTheirCandidate,
                     canSuccessfulJobPost: Response.data.responseObject.canSuccessfulJobPost,
-                    camNewApplicationOnPostedJobs: Response.data.responseObject.camNewApplicationOnPostedJobs,
+                    canNewApplicationOnPostedJobs: Response.data.responseObject.canNewApplicationOnPostedJobs,
                     canInterviewInviteAcceptedDeclinedByCandidate: Response.data.responseObject.canInterviewInviteAcceptedDeclinedByCandidate,
                 },
                     //console.log(Response.data.responseObject)
@@ -144,11 +144,11 @@ class EmailSetting extends Component {
     /* To handle new application Job Post */
     onNewAppJobPostChange = () => {
         this.setState(initialState => ({
-            camNewApplicationOnPostedJobs: !initialState.camNewApplicationOnPostedJobs,
+            canNewApplicationOnPostedJobs: !initialState.canNewApplicationOnPostedJobs,
         })
         )
         /* If new Application Job Post is disabled then allow notification is also disabled */
-        if (!this.state.camNewApplicationOnPostedJobs === false) {
+        if (!this.state.canNewApplicationOnPostedJobs === false) {
             this.setState({
                 canAllowNotificationForRecruite: false
             })
@@ -282,7 +282,7 @@ class EmailSetting extends Component {
                                                 <div>
                                                     <label className="checkmark">
                                                         <input type="checkbox" className="primary"
-                                                            checked={this.state.camNewApplicationOnPostedJobs}
+                                                            checked={this.state.canNewApplicationOnPostedJobs}
                                                             onChange={this.onNewAppJobPostChange}
                                                         />
                                                         <span className="checkmark"></span>

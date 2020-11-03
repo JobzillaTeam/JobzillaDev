@@ -10,7 +10,6 @@ import { Toast } from 'primereact/toast';
 //import axios from 'axios'
 // import Toast from 'light-toast';
 
-
 export default class Signup extends Component {
     constructor() {
         super()
@@ -70,17 +69,25 @@ export default class Signup extends Component {
                 };
     // Calling Signup Service from Service file:-
     
-            this.signupService.postSignup(this.state.fields)
-            .then(Response=> {this.props.history.push('/')
-                localStorage.setItem('jobzilla',JSON.stringify(this.state.fields));
-            })
-          .catch(error=>{this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error'},50000);
-            })
-            this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User is Signed up Successfully'},50000); 
+    this.signupService.postSignup(this.state.fields)
+    .then(Response => {
+        localStorage.setItem('jobzilla', JSON.stringify(this.state.fields));
+        if (Response.status === 208) {
+            this.toast.show({ severity: 'error', summary: 'Error', detail: 'User already exist' }, 80000);
+        } else {
+            this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'User Signup Successfully' }, 80000);
+        this.props.history.push('/')
+
         }
-            this.refs.check.checked= false ;
-        }
-    validateForm = () => {
+    })
+    .catch(error => {
+        console.log(error)
+        this.toast.show({ severity: 'error', summary: 'Error', detail: 'Internal server error' }, 80000);
+    })
+}
+this.refs.check.checked = false;
+}
+validateForm = () => {
         let fields = this.state.fields;
         let errors = {};
         let formIsValid = true;
@@ -272,7 +279,7 @@ export default class Signup extends Component {
                                         <div className="form-check">
                                             <input className="form-check-input" type="checkbox" id="agreeTerms" ref="check" required/>
                                             <label className="form-check-label" htmlFor="agreeTerms">
-                                                I agree to terms and conditions
+<Link to="/termsofUse">I agree to terms and conditions</Link>
                                             </label>
                                         </div>  
                                     </div>
@@ -280,7 +287,7 @@ export default class Signup extends Component {
                                 <div className="form-group mt-5">
                                     <button className="btn btn-blue w-50"  >Create</button>
                                 </div>  
-                                <div className="terms" ><Link to="/termsofUse">Terms of use</Link></div> 
+                                {/* <div className="terms" ><Link to="/termsofUse">Terms of use</Link></div>  */}
                             </div>
                             {/* image on sign up */}
                             <div className="col-md-7">
@@ -302,5 +309,6 @@ export default class Signup extends Component {
         )
     }
 }
+
 
 

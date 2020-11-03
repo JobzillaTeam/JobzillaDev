@@ -84,13 +84,20 @@ showError= (e) => {
    // Calling Add user Service from Service file:-   
         this.addUser.postAddUser(this.state.fields)
          .then(Response=>{
-              this.hideModal()
+              //this.hideModal()
+              if(Response.status===208){
+
+                this.toast.show({severity: 'error', summary: 'Error', detail: 'User already exist'},80000);
+            }
+            else {
+              this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User added Successfully'},60000);
+              }
         window.location.reload()
         })
           .catch(error=>{
             this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},20000);})
             
-        this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User is added Successfully'},20000);
+        
                 
          localStorage.setItem("hobzilla",JSON.stringify(this.state.fields))
     }

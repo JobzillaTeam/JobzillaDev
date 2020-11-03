@@ -96,7 +96,14 @@ class UploadProfile extends Component {
             // Calling Upload Sample File Service from Service file:-
                         this.fileService.postSampleFile(formData, formheader) 
                         .then(Response=>{
+                                    console.log(Response.status)
+                                    if(Response.status===208){
+
+                                        this.toast.show({severity: 'error', summary: 'Error', detail: 'Email Id already exist'},600000);
+                                    }
+                                    else {
                                     this.toast.show({severity: 'success', summary: 'Success Message', detail: 'File uploaded Successfully'},60000);
+                                    }
                                     window.location.reload();
                                 })
 
