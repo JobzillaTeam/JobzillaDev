@@ -209,7 +209,7 @@ const PersonalComponent = ({ showPopup }) => {
               name="maritalStatus"
               onChange={(e) => handleFormInputData(e)}
             >
-              <option disabled>Select Marital Status</option>
+              <option>Select Marital Status</option>
               <option>Single/unmarried</option>
               <option>Married</option>
             </select>
