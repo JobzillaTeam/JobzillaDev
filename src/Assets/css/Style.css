@@ -3054,3 +3054,7 @@ textarea {
 }
 
 /*  Terms and Condition Check End */
+
+.profile__editIcon {
+    cursor: pointer;
+}

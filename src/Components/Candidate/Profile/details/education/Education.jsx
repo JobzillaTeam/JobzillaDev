@@ -11,7 +11,12 @@ export const Education = ({ showPopup }) => {
   const { educationDetailsList } = profileInfo;
   const isSchoolEducation = (education) => {
     return education.educationType === '10th' || education.educationType === '12th'
-  } ;
+  };
+  const educationDetailsListSorted = educationDetailsList && educationDetailsList.sort((eduA, eduB) => {
+    if (eduA.passingOutYear && eduB.passingOutYear) {
+      return eduB.passingOutYear - eduA.passingOutYear;
+    }
+  })
   return (
     <div class="bg-white px-4 py-4 section-divider align-items-center">
       <div class="col">
@@ -21,7 +26,7 @@ export const Education = ({ showPopup }) => {
           <span class="subtitle-semi-bold">Education</span>
         </div>
         <div class="px-4 mb-3">
-          {(educationDetailsList) ? educationDetailsList.map((data) => (
+          {(educationDetailsListSorted) ? educationDetailsListSorted.map((data) => (
             <div class="col-12 px-0 py-3">
               <div>
                 <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_EDUCATION, true, { resourceId: data.educationId })} />
