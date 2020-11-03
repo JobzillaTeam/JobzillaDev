@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { EDIT_CERTIFICATE, ADD_NEW_CERTIFICATE } from '../../../../../Utils/AppConst'
 import { Context } from '../../../../../Context/ProfileContext';
+import moment from 'moment';
 
 export const Certifications = ({ showPopup }) => {
   const { state } = useContext(Context);
@@ -9,6 +10,16 @@ export const Certifications = ({ showPopup }) => {
     setProfileInfo(data)
   })
   const { candidateCertificatesList } = profileInfo;
+  const candidateCertificatesListSorted = candidateCertificatesList && candidateCertificatesList.sort((certA, certB) => {
+    if (certA.issueMonth && certA.issueYear && certB.issueMonth, certB.issueYear) {
+      debugger
+      const startMonthValue = parseInt(moment().month(certA.issueMonth).format("M")) - 1;
+      const endMonthValue = parseInt(moment().month(certB.issueMonth).format("M")) - 1;
+      const startDate = new Date(parseInt(certA.issueYear), startMonthValue).getTime();
+      const endDate = new Date(parseInt(certB.issueYear), endMonthValue).getTime();
+      return endDate - startDate;
+    }
+  });
   return (
     <div class="bg-white px-4 py-4 section-divider align-items-center">
       <div class="col">
@@ -16,7 +27,7 @@ export const Certifications = ({ showPopup }) => {
           <span class="subtitle-semi-bold ml-4">Certifications</span>
         </div>
         <div class="px-4 mb-3">
-          {(candidateCertificatesList) ? candidateCertificatesList.map((data) => (
+          {(candidateCertificatesListSorted) ? candidateCertificatesListSorted.map((data) => (
             <div class="col-12 px-0 py-3">
               <div>
                 <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_CERTIFICATE, true, {resourceId: data.certificationId})} />

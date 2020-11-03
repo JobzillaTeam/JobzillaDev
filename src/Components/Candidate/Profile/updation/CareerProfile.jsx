@@ -121,15 +121,14 @@ const CareerProfileComponent = ({ showPopup }) => {
         </div>
         <div className="form-group">
           <label htmlFor="University">Preferred Locations</label>
-          {(cities) ? <ReactTags
+          <ReactTags
             placeholderText={'Add Preferred Locations'}
             minQueryLength={1}
             tags={preferredLocations}
-            suggestions={cities}
+            suggestions={cities || []}
             onDelete={onDelete}
             onAddition={onAddition}
-          /> : null
-          }
+          />
         </div>
         <div className="form-group">
           <label htmlFor="University">Preferred Shift</label>
