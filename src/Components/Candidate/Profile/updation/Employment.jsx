@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Context } from '../../../../Context/ProfileContext';
 import { employmentFormDefaultValue } from '../../../../Utils/ProfileFormHelper';
-import { MAX_LENGTH, CANDIDATE_ID, MONTH_NAMES } from '../../../../Utils/AppConst';
+import { MAX_LENGTH, MONTH_NAMES } from '../../../../Utils/AppConst';
 import ApiServicesOrgCandidate from '../../../../Services/ApiServicesOrgCandidate';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import moment from 'moment';

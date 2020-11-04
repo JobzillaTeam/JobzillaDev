@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Context } from '../../../../Context/ProfileContext';
 import ApiServicesOrgCandidate from '../../../../Services/ApiServicesOrgCandidate';
 import { careerProfileFormDefaultValues } from '../../../../Utils/ProfileFormHelper';
-import { CANDIDATE_ID, PREFERRED_SHIFT_TYPE_ENUM } from '../../../../Utils/AppConst';
+import { PREFERRED_SHIFT_TYPE_ENUM } from '../../../../Utils/AppConst';
 import swal from 'sweetalert';
 
 const CareerProfileComponent = ({ showPopup }) => {
@@ -91,11 +91,12 @@ const CareerProfileComponent = ({ showPopup }) => {
 
 
   const onSubmit = values => {
+    const candidateId = localStorage.getItem('candidateId');
     let data = {
       "preferredShift": customInputValues.preferredShift,
       "employmentType": values.employmentType,
       "preferredLocation": addPreferredLocation.join(),
-      "candidateId": CANDIDATE_ID
+      "candidateId": candidateId
     }
     ApiServicesOrgCandidate.updateCareerInfo(data, getProfileInfo, showPopup);
   }
