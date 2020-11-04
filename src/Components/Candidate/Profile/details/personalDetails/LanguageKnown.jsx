@@ -35,8 +35,8 @@ const LanguageKnownComponent = ({ showPopup }) => {
           <span class="subtitle-semi-bold ml-4">Languages Known</span>
         </div>
         <div class="px-2">
-          <div class="col-9 ml-n3">
-            <table class="table">
+          <div class="col-10 ml-n3">
+            <table class="table table-fixed-layout">
               <thead class="table-thead">
                 <tr>
                   <th class="normal-text-medium-bold">Language</th>

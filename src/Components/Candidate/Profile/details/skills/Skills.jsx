@@ -35,8 +35,8 @@ const SkillsComponent = ({ showPopup }) => {
           <span class="subtitle-semi-bold">Skills</span>
         </div>
         <div class="ml-2">
-          <div class="col-9 ml-n3">
-            <table class="table mb-3">
+          <div class="col-10 ml-n3">
+            <table class="table mb-3 table-fixed-layout">
               <thead class="table-thead">
                 <tr>
                   <th class="normal-text-medium-bold">Skills</th>
