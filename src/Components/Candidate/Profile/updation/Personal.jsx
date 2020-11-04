@@ -205,13 +205,12 @@ const PersonalComponent = ({ showPopup }) => {
             <select className="form-control"
               value={inputData.maritalStatus}
               id="maritalStatus"
-              required
               name="maritalStatus"
               onChange={(e) => handleFormInputData(e)}
             >
-              <option>Select Marital Status</option>
-              <option>Single/unmarried</option>
-              <option>Married</option>
+              <option value=''>Select Marital Status</option>
+              <option value='Single/unmarried'>Single/unmarried</option>
+              <option value='Married'>Married</option>
             </select>
           </div>
           <div className="form-group">

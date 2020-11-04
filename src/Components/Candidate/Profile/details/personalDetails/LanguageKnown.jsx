@@ -35,8 +35,8 @@ const LanguageKnownComponent = ({ showPopup }) => {
           <span class="subtitle-semi-bold ml-4">Languages Known</span>
         </div>
         <div class="px-2">
-          <div class="col-9 ml-n3">
-            <table class="table">
+          <div class="col-10 ml-n3">
+            <table class="table table-fixed-layout">
               <thead class="table-thead">
                 <tr>
                   <th class="normal-text-medium-bold">Language</th>
@@ -56,8 +56,8 @@ const LanguageKnownComponent = ({ showPopup }) => {
                     <td>{(candidateLanguages.canWrite) ? <img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /> : null}</td>
                     <td>{(candidateLanguages.canSpeak) ? <img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /> : null}</td>
                     <td class="edit-icon-column">
-                      <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="edit-icon" alt="Cinque Terre" onClick={() => showPopup(EDIT_LANGUAGE, true, {resourceId: candidateLanguages.languageId})} />
-                      <img src="/images/Dashboard-assets/delete.svg" class="edit-icon" alt="Cinque Terre" onClick={() => deleteLanguage(candidateLanguages.languageId)} />
+                      <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="edit-icon profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_LANGUAGE, true, {resourceId: candidateLanguages.languageId})} />
+                      <img src="/images/Dashboard-assets/delete.svg" class="edit-icon profile__editIcon" alt="Cinque Terre" onClick={() => deleteLanguage(candidateLanguages.languageId)} />
                     </td>
                   </tr>
                 )) : null}

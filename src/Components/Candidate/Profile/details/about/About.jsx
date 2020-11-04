@@ -12,7 +12,7 @@ const AboutComponent = ({ showPopup }) => {
     <div class="bg-white px-4 py-4 section-divider align-items-center">
       <div class="col">
         <div class="mb-4 align-items-center">
-          <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_ABOUT, true)} />
+          <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_ABOUT, true)} />
           <img src="/images/Dashboard-assets/about-icon.svg" alt="Cinque Terre" class="mr-2" />
           <span class="subtitle-semi-bold">About</span>
         </div>

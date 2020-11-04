@@ -1847,7 +1847,7 @@ textarea.form-control {
 }
 
 .modal-fade {
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 .popup-header-row {
@@ -3057,4 +3057,14 @@ textarea {
 
 .profile__editIcon {
     cursor: pointer;
+}
+
+.table-fixed-layout {
+    table-layout: fixed;
+}
+.table-fixed-layout thead tr th, .table-fixed-layout tbody tr td {
+    word-wrap: break-word !important;
+}
+.table-fixed-layout thead tr th:first-child, .table-fixed-layout tbody tr td:first-child {
+    width: 180px !important;
 }

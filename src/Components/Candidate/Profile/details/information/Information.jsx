@@ -90,7 +90,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
           </div>
           <div class="col col-md-9 col-xs-12 align-items-center">
             <div>
-              <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_PROFILE_NAME, true)} />
+              <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_PROFILE_NAME, true)} />
               <h3 class="mb-2">{firstName} {lastName}</h3>
             </div>
             <span class="visible-lg-inline">{currentRole} at {company}</span>

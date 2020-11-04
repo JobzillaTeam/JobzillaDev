@@ -14,7 +14,7 @@ const DesiredProfileComponent = ({ showPopup }) => {
       <div class="bg-white px-4 py-4 section-divider align-items-center">
         <div class="col">
           <div class="mb-4 ml-4">
-            <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_CAREER_PROFILE, true)} />
+            <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_CAREER_PROFILE, true)} />
             <span class="subtitle-semi-bold">Desired Career Profile</span>
           </div>
           <div class="row col-9 px-4">

@@ -7,7 +7,7 @@ import ApiServicesOrgCandidate from '../../../../Services/ApiServicesOrgCandidat
 
 const CTCComponent = ({ showPopup }) => {
   const { state, getProfileInfo } = React.useContext(Context);
-  const initialCustomInputValues = {currencyType: CURRENCY_TYPE_ENUM.INR}
+  const initialCustomInputValues = { currencyType: CURRENCY_TYPE_ENUM.INR }
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
 
   const { handleSubmit, register, errors, setValue, clearErrors, getValues, setError } = useForm({
@@ -20,7 +20,7 @@ const CTCComponent = ({ showPopup }) => {
     if (value === CURRENCY_TYPE_ENUM.INR || value === CURRENCY_TYPE_ENUM.USD) {
       clearErrors('currencyType');
     }
-    setCustomInputValues({currencyType: e.target.value})
+    setCustomInputValues({ currencyType: e.target.value })
   }
 
   React.useEffect(() => {
@@ -38,13 +38,16 @@ const CTCComponent = ({ showPopup }) => {
   }, []);
 
   const onSubmit = values => {
-    if (values.currentCtcInLakh || values.currentCtcInThousand) {
+    if (!values.currentCtcInLakh || !values.currentCtcInLakh[0]) values.currentCtcInLakh = "0"
+    const cTCInFormat = getCTCInFormat(values.currentCtcInLakh, values.currentCtcInThousand)
+    const eTCInFormat = getCTCInFormat(values.expectedCtcInLakh, values.expectedCtcInThousand)
+    console.log(cTCInFormat)
+    if (cTCInFormat > 0) {
       clearErrors('currentCtcInLakh');
-      if (!values.currentCtcInLakh || values.currentCtcInLakh[0]) values.currentCtcInLakh = "0"
       const data = {
         currencyType: customInputValues.currencyType,
-        currentCTC: getCTCInFormat(values.currentCtcInLakh, values.currentCtcInThousand),
-        expectedCTC: getCTCInFormat(values.expectedCtcInLakh, values.expectedCtcInThousand),
+        currentCTC: cTCInFormat,
+        expectedCTC: eTCInFormat,
         candidateId: CANDIDATE_ID
       }
       ApiServicesOrgCandidate.updateProfileInfo(data, getProfileInfo, showPopup);
@@ -107,7 +110,7 @@ const CTCComponent = ({ showPopup }) => {
               <small class="pull-right pt-1">Lakh</small>
             </div>
             {/* <label class="w-100 text-right small-text-light mt-2" htmlFor="University">Lakhs</label> */}
-            
+
           </div>
           <div className="col  ml-4">
             <select
