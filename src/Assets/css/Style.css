@@ -1847,7 +1847,7 @@ textarea.form-control {
 }
 
 .modal-fade {
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 .popup-header-row {
