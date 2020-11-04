@@ -131,14 +131,23 @@ class ApiServicesOrg extends Component {
         }
 
         //4.5 Delete User - Multiple Users- Admin/User
-        deleteMultiUser(updatedUserId){
-            console.log(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
-            return(
-                axios
-                .delete(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
-                .then(Response => Response)
-            )    
-    }
+                    //     deleteMultiUser(updatedUserId){
+                    //         console.log(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
+                    //         return(
+                    //             axios
+                    //             .delete(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
+                    //             .then(Response => Response)
+                    //         )    
+                    // }
+                    deleteMultiUser(updatedUserId){
+                        console.log(ApiBaseUrl+ "/user/multipleUsersById/"+ updatedUserId)
+                        return(
+                            axios
+                            .delete(ApiBaseUrl+ "/user/multipleUsersById/"+ updatedUserId, this.getToken())
+                            .then(Response => Response)
+                        )    
+                }
+
 
 // 5. Recruiter Functionalities
 
