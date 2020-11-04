@@ -49,19 +49,23 @@ const SkillsComponent = ({ showPopup }) => {
               </thead>
               <tbody>
 
-                {(skill.skillList) ? skill.skillList.map((skill, i) => (
-                  <tr>
-                    <td>{skill.skillName}</td>
-                    <td>{skill.version}</td>
-                    <td>{skill.experience}</td>
-                    <td>{skill.proficiency}</td>
-                    <td class="text-center">{skill.isPrimarySkill ? <img src="/images/Dashboard-assets/candidate/correct_black.svg" alt="Cinque Terre" /> : null}</td>
-                    <td class="edit-icon-column">
-                      <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="edit-icon profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_SKILL, true, { resourceId: skill.skillId })} />
-                      <img src="/images/Dashboard-assets/delete.svg" class="edit-icon profile__editIcon" alt="Cinque Terre" onClick={() => deleteSkill(skill.skillId)} />
-                    </td>
-                  </tr>
-                )) : null}
+                {(skill.skillList) ? skill.skillList.map((skill, i) => {
+                  const skillExperience = skill.experience ? skill.experience : 0
+                  const skillExperienceInFormat = skillExperience > 0 ? parseFloat(skillExperience).toFixed(2) : skillExperience;
+                  return (
+                    <tr>
+                      <td>{skill.skillName}</td>
+                      <td>{skill.version}</td>
+                      <td>{skillExperienceInFormat}</td>
+                      <td>{skill.proficiency}</td>
+                      <td class="text-center">{skill.isPrimarySkill ? <img src="/images/Dashboard-assets/candidate/correct_black.svg" alt="Cinque Terre" /> : null}</td>
+                      <td class="edit-icon-column">
+                        <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="edit-icon profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_SKILL, true, { resourceId: skill.skillId })} />
+                        <img src="/images/Dashboard-assets/delete.svg" class="edit-icon profile__editIcon" alt="Cinque Terre" onClick={() => deleteSkill(skill.skillId)} />
+                      </td>
+                    </tr>
+                  );
+                }) : null}
               </tbody>
             </table>
           </div>

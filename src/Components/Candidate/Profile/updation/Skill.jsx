@@ -143,9 +143,9 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
                   message: "Year cannot be left blank"
                 })}
               >
-                <option value="" selected>Select Year</option>
+                <option value={0}>Select Year</option>
                 {Array(31).fill().map((_, i) => (
-                  <option value={('0' + i).slice(-2)} key={`${i}_years`}>{i} {i===0 || i ===1 ? 'Year' : 'Years'} </option>
+                  <option value={i} key={`${i}_years`}>{i} {i===0 || i ===1 ? 'Year' : 'Years'} </option>
                 ))}
               </select>
               {errors.experienceInYear && <div class="error-message">{errors.experienceInYear.message}</div>}
@@ -160,7 +160,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
                   message: "Month cannot be left blank"
                 })}
               >
-                <option value="" selected>Select Month</option>
+                <option value={0}>Select Month</option>
                 {Array(12).fill().map((_, i) => (
                   <option value={i < 10 ? `0${i}` : i} key={`${i}_months`}>{i} {i === 0 || i === 1 ? 'Month' : 'Months'} </option>
                 ))}

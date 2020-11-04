@@ -73,22 +73,9 @@ const getValueInFormat = (string1, string2) => {
   if (string1) value = value.concat(string1);
   if (string1 && string2) value = value.concat('.');
   if (string2) value = value.concat(string2);
-  return parseFloat(value);
+  return parseFloat(value).toFixed(2);
 }
 export const getCTCInLakhAndThousand = value => {
-  let getCTCInLakhAndThousandFormat = '0'
-  let val = value.toString();
-  if (val.includes('.') && val.split('.')[1] && val.split('.')[1].length === 1 ) {
-    val = `${val.split('.')[0]}.${val.split('.')[1]}0`
-  }
-  if (val === '0') {
-    getCTCInLakhAndThousandFormat = '0'
-  } else if (!val.includes('.')) {
-    getCTCInLakhAndThousandFormat = `${val} Lakh 00 Thousand`
-  } else if (val.includes('.') && val.split('.')[0] === '0') {
-    getCTCInLakhAndThousandFormat = `00 Lakh ${val.split('.')[1]} Thousand`
-  } else if (val.includes('.')) {
-    getCTCInLakhAndThousandFormat = `${val.split('.')[0]} Lakh ${val.split('.')[1]} Thousand`
-  }
+  let getCTCInLakhAndThousandFormat = `${parseFloat(value ? value : 0).toFixed(2)}`.replace('.', ' Lakh ').concat(' Thousand')
   return getCTCInLakhAndThousandFormat;
 }
