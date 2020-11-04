@@ -3,7 +3,6 @@ import { ApiBaseUrl } from '../Config.jsx'
 
 import React, { Component, useContext } from 'react';
 import { Context } from '../Context/ProfileContext';
-import { AUTH_HEADER } from '../Utils/AppConst.jsx';
 import Resume from '../Components/Candidate/Profile/details/resume/Resume.jsx';
 
 class ApiServicesOrgCandidate {
@@ -34,9 +33,12 @@ class ApiServicesOrgCandidate {
   }
 
   updateProfileInfo(profileInfo, getProfileRefresh, showPopup) {
+    const authToken = localStorage.getItem('authToken')
     return (
       axios
-        .put(`${ApiBaseUrl}/candidate/candidateinfo/`, profileInfo, AUTH_HEADER )
+        .put(`${ApiBaseUrl}/candidate/candidateinfo/`, profileInfo, {
+          headers: {'Authorization': `Bearer ${authToken}`}
+        })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
         })
