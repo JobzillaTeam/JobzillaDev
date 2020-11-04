@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Context } from '../../../../Context/ProfileContext';
 import { aboutFormDefaultValues } from '../../../../Utils/ProfileFormHelper';
-import { MAX_LENGTH, CANDIDATE_ID } from '../../../../Utils/AppConst';
+import { MAX_LENGTH } from '../../../../Utils/AppConst';
 import ApiServicesOrgCandidate from '../../../../Services/ApiServicesOrgCandidate';
 
 const AboutComponent = ({ showPopup }) => {
@@ -29,7 +29,8 @@ const AboutComponent = ({ showPopup }) => {
   }
 
   const onSubmit = values => {
-    ApiServicesOrgCandidate.updateProfileInfo({ ...values, candidateId: CANDIDATE_ID }, getProfileInfo, showPopup);
+    const candidateId = localStorage.getItem('candidateId');
+    ApiServicesOrgCandidate.updateProfileInfo({ ...values, candidateId: candidateId }, getProfileInfo, showPopup);
   }
 
   return (

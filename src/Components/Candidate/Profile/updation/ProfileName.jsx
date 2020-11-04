@@ -5,7 +5,6 @@ import { profileNameFormDefaultValues } from '../../../../Utils/ProfileFormHelpe
 import ApiServicesOrgCandidate from '../../../../Services/ApiServicesOrgCandidate';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { CANDIDATE_ID } from '../../../../Utils/AppConst';
 
 const ProfileNameComponent = ({ showPopup }) => {
   const initialCustomInputValues = {mobileNumber: ''}
@@ -41,8 +40,9 @@ const ProfileNameComponent = ({ showPopup }) => {
   }
 
   const onSubmit = values => {
+    const candidateId = localStorage.getItem('candidateId');
     delete values.emailId;
-    ApiServicesOrgCandidate.updateProfileInfo({...values, candidateId: CANDIDATE_ID, mobileNumber: customInputValues.mobileNumber }, getProfileInfo, showPopup);
+    ApiServicesOrgCandidate.updateProfileInfo({...values, candidateId: candidateId, mobileNumber: customInputValues.mobileNumber }, getProfileInfo, showPopup);
   }
 
   const handleMobileNumberChange = value => {

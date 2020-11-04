@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Context } from '../../../../Context/ProfileContext';
 import { cTCFormDefaultValues, getCTCInLakh, getCTCInThousand, getCTCInFormat } from '../../../../Utils/ProfileFormHelper';
-import { CANDIDATE_ID, CURRENCY_TYPE_ENUM } from '../../../../Utils/AppConst';
+import { CURRENCY_TYPE_ENUM } from '../../../../Utils/AppConst';
 import ApiServicesOrgCandidate from '../../../../Services/ApiServicesOrgCandidate';
 
 const CTCComponent = ({ showPopup }) => {
@@ -38,6 +38,7 @@ const CTCComponent = ({ showPopup }) => {
   }, []);
 
   const onSubmit = values => {
+    const candidateId = localStorage.getItem('candidateId');
     if (!values.currentCtcInLakh || !values.currentCtcInLakh[0]) values.currentCtcInLakh = "0"
     const cTCInFormat = getCTCInFormat(values.currentCtcInLakh, values.currentCtcInThousand)
     const eTCInFormat = getCTCInFormat(values.expectedCtcInLakh, values.expectedCtcInThousand)
@@ -48,7 +49,7 @@ const CTCComponent = ({ showPopup }) => {
         currencyType: customInputValues.currencyType,
         currentCTC: cTCInFormat,
         expectedCTC: eTCInFormat,
-        candidateId: CANDIDATE_ID
+        candidateId: candidateId
       }
       ApiServicesOrgCandidate.updateProfileInfo(data, getProfileInfo, showPopup);
     } else {
