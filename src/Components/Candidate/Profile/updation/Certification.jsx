@@ -8,6 +8,7 @@ import { certificationFormDefaultValues } from "../../../../Utils/ProfileFormHel
 import moment from 'moment';
 
 const CertificationComponent = ({ dataAttributes, showPopup }) => {
+  let certificationNameInput = '';
   const { handleSubmit, getValues, register, errors, setValue, reset, setError, clearErrors } = useForm({
     mode: 'onSubmit',
     defaultValues: certificationFormDefaultValues
@@ -66,9 +67,13 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
   const submitForm = (e) => {
     const certificationName = customInputValues.certificationName && customInputValues.certificationName[0]
     if (!certificationName) {
+      let message = 'Certification Name cannot be left blank';
+      if (certificationNameInput && certificationNameInput.inputNode && certificationNameInput.inputNode.value && certificationNameInput.inputNode.value[0]) {
+        message = 'Please fill appropriate Certification Name';
+      }
       setError('certificationName', {
         type: "manual",
-        message: 'Certification Name cannot be left blank'
+        message: message
       });
     }
     const startMonth = values.issueMonth;
@@ -127,6 +132,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
         <div className="form-group">
           <label htmlFor="certificationName">Certification Name<span >*</span></label>
           {isTypeHeadInputReady ? <Typeahead
+            ref={input => certificationNameInput = input}
             allowNew
             newSelectionPrefix="Add a new Certification: "
             id="certificationName"

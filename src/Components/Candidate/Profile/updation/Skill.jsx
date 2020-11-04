@@ -6,6 +6,7 @@ import ApiServicesOrgCandidate from "../../../../Services/ApiServicesOrgCandidat
 import { skillFormDefaultValues, getExperienceInFormat, getExperienceInYear, getExperienceInMonth } from "../../../../Utils/ProfileFormHelper";
 
 const SkillComponent = ({ dataAttributes, showPopup }) => {
+  let skillNameInput = '';
   const { handleSubmit, register, errors, setValue, setError, clearErrors } = useForm({
     mode: 'onSubmit',
     defaultValues: skillFormDefaultValues
@@ -63,9 +64,13 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
   const submitForm = (e) => {
     const skillName = customInputValues.skillName && customInputValues.skillName[0]
     if (!skillName) {
+      let message = 'Skill Name cannot be left blank';
+      if (skillNameInput && skillNameInput.inputNode && skillNameInput.inputNode.value && skillNameInput.inputNode.value[0]) {
+        message = 'Please fill appropriate skill';
+      }
       setError('skillName', {
         type: "manual",
-        message: 'Skill Name cannot be left blank'
+        message: message
       });
     }
   }
@@ -92,6 +97,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
         <div className="form-group">
           <label htmlFor="skillName">Skill Name<span >*</span></label>
           {isTypeHeadInputReady ? <Typeahead
+            ref={input => skillNameInput = input}
             allowNew
             newSelectionPrefix="Add a new skill: "
             id="skillName"
