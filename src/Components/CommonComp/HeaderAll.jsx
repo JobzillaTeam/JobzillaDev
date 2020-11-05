@@ -75,7 +75,7 @@ class HeaderAll extends Component {
           <ul className="nav mr-3">
             <li>
             {this.state.imageUrl ? <img className="rounded-circle profile-icon mr-2" src={`data:image/jpeg;base64,${this.state.imageUrl}`} width="35" height="35"/>
-            : <img className="rounded-circle profile-icon mr-2" src="/images/Dashboard-assets/user-f.jpg"width="35" height="35" alt="User profile"/>}
+            : <img className="rounded-circle profile-icon mr-2" src="/images/Dashboard-assets/user-f.png"width="35" height="35" alt="User profile"/>}
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#" data-toggle="dropdown">
