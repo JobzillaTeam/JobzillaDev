@@ -104,7 +104,7 @@ class EditProfile extends Component {
                                             />
                                         </form>
                                         {this.state.imageUrl ? <img className="mr-3 rounded-circle" src={`data:image/png;base64,${this.state.imageUrl}`} alt="User profile" width="133px" height="134.59px"/>
-                                        : <img className="mr-3 rounded-circle" src="images/Dashboard-assets/user-f.png" alt="User profile"/>}
+                                        : <img className="mr-3 rounded-circle" src="images/Dashboard-assets/user-f.png" height="133" width="133" alt="User profile"/>}
                                     </div>
                             <div className="pt-3">
                                         <div>Rosa Dodson</div>
