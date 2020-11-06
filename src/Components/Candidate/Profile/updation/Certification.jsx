@@ -76,12 +76,6 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
         message: message
       });
     }
-    const startMonth = values.issueMonth;
-    const startYear = values.issueYear;
-    const endMonth = values.expirationMonth;
-    const endYear = values.expirationYear;
-    const isEndDateChange = false
-    starDateEndDateValidation(startMonth, startYear, endMonth, endYear, isEndDateChange);
   }
   const handleHasNoExpirationDate = e => {
     setHasNoExpirationDate(!hasNoExpirationDate);
@@ -90,6 +84,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
   }
 
   const starDateEndDateValidation = (startMonth, startYear, endMonth, endYear, isEndDateChange) => {
+    let isValid = true;
     if (startMonth && startYear && endMonth && endYear) {
       const startMonthValue = parseInt(moment().month(startMonth).format("M")) - 1;
       const endMonthValue = parseInt(moment().month(endMonth).format("M")) - 1;
@@ -103,8 +98,10 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
           type: "manual",
           message: message
         });
+        isValid = false;
       }
     }
+    return isValid;
   }
 
   const monthAndDateOnChange = e => {
@@ -120,10 +117,18 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
   const onSubmit = values => {
     const certificationName = customInputValues.certificationName && customInputValues.certificationName[0]
     if (certificationName) clearErrors('certificationName');
-    if (resourceId) {
-      ApiServicesOrgCandidate.updateCertification({ ...values, certificationName: certificationName, certificationId: resourceId }, getProfileInfo, showPopup);
-    } else {
-      ApiServicesOrgCandidate.addCertification({ ...values, certificationName: certificationName }, getProfileInfo, showPopup);
+    const startMonth = values.issueMonth;
+    const startYear = values.issueYear;
+    const endMonth = values.expirationMonth;
+    const endYear = values.expirationYear;
+    const isEndDateChange = false
+    const isValidForm = starDateEndDateValidation(startMonth, startYear, endMonth, endYear, isEndDateChange);
+    if (isValidForm) {
+      if (resourceId) {
+        ApiServicesOrgCandidate.updateCertification({ ...values, certificationName: certificationName, certificationId: resourceId }, getProfileInfo, showPopup);
+      } else {
+        ApiServicesOrgCandidate.addCertification({ ...values, certificationName: certificationName }, getProfileInfo, showPopup);
+      }
     }
   }
   return (

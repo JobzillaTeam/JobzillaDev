@@ -47,7 +47,7 @@ constructor(){
                     <div className="profile text-center">
                         <div className="text-center">
                         {this.state.imageUrl ? <img className="mr-3 rounded-circle" src={`data:image/png;base64,${this.state.imageUrl}`} alt="User profile" width="133px" height="133px"/>
-                        : <img className="mr-3 rounded-circle" src="/images/profile/noImage.jpg" alt="User profile" width="133px" height="133px"/>}
+                        : <img className="mr-3 rounded-circle" src="images/Dashboard-assets/user-f.png" alt="User profile" width="133px" height="133px"/>}
                         </div>
                         
                         <div className= "pt-3">Rosa Dodson</div>
