@@ -12,7 +12,6 @@ export const Certifications = ({ showPopup }) => {
   const { candidateCertificatesList } = profileInfo;
   const candidateCertificatesListSorted = candidateCertificatesList && candidateCertificatesList.sort((certA, certB) => {
     if (certA.issueMonth && certA.issueYear && certB.issueMonth, certB.issueYear) {
-      debugger
       const startMonthValue = parseInt(moment().month(certA.issueMonth).format("M")) - 1;
       const endMonthValue = parseInt(moment().month(certB.issueMonth).format("M")) - 1;
       const startDate = new Date(parseInt(certA.issueYear), startMonthValue).getTime();
@@ -30,7 +29,7 @@ export const Certifications = ({ showPopup }) => {
           {(candidateCertificatesListSorted) ? candidateCertificatesListSorted.map((data) => (
             <div class="col-12 px-0 py-3">
               <div>
-                <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_CERTIFICATE, true, {resourceId: data.certificationId})} />
+                <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_CERTIFICATE, true, {resourceId: data.certificationId})} />
                 <span class="subtitle-semi-bold">{data.certificationName}</span>
               </div>
               {/* <p class="normal-text-light mb-0">Quisque congue dignissim efficitur. Vestibulum ultrices pulvinar ex, a dignissim neque tincidunt sed.</p> */}

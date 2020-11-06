@@ -6,6 +6,7 @@ import ApiServicesOrgCandidate from "../../../../Services/ApiServicesOrgCandidat
 import { languageFormDefaultValues } from "../../../../Utils/ProfileFormHelper";
 
 const LanguageComponent = ({ dataAttributes, showPopup }) => {
+  let languageInput = '';
   const { handleSubmit, register, errors, setValue, setError, clearErrors } = useForm({
     mode: 'onSubmit',
     defaultValues: languageFormDefaultValues
@@ -61,9 +62,13 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
   const submitForm = (e) => {
     const language = customInputValues.language && customInputValues.language[0]
     if (!language) {
+      let message = 'Language cannot be left blank';
+      if (languageInput && languageInput.inputNode && languageInput.inputNode.value && languageInput.inputNode.value[0]) {
+        message = 'Please fill appropriate Language';
+      }
       setError('language', {
         type: "manual",
-        message: 'Language cannot be left blank'
+        message: message
       });
     }
   }
@@ -90,6 +95,7 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
         <div className="form-group">
           <label htmlFor="language">Language<span >*</span></label>
           {isTypeHeadInputReady ? <Typeahead
+            ref={input => languageInput = input}
             allowNew
             newSelectionPrefix="Add a new Language: "
             id="language"

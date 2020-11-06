@@ -32,20 +32,39 @@ class UploadProfile extends Component {
         
     state = { 
         selectedFile: '',
-        DraggedFile:''
+        DraggedFile:'',
+        select:false,
+        drag:false
       }; 
        
-      onFileChange = event => {   
-        this.setState({ selectedFile: event.target.files[0] });     
+      onFileChange = event => { 
+
+        if(this.state.drag==true)
+        {
+            this.toast.show({severity: 'error', summary: 'Error', detail: 'You have already dragged  a file'},50000);
+        }
+        else
+        {
+           this.setState({ selectedFile: event.target.files[0],
+            select:true});     
+        }
+   
       };  
 
-      onFileChange1 = (fileAccept) => {   
-        
-        this.setState({ DraggedFile: fileAccept[0] });   
-        this.fileValidation()  
+      onFileChange1 = (fileAccept) => { 
+
+        if(this.state.select==true)
+        {
+            this.toast.show({severity: 'error', summary: 'Error', detail: 'You have already selected  a file'},50000);
+        }
+        else{
+        this.setState({ 
+            DraggedFile: fileAccept[0],
+            drag:true });   
+            this.fileValidation()  
       };    
          
-        
+    }
         // Csv extention validation check on upload button
         fileValidation = () =>{
            var filemode1= this.state.DraggedFile
@@ -99,7 +118,7 @@ class UploadProfile extends Component {
                                     console.log(Response.status)
                                     if(Response.status===208){
 
-                                        this.toast.show({severity: 'error', summary: 'Error', detail: 'Email Id already exist'},600000);
+                                        this.toast.show({severity: 'error', summary: 'Error', detail: 'Email Id already exist'},80000);
                                     }
                                     else {
                                     this.toast.show({severity: 'success', summary: 'Success Message', detail: 'File uploaded Successfully'},60000);
@@ -111,11 +130,15 @@ class UploadProfile extends Component {
                                     console.log(error)
                                     this.toast.show({severity: 'error', summary: 'Error', detail: 'Please fill data in each coloumn of CSV file '},50000);})
         }
-
+            this.setState({
+                select:false,
+                drag:false
+            })
     }
    
     render() {
         return(
+            
             <Fragment>
                 <LeftNavProvider></LeftNavProvider>
 				<div className="maincontent">

@@ -73,7 +73,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
         <div class="row align-items-center">
           <div class="col col-md-3 col-xs-12 align-items-center">
           {imagUrl ? <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
-         : <img src="/images/Dashboard-assets/user-f.jpg" height="175" width="175" class="rounded-circle" alt="User profile"/>}
+         : <img src="/images/profile/noImage.jpg" height="175" width="175" class="rounded-circle" alt="User profile"/>}
 
             <label htmlFor='picture'>
               <img src="/images/Dashboard-assets/ar_camera.svg" style={{ cursor: "pointer" }}
@@ -90,7 +90,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
           </div>
           <div class="col col-md-9 col-xs-12 align-items-center">
             <div>
-              <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_PROFILE_NAME, true)} />
+              <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_PROFILE_NAME, true)} />
               <h3 class="mb-2">{firstName} {lastName}</h3>
             </div>
             <span class="visible-lg-inline">{currentRole} at {company}</span>

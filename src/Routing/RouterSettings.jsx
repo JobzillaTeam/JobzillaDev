@@ -70,8 +70,7 @@ class RouterSettings extends Component {
             <Route path="/leftnavcandidate" component={LeftNavCandidate} />
             <Route path="/logout">
               {() => {
-                AppHelper.onLogout();
-                return <Redirect to="/login" />
+                return AppHelper.onLogout();
               }}
             </Route>
             <OrganizationLayout path="/changePasswordOrg" component={ChangePasswordOrg}/>

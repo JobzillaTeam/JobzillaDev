@@ -41,7 +41,7 @@ const EmploymentComponent = ({ showPopup }) => {
           {(employmentDetailsListSorted) ? employmentDetailsListSorted.map((employment, i) => (
             <div class="col-12 px-0 py-3">
               <div>
-                <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_EMPLOYMENT, true, { resourceId: employment.employmentId })} />
+                <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_EMPLOYMENT, true, { resourceId: employment.employmentId })} />
                 <span class="subtitle-semi-bold">{employment.designation}</span>
               </div>
               <div><span class="normal-text-semi-bold">{employment.organization}</span></div>

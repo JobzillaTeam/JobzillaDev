@@ -2,12 +2,13 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Context } from '../../../../Context/ProfileContext';
 import { employmentFormDefaultValue } from '../../../../Utils/ProfileFormHelper';
-import { MAX_LENGTH, CANDIDATE_ID, MONTH_NAMES } from '../../../../Utils/AppConst';
+import { MAX_LENGTH, MONTH_NAMES } from '../../../../Utils/AppConst';
 import ApiServicesOrgCandidate from '../../../../Services/ApiServicesOrgCandidate';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import moment from 'moment';
 
 const EmploymentComponent = ({ dataAttributes, showPopup }) => {
+  let organizationInput = '';
   const { state, getProfileInfo } = React.useContext(Context);
   const resourceId = dataAttributes && dataAttributes.resourceId;
   const [descriptionLength, setDescriptionLength] = React.useState(MAX_LENGTH);
@@ -118,9 +119,13 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
   const submitForm = (e) => {
     const organization = customInputValues.organization && customInputValues.organization[0]
     if (!organization) {
+      let message = 'Organization cannot be left blank';
+      if (organizationInput && organizationInput.inputNode && organizationInput.inputNode.value && organizationInput.inputNode.value[0]) {
+        message = 'Please fill appropriate Organization';
+      }
       setError('organization', {
         type: "manual",
-        message: 'Organization cannot be left blank'
+        message: message
       });
     }
     const startMonth = values.startedWorkingFromMonth;
@@ -150,6 +155,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
         <div className="form-group">
           <label htmlFor="organization">Organization<span >*</span></label>
           {isTypeHeadInputReady ? <Typeahead
+            ref={input => organizationInput = input}
             allowNew
             newSelectionPrefix="Add a new Organization: "
             id="_organization"

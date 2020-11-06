@@ -7,6 +7,8 @@ import { COURSE_TYPE_ENUM } from "../../../../Utils/AppConst";
 
 
 const EducationComponent = ({ dataAttributes, showPopup }) => {
+  let boardInput = '';
+  let universityInput = '';
   const { handleSubmit, getValues, register, errors, setValue, reset, setError, clearErrors } = useForm({
     mode: 'onSubmit',
     defaultValues: {
@@ -130,15 +132,23 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
     const board = customInputValues.board && customInputValues.board[0];
     const university = customInputValues.university && customInputValues.university[0];
     if (isSchoolForm && !board) {
+      let message = 'Board cannot be left blank';
+      if (boardInput && boardInput.inputNode && boardInput.inputNode.value && boardInput.inputNode.value[0]) {
+        message = 'Please fill appropriate Board';
+      }
       setError('board', {
         type: "manual",
-        message: 'Board cannot be left blank'
+        message: message
       });
     }
     if (!isSchoolForm && !university) {
+      let message = 'University/Institute cannot be left blank';
+      if (universityInput && universityInput.inputNode && universityInput.inputNode.value && universityInput.inputNode.value[0]) {
+        message = 'Please fill appropriate University/Institute';
+      }
       setError('university', {
         type: "manual",
-        message: 'University/Institute cannot be left blank'
+        message: message
       });
     }
     if (!isSchoolForm && !customInputValues.courseType) {
@@ -190,6 +200,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
         {isSchoolForm ? <div className="form-group">
           <label htmlFor="board">Board<span >*</span></label>
           {isTypeHeadInputReady ? <Typeahead
+            ref={input => boardInput = input}
             allowNew
             newSelectionPrefix="Add a new Board: "
             id="board"
@@ -232,6 +243,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
             <div className="form-group">
               <label htmlFor="university">University/Institute<span >*</span></label>
               {isTypeHeadInputReady ? <Typeahead
+                ref={input => universityInput = input}
                 allowNew
                 newSelectionPrefix="Add a new University/Institute: "
                 id="university"

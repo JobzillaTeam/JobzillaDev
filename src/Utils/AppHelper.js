@@ -1,5 +1,19 @@
+import React from 'react';
+import { Redirect } from "react-router-dom";
+
 const orgRoles = ['owner', 'admin', 'user'];
 const onLogout = _ => {
+  let pathName = '/login'
+  const rememberme = localStorage.getItem('rememberme');
+  const userRole = localStorage.getItem('userRole');
+  if (
+    localStorage.hasOwnProperty('userRole') && (
+      typeof userRole === 'string' ||
+      userRole instanceof String
+    ) &&
+    userRole.toLowerCase() === 'candidate_role') {
+    pathName = '/login?role=candidate'
+  }
   localStorage.removeItem('userDetails');
   localStorage.removeItem('userId');
   localStorage.removeItem('organizationId');
@@ -10,11 +24,11 @@ const onLogout = _ => {
   localStorage.removeItem('isLoggedIn');
   localStorage.removeItem('status');
   localStorage.removeItem('userName');
-  const rememberme = localStorage.getItem('rememberme');
   if (!(localStorage.hasOwnProperty('rememberme') && (typeof rememberme === 'string' || rememberme instanceof String) && rememberme.toLowerCase().includes('true'))) {
     localStorage.removeItem('emailId');
     localStorage.removeItem('rememberme');
   }
+  return <Redirect to={pathName} />
 }
 const isLoggedIn = (userType, isAuthorizationCheck) => {
   let isLoggedIn = true;
@@ -31,11 +45,11 @@ const isLoggedIn = (userType, isAuthorizationCheck) => {
 
 const isOrganizationRelatedUser = () => {
   return localStorage.hasOwnProperty('userRole') &&
-  localStorage.getItem('userRole')[0] && (
-    typeof localStorage.getItem('userRole') === 'string' ||
-    localStorage.getItem('userRole') instanceof String
-  ) &&
-  orgRoles.includes(localStorage.getItem('userRole').toLocaleLowerCase());
+    localStorage.getItem('userRole')[0] && (
+      typeof localStorage.getItem('userRole') === 'string' ||
+      localStorage.getItem('userRole') instanceof String
+    ) &&
+    orgRoles.includes(localStorage.getItem('userRole').toLocaleLowerCase());
 }
 
 export const AppHelper = {

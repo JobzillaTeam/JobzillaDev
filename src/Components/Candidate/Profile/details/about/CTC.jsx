@@ -28,7 +28,7 @@ const CTCComponent = ({ showPopup }) => {
         <div class="col-6 px-4 py-4 section-divider">
           <div class="col">
             <div class="mb-4">
-              <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right" alt="Cinque Terre" onClick={() => showPopup(EDIT_CTC, true)} />
+              <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_CTC, true)} />
               <span class="subtitle-semi-bold">Expected CTC</span>
             </div>
             <div >
