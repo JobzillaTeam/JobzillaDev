@@ -193,15 +193,29 @@ class ApiServicesOrg extends Component {
         //5.5 View Candidate profile 
                 getCandidateInfo() {
                     // const userId = JSON.parse(localStorage.getItem('candidateId'));
-                    const userId=126
+                    const userId=194
                     return (
                         axios
                         .get(ApiBaseUrl + '/candidate/profileview/'+ userId , this.getToken())
                         .then(Response => Response)
                     )
                 }
+        //5.6 Download Resume for Recruiter
+        downloadResumeFile (){
+            //const candidateId = JSON.parse(localStorage.getItem('candidateId'));
+            const candidateId=195
+            //console.log(candidateId)
+              return(
+             axios
+               .get (ApiBaseUrl +"/user/viewResume/" + candidateId ,this.getToken())
+               .then(Response => Response),
+               localStorage.setItem("Resume", Response))
 
-          //5.6 Uploading Profile Photo
+           
+       }
+       
+
+        //5.7 Uploading Profile Photo
                 postProfilePhoto (formData, formheader){
                     const userId=JSON.parse(localStorage.getItem('userDetails')).id
                 return(
@@ -211,7 +225,7 @@ class ApiServicesOrg extends Component {
                 )
             }
   
-            //5.7 view Profile Photo
+            //5.8 view Profile Photo
                 viewProfileImage (){
                    const userId=JSON.parse(localStorage.getItem('userDetails')).id
                    return(
@@ -237,7 +251,7 @@ class ApiServicesOrg extends Component {
             }
 
         
-        //5.6 Uploading Profile Photo
+        //5.9 Uploading Profile Photo
                 postProfilePhoto (formData, formheader){
                     const userId=JSON.parse(localStorage.getItem('userDetails')).id
                     return(
@@ -247,7 +261,7 @@ class ApiServicesOrg extends Component {
                     )
                 }
 
-         //5.7 view Profile Photo
+         //5.10 view Profile Photo
                 viewProfileImage (){
                     const userId=JSON.parse(localStorage.getItem('userDetails')).id
                     return(
@@ -257,6 +271,27 @@ class ApiServicesOrg extends Component {
                     )
                 }
 
+         //6. Edit and View Org Profile
+                getOrganizationProfile() {
+                    const authToken = localStorage.getItem("authToken");
+                    const orgId = localStorage.getItem("organizationId");
+                    console.log("testing");
+                    console.log(orgId);
+                
+                    // new file
+                    return axios
+                      .get(
+                        `${ApiBaseUrl}/user/organizationProfile/${orgId}`,
+                        {
+                          headers: { Authorization: `Bearer ${authToken}` },
+                        }
+                      )
+                      .then((Response) => Response)
+                      .catch((error) => {
+                        console.log(error);
+                      });
+                  }
+                
 
 }
 export default ApiServicesOrg

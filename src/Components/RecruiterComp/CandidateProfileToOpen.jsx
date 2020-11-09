@@ -1,23 +1,33 @@
 import React, { Component, createRef } from 'react';
+import scrollToComponent from 'react-scroll-to-component';
+import RenderLoader from '../CommonComp/Loader';
 import { Link } from 'react-router-dom'
 import LeftNavProvider from '../CommonComp/LeftNavProvider';
 import HeaderAll from '../CommonComp/HeaderAll'
 import Footer from '../CommonComp/Footer'
-import { Breadcrumbs } from '../CommonComp/breadcrumbs/index';
 import ScrollUpButton from "react-scroll-up-button";
 import '../Candidate/Profile/profile.css';
 import '../../Assets/css/Candidate.css'
-import ApiServicesOrg from '../../Services/ApiServicesOrg'
-import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
-import Dropzone from 'react-dropzone'
+import ApiServicesOrg from '../../Services/ApiServicesOrg';
+//import Dropzone from 'react-dropzone'
 
 class CandidateProfileToOpen extends Component {
 
     constructor() {
       super()
       this.profileService = new ApiServicesOrg()
+      this.fileService2 = new ApiServicesOrg()
+      this.scrollToTopWithCallback = this.scrollToTopWithCallback.bind(this);
       this.state = {
         CandidateDetails: {},
+        candidateInfo:[],
+        candidateLanguageList:[],
+        candidateCertificatesList:[],
+        educationDetailsList:[],
+        employmentDetailsList:[],
+        skillList:[],
+        offset: -90,
+        currentTabIndex: 0
       }
     }
 
@@ -28,360 +38,92 @@ class CandidateProfileToOpen extends Component {
           
           this.setState({
             CandidateDetails: Response.data.responseObject,
+            candidateInfo:Response.data.responseObject.candidateInfo,
+            skillList:Response.data.responseObject.skillList,
+            educationDetailsList:Response.data.responseObject.educationDetailsList,
+            employmentDetailsList:Response.data.responseObject.employmentDetailsList,
+            candidateCertificatesList:Response.data.responseObject.candidateCertificatesList,
+            candidateLanguageList:Response.data.responseObject.candidateLanguageList
+
             
-          }, () => { console.log(this.state.CandidateDetails) },
+          }, () => { console.log(this.state.candidateInfo) },
 
           ),
         ) 
+    window.onscroll = function () { myFunction() };
+
+    var navbar = document.getElementById("profileNavbar");
+    var sticky = navbar.offsetTop;
+
+    const myFunction = () => {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+        this.setState({
+          offset: -45
+        })
+      } else {
+        navbar.classList.remove("sticky");
+        this.setState({
+          offset: -90
+        })
+      }
+    }
+    scrollToComponent(this.refs.name, {
+      offset: 500,
+      align: 'top',
+      duration: 500,
+      ease: 'inCirc',
+    });
    }
 
-   downLoadResume(){
-    alert(`Hii`)
-}
-
-renderAbout = () => {
-    return (
-      <div class="card border-0">
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/about.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">About</span>
-          </div>
-          <div class="profile-col-right right-sec">
-            
-          </div>
-          <div class="col-12 mt-4">
-            <p class="normal-text-light profie-description">Senior Python Developer responsibilities include participating in all phases of the software development lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you..</p>
-          </div>
-        </div>
-        <hr class="border-1" />
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/about.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Current CTC</span>
-          </div>
-          <div class="profile-summary-col-right-30 right-sec">
-            <span class="normal-text-medium mgl-10">INR 9 LAKHS 60 THOUSAND</span>
-          </div>
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/about.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Expected CTC</span>
-          </div>
-          <div class="profile-summary-col-right-30 right-sec">
-            
-            <span class="normal-text-medium mgl-10">INR 9 LAKHS 60 THOUSAND</span>
-          </div>
-        </div>
-        <hr class="border-1" />
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/desired_profile.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Desired Profile</span>
-          </div>
-          <div class="profile-col-right right-sec">
-            
-          </div>
-          <div class="col-12">
-            <div class="row row-pad-row">
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Employment Type</span></div>
-                <div><span class="small-text-light">Full Time</span></div>
-              </div>
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Preferred Locations</span></div>
-                <div><span class="small-text-light">Mumbai, Pune</span></div>
-              </div>
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Preferred Shift</span></div>
-                <div><span class="small-text-light">Day</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>);
+   scrollToTopWithCallback() {
+    let scroller = scrollToComponent(this.Violet, {
+      offset: 0,
+      align: 'top',
+      duration: 1500,
+    });
+    scroller.on('end', () => console.log('Scrolling end!'));
   }
-  renderResume = () => {
-    const dropzoneRef = createRef();
-    const openDialog = () => {
-      // Note that the ref is set async,
-      // so it might be null at some point 
-      if (dropzoneRef.current) {
-        dropzoneRef.current.open()
+
+  downloadResume = () => {
+
+    // Calling Download Resume File Service from Service file:-
+        var blob;
+        //alert("Download")
+        this.fileService2.downloadResumeFile()
+        .then(Response => {
+            var data1=Response.data.responseObject
+            console.log(data1)
+            blob = this.convertBase64toBlob(data1, 'application/msword'); 
+            var blobURL = URL.createObjectURL(blob)
+            var blobURL = URL.createObjectURL(blob);
+                window.open(blobURL); 
+            })
+        }
+    
+ convertBase64toBlob(content, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 512;
+    var byteCharacters = window.atob(content); //method which converts base64 to binary
+    var byteArrays = [
+    ];
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
       }
-    };
-    return (
-      <div class="row profile-row-fashion">
-        <div class="profile-col-left left-sec-heading">
-          <img src="/images/Dashboard-assets/candidate/resume.png" alt="Cinque Terre" class="left-sec-icon" />
-          <span class="subtitle-semi-bold left-sec-heading-text">Upload Resume</span>
-        </div>
-        <div class="profile-col-right right-sec">
-          <Link to="#" style={{ color: '#007EFF' }}>John_doe_resume.pdf</Link><span class="small-text-light mgl-10">Last updated on 19 June 2020</span>
-        </div>
-        <div class="col-12">
-          <Dropzone ref={dropzoneRef} noClick noKeyboard>
-            {({ getRootProps, getInputProps, acceptedFiles }) => {
-              return (
-                <div className="dropzone-box">
-                  <div {...getRootProps({ className: 'dropzone' })}>
-                    <input {...getInputProps()} />
-                    <div><span class="normal-text-medium">Drag and drop file here</span></div>
-                    <div><span class="normal-text-medium">or</span></div>
-                    <button onClick={openDialog} class="btn lightBlue choose-file">Choose file</button>
-                  </div>
-                  <aside>
-                    <ul>
-                      {acceptedFiles ? acceptedFiles.map(file => (
-                        <li key={file.path}>
-                          {file.path} - {file.size} bytes
-                        </li>
-                      )) : <li key='no-file'>
-                          No file choosen
-                    </li>}
-                    </ul>
-                  </aside>
-                </div>
-              );
-            }}
-          </Dropzone>
-        </div>
-      </div>
-    );
-  }
-  renderSkills = () => {
-    return (
-      <div class="row profile-row-fashion">
-     
-        <div class="col-12" >
-          <table class="table">
-            <thead class="table-thead">
-              <tr>
-                <th class="normal-text-medium">SKILLS</th>
-                <th class="normal-text-medium">VERSION</th>
-                <th class="normal-text-medium">EXPERIENCE</th>
-                <th class="normal-text-medium">PROFICIENCY</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Skill 1</td>
-                <td>V5.1</td>
-                <td>5 Years</td>
-                <td>Expert</td>
-                
-              </tr>
-              <tr>
-                <td>Skill 2</td>
-                <td>V2.1</td>
-                <td>1 Years</td>
-                <td>Expert</td>
-                
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-12">
-          <div class="row row-pad-row">
-            <div class="profile-col-left mt30">
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    )
-  }
-  renderEducation = () => {
-    return (
-      <div>
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/education.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Education</span>
-
-          </div>
-          
-          <div class="col-12">
-            <div class="row row-pad-row">
-              <div class="profile-col-left mt30 pad-left">
-                <div><span class="normal-text-semi-bold">Bachelor of Technology </span></div>
-                <div><span class="small-text-light">Bachelor of Technology (2011-2015)</span></div>
-                <div><span class="small-text-light">University Name</span></div>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/certification.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Certifications</span>
-
-          </div>
-          <div class="profile-col-right right-sec">
-            
-            <div><span class="normal-text-light">XYZ Certifications</span></div>
-            <div><span class="normal-text-light">TCS Issued on Sept 2019 </span></div>
-          </div>
-          <div class="col-12">
-            <div class="row row-pad-row">
-              <div class="profile-col-left mt30">
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>);
-  }
-
-  renderEmployment = () => {
-    return (<div class="row profile-row-fashion employment">
-      {/* <div class="profile-col-left left-sec-heading">
-        <img src="/images/Dashboard-assets/candidate/employment.png" alt="Cinque Terre" class="left-sec-icon" />
-        <span class="subtitle-semi-bold left-sec-heading-text">Employment</span>
-
-      </div> */}
-      <div class="profile-col-right right-sec">
-
-      </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-12 mt30">
-            <div>
-              
-              <span class="subtitle-semi-bold">Software Developer</span>
-            </div>
-            <div><span class="normal-text-light">TCS-FullTime</span></div>
-            <div><span class="normal-text-light">Sept 2008 present</span></div>
-            <p class="mt25 normal-text-light">Senior Python Developer responsibilities include participating in all phases of the software development lifecycle lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you.</p>
-          </div>
-          <div class="col-12 mt30">
-            <div>
-              
-              <span class="subtitle-semi-bold">Software Developer</span>
-            </div>
-            <div><span class="normal-text-light">TCS-FullTime</span></div>
-            <div><span class="normal-text-light">Sept 2008 present</span></div>
-            <p class="mt25 normal-text-light">Senior Python Developer responsibilities include participating in all phases of the software development lifecycle lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="row row-pad-row">
-          <div class="profile-col-left mt30">
-          </div>
-         
-        </div>
-      </div>
-    </div>);
-  }
-
-  renderOther = () => {
-    return (
-      <div>
-
-
-
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/about.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Personal Details</span>
-
-          </div>
-          <div class="profile-col-right right-sec">
-            
-          </div>
-          <div class="col-12">
-            <div class="row row-pad-row">
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Date of Birth</span></div>
-                <div><span class="small-text-light">4th may 1993</span></div>
-              </div>
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Gender</span></div>
-                <div><span class="small-text-light">Male</span></div>
-              </div>
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Marital Status</span></div>
-                <div><span class="small-text-light">Married</span></div>
-              </div>
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Passport ID</span></div>
-                <div><span class="small-text-light">LJ24545</span></div>
-              </div>
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Work Permit</span></div>
-                <div><span class="small-text-light">India US HB</span></div>
-              </div>
-              <div class="profile-col-left mt30">
-                <div><span class="normal-text-medium">Address</span></div>
-                <div><span class="small-text-light">Flat 39 D Navi Mumbai Maharastra</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="row row-pad-row">
-              <div class="profile-col-left mt30">
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      
-        <div class="row profile-row-fashion">
-          <div class="profile-col-left left-sec-heading">
-            <img src="/images/Dashboard-assets/candidate/about.png" alt="Cinque Terre" class="left-sec-icon" />
-            <span class="subtitle-semi-bold left-sec-heading-text">Language Known</span>
-
-          </div>
-          <div class="profile-col-right">
-            <table class="table">
-              <thead class="table-thead">
-                <tr>
-                  <th class="normal-text-medium">LANGUAGE</th>
-                  <th class="normal-text-medium">PROFICIENCY</th>
-                  <th class="normal-text-medium">READ</th>
-                  <th class="normal-text-medium">WRITE</th>
-                  <th class="normal-text-medium">SPEAK</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Skill 1</td>
-                  <td>Proficient</td>
-                  <td><img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /></td>
-                  <td><img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /></td>
-                  <td><img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /></td>
-                  
-                </tr>
-                <tr>
-                  <td>Skill 2</td>
-                  <td>Proficient</td>
-                  <td><img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /></td>
-                  <td><img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /></td>
-                  <td><img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /></td>
-                  
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-12">
-            <div class="row row-pad-row">
-              <div class="profile-col-left mt30">
-              </div>
-              
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-    );
+      var byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    var blob = new Blob(byteArrays, {
+      type: contentType
+    }); //statement which creates the blob
+    return blob;
   }
 
 render() {
-
+    const skill=this.state
     return (
       <div>
         <LeftNavProvider></LeftNavProvider>
@@ -400,6 +142,7 @@ render() {
                         <li class="breadcrumb-item active" aria-current="page"> Profile </li>
                     </ol>
                 </div>
+                
                 <div class="container-fashion">
                   <div class="row profile-details">
                     <div class="profile-summary-col-left">
@@ -409,65 +152,370 @@ render() {
                       <img src="/images/Dashboard-assets/candidate/profile-pic.png" class="rounded-circle" alt="Cinque Terre" />
                     </div>
                     <div class="profile-summary-col-right">
-                    {/* <a class="download-right" href="" onClick={this.downLoadResume}><img alt="" class="edit-icon" src="../images/ActiveJob-JobDetails/Group 555.svg"></img> Download Resume</a> */}
-    <h4 class="h4-fashion">John Doe</h4>
-                      <span class="subtitle-medium">Software Developer at TCS</span>
+                    {/* <RenderLoader /> */}
+                     <a class="download-right" href="" onClick={this.downloadResume}><img alt="" class="edit-icon" src="../images/ActiveJob-JobDetails/Group 555.svg"></img> Download Resume</a>
+                     <h4 class="h4-fashion">{this.state.candidateInfo.firstName}  {this.state.candidateInfo.lastName}</h4>
+                     <span class="subtitle-medium">{this.state.candidateInfo.currentRole} at {this.state.candidateInfo.company}</span>
                       <hr class="border" />
                       <div class="row">
                         <div class="col">
                           <img src="/images/Dashboard-assets/candidate/location.png" alt="Cinque Terre" />
-                          <span class="normal-text-medium mgl-10">Mumbai, India</span>
+                          <span class="normal-text-medium mgl-10">{this.state.candidateInfo.city} , {this.state.candidateInfo.country}</span>
                         </div>
                         <div class="col">
                           <img src="/images/Dashboard-assets/candidate/mobile.png" alt="Cinque Terre" />
-                          <span class="normal-text-medium mgl-10">+91 1234567890</span>
+                          <span class="normal-text-medium mgl-10">{this.state.candidateInfo.mobileNumber}</span>
                         </div>
                         <div class="col">
                           <img src="/images/Dashboard-assets/candidate/message.png" alt="Cinque Terre" />
-                          <span class="normal-text-medium mgl-10">Johndoe@tcs.com</span>
+                          <span class="normal-text-medium mgl-10">{this.state.candidateInfo.emailId}</span>
                         </div>
                       </div>
                       
                     </div>
                   </div>
-                  <Tabs
-                    defaultTab="one"
-                    onChange={(tabId) => { console.log(tabId) }}
-                  >
-                    <TabList>
-                      <Tab tabFor="one">About</Tab>
-                      <Tab tabFor="two">Resume</Tab>
-                      <Tab tabFor="three">Skills</Tab>
-                      <Tab tabFor="four">Education</Tab>
-                      <Tab tabFor="five">Employment</Tab>
-                      <Tab tabFor="six">Personal Details</Tab>
-                    </TabList>
-                    <TabPanel tabId="one">
-                      {this.renderAbout()}
-                    </TabPanel>
-                    <TabPanel tabId="two">
-                      {this.renderResume()}
-                    </TabPanel>
-                    <TabPanel tabId="three">
-                      {this.renderSkills()}
-                    </TabPanel>
-                    <TabPanel tabId="four">
-                      {this.renderEducation()}
-                    </TabPanel>
-                    <TabPanel tabId="five">
-                      {this.renderEmployment()}
-                    </TabPanel>
-                    <TabPanel tabId="six">
-                      {this.renderOther()}
-                    </TabPanel>
-                  </Tabs>
-
-
                 </div>
-                {/* Importing Overview Cards, Top skills card and monthly Report Bar Graph */}
-
               </section>
             </div>
+
+            <div className='profile__button_group' id="profileNavbar">
+           <div
+            class={`profileTabs ${this.state.currentTabIndex === 0 ? 'profileTabsSelected' : ''}`}
+            onClick={() => {
+              scrollToComponent(this.AboutSection, {
+                offset: this.state.offset,
+                align: 'top',
+                duration: 1500,
+              });
+              this.setState({currentTabIndex: 0})
+            }}
+          >
+            About
+          </div>
+          {/* <div
+            class={`profileTabs ${this.state.currentTabIndex === 1 ? 'profileTabsSelected' : ''}`}
+            onClick={() => {
+              scrollToComponent(this.ResumeSection, {
+                offset: this.state.offset,
+                align: 'top',
+                duration: 1500,
+              });
+              this.setState({currentTabIndex: 1})
+            }}
+          >
+            Resume
+          </div> */}
+          <div
+            class={`profileTabs ${this.state.currentTabIndex === 1 ? 'profileTabsSelected' : ''}`}
+            onClick={() => {
+              scrollToComponent(this.SkillsSection, {
+                offset: this.state.offset,
+                align: 'top',
+                duration: 1500,
+              });
+              this.setState({currentTabIndex: 1})
+            }}
+          >
+            Skills
+          </div>
+          <div
+            class={`profileTabs ${this.state.currentTabIndex === 2 ? 'profileTabsSelected' : ''}`}
+            onClick={() => {
+              scrollToComponent(this.EducationSection, {
+                offset: this.state.offset,
+                align: 'top',
+                duration: 1500,
+              });
+              this.setState({currentTabIndex: 2})
+            }}
+          >
+            Education & Certifications
+          </div>
+        <div
+          class={`profileTabs ${this.state.currentTabIndex === 3 ? 'profileTabsSelected' : ''}`}
+          onClick={() => {
+            scrollToComponent(this.EmploymentSection, {
+              offset: this.state.offset,
+              align: 'top',
+              duration: 1500,
+            });
+            this.setState({currentTabIndex: 3})
+          }}
+          >
+            Employment
+          </div>
+      <div
+        class={`profileTabs ${this.state.currentTabIndex === 4 ? 'profileTabsSelected' : ''}`}
+        onClick={() => {
+          scrollToComponent(this.PersonalDetailsSection, {
+            offset: this.state.offset,
+            align: 'top',
+            duration: 1500,
+          });
+          this.setState({currentTabIndex: 4})
+        }}
+      >
+        Personal Details
+          </div>
+        </div >
+        
+        <div>
+          <section class="mb-3"
+            ref={(section) => {
+              this.AboutSection = section;
+            }}
+          >
+        <div class="bg-white px-4 py-4 section-divider align-items-center">
+        <div class="col">
+         <div class="mb-4 align-items-center">
+          <img src="/images/Dashboard-assets/about-icon.svg" alt="Cinque Terre" class="mr-2" />
+          <span class="subtitle-semi-bold">About</span>
+        </div>
+        <div class="pl-4 pr-4">
+          <p class="normal-text-light mb-0 pr-4">{this.state.candidateInfo.about}</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white section-divider align-items-center row mx-0">
+        <div class="col-6 px-4 py-4 section-divider" style={{ borderRight: '1px solid #F1F1F1' }}>
+          <div class="col">
+            <div class="mb-4">
+              <span class="subtitle-semi-bold ml-4">Current CTC</span>
+            </div>
+            <div class="px-4">
+              <span class="normal-text-medium">{this.state.candidateInfo.currencyType} {this.state.candidateInfo.currentCTC}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 px-4 py-4 section-divider">
+          <div class="col">
+            <div class="mb-4">
+              <span class="subtitle-semi-bold">Expected CTC</span>
+            </div>
+            <div >
+              <span class="normal-text-medium">{this.state.candidateInfo.currencyType} {this.state.candidateInfo.expectedCTC}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white px-4 py-4 section-divider align-items-center">
+        <div class="col">
+          <div class="mb-4 ml-4">
+            <span class="subtitle-semi-bold">Desired Career Profile</span>
+          </div>
+          <div class="row col-9 px-4">
+            <div class="col-4 mb-4">
+              <div><span class="font-weight-bold">Employment Type</span></div>
+             <span class="small-text-light">{this.state.candidateInfo.employmentType}</span>
+            </div>
+            <div class="col-4 mb-4">
+              <div><span class="font-weight-bold">Preferred Locations</span></div>
+             <span class="small-text-light">{this.state.candidateInfo.preferredLocation}</span>
+            </div>
+            <div class="col-4 mb-4">
+              <div><span class="font-weight-bold">Preferred Shift</span></div>
+              <div><span class="small-text-light">{this.state.candidateInfo.preferredShift}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+          </section>
+          {/* <section class="mb-3"
+              ref={(section) => {
+              this.ResumeSection = section;
+            }}
+          >
+             <Resume showPopup={this.props.showPopup} /> 
+          </section> */}
+          <section class="mb-3"
+            ref={(section) => {
+              this.SkillsSection = section;
+            }}
+          >
+        <div class="bg-white px-4 py-4 section-divider align-items-center">
+        <div class="col">
+        <div class="mb-4 align-items-center">
+        <img src="/images/Dashboard-assets/skills-icon.svg" alt="Cinque Terre" class="mr-2" />
+          <span class="subtitle-semi-bold">Skills</span>
+        </div>
+        <div class="ml-2">
+          <div class="col-9 ml-n3">
+            <table class="table mb-3">
+              <thead class="table-thead">
+                <tr>
+                  <th class="normal-text-medium-bold">Skills</th>
+                  <th class="normal-text-medium-bold">Version</th>
+                  <th class="normal-text-medium-bold">Experience</th>
+                  <th class="normal-text-medium-bold">Proficiency</th>
+                  {/* <th class="normal-text-medium-bold text-center">Primary Skills</th> */}
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                {(skill.skillList) ? skill.skillList.map((skill, i) => (
+                  <tr>
+                    <td>{skill.skillName}</td>
+                    <td>{skill.version}</td>
+                    <td>{skill.experience}</td>
+                    <td>{skill.proficiency}</td>
+                    {/* <td class="text-center">{skill.primarySkill ? <img src="/images/Dashboard-assets/candidate/correct_black.svg" alt="Cinque Terre" /> : null}</td> */}
+
+                  </tr>
+                )) : null}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+          </section>
+          <section class="mb-3"
+            ref={(section) => {
+              this.EducationSection = section;
+            }}
+          >
+           <div class="bg-white px-4 py-4 section-divider align-items-center">
+         <div class="col">
+        <div class="mb-4 align-items-center">
+
+          <img src="/images/Dashboard-assets/education-icon.svg" alt="Cinque Terre" class="mr-2" />
+          <span class="subtitle-semi-bold">Education</span>
+        </div>
+        <div class="px-4 mb-3">
+          {(this.state.educationDetailsList) ? this.state.educationDetailsList.map((data) => (
+            <div class="col-12 px-0 py-3">
+              <div>
+                <span class="subtitle-semi-bold">{data.university}</span>
+              </div>
+              <div><span class="normal-text-semi-bold"> {data.educationType}{` - ${data.course} ${data.specialization}`} </span></div>
+              <div><span class="normal-text-light">{data.passingOutYear} {data.courseType}</span></div>
+            </div>
+          )) : null}
+        </div>
+      </div>
+    </div>
+    <div class="bg-white px-4 py-4 section-divider align-items-center">
+      <div class="col">
+        <div class="mb-4">
+          <span class="subtitle-semi-bold ml-4">Certifications</span>
+        </div>
+        <div class="px-4 mb-3">
+          {(this.state.candidateCertificatesList) ? this.state.candidateCertificatesList.map((data) => (
+            <div class="col-12 px-0 py-3">
+              <div>
+                <span class="subtitle-semi-bold">{data.certificationName}</span>
+              </div>
+              <div><span class="normal-text-light">Issued on {data.issueMonth}{data.issueYear && data.issueMonth ? ' , ' : ''}{data.issueYear} | {data.expirationMonth || data.expirationYear ? `${data.expirationMonth} ${data.expirationMonth && data.expirationYear ? ' , ' : ''} ${data.expirationYear}` : 'No Expiration Date'}</span></div>
+              <div><span class="normal-text-light">Credential ID {data.credentialId}</span></div>
+              <a className="forgot_link" target="_blank" href={data.credentialURL}>{data.credentialURL}</a>
+            </div>
+          )) : null}
+        </div>
+      </div>
+    </div>
+          </section>
+          <section class="mb-3"
+            ref={(section) => {
+              this.EmploymentSection = section;
+            }}
+          >
+             <div class="bg-white px-4 py-4 section-divider align-items-center">
+      <div class="col">
+        <div class="mb-4 align-items-center">
+          <img src="/images/Dashboard-assets/employment-icon.svg" alt="Cinque Terre" class="mr-2" />
+          <span class="subtitle-semi-bold">Employment</span>
+        </div>
+        <div class="px-4 mb-3">
+          {(this.state.employmentDetailsList) ? this.state.employmentDetailsList.map((employment, i) => (
+            <div class="col-12 px-0 py-3">
+              <div>
+                <span class="subtitle-semi-bold">{employment.designation}</span>
+              </div>
+              <div><span class="normal-text-semi-bold">{employment.organization}</span></div>
+              <div><span class="normal-text-light">{employment.startedWorkingFromMonth}{employment.startedWorkingFromYear && employment.startedWorkingFromMonth ? ' , ' : ''}{employment.startedWorkingFromYear} | {!employment.currentCompany ? `${employment.workedTillMonth} ${employment.workedTillYear && employment.workedTillMonth ? ' , ' : ''} ${employment.workedTillYear}` : ' - Present'} ({employment.employmentType})</span></div>
+              <p class="normal-text-light">{employment.description}</p>
+            </div>
+          )) : null}
+        </div>
+      </div>
+    </div>
+          </section>
+          <section class="mb-3"
+            ref={(section) => {
+              this.PersonalDetailsSection = section;
+            }}
+          >
+            <div class="bg-white px-4 py-4 section-divider align-items-center">
+      <div class="col">
+        <div class="mb-4 align-items-center">
+          <img src="/images/Dashboard-assets/profile-icon.svg" alt="Cinque Terre" class="mr-2" />
+          <span class="subtitle-semi-bold">Personal Details</span>
+        </div>
+        <div class="row col-9 px-4">
+          <div class="col-4 mb-4">
+            <div><span class="font-weight-bold">Date of Birth</span></div>
+            <div><span class="small-text-light">{this.state.candidateInfo.dob}</span></div>
+          </div>
+          <div class="col-4 mb-4">
+            <div><span class="font-weight-bold">Gender</span></div>
+            <div><span class="small-text-light">{this.state.candidateInfo.gender}</span></div>
+          </div>
+          <div class="col-4">
+            <div><span class="font-weight-bold">Marital Status</span></div>
+            <div><span class="small-text-light">{this.state.candidateInfo.maritalStatus}</span></div>
+          </div>
+          <div class="col-4 mb-4">
+            <div><span class="font-weight-bold">Address</span></div>
+            <div><span class="small-text-light">{this.state.candidateInfo.address}</span></div>
+          </div>
+          <div class="col-4">
+            <div><span class="font-weight-bold">Passport ID</span></div>
+            <div><span class="small-text-light">{this.state.candidateInfo.passportId}</span></div>
+          </div>
+          <div class="col-4">
+            <div><span class="font-weight-bold">Work Permit</span></div>
+           <div><span class="small-text-light">{this.state.candidateInfo.workPermit}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white px-4 py-4 section-divider align-items-center">
+      <div class="col">
+        <div class="mb-4">
+          <span class="subtitle-semi-bold ml-4">Languages Known</span>
+        </div>
+        <div class="px-2">
+          <div class="col-9 ml-n3">
+            <table class="table">
+              <thead class="table-thead">
+                <tr>
+                  <th class="normal-text-medium-bold">Language</th>
+                  <th class="normal-text-medium-bold">Proficiency</th>
+                  <th class="normal-text-medium-bold">Read</th>
+                  <th class="normal-text-medium-bold">Write</th>
+                  <th class="normal-text-medium-bold">Speak</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {(this.state.candidateLanguageList) ? this.state.candidateLanguageList.map((candidateLanguages, i) => (
+                  <tr>
+                    <td>{candidateLanguages.language}</td>
+                    <td>{candidateLanguages.proficiency}</td>
+                    <td>{(candidateLanguages.canRead) ? <img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /> : null}</td>
+                    <td>{(candidateLanguages.canWrite) ? <img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /> : null}</td>
+                    <td>{(candidateLanguages.canSpeak) ? <img src="/images/Dashboard-assets/candidate/correct.png" alt="Cinque Terre" /> : null}</td>
+                  </tr>
+                )) : null}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+          </section>
+        </div>
           </div>
 
           <Footer></Footer>

@@ -86,7 +86,8 @@ class Resume extends Component {
             productDialog: false,
             deleteProductDialog: false,
             submitted: false,
-            showing:true
+            showing:true,
+            submitDisabled:true
                  }; 
 
       onFileChange = event => {   
@@ -238,7 +239,10 @@ class Resume extends Component {
                      <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("SelectedFile")}</span>
                      <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span>
                      <span>Last updated on 10 sept 2020</span>
-                     <a className="download_sample_link d-block text-right" href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>
+                     
+        <div> {localStorage.getItem("SelectedFile") || localStorage.getItem("DraggedFile")
+        ?<a className="download_sample_link d-block text-right"  href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>
+        :<a className="download_sample_link d-block text-right disabledCursor "  href="#" >Delete Resume</a>}</div>  
                    </div>
                    <div class="col">
                    <section className="content_section">

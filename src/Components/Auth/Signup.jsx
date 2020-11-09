@@ -49,7 +49,7 @@ export default class Signup extends Component {
         });
         if (this.validateForm()) {
             let fields = {};
-            fields["org_name"] = "";
+            fields["organizationName"] = "";
             fields["email"] = "";
             fields["phoneNumber"] = "";
             fields["contactPerson"] = "";
@@ -92,15 +92,15 @@ validateForm = () => {
         let errors = {};
         let formIsValid = true;
 
-        if (!fields["org_name"]) {
+        if (!fields["organizationName"]) {
             formIsValid = false;
-            errors["org_name"] = "*Please enter organisation name";
+            errors["organizationName"] = "*Please enter organisation name";
         }
 
-        if (typeof fields["org_name"] !== "undefined") {
-            if (!fields["org_name"].match(/^[a-zA-Z ]*$/)) {
+        if (typeof fields["organizationName"] !== "undefined") {
+            if (!fields["organizationName"].match(/^[a-zA-Z ]*$/)) {
                 formIsValid = false;
-                errors["org_name"] = "*Please enter alphabet characters only.";
+                errors["organizationName"] = "*Please enter alphabet characters only.";
             }
         }
 
@@ -138,7 +138,7 @@ validateForm = () => {
         if (typeof fields["contactPerson"] !== "undefined") {
             if (!fields["contactPerson"].match(/^[a-zA-Z ]*$/)) {
                 formIsValid = false;
-                errors["org_name"] = "*Please enter alphabet characters only.";
+                errors["organizationName"] = "*Please enter alphabet characters only.";
             }
         }
 
@@ -175,7 +175,7 @@ validateForm = () => {
        
         
     render() {       
-        const {org_name,email,mobile,contactPerson,gstin,password,confirm_password} = this.state.fields
+        const {organizationName,email,mobile,contactPerson,gstin,password,confirm_password} = this.state.fields
         return (
             <Fragment>
                 <div className="content">
@@ -193,11 +193,11 @@ validateForm = () => {
                                 {/* Organization Name */}
                                 <div className="form-group">
                                     <label htmlFor="signup_OrgName">Organization Name</label>
-                                    <input type="text" id="signup_OrgName" className="form-control" name="org_name"
-                                        value={this.state.fields.org_name} onChange={ (e) => {this.handleChange(e);this.validateForm();} }
+                                    <input type="text" id="signup_OrgName" className="form-control" name="organizationName"
+                                        value={this.state.fields.organizationName} onChange={ (e) => {this.handleChange(e);this.validateForm();} }
                                         onBlur = {(e) => {this.handleTouch(e);this.validateForm();} } />
                                         {
-                                            this.state.formSubmitted || this.state.touched.org_name?<div className="errorMsg">{this.state.errors.org_name}</div>:''                   
+                                            this.state.formSubmitted || this.state.touched.organizationName?<div className="errorMsg">{this.state.errors.organizationName}</div>:''                   
                                         }
                                 </div>
                                 {/* Official Email */}

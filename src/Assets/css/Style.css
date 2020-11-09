@@ -3017,6 +3017,7 @@ textarea {
 .form-control.is-invalid {
     padding-right: 12px !important;
 }
+
 .recruiterForm__sectionHeading {
     font-size: 16px;
     color: #52575C;
@@ -3028,6 +3029,7 @@ textarea {
     top: 60px;
     left: -45px;
 }
+
 
 /*  Terms and Condition Check Start */
 
@@ -3053,6 +3055,7 @@ textarea {
     font-family: Montserrat-Medium !important;
 }
 
+
 /*  Terms and Condition Check End */
 
 .profile__editIcon {
@@ -3062,9 +3065,26 @@ textarea {
 .table-fixed-layout {
     table-layout: fixed;
 }
-.table-fixed-layout thead tr th, .table-fixed-layout tbody tr td {
+
+.table-fixed-layout thead tr th,
+.table-fixed-layout tbody tr td {
     word-wrap: break-word !important;
 }
-.table-fixed-layout thead tr th:first-child, .table-fixed-layout tbody tr td:first-child {
+
+.table-fixed-layout thead tr th:first-child,
+.table-fixed-layout tbody tr td:first-child {
     width: 180px !important;
 }
+
+
+/* Disbale delete resume by Anuja*/
+
+.disabledCursor {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+
+/* Disbale delete resume*/
