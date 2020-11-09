@@ -146,4 +146,8 @@ class Profile extends Component {
   }
 }
 
+<<<<<<< HEAD
 export default Profile;
+=======
+export default Profile
+>>>>>>> 2f0f166ab0ce7fb4986d3547519b17ab6ff2966f

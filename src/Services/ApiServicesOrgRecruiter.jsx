@@ -30,7 +30,19 @@ class ApiServicesOrgRecruiter {
         })
     )
   }
+
+getListOfClosedJobs(){
+  const authToken = localStorage.getItem('authToken');
+  const closedJobId = localStorage.getItem('organizationId');
+  return (
+    axios
+    .get(`${ApiBaseUrl}/recruiter/listOfAllClosedJobs/${closedJobId}`, {
+      headers: {'Authorization': `Bearer ${authToken}`}
+    })
+    .then(Response => Response).catch(error => {
+      console.log(error);
+    })
+  );
 }
-
-
+}
 export default new ApiServicesOrgRecruiter;

@@ -11,7 +11,7 @@ export const Certifications = ({ showPopup }) => {
   })
   const { candidateCertificatesList } = profileInfo;
   const candidateCertificatesListSorted = candidateCertificatesList && candidateCertificatesList.sort((certA, certB) => {
-    if (certA.issueMonth && certA.issueYear && certB.issueMonth, certB.issueYear) {
+    if (certA.issueMonth && certA.issueYear && certB.issueMonth && certB.issueYear) {
       const startMonthValue = parseInt(moment().month(certA.issueMonth).format("M")) - 1;
       const endMonthValue = parseInt(moment().month(certB.issueMonth).format("M")) - 1;
       const startDate = new Date(parseInt(certA.issueYear), startMonthValue).getTime();
