@@ -159,159 +159,15 @@ class ApiServicesOrg extends Component {
                 .get(ApiBaseUrl + '/recruiter/listOfAllActiveJobs/' + orgId, this.getToken())
                 .then(Response => Response,
             )
-<<<<<<< HEAD
-        }
-
-        //4.5 Delete User - Multiple Users- Admin/User
-                    //     deleteMultiUser(updatedUserId){
-                    //         console.log(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
-                    //         return(
-                    //             axios
-                    //             .delete(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
-                    //             .then(Response => Response)
-                    //         )    
-                    // }
-                    deleteMultiUser(updatedUserId){
-                        console.log(ApiBaseUrl+ "/user/multipleUsersById/"+ updatedUserId)
-                        return(
-                            axios
-                            .delete(ApiBaseUrl+ "/user/multipleUsersById/"+ updatedUserId, this.getToken())
-                            .then(Response => Response)
-                        )    
-                }
-
-
-// 5. Recruiter Functionalities
-
-        //5.1 Active Job- All jobs to view on main "Active-Job" page
-        // getAllActiveJobs(){
-        //     return{
-        //         axios
-        //         .get(ApiBaseUrl+)
-        //         .then(Response => Response)
-        //     }
-        // }
-
-        //5.2 Active Job- VeiwDetails- View candidate Application list- Job Details Component
-            getViewAllCandidateApplication() {
-                const jobId = JSON.parse(localStorage.getItem('userDetails')).id;
-                    return (
-                        axios
-                        .get(ApiBaseUrl + '/recruiter/listOfCandidateApplication/'+ jobId , this.getToken())
-                        .then(Response => Response)
-                    )
-                }
-
-        //5.3 Active Job- VeiwDetails- View Matching Candidate list- Job Details Component
-            getViewAllMatchingCandidate() {
-                const jobId = JSON.parse(localStorage.getItem('userDetails')).id;
-                    return (
-                        axios
-                        .get(ApiBaseUrl + '/recruiter/listOfMatchingCandidateApplication/'+ jobId , this.getToken())
-                        .then(Response => Response)
-                    )
-                }
-            
-        //5.4 View Shortlisted Candidate list- Job Details 
-            getViewAllShortlistedCandidate() {
-                const jobId = JSON.parse(localStorage.getItem('userDetails')).id;
-                    return (
-                        axios
-                        .get(ApiBaseUrl + '/recruiter/listOfShortListedCandidate/'+ jobId , this.getToken())
-                        .then(Response => Response)
-                    )
-                }
-
-        //5.5 View Candidate profile 
-                getCandidateInfo() {
-                    // const userId = JSON.parse(localStorage.getItem('candidateId'));
-                    const userId=194
-                    return (
-                        axios
-                        .get(ApiBaseUrl + '/candidate/profileview/'+ userId , this.getToken())
-                        .then(Response => Response)
-                    )
-                }
-        //5.6 Download Resume for Recruiter
-        downloadResumeFile (){
-            //const candidateId = JSON.parse(localStorage.getItem('candidateId'));
-            const candidateId=195
-            //console.log(candidateId)
-              return(
-             axios
-               .get (ApiBaseUrl +"/user/viewResume/" + candidateId ,this.getToken())
-               .then(Response => Response),
-               localStorage.setItem("Resume", Response))
-
-           
-       }
-       
-
-        //5.7 Uploading Profile Photo
-                postProfilePhoto (formData, formheader){
-                    const userId=JSON.parse(localStorage.getItem('userDetails')).id
-                return(
-                    axios
-                    .post(ApiBaseUrl + "/user/uploadImage/"+ userId, formData, formheader)
-                    .then(Response => Response)
-                )
-            }
-  
-            //5.8 view Profile Photo
-                viewProfileImage (){
-                   const userId=JSON.parse(localStorage.getItem('userDetails')).id
-                   return(
-                       axios
-                       .get (ApiBaseUrl + "/user/viewImage/"+ userId, this.getToken())
-                       .then(Response => Response)
-                   )
-               }
-
-               updateAcceptedTC(){
-                const userID = localStorage.getItem('userId')
-                const authToken = localStorage.getItem('authToken')
-
-                return(
-                    axios
-                    .put(`${ApiBaseUrl}/user/acceptedTC/${userID}`, {}, {
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`
-                        }
-                      })
-                    .then(Response => Response)
-                )
-            }
-
-        
-        //5.9 Uploading Profile Photo
-                postProfilePhoto (formData, formheader){
-                    const userId=JSON.parse(localStorage.getItem('userDetails')).id
-                    return(
-                        axios
-                        .post(ApiBaseUrl + "/user/uploadImage/"+ userId, formData, formheader)
-                        .then(Response => Response)
-                    )
-                }
-
-         //5.10 view Profile Photo
-                viewProfileImage (){
-                    const userId=JSON.parse(localStorage.getItem('userDetails')).id
-                    return(
-                        axios
-                        .get (ApiBaseUrl + "/user/viewImage/"+ userId, this.getToken())
-                        .then(Response => Response)
-                    )
-                }
-=======
         )
     }
 
     //5.2 post api for active job-- invite button
-    putApplicationStatus(jobId,candidateId,applicationStatus) {
+    putApplicationStatus(jobId, candidateId, applicationStatus) {
         console.log(ApiBaseUrl + `/recruiter/updateApplicationStatus/${jobId}/${candidateId}/${applicationStatus}`, this.getToken())
         return (
             axios
-                .put(ApiBaseUrl + '/recruiter/updateApplicationStatus/'+jobId+'/'+candidateId+'/'+applicationStatus,null, this.getToken())
+                .put(ApiBaseUrl + '/recruiter/updateApplicationStatus/' + jobId + '/' + candidateId + '/' + applicationStatus, null, this.getToken())
                 .then(Response => Response)
         )
     }
@@ -412,29 +268,32 @@ class ApiServicesOrg extends Component {
                 .then(Response => Response)
         )
     }
->>>>>>> 2f0f166ab0ce7fb4986d3547519b17ab6ff2966f
 
-         //6. Edit and View Org Profile
-                getOrganizationProfile() {
-                    const authToken = localStorage.getItem("authToken");
-                    const orgId = localStorage.getItem("organizationId");
-                    console.log("testing");
-                    console.log(orgId);
-                
-                    // new file
-                    return axios
-                      .get(
-                        `${ApiBaseUrl}/user/organizationProfile/${orgId}`,
-                        {
-                          headers: { Authorization: `Bearer ${authToken}` },
-                        }
-                      )
-                      .then((Response) => Response)
-                      .catch((error) => {
-                        console.log(error);
-                      });
-                  }
-                
+    // For getting profile info
+    getOrganizationProfile() {
+        const orgId = localStorage.getItem("organizationId");
+        return axios
+            .get(`${ApiBaseUrl}/user/organizationProfile/${orgId}`, this.getToken())
+            .then((Response) => Response)
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+
+    // For edit and update of Organization Profile
+    updateOrganizationProfile(employee) {
+        const orgId = localStorage.getItem("organizationId");
+        return axios
+            .put(`${ApiBaseUrl}/user/updateOrganizationProfile`,employee, this.getToken())
+            .then((Response) => console.log(Response))
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }
+
+
 
 }
 export default ApiServicesOrg
