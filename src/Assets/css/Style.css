@@ -2437,7 +2437,9 @@ textarea.form-control {
     background-color: #F4F4F4 !important;
     padding-bottom: 0px !important;
 }
-
+.noMatchingcandidateText{
+    padding-left: 1rem;
+}
 #notNow {
     background-color: whitesmoke !important;
     border-color: #007EFF !important;
