@@ -293,6 +293,15 @@ class ApiServicesOrg extends Component {
 
     }
 
+    putForgotPassword(emailId) {
+        return (
+            axios
+                .put(ApiBaseUrl + `/user/forgotPassword/${emailId}`, {}, ApiHeader)
+                .then(Response => Response)
+        )
+
+    }
+
 
 
 }

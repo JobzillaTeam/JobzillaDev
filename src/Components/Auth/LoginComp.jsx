@@ -200,7 +200,7 @@ class LoginComp extends Component {
                     </div>
                   </div>
                   <div className="float-right">
-                    <a className="forgot_link" href="#">Forgot Password</a>
+                    <Link to={isSignupButtonVisible ? "/forgotPassword" : "/forgotPassword?role=candidate"} className="forgot_link">Forgot Password</Link>
                   </div>
                 </div>
                 {/* Buttons */}
@@ -216,7 +216,7 @@ class LoginComp extends Component {
                   </div>
                 </div>
                 {/* Terms and policy */}
-                <div className="terms"><Link to="/termsofUse">Terms of use</Link>
+                <div className="terms"><Link to={isSignupButtonVisible ? "/termsofUse" : "/termsofUse?role=candidate"}>Terms of use</Link>
                 </div>
                 {/*  */}
               </div>

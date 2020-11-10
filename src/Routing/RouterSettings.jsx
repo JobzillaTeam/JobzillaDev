@@ -45,6 +45,7 @@ import CandidateLayout from '../Layouts/CandidateLayout'
 import OrganizationLayout from "../Layouts/OrganizationLayout";
 import AuthLayout from "../Layouts/AuthLayout";
 import { AppHelper } from "../Utils/AppHelper";
+import ForgotPassword from "../Components/Auth/ForgotPassword";
 
 class RouterSettings extends Component {
 
@@ -59,6 +60,7 @@ class RouterSettings extends Component {
             <AuthLayout path="/signup" component={Signup} />
             <AuthLayout exact path="/" component={LoginComp} />
             <AuthLayout path="/login" component={LoginComp} />
+            <AuthLayout path="/forgotPassword" component={ForgotPassword} />
             <OrganizationLayout path="/providerDashboard" component={ProviderDashboard} />
             <OrganizationLayout path="/uploadProfile" component={UploadProfile} />
             <OrganizationLayout path="/addUser" component={AddUser} />
