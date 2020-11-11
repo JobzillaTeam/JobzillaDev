@@ -17,15 +17,11 @@ class ActiveJob extends Component {
       search: '',
       noOfActiveJobs: '',
       daysPostedAgo: '',
-      jobs: [],
-      activeJobIds: [],
-      candidateId: [],
-      days: [],
+       days: [],
       candidates: [],
       jobId: '',
       jobDescription: [],
       selectedId: [],
-      positions: '',
       selectValue: ''
     }
     this.activeJobs = new ApiServicesOrg();
@@ -33,7 +29,6 @@ class ActiveJob extends Component {
     this.inviteCandidate = new ApiServicesOrg();
     this.updateSearch = this.updateSearch.bind(this);
     this.onInviteButtonClick = this.onInviteButtonClick.bind(this);
-    this.dateDiffInDays = this.dateDiffInDays.bind(this)
     this.handleDropdownChange = this.handleDropdownChange.bind(this)
   }
   updateSearch(e) {
@@ -51,9 +46,6 @@ class ActiveJob extends Component {
           this.setState({
             jobDetails: Response.data.responseObject,
             noOfActiveJobs: Response.data.responseObject.length,
-            daysPostedAgo: (Response.data.responseObject).map((day) => {
-              this.state.days.push(day.createdDate).toString()
-            })
           }, () => {
             this.state.jobDetails && this.state.jobDetails[0] && this.state.jobDetails.map(job => {
               this.MatchingCandidate.getViewAllMatchingCandidate(job.jobId)
@@ -75,7 +67,7 @@ class ActiveJob extends Component {
           )}
           
   onInviteButtonClick = (jobId, candidateId, applicationStatus) => {
-    applicationStatus = 'Invite_Sent'
+    applicationStatus = 'Invite_Sent_By_Recruiter'
     return (
       this.inviteCandidate.putApplicationStatus(jobId, candidateId, applicationStatus)
         .then(Response => {
@@ -90,36 +82,28 @@ class ActiveJob extends Component {
     )
   }
 
-  dateDiffInDays(date1, date2) {
-    return Math.round((date2 - date1) / (1000 * 60 * 60 * 24));
-  }
   handleDropdownChange(e) {
-    this.setState({ selectValue: e.target.value })
-    if (this.state.selectValue === "unfulfilled_Highest") {
-      this.state.candidates.map((data) => {
-        const vaccency = data.jobDescription.noOfPositionsAvailable
-        vaccency.sort(function (a, b) {
-          return a.noOfPositionsAvailable - b.noOfPositionsAvailable
-
-        }
-        )
-      })
+    const updatedJobs = this.state.candidates.sort((objA, objB) => {
+    const dateA = new Date(objA.jobDescription.createdDate).getTime()
+    const dateB = new Date(objB.jobDescription.createdDate).getTime()
+    const PositionsA = objA.jobDescription.noOfPositionsAvailable-objA.jobDescription.noOfHiredPositions
+    const PositionsB = objB.jobDescription.noOfPositionsAvailable-objB.jobDescription.noOfHiredPositions
+    if (e.target.value === "recent_First") {
+    return dateB - dateA
+    } else if (e.target.value === "recent_Last") {
+    return dateA - dateB
+    } else if(e.target.value ==="unfulfilled_Highest"){
+      return PositionsB - PositionsA
+    } else if(e.target.value ==="unfulfilled_Lowest"){
+      return PositionsA - PositionsB
     }
-  }
+    });
+    this.setState({
+    candidates: updatedJobs
+    });
+    }
 
-  render() {
-    //console.log(this.state.selectValue)
-    var tempDate = new Date();
-    var date2 = []
-    var date1 = []
-    var day = []
-    var month = []
-    var year = []
-    var fullDate = []
-    var date = new Date();
-    var day, moth, year, tempDate, date5, currDate, d;
-    var daysDiff = []
-
+    render() {
     const jobs = this.state.jobs
     let candidates = this.state.candidates.filter(
       (data) => {
@@ -153,7 +137,6 @@ class ActiveJob extends Component {
                     }
                   </div>
                   <div className="col-md-6 text-md-right">
-                    {/* <button className="btn btn-blue">Create New Job</button> */}
                     <Link to="/createJob"><button className="btn btn-blue">Create New Job</button></Link>
                   </div>
                 </div>
@@ -190,35 +173,24 @@ class ActiveJob extends Component {
                   <div className="white-middle-section5  mt-0 p-0 border-bottom-thin h-100">
                     <div className="px-5 pt-3" key={index}>
                       <div>
-                        {
-                          d = new Date(data.jobDescription.createdDate),
-                          day = d.getDate(),
-                          month = d.getMonth() + 1,
-                          year = d.getFullYear(),
-                          fullDate = year + '-' + month + '-' + day,
-                          tempDate = new Date(),
-                          date5 = tempDate.getFullYear() + '-' + (tempDate.getMonth() + 1) + '-' + tempDate.getDate(),
-                          currDate = date5,
-                          daysDiff = this.dateDiffInDays(new Date(fullDate), new Date(currDate)),
-                          console.log(daysDiff)
-                        }
                         <span className="mr-3 job-title-text" id="designation">{data.jobDescription.jobTitle}</span>
-                        <span className="job-posted-time-text">Posted {daysDiff} day ago</span>
+                        <span className="job-posted-time-text">Posted {data.jobDescription.postedAt} day ago</span>
                       </div>
                       <div>
+                        {console.log(data.jobDescription)}
                         <ul className="job-skills">
                           <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/category.svg" />{data.jobDescription.category}</li>
                           <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/experience.svg" />{data.jobDescription.experienceReqFrom}-{data.jobDescription.experienceReqTo} years</li>
                           <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/job_role.svg" />{data.jobDescription.employmentType}</li>
                           <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/location.svg" />{data.jobDescription.jobCity},{data.jobDescription.jobCountry}</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/technology.svg" />{data.jobDescription.primarySkills},{data.jobDescription.secondarySkills}</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/vaccency.svg" />{data.jobDescription.noOfPositionsAvailable}</li>
+                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/technology.svg" />{data.jobDescription.primarySkills}</li>
+                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/vaccency.svg" />{data.jobDescription.noOfPositionsAvailable-data.jobDescription.noOfHiredPositions}</li>
                         </ul>
                       </div>
                       <div className="row">
                         {(data.matchingCandidates) ? data.matchingCandidates.slice(0, 3).map((match, index) =>
                           <div className="col-md-4 active-job" key={index} >
-                            {console.log(data.jobDescription.jobId)}
+                            {/* {console.log(data.jobDescription.jobId)} */}
 
                             {(match.matchingCandidates === "undefined") ? <h6 className="noMatchingcandidateText">You have no matching candidates</h6> :
                               (<Card className="custom h-100" style={{}} >
