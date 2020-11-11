@@ -80,12 +80,12 @@ class CloseJobs extends Component {
                   </div>
                 </section>
                 {/* detail Sections */}
-                {closedJobs.map((jobDetails) => (
+                {closedJobs && closedJobs.map((jobDetails) => (
                   <section className="white-middle-section mb-3 mt-0 p-0">
                   <div className="px-5 pt-3">
                     <div>
-                      <span className="job-title">
-                        TCS Sr. Software Engineer
+                      <span className="job-title pr-3">
+                        {jobDetails.jobTitle}
                       </span>
                       <span className="job-posting">Posted {jobDetails.postedAt} day ago</span>
                     </div>
@@ -93,7 +93,7 @@ class CloseJobs extends Component {
                       <ul className="job-skills">
                         <li>
                           <img src="/images/Dashboard-assets/recent-matches/category.svg" />
-                          Development
+                          {jobDetails.category}
                         </li>
                         <li>
                           <img src="/images/Dashboard-assets/recent-matches/experience.svg" />
@@ -113,7 +113,7 @@ class CloseJobs extends Component {
                         </li>
                         <li>
                           <img src="/images/Dashboard-assets/recent-matches/vaccency.svg" />
-                          2
+                          {jobDetails.noOfHiredPositions}
                         </li>
                       </ul>
                     </div>

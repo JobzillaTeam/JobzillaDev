@@ -56,88 +56,87 @@ class ChangePassword extends Component {
         }
       }
 
-      //change password
-      onChangePassword = (e) => {
-          console.log(this.state.fields)
-        e.preventDefault();
-        this.setState({
-          formSubmitted: true,
-        });
-        if(this.validateForm()){
-           
-                let fields = {};
-                fields["oldPassword"] = "";
-                fields["password"] = "";
-                fields["confirmPassword"] = "";
-               this.setState({ fields: fields });
-                this.setState({
-                    formSubmitted: false
-                  });
-                  const options = { 
-                    headers: { 
-                    'Content-Type': 'application/json', 
-                    } 
-                };
-       
-          // change password API
-         
-              this.updatePassword.getChangePassword(this.state.fields.oldPassword, this.state.fields.password)
-              .then(Response => {
-                console.log(Response)
-                this.toast.show({ severity: 'success',summary: 'Success Message', detail: 'Password Updated Successfully', life: 4000 })  
-               
-              })
-              .catch(error => {
-                  console.log("Error Occured..", error)
-                 
-                   this.toast.show({ severity: 'error',summary: 'Error', detail: 'Something Went Wrong', life: 4000 });
-              })
-            
-           }
-        }
-        validateForm = () => {
-            let fields = this.state.fields;
-            let errors = {};
-            let formIsValid = true;
-    
-            if (!fields["oldPassword"]) {
-                formIsValid = false;
-                errors["oldPassword"] = "*Please Enter old password";
-              }
-            if (!fields["password"]) {
-              formIsValid = false;
-              errors["password"] = "*Please Enter new password";
-            }
-    
-            if (typeof fields["password"] !== "undefined") {
-                if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
-                    formIsValid = false;
-                    errors["password"] = "*Please enter secure and strong password.";
-                }
-            }
-    
-            if (!fields["confirmPassword"]) {
-                formIsValid = false;
-                errors["confirmPassword"] = "*Please Enter confirm password";
-              }
-    
-              if (typeof fields["password"] !== "undefined" && typeof fields["confirmPassword"] !== "undefined") {
-                  
-                if (fields["password"] !== fields["confirmPassword"]) {
-                    formIsValid = false;
-                  errors["password"] = "Passwords don't match.";
-                }
-              } 
-    
-    
-            this.setState({
-                errors: errors,
-                submitDisabled: !formIsValid
-            });
-            return formIsValid;
-        }
-    
-    
+  //change password
+  onChangePassword = (e) => {
+    e.preventDefault();
+    this.setState({
+      formSubmitted: true,
+    });
+    if (this.validateForm()) {
+
+      // change password API
+      return (
+        this.updatePassword.putChangePassword(this.state.fields.oldPassword, this.state.fields.newPassword)
+          .then(Response => {
+                 console.log(Response)
+            //     if(Response.status===417){
+
+            //         this.toast.show({severity: 'error', summary: 'Error', detail: 'Old password does not match'},600000);
+            //     }
+            //     else {
+            //     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully', life: 4000 })
+            //     //window.location.reload()
+            // }
+            //     window.location.reload();
+            // })
+
+            //console.log(Response)
+            this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully', life: 4000 })
+            window.location.reload()
+          })
+          .catch(error => {
+            console.log("Error Occured..", error)
+            this.toast.show({ severity: 'error', summary: 'Error', detail: 'Old Password does not match', life: 4000 });
+            window.location.reload()
+          })
+      )
+
+    }
+  }
+
+  validateForm = () => {
+    let fields = this.state.fields;
+    let errors = {};
+    let formIsValid = true;
+
+    if (!fields["oldPassword"]) {
+      formIsValid = false;
+      errors["oldPassword"] = "*Please Enter old password";
+    }
+   
+    if (!fields["newPassword"]) {
+      formIsValid = false;
+      errors["newPassword"] = "*Please Enter new password";
+    }
+
+    if (typeof fields["newPassword"] !== "undefined") {
+      if (!fields["newPassword"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
+        formIsValid = false;
+        errors["newPassword"] = "*Please enter secure and strong password.";
+      }
+    }
+
+    if (!fields["confirmPassword"]) {
+      formIsValid = false;
+      errors["confirmPassword"] = "*Please Enter confirm password";
+    }
+
+    if (typeof fields["newPassword"] !== "undefined" && typeof fields["confirmPassword"] !== "undefined") {
+
+      if (fields["newPassword"] !== fields["confirmPassword"]) {
+        formIsValid = false;
+        errors["newPassword"] = "Passwords don't match.";
+      }
+    }
+
+
+    this.setState({
+      errors: errors,
+      submitDisabled: !formIsValid
+    });
+    return formIsValid;
+  }
+
     
     render() {
          const {oldPasswordValue, newPasswordValue,  confirmPasswordValue, revealOldPassword, revealNewPassword  } = this.state;
@@ -182,8 +181,8 @@ class ChangePassword extends Component {
                                         }
                                 </div>
                                 <div className="form-group new-password">
-                                <label htmlFor="password">New Password</label>
-                                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text":"password"} placeholder="Enter New Password" id="password" className="form-control" name="password"  value={this.state.fields.password}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                <label htmlFor="newPassword">New Password</label>
+                                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text":"password"} placeholder="Enter New Password" id="newPassword" className="form-control" name="newPassword"  value={this.state.fields.newPassword}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
                                     <span className= "input-group-append" onClick={this.toggleNewPassword}>
                                     <span>
@@ -194,7 +193,7 @@ class ChangePassword extends Component {
                                     </span>
                                     </span>
                                     {
-                                       this.state.formSubmitted || this.state.touched.password?<div className="errorMsg">{this.state.errors.password}</div>:''                    
+                                       this.state.formSubmitted || this.state.touched.newPassword?<div className="errorMsg">{this.state.errors.newPassword}</div>:''                    
                                     }
                                 </div>    
                                 <div className="form-group confirm-password">
@@ -203,8 +202,8 @@ class ChangePassword extends Component {
                                     onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
                                     {
-                                       this.state.formSubmitted || this.state.touched.password?
-                                          <div className="errorMsg">{this.state.errors.password}</div>:''                    
+                                       this.state.formSubmitted || this.state.touched.newPassword?
+                                          <div className="errorMsg">{this.state.errors.newPassword}</div>:''                    
                                     }
                                     
                            
