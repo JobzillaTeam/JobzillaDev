@@ -103,6 +103,10 @@ class ActiveJob extends Component {
     });
     }
 
+    showProfile(jobId){
+      localStorage.setItem("JobId",jobId)
+  }
+  
     render() {
     const jobs = this.state.jobs
     let candidates = this.state.candidates.filter(
@@ -229,7 +233,7 @@ class ActiveJob extends Component {
                         ) : <div className="noMatchingcandidateText">No matching Candidates Found</div>}
                       </div>
                       <div>
-                      <div className="job-full-detail text-right text-md-right mt-4 mb-4"><Link to={`/jobPostingCollection/${data.jobDescription.jobId}`}>VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                      <div className="job-full-detail text-right text-md-right mt-4 mb-4"><Link to="/jobPostingCollection" onClick={()=>this.showProfile(data.jobDescription.jobId)}>VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                       </div>
                     </div> 
                   </div>

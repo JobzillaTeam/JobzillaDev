@@ -9,16 +9,43 @@ import { TabMenu } from 'primereact/tabmenu';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import {Link} from 'react-router-dom'
-
+import ApiServicesOrg from '../../../Services/ApiServicesOrg'
 
 export default class JobPostingCollection extends Component {
 	constructor(props){
         super(props)
+        const jobDetail={}
         this.state = {
-			      activeIndex: 1,
+            jobDetail,
+            postDate:{},
+            postDate1:'',
+			activeIndex: 1,
             activeIndex1: null,
         }
+        this.activeJob1 = new ApiServicesOrg();
   }
+
+  componentDidMount() {
+    //To get job Detail
+        this.activeJob1.getAllJobDetails()
+          .then(Response =>
+           
+            this.setState({
+                jobDetail:Response.data.responseObject,
+                postDate:Response.data.responseObject.createdDate
+            },
+               
+            () =>{
+                console.log(this.state.jobDetail) 
+                console.log(this.state.postDate)},
+        )
+           
+       );
+      
+   }
+            
+
+        
 	onClick(itemIndex) {
         let activeIndex1 = this.state.activeIndex1 ? [...this.state.activeIndex1] : [];
         if (activeIndex1.length === 0) {
@@ -41,9 +68,28 @@ export default class JobPostingCollection extends Component {
         alert(`hii`)
   }
 
+  dateDiffInDays(date1, date2) {
+    // round to the nearest whole number
+    return Math.round((date2-date1)/(1000*60*60*24));
+}
+
  
 	render() {
-		const details= localStorage.getItem('emaildetails')
+        const d=new Date(this.state.postDate)
+        
+        const day=d.getDate()
+        const month=d.getMonth()+1
+        const year=d.getFullYear()
+        const FullDate=year+'-'+month+'-'+day
+         console.log("fullDate",FullDate)
+        const currentDate=new Date()
+      
+        const currentDate1=currentDate.getFullYear()+'-'+(currentDate.getMonth()+1)+'-'+ (currentDate.getDay()+1)
+
+        console.log("current",currentDate1)
+        const currentDate12=currentDate1
+        const daysDiff=this.dateDiffInDays(new Date(FullDate),new Date(currentDate))
+
 		return (
 			<div>
 				<LeftNavProvider></LeftNavProvider>
@@ -59,26 +105,27 @@ export default class JobPostingCollection extends Component {
                     </ol>
                 </div>
             </div>
-
+           
             <section className="white-middle-section1 mt-4">                               
                   <div>  
-                    <img src= "../images/ActiveJob-JobDetails/Group 594.svg" onClick={this.open} style={{float : 'right'}}/>
+                    <img src= "../images/icons/Group 594.svg" onClick={this.open} style={{float : 'right'}}/>
                         <div className="job-title-header">                         
-                            <span className="mr-3 job-title-text" id="designation1">Sr. Software Engineer</span>                         
-                            <span className="job-posted-time-text">Posted 1 day ago</span>                       
+                            <span className="mr-3 job-title-text" id="designation1">{this.state.jobDetail.jobTitle}</span>                         
+                            <span className="job-posted-time-text">Posted {daysDiff} days ago</span>                       
                         </div>                  
                     
                         <div className="job-content d-flex-left justify-content">                         
-                            <span className="mr-4 job-content-attributes"><i className="pi pi-list mr-2" aria-hidden="true"></i>Development</span>                         
-                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-calendar mr-2" aria-hidden="true"></i>5-6 years</span>                         
-                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-clock mr-2" aria-hidden="true"></i>Full Time</span>                         
-                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-map-marker mr-2" aria-hidden="true"></i>Mumbai, India</span>                          
-                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-cog mr-2" aria-hidden="true"></i>React js</span>                          
-                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-users mr-2" aria-hidden="true"></i>2</span>                        </div>
+                            <span className="mr-4 job-content-attributes"><i className="pi pi-list mr-2" aria-hidden="true"></i>{this.state.jobDetail.category}</span>                         
+                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-calendar mr-2" aria-hidden="true"></i>{this.state.jobDetail.experienceReqFrom}-{this.state.jobDetail.experienceReqTo}years</span>                         
+                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-clock mr-2" aria-hidden="true"></i>{this.state.jobDetail.employmentType}</span>                         
+                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-map-marker mr-2" aria-hidden="true"></i>{this.state.jobDetail.jobCity},{this.state.jobDetail.jobCountry}</span>                          
+                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-cog mr-2" aria-hidden="true"></i>{this.state.jobDetail.primarySkills},{this.state.jobDetail.secondarySkills}</span>                          
+                            <span className="mr-4 job-content-attributes"><i className="pi pi-fw pi-users mr-2" aria-hidden="true"></i>{this.state.jobDetail.noOfPositionsAvailable}</span>                        </div>
                         </div>
             </section>
+    
         </div>
-
+       
         <div className="content_section main">
             <section className="white-middle-section1 mt-4 "> 
                 <div className="viewdetails"><p>View More Details</p></div>  
@@ -90,14 +137,14 @@ export default class JobPostingCollection extends Component {
                                     <div className="content_headings">  
                                         <span><img src="/images/icons/skills.svg"/></span>                              
                                         <h6 >Nice to have</h6>
-                                        <span>Skill 1, Skill 2, Skill 3</span>
+                                        <span>{this.state.jobDetail.primarySkills}, {this.state.jobDetail.secondarySkills}</span>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="content_headings">
                                        <span><img src="/images/icons/salary.svg"/></span>
                                         <h6 >Annual Salary</h6>
-                                        <span>8.00 - 10.00 Lakhs</span>
+                                        <span>{this.state.jobDetail.annualSalaryFrom}-{this.state.jobDetail.annualSalaryTo}</span>
                                     </div>
                                 </div>                    
                             </div>
@@ -107,9 +154,8 @@ export default class JobPostingCollection extends Component {
                                     <div className="content_headings">
                                         <span><img src="/images/icons/job_desc.svg"/></span>
                                         <h6 >Job Description</h6>
-                                        <p>We are looking for a Senior Python Developer to build functional and efficient server-side applications.</p>
-                                        <p>Senior Python Developer responsibilities include participating in all phases of the software development lifecycle and coaching junior developers. If you’re a seasoned developer with a love for back-end technologies, we’d like to meet you.</p>
-                                        <p>Your ultimate goal is to create high-quality products that meet customer needs.</p>
+                                        <p>{this.state.jobDetail.jobDescription}</p>
+                                       
                                     </div>
                                 </div>
                                 <div className="col-md-6">
@@ -117,13 +163,8 @@ export default class JobPostingCollection extends Component {
                                         <span><img src="/images/icons/responsibilities.svg"/></span>
                                         <h6>Responsibilities</h6>
                                         <ol>
-                                            <li>Help design and implement functional requirements.</li>
-                                            <li>Build efficient back-end features in Python.</li>
-                                            <li>Integrate front-end components into applications.</li>
-                                            <li>Manage testing and bug fixes Prepare technical documentation.</li>
-                                            <li>Collaborate with UX/UI designers to implement design into the code.</li>
-                                            <li>Coach junior team members.</li>
-                                            <li>Implement software enhancements and suggest improvements.</li>
+                                            <li>{this.state.jobDetail.responsibilities}</li>
+                                           
                                         </ol>
                                     </div>
                                 </div>
@@ -136,7 +177,7 @@ export default class JobPostingCollection extends Component {
                                                 <div>Working Hours</div>
                                             </div>
                                             <div className="col-xs-12 col-md-6 others_section_secondcol">
-                                                <div>10:00 AM-7:00 PM</div>
+                                            <div>{this.state.jobDetail.expectedWorkinghrsFrom}-{this.state.jobDetail.expectedWorkinghrsTo}</div>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -144,7 +185,7 @@ export default class JobPostingCollection extends Component {
                                                 <div>Visa</div>
                                             </div>
                                             <div className="col-xs-12 col-md-6 others_section_secondcol">
-                                                <div>Nice to have H1B</div>
+                                                <div>{this.state.jobDetail.visa}</div>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -152,7 +193,7 @@ export default class JobPostingCollection extends Component {
                                                 <div>Passport</div>
                                             </div>
                                             <div className="col-xs-12 col-md-6 others_section_secondcol">
-                                                <div>Must have Passport</div>
+                                                <div>{this.state.jobDetail.mustHavePassport}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -163,6 +204,7 @@ export default class JobPostingCollection extends Component {
                 </Accordion>
 			      </section>
         </div>
+    
 
 			  <div className="content_section main">
             <section className="white-middle-section2  mt-4">
