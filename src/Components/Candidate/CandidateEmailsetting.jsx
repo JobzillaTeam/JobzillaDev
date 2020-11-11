@@ -66,18 +66,19 @@ class CandidateEmailSetting extends Component {
     // Get previous state of checkboxes
     componentDidMount() {
         this.emailNotificationSetting.getCandidateSettings(this.state.candidateId)
-            .then(Response =>
-                //console.log(Response.data.responseObject),
-                this.setState({
-                    allowNotification: Response.data.responseObject.allowNotification,
-                    candidateId: Response.data.responseObject.candidateId,
-                    id: Response.data.responseObject.id,
-                    newInvite: Response.data.responseObject.newInvite,
-                    inviteAcceptedDeclinedByRecruiter: Response.data.responseObject.inviteAcceptedDeclinedByRecruiter,
-                    changeInApplicationStatus: Response.data.responseObject.changeInApplicationStatus,
-                    newOffer: Response.data.responseObject.newOffer,
-                }),
-            );
+            .then(Response => {
+                if (Response && Response.data) {
+                    this.setState({
+                        allowNotification: Response.data.responseObject.allowNotification,
+                        candidateId: Response.data.responseObject.candidateId,
+                        id: Response.data.responseObject.id,
+                        newInvite: Response.data.responseObject.newInvite,
+                        inviteAcceptedDeclinedByRecruiter: Response.data.responseObject.inviteAcceptedDeclinedByRecruiter,
+                        changeInApplicationStatus: Response.data.responseObject.changeInApplicationStatus,
+                        newOffer: Response.data.responseObject.newOffer,
+                    })
+                }
+            });
     }
 
 

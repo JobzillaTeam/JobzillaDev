@@ -408,7 +408,15 @@ class ApiServicesOrgCandidate {
               .then(Response => Response) 
   )
 }
-
+  //Change Password  
+  putChangePassword(oldPassword, newPassword){
+    const emailID = JSON.parse(localStorage.getItem('userDetails')).email;
+    return(
+      axios 
+      .put(ApiBaseUrl + "/user/changePassword/"+`${emailID}/${oldPassword}/${newPassword}`,null , this.getToken())
+      .then(Response => Response) 
+    )
+  }
 }
 
 export default new ApiServicesOrgCandidate();

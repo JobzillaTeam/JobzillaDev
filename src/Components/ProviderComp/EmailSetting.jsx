@@ -69,20 +69,21 @@ class EmailSetting extends Component {
     // Get previous state of checkboxes
     componentDidMount() {
         this.emailSetting.getEmailSettings()
-            .then(Response =>
-                this.setState({
-                    id: Response.data.responseObject.id,
-                    candidateId: Response.data.responseObject.candidateId,
-                    canAllowNotificationForProvider: Response.data.responseObject.canAllowNotificationForProvider,
-                    canAllowNotificationForRecruite: Response.data.responseObject.canAllowNotificationForRecruite,
-                    canCandidateHasAcceptedTermsAndConditions: Response.data.responseObject.canCandidateHasAcceptedTermsAndConditions,
-                    canOfferMadeToTheirCandidate: Response.data.responseObject.canOfferMadeToTheirCandidate,
-                    canSuccessfulJobPost: Response.data.responseObject.canSuccessfulJobPost,
-                    canNewApplicationOnPostedJobs: Response.data.responseObject.canNewApplicationOnPostedJobs,
-                    canInterviewInviteAcceptedDeclinedByCandidate: Response.data.responseObject.canInterviewInviteAcceptedDeclinedByCandidate,
-                },
-                    //console.log(Response.data.responseObject)
-                ));
+            .then(Response => {
+                if (Response && Response.data) {
+                    this.setState({
+                        id: Response.data.responseObject.id,
+                        candidateId: Response.data.responseObject.candidateId,
+                        canAllowNotificationForProvider: Response.data.responseObject.canAllowNotificationForProvider,
+                        canAllowNotificationForRecruite: Response.data.responseObject.canAllowNotificationForRecruite,
+                        canCandidateHasAcceptedTermsAndConditions: Response.data.responseObject.canCandidateHasAcceptedTermsAndConditions,
+                        canOfferMadeToTheirCandidate: Response.data.responseObject.canOfferMadeToTheirCandidate,
+                        canSuccessfulJobPost: Response.data.responseObject.canSuccessfulJobPost,
+                        canNewApplicationOnPostedJobs: Response.data.responseObject.canNewApplicationOnPostedJobs,
+                        canInterviewInviteAcceptedDeclinedByCandidate: Response.data.responseObject.canInterviewInviteAcceptedDeclinedByCandidate,
+                    })
+                }
+            });
     }
 
     onSaveSettings = () => {

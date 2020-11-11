@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap'
 import React, { Component } from 'react';
 import { Toast } from 'primereact/toast';
-import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate';
+import ApiServicesOrg from '../../Services/ApiServicesOrg';
 
 class ChangePasswordOrg extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class ChangePasswordOrg extends Component {
     this.newPasswordRef = React.createRef();
     this.confirmPasswordRef = React.createRef();
     this.handleChange = this.handleChange.bind(this);
-    this.updatePassword = ApiServicesOrgCandidate;
+    this.updatePassword = new ApiServicesOrg();
     this.onChangePassword = this.onChangePassword.bind(this);
   }
 
@@ -71,9 +71,9 @@ class ChangePasswordOrg extends Component {
 
       // change password API
       return (
-        this.updatePassword.getChangePassword(this.state.fields.oldPassword, this.state.fields.password)
+        this.updatePassword.putChangePassword(this.state.fields.oldPassword, this.state.fields.newPassword)
           .then(Response => {
-            //     console.log(Response)
+                 console.log(Response)
             //     if(Response.status===417){
 
             //         this.toast.show({severity: 'error', summary: 'Error', detail: 'Old password does not match'},600000);
@@ -87,12 +87,12 @@ class ChangePasswordOrg extends Component {
 
             //console.log(Response)
             this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully', life: 4000 })
-            window.location.reload()
+           // window.location.reload()
           })
           .catch(error => {
             console.log("Error Occured..", error)
             this.toast.show({ severity: 'error', summary: 'Error', detail: 'Old Password does not match', life: 4000 });
-            window.location.reload()
+           // window.location.reload()
           })
       )
 
@@ -108,15 +108,16 @@ class ChangePasswordOrg extends Component {
       formIsValid = false;
       errors["oldPassword"] = "*Please Enter old password";
     }
-    if (!fields["password"]) {
+   
+    if (!fields["newPassword"]) {
       formIsValid = false;
-      errors["password"] = "*Please Enter new password";
+      errors["newPassword"] = "*Please Enter new password";
     }
 
-    if (typeof fields["password"] !== "undefined") {
-      if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
+    if (typeof fields["newPassword"] !== "undefined") {
+      if (!fields["newPassword"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
         formIsValid = false;
-        errors["password"] = "*Please enter secure and strong password.";
+        errors["newPassword"] = "*Please enter secure and strong password.";
       }
     }
 
@@ -125,11 +126,11 @@ class ChangePasswordOrg extends Component {
       errors["confirmPassword"] = "*Please Enter confirm password";
     }
 
-    if (typeof fields["password"] !== "undefined" && typeof fields["confirmPassword"] !== "undefined") {
+    if (typeof fields["newPassword"] !== "undefined" && typeof fields["confirmPassword"] !== "undefined") {
 
-      if (fields["password"] !== fields["confirmPassword"]) {
+      if (fields["newPassword"] !== fields["confirmPassword"]) {
         formIsValid = false;
-        errors["password"] = "Passwords don't match.";
+        errors["newPassword"] = "Passwords don't match.";
       }
     }
 
@@ -187,8 +188,8 @@ class ChangePasswordOrg extends Component {
                   {/* New Password */}
                   <div className="form-group">
 
-                    <label htmlFor="password">New Password</label>
-                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text" : "password"} id="password" className="form-control" name="password" value={this.state.fields.password} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
+                    <label htmlFor="newPassword">New Password</label>
+                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text" : "password"} id="newPassword" className="form-control" name="newPassword" value={this.state.fields.newPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
                       onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                     <span className="input-group-append" onClick={this.toggleNewPassword}>
                       <span>
@@ -199,7 +200,7 @@ class ChangePasswordOrg extends Component {
                       </span>
                     </span>
                     {
-                      this.state.formSubmitted || this.state.touched.password ? <div className="errorMsg">{this.state.errors.password}</div> : ''
+                      this.state.formSubmitted || this.state.touched.newPassword ? <div className="errorMsg">{this.state.errors.newPassword}</div> : ''
                     }
 
                   </div>
@@ -211,8 +212,8 @@ class ChangePasswordOrg extends Component {
                       onChange={(e) => { this.handleChange(e); this.validateForm(); }}
                       onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                     {
-                      this.state.formSubmitted || this.state.touched.password ?
-                        <div className="errorMsg">{this.state.errors.password}</div> : ''
+                      this.state.formSubmitted || this.state.touched.newPassword ?
+                        <div className="errorMsg">{this.state.errors.newPassword}</div> : ''
                     }
 
                   </div>

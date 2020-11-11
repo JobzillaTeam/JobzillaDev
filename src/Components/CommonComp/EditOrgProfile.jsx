@@ -258,6 +258,7 @@ class EditProfile extends Component {
                       name="officialEmail"
                       placeholder="joedoe@example.com"
                       className="form-control"
+                      disabled
                       defaultValue={this.state.officialEmail}
                       onChange={this.changeOfficialEmailHandler}
                     />
