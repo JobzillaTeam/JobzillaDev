@@ -86,8 +86,8 @@ class ActiveJob extends Component {
     const updatedJobs = this.state.candidates.sort((objA, objB) => {
     const dateA = new Date(objA.jobDescription.createdDate).getTime()
     const dateB = new Date(objB.jobDescription.createdDate).getTime()
-    const PositionsA = objA.jobDescription.noOfPositionsAvailable-objA.jobDescription.noOfHiredPositions
-    const PositionsB = objB.jobDescription.noOfPositionsAvailable-objB.jobDescription.noOfHiredPositions
+    const PositionsA = objA.jobDescription.noOfPositionsAvailable
+    const PositionsB = objB.jobDescription.noOfPositionsAvailable
     if (e.target.value === "recent_First") {
     return dateB - dateA
     } else if (e.target.value === "recent_Last") {
@@ -181,14 +181,13 @@ class ActiveJob extends Component {
                         <span className="job-posted-time-text">Posted {data.jobDescription.postedAt} day ago</span>
                       </div>
                       <div>
-                        {console.log(data.jobDescription)}
                         <ul className="job-skills">
                           <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/category.svg" />{data.jobDescription.category}</li>
                           <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/experience.svg" />{data.jobDescription.experienceReqFrom}-{data.jobDescription.experienceReqTo} years</li>
                           <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/job_role.svg" />{data.jobDescription.employmentType}</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/location.svg" />{data.jobDescription.jobCity},{data.jobDescription.jobCountry}</li>
+                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/location.svg" />{data.jobDescription.jobCity}, {data.jobDescription.jobCountry}</li>
                           <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/technology.svg" />{data.jobDescription.primarySkills}</li>
-                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/vaccency.svg" />{data.jobDescription.noOfPositionsAvailable-data.jobDescription.noOfHiredPositions}</li>
+                          <li className="job-skills-text"><img src="images/Dashboard-assets/recent-matches/vaccency.svg" />{data.jobDescription.noOfPositionsAvailable}</li>
                         </ul>
                       </div>
                       <div className="row">

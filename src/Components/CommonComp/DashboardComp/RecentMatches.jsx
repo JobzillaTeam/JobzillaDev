@@ -14,7 +14,7 @@ export default class RecentMatches extends Component {
         <div className="row ml-0 mr-1">
           <div className="col col-sm-12 col-md-12 col-lg-12">
             <h4 className="wid100 ml-3 marT30">Recent Matches</h4>
-            <section className="recent_matches_section">
+            <section className="recent_matches_section1">
               {[1, 2, 3].map((i) => {
                 return (
                   <div key={i} className="row align-items-center">
@@ -24,12 +24,12 @@ export default class RecentMatches extends Component {
                         <span className="job-posted-time-text">Posted 1 day ago</span>
                       </div>
                       <div className="job-content">
-                        <span className="mr-34 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/category.svg" alt="category"></img></i>Category</span>
-                        <span className="mr-34 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/experience.svg" alt="experience"/></i>5-6 years</span>
-                        <span className="mr-34 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/job_role.svg" alt="job-role"/></i>Full Time</span>
-                        <span className="mr-34 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/location.svg" alt="location"/></i>Mumbai, India</span>
-                        <span className="mr-34 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/technology.svg" alt="infra-oprations"/></i>Infra Operation</span>
-                        <span className="mr-34 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/vaccency.svg" alt="vaccency"/></i>2</span>
+                        <span className="mr-19 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/category.svg" alt="category"></img></i>Category</span>
+                        <span className="mr-19 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/experience.svg" alt="experience"/></i>5-6 years</span>
+                        <span className="mr-19 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/job_role.svg" alt="job-role"/></i>Full Time</span>
+                        <span className="mr-19 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/location.svg" alt="location"/></i>Mumbai, India</span>
+                        <span className="mr-19 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/technology.svg" alt="infra-oprations"/></i>Infra Operation</span>
+                        <span className="mr-19 job-content-attributes"><i><img className="mr-8" src="/images/Dashboard-assets/recent-matches/vaccency.svg" alt="vaccency"/></i>2</span>
                       </div>
                     </div>
                     <div className={"col-12 col-sm-12 col-md-4 col-lg-4 d-flex flex-row-reverse align-items-center"}>

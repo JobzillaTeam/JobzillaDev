@@ -27,7 +27,7 @@ export default class CandidateOverviewCard extends Component {
                     </div>
 
                     <div className="row ml-4 marT20 profile_strength_subtext clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ullamcorper.<span className="font-blue complete-now-text">COMPLETE NOW</span></div>
-                    <p1 className="wid100 ml-4 marT30">Overview-2020</p1>
+                    <p1 className="wid100 ml-4 marT30 overview_text">Overview-2020</p1>
                     <div className="col-12 col-sm-12 col-md-6 col-lg-4">
                         <section className="jobPosted_section_Card">
                             <div className="media">
@@ -45,13 +45,13 @@ export default class CandidateOverviewCard extends Component {
                     <div className="col-12 col-sm-12 col-md-6 col-lg-4">
                         <section className="activeJobs_section_Card">
                             <div className="media">
-                                <img className="ml-5 mr-4" src="/images/Dashboard-assets/active-profile.svg" alt="Active Profile image" />
+                                <img className="ml-4 mr-3" src="/images/dashboard-assets/active-profile.svg" alt="Active Profile image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
                                         <CountUp start={0} end={selectedForInterviews} duration={2.75} separator="," />
                                     </h5>
                             Selected for Interviews
-                            {/* <img src="/images/Dashboard-assets/more_ico.png" width="10" height="10" className="more_ico" /> */}
+                            {/* <img src="images/dashboard-assets/more_ico.png" width="10" height="10" className="more_ico" /> */}
                                 </div>
                             </div>
                         </section>
@@ -59,13 +59,13 @@ export default class CandidateOverviewCard extends Component {
                     <div className="col-12 col-sm-12 col-md-6 col-lg-4">
                         <section className="candidateHired_section_Card">
                             <div className="media">
-                                <img className="ml-5 mr-4 mt-2" src="/images/Dashboard-assets/offer-ico.svg" alt="Hired Profile image" />
+                                <img className="ml-5 mr-4 mt-2" src="/images/dashboard-assets/offer-ico.svg" alt="Hired Profile image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
                                         <CountUp start={0} end={jobOffers} duration={2.75} separator="," />
                                     </h5>
                             Job Offers
-                            {/* <img src="/images/Dashboard-assets/more_ico.png" width="10" height="10" className="more_ico" /> */}
+                            {/* <img src="images/dashboard-assets/more_ico.png" width="10" height="10" className="more_ico" /> */}
                                 </div>
                             </div>
                         </section>
