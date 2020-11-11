@@ -351,11 +351,15 @@ class ApiServicesOrg extends Component {
     //5.9 Download Resume In Shortlisted Candidate
     downloadResumeFile1() {
         const candidateId = localStorage.getItem("downloadCandidateId")
+        const authToken = localStorage.getItem('authToken')
 
         return (
-            axios
-                .get(ApiBaseUrl + "/user/viewResume/" + candidateId, null, this.getToken())
-                .then(Response => console.log(Response))
+            axios({
+                url: `${ApiBaseUrl}/user/viewResume/${candidateId}`,
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            }).then(Response => Response)
         )
     }
 
