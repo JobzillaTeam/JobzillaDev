@@ -417,6 +417,20 @@ class ApiServicesOrgCandidate {
       .then(Response => Response) 
     )
   }
+
+  fetchInterviewInvitesForCandidate() {
+    const candidateId = localStorage.getItem('candidateId')
+    const authToken = localStorage.getItem('authToken')
+    return (
+      axios
+        .get(`${ApiBaseUrl}/candidate/interviewInvitesForCandidate/${candidateId}`, {
+          headers: {'Authorization': `Bearer ${authToken}`}
+        })
+        .then(Response => Response.data.responseObject)
+    )
+  }
+
+
 }
 
 export default new ApiServicesOrgCandidate();
