@@ -137,7 +137,7 @@ export default class ShortlistedCandidate extends Component {
                                         <td>{data.comment}</td>
                                         <td>{data.lastUpdate}</td>
                                         <td>
-                                            <a href=""onClick={()=> this.downloadResume(data.candidate.candidateId)}><img  src="../images/icons/Group 555.svg"></img> Download Resume</a>
+                                            <button onClick={()=> this.downloadResume(data.candidate.candidateId)}><img  src="../images/icons/Group 555.svg"></img> Download Resume</button>
                                         </td>
                                     </tr>)}
                                </tbody>
