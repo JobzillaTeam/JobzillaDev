@@ -172,32 +172,12 @@ class ApiServicesOrg extends Component {
         )
     }
 
-    //5.2 Active Job- VeiwDetails- View candidate Application list- Job Details Component
-    getViewAllCandidateApplication() {
-        const jobId = JSON.parse(localStorage.getItem('userDetails')).id;
-        return (
-            axios
-                .get(ApiBaseUrl + '/recruiter/listOfCandidateApplication/' + jobId, this.getToken())
-                .then(Response => Response)
-        )
-    }
-
     //5.3 Active Job- VeiwDetails- View Matching Candidate list- Job Details Component
     getViewAllMatchingCandidate(jobId) {
         // const jobId = localStorage.getItem('matchingId')
         return (
             axios
                 .get(ApiBaseUrl + '/recruiter/listOfMatchingCandidateApplications/' + jobId, this.getToken())
-                .then(Response => Response)
-        )
-    }
-
-    //5.4 View Shortlisted Candidate list- Job Details 
-    getViewAllShortlistedCandidate() {
-        const jobId = JSON.parse(localStorage.getItem('userDetails')).id;
-        return (
-            axios
-                .get(ApiBaseUrl + '/recruiter/listOfShortListedCandidate/' + jobId, this.getToken())
                 .then(Response => Response)
         )
     }
@@ -209,26 +189,6 @@ class ApiServicesOrg extends Component {
         return (
             axios
                 .get(ApiBaseUrl + '/candidate/profileview/' + userId, this.getToken())
-                .then(Response => Response)
-        )
-    }
-
-    //5.6 Uploading Profile Photo
-    postProfilePhoto(formData, formheader) {
-        const userId = JSON.parse(localStorage.getItem('userDetails')).id
-        return (
-            axios
-                .post(ApiBaseUrl + "/user/uploadImage/" + userId, formData, formheader)
-                .then(Response => Response)
-        )
-    }
-
-    //5.7 view Profile Photo
-    viewProfileImage() {
-        const userId = JSON.parse(localStorage.getItem('userDetails')).id
-        return (
-            axios
-                .get(ApiBaseUrl + "/user/viewImage/" + userId, this.getToken())
                 .then(Response => Response)
         )
     }
@@ -285,7 +245,7 @@ class ApiServicesOrg extends Component {
     updateOrganizationProfile(employee) {
         const orgId = localStorage.getItem("organizationId");
         return axios
-            .put(`${ApiBaseUrl}/user/updateOrganizationProfile`,employee, this.getToken())
+            .put(`${ApiBaseUrl}/user/updateOrganizationProfile`, employee, this.getToken())
             .then((Response) => console.log(Response))
             .catch((error) => {
                 console.log(error);
@@ -301,16 +261,107 @@ class ApiServicesOrg extends Component {
         )
 
     }
-     //Change Password  
-    putChangePassword(oldPassword, newPassword){
-            const emailID = JSON.parse(localStorage.getItem('userDetails')).email;
-            return(
-            axios 
-            .put(ApiBaseUrl + "/user/changePassword/"+`${emailID}/${oldPassword}/${newPassword}`,null,  this.getToken())
-            .then(Response => Response) 
+    //Change Password  
+    putChangePassword(oldPassword, newPassword) {
+        const emailID = JSON.parse(localStorage.getItem('userDetails')).email;
+        return (
+            axios
+                .put(ApiBaseUrl + "/user/changePassword/" + `${emailID}/${oldPassword}/${newPassword}`, null, this.getToken())
+                .then(Response => Response)
         )
     }
 
+    //5.2 Active Job- VeiwDetails- View candidate Application list- Job Details Component
+    getViewAllCandidateApplication() {
+        const jobId = JSON.parse(localStorage.getItem('JobId'));
+        return (
+            axios
+                .get(ApiBaseUrl + '/recruiter/listOfCandidateApplications/' + jobId, this.getToken())
+                .then(Response => Response)
+        )
+    }
+
+    //5.3 Active Job- VeiwDetails- View Matching Candidate list- Job Details Component
+    getViewAllMatchingCandidate1() {
+        const jobId = JSON.parse(localStorage.getItem('JobId'));
+        return (
+            axios
+                .get(ApiBaseUrl + '/recruiter/listOfMatchingCandidateApplications/' + jobId, this.getToken())
+                .then(Response => Response)
+        )
+    }
+
+    //5.4 View Shortlisted Candidate list- Job Details Component
+    getViewAllShortlistedCandidate() {
+        const jobId = JSON.parse(localStorage.getItem('JobId'));
+        return (
+            axios
+                .get(ApiBaseUrl + '/recruiter/listOfShortListedCandidate/' + jobId, this.getToken())
+                .then(Response => Response)
+        )
+    }
+
+    //5.5 View active job Details 
+    getAllJobDetails() {
+        const jobId = JSON.parse(localStorage.getItem('JobId'));
+        return (
+            axios
+                .get(ApiBaseUrl + '/recruiter/jobDetailsById/' + jobId, this.getToken())
+                .then(Response => Response)
+        )
+    }
+
+    //5.6 update interview status in shortlisted candidate
+    updateInterviewStatus(fields) {
+        const jobId = JSON.parse(localStorage.getItem('JobId'));
+        const candidateId = localStorage.getItem("CandidateId")
+        return (
+            axios
+                .put(ApiBaseUrl + "/recruiter/updateInterviewStatus/" + `${jobId}/${candidateId}`, { 'interviewStatus': fields.interviewStatus, 'comment': fields.comment }, this.getToken())
+                .then(Response => Response)
+        )
+    }
+
+    //5.7 Accept application in matching candidate
+    updateApplicationStatus() {
+        const jobId = JSON.parse(localStorage.getItem('JobId'));
+        const candidateId = localStorage.getItem("InviteCandidateId")
+        const applocationStatus = "Invite_Sent_By_Recruiter"
+        return (
+            axios
+                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobId}/${candidateId}/${applocationStatus}`, null, this.getToken())
+                .then(Response => Response)
+        )
+
+    }
+
+    //5.8 For Remove candidate from  Matching Candidate
+    updateApplicationStatus1() {
+        const jobId = JSON.parse(localStorage.getItem('JobId'));
+        const candidateId = localStorage.getItem("InviteCandidateId")
+        const applocationStatus = "Invite_Removed_By_Recruiter"
+        return (
+            axios
+                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobId}/${candidateId}/${applocationStatus}`, null, this.getToken())
+                .then(Response => Response)
+        )
+
+    }
+
+    //5.9 Download Resume In Shortlisted Candidate
+    downloadResumeFile1() {
+        const candidateId = localStorage.getItem("downloadCandidateId")
+        const authToken = localStorage.getItem('authToken')
+
+        return (
+            axios({
+                url: `${ApiBaseUrl}/user/viewResume/${candidateId}`,
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            }).then(Response => Response)
+        )
+    }
 
 
 }

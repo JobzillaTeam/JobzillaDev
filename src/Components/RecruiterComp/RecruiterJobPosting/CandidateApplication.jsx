@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import { DataTable } from 'primereact/datatable';
 import ProgressBar from 'react-customizable-progressbar'
 import { Column } from 'primereact/column';
@@ -6,17 +7,17 @@ import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import ApiServicesOrg from '../../../Services/ApiServicesOrg.jsx';
-
+import { data } from 'jquery';
 
 export default class CandidateApplication extends Component {
 
     emptyProduct = {
-        id: null,
-        Candidate: '',
+        candidateId: '',
+        firstName: '',
         skills: '',
-        experience: '',
+        yearsofExp: '',
         availableFrom: 0,
-        activity: '',
+        matchingPercentage: '',
        
     };
 
@@ -25,241 +26,180 @@ export default class CandidateApplication extends Component {
 
         this.state = {
             products: [],
-            productDialog: false,
-            deleteProductDialog: false,
-            product: this.emptyProduct,
-            submitted: false,
-            lazyTotalRecords:0,
+            match:[],
+            matchPer:[],
+            candidate:{},
+            candidate1:[],
+            candidateLength:'',
+           
             loading:false,
+          
         };
 
         this.CandidateApplication = new ApiServicesOrg();
-        this.onVirtualScroll = this.onVirtualScroll.bind(this);
-        this.nameBodyTemplate = this.nameBodyTemplate.bind(this);
-        this.countryBodyTemplate = this.countryBodyTemplate.bind(this);
-        this.companyBodyTemplate = this.companyBodyTemplate.bind(this);
-        this.dateBodyTemplate = this.dateBodyTemplate.bind(this);
-        this.activityBodyTemplate = this.activityBodyTemplate.bind(this);
-        this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
-        this.hideDialog = this.hideDialog.bind(this);
-        this.confirmDeleteProduct = this.confirmDeleteProduct.bind(this);
-        this.deleteProduct = this.deleteProduct.bind(this);
-        this.hideDeleteProductDialog = this.hideDeleteProductDialog.bind(this);
-     
     }
 
     componentDidMount() {
         this.setState({ loading: true });
         this.CandidateApplication.getViewAllCandidateApplication()
-        .then(Response => this.setState({ products: Response.data.responseObject,loading:false }
+        .then(Response => {
+            if(Response.data.responseObject){
             
-        ),console.log(this.products));
-        setTimeout(() => {
             this.setState({
-                products: this.loadChunk(0, 40),
-                lazyTotalRecords: 500
-            });
-        }, 250);
-    }
-    loadChunk(index, length) {
-        let chunk = [];
-        for (let i = 0; i < length; i++) {
-            chunk[i] = { ...this.state.products[i]};
-        }
-
-        return chunk;
-    }
-
-    onVirtualScroll(event) {
-        //for demo purposes keep loading the same dataset
-        //in a real production application, this data should come from server by building the query with LazyLoadEvent options
-        setTimeout(() => {
-            //last chunk
-            if (event.first ===100) {
-                this.setState({
-                    products: this.loadChunk(event.first, 40)
-                });
-            }
-            else {
-                this.setState({
-                    products: this.loadChunk(event.first, event.rows)
-                });
-            }
-        }, 500);
-    }
-
-    loadingText1() {
-      return <span className="loading-text"></span>;
-    }
-
-    formatCurrency(value) {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
-
-  
-    hideDialog() {
-        this.setState({
-            submitted: false,
-            productDialog: false
-        });
-    }
-
-    hideDeleteProductDialog() {
-        this.setState({ deleteProductDialog: false });
-    }
-
-    // editProduct(product) {
-    //     this.setState({
-    //         product: { ...product },
-    //         productDialog: true
-    //     });
-    // }
-
-    confirmDeleteProduct(product) {
-        this.setState({
-            product,
-            deleteProductDialog: true
-        });
-    }
-
-    deleteProduct() {
-        let products = this.state.products.filter(val => val.id !== this.state.product.id);
-        this.setState({
-            products,
-            deleteProductDialog: false,
-            product: this.emptyProduct
-        });
-        this.toast.show({ severity: 'success', summary: 'Successful', detail: 'User Deleted', life: 3000 });
-    }
-
-   
-    confirmDeleteSelected() {
-        this.setState({ deleteProductsDialog: true });
-    }
-
-  
-    nameBodyTemplate(rowData) {
-        return (
-            <>
-            	<div className="custom"   >
-                        <h5 id="name1">{rowData.candidate}</h5>
-                        <p id="body1">{<span>Software developer at TCS</span>}</p>		
-                        <p>  <i className="pi pi-map-marker"></i>Mumbai,India</p>
-                </div>
-                 
-               
-              
-            </>
-        );
-    }
-
-    countryBodyTemplate(rowData) {
-        return (
-            <>
-                <div className="custom"   >
-                    <p id="body1">{rowData.skills}</p>
-                </div>
-            
-            </>
-        );
-    }
-
-    companyBodyTemplate(rowData) {
-        return (
-            <>
-                 <div className="custom"   >
-                    <p id="body1">{rowData.experience}</p>
-                </div>
-            </>
-        );
-    }
-
-    dateBodyTemplate(rowData) {
-        return (
-            <>
-                <div className="custom"   >
-                    <p id="body1">{rowData.availableFrom}</p>
-                </div>
-            </>
-        );
-    }
-
-   
-
-    activityBodyTemplate(rowData) {
-    let percentage=rowData.activity
-    return (
-            <>
-                   
-                  
-               
-                    <ProgressBar className="circle"
-						progress={percentage}
-						radius={32}
-						strokeWidth={3}
-						strokeColor="#147AD6"
-						steps={100}
-						cut={20}
-						trackStrokeWidth={2}
-						progress={percentage}>
-						<div className="indicator">
-							<div>{percentage}%
-							Match</div>
-                        </div>
-					</ProgressBar> 
+                products:Response.data.responseObject,
+                candidateLength:Response.data.responseObject.length,
+                match:(Response.data.responseObject).map((data2)=>{this.state.matchPer.push(data2.matchingPercentage)}),
+                 candidate:(Response.data.responseObject).map((data1)=>{this.state.candidate1.push(data1.candidate)}),
+                 loading:false },
+                () =>{
+                    console.log(this.state.matchPer)
+                    console.log(this.state.products) 
+                    console.log(this.state.candidate1)
                     
-             </>
+                },
+                    
+                  
+            )
+            }
+        }   
         );
+
+       
+    }
+
+   
+  
+    acceptInvite(candidateID){
+        localStorage.setItem("InviteCandidateId",candidateID)
+        return (
+          this.MatchingCandidate.updateApplicationStatus()
+            .then(Response => {
+              console.log(Response)
+              this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite send Successfully', life: 2000 })
+             // window.location.reload()
+            })
+            .catch(error => {
+              console.log("Error Occured..", error)
+              this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
+            })
+        )
+    }
+
+    declinInvite(candidateID){
+        localStorage.setItem("InviteCandidateId",candidateID)
+        return (
+          this.MatchingCandidate.updateApplicationStatus1()
+            .then(Response => {
+              console.log(Response)
+              this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Declined', life: 2000 })
+            //  window.location.reload()
+            })
+            .catch(error => {
+              console.log("Error Occured..", error)
+              this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
+            })
+        )
     }
    
-    actionBodyTemplate(rowData) {
-        return (
-            <>
-             <button className="btn btn-blue1 mr-2" onClick={() => this.editProduct(rowData)}>Accept</button>
-             <button className="btn btn-border1" onClick={() => this.confirmDeleteProduct(rowData)}>Declain</button>
-                
-            </>
-        );
+  
+
+    showProfile(candidateID){
+        localStorage.setItem("candidateId",candidateID)
     }
+   
+   
 
     render() {
+       
 
-        const deleteProductDialogFooter = (
-            <>
-                <Button label="No" icon="pi pi-times" className="p-button-text" onClick={this.hideDeleteProductDialog} />
-                <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={this.deleteProduct} />
-            </>
-        );
        
         return (
             <div className="datatable-editing-demo">
                 <Toast ref={(el) => this.toast = el} />
                 
-                <div className="Show">Total Result {[this.state.products.length]} </div>
-               
-                <DataTable ref={(el) => this.dt = el} className="p-datatable-striped"  value={this.state.products} scrollable scrollHeight="520px" lazy rows={20} loading={this.state.loading}
-                            virtualScroll virtualRowHeight={45} onVirtualScroll={this.onVirtualScroll} totalRecords={this.state.lazyTotalRecords} 
-                    >
-                         <Column field="id" header=""    style={{width:'5%'}}   loadingBody={this.loadingText1}></Column> 
+            
+                              <div>
 
-                         <Column  field="candidate" header="Candidates"   style={{width:'20%'}} body={this.nameBodyTemplate} loadingBody={this.loadingText1} ></Column>
-                        <Column field="skills" header="Skills"  style={{width:'15%'}} body={this.countryBodyTemplate}  loadingBody={this.loadingText1} />
-                        <Column field="experience" header="Experience"  style={{width:'15%'}} body={this.companyBodyTemplate} loadingBody={this.loadingText1} />
-                        <Column field="availableFrom" header="AvailableFrom"  style={{width:'10%'}} body={this.dateBodyTemplate} loadingBody={this.loadingText1} />
-                        <Column field="activity" header="Match"  style={{width:'10%'}} body={this.activityBodyTemplate} loadingBody={this.loadingText1}/>
-                        <Column header="Action" body={this.actionBodyTemplate}  style={{width:'20%'}} loadingBody={this.loadingText1}></Column>
-                        
-                        {/* <Column body={this.actionBodyTemplate} style={{width:'6%'}} loadingBody={this.loadingText1}></Column> */}
-                    </DataTable>
-          
+                                    <div className="Show">Total Result {this.state.candidateLength} </div>
+                                       
+                                    {this.state.products ?
+                                        <table className="table table-borderless custom-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Candidates</th>
+                                                    <th>Skills</th>
+                                                    <th>Experiance</th>
+                                                    <th>AvailableFrom</th>
+                                                    <th>Match</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {this.state.candidate1.map((data,index)=>
+                                                <tr>
+                                                    <td>{data.candidateId}</td>
+                                                    {/* onClick={localStorage.setItem('candidateID', data.candidateId)} */}
+                                                    <td>
+                                                    <Link to= "/candidateProfileToOpen" onClick={() => this.showProfile(data.candidateId)}><p className="tb-title-text">{data.firstName}</p> </Link>
+                                                        <p>{data.currentRole} at {data.company}</p>
+                                                         <p><img src="/images/icons/location.svg" alt="location" className="pr-2"/>{data.address},{data.city}</p>
+                                                    </td>
+                                                  
+                                                    <td>
+                                                   {data.skills}
+                                                    </td>
+                                                  
+                                                    <td>  
+                                                       {data.yearsofExp}
+                                                    </td>
+                                                    <td> 
+                                                        {data.availableFrom}
+                                                    </td>
+
+                                                    
+                                                    
+                                                    <td>
+                                                   
+                                                    <span className="p-column-title"></span>
+                                                    <ProgressBar className="circle"
+                                                        progress={this.state.matchPer}
+                                                        radius={32}
+                                                        strokeWidth={3}
+                                                        strokeColor="#147AD6"
+                                                        steps={100}
+                                                        cut={20}
+                                                        trackStrokeWidth={2}
+                                                        progress={this.state.matchPer}>
+                                                            {this.state.matchPer.map((data2)=>
+                                                        <div className="indicator">
+                                                            <div>{data2}%
+                                                            Match</div>
+                                                        </div>)}
+                                                    </ProgressBar> 
+                                                    
+                                                    </td>
+                                             
+
+                                                    <td>
+                                                    <button className="btn btn-blue1 mr-2" onClick={() => this.acceptInvite(data.candidateId)}>Accept</button>
+                                                
+                                                    <button className="btn btn-border1" onClick={() => this.declinInvite(data.candidateId)}>Declain</button>
+                                                    </td>
+
+                                                </tr>
+                                                )}
+                                              
+                                            </tbody>
+                                            
+                                        </table>
+                                        :
+                                           <p>No Contect</p>}
+                                    </div>
+
+                                  
                     
-                    <Dialog visible={this.state.deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={this.hideDeleteProductDialog}>
-                    <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
-                        {this.state.product && <span>Are you sure you want to delete <b>{this.state.product.name}</b>?</span>}
-                    </div>
-                </Dialog>
-               
+                 
             </div>
         );
     }
