@@ -53,7 +53,7 @@ const InterviewInvites = () => {
           <div class="row">
             <div class="col-md-12 pb-2 pt-2">
               <h5 class="job-heading">Interview Invites</h5>
-              <p class="job-invite">You have {inviteJobs.length} invites, View <span class="job-accepted"><a href="" class="job-accept">Accepted interviews</a></span></p>
+              <p class="job-invite">You have {inviteJobs && inviteJobs.length ? inviteJobs.length : 0} invites, View <span class="job-accepted"><a href="" class="job-accept">Accepted interviews</a></span></p>
             </div>
           </div>
           <section class="white-middle-section ml-0 mr-1">
