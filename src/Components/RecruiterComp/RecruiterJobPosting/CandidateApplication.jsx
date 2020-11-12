@@ -41,7 +41,7 @@ export default class CandidateApplication extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        this.CandidateApplication.getViewAllCandidateApplication()
+        this.CandidateApplication.getViewAllCandidateApplication(this.props.jobID)
         .then(Response => {
             if(Response.data.responseObject){
             
@@ -72,7 +72,7 @@ export default class CandidateApplication extends Component {
     acceptInvite(candidateID){
         localStorage.setItem("InviteCandidateId",candidateID)
         return (
-          this.MatchingCandidate.updateApplicationStatus()
+          this.MatchingCandidate.updateApplicationStatus(this.props.jobID)
             .then(Response => {
               console.log(Response)
               this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite send Successfully', life: 2000 })
@@ -88,7 +88,7 @@ export default class CandidateApplication extends Component {
     declinInvite(candidateID){
         localStorage.setItem("InviteCandidateId",candidateID)
         return (
-          this.MatchingCandidate.updateApplicationStatus1()
+          this.MatchingCandidate.updateApplicationStatus1(this.props.jobID)
             .then(Response => {
               console.log(Response)
               this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Declined', life: 2000 })

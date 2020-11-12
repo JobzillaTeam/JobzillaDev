@@ -72,7 +72,7 @@ class InterviewStatusPopUp extends Component{
           });
           // this.state.fields['candidateId'] = localStorage.getItem('candidateId');
           // this.state.fields['jobId'] = localStorage.getItem('JobId');
-              this.interViewStatus.updateInterviewStatus(this.state.fields)
+              this.interViewStatus.updateInterviewStatus(this.state.fields, this.props.jobID)
                 .then(Response=>{
                   console.log(Response)
                   this.hideModal()

@@ -27,7 +27,7 @@ export default class ShortlistedCandidate extends Component {
 
       componentDidMount() {
         this.setState({ loading: true });
-          this.ShortlistedCandidateService.getViewAllShortlistedCandidate()
+          this.ShortlistedCandidateService.getViewAllShortlistedCandidate(this.props.jobID)
           .then(Response =>  {
                if(Response.data.responseObject){
               
@@ -130,7 +130,7 @@ export default class ShortlistedCandidate extends Component {
                                             <p><img src="/images/icons/location.svg" alt="location" className="pr-2"/>{data.candidate.address},{data.candidate.city}</p>
                                         </td>
                                         <td>           
-                                            <InterviewStatusPopUp ref={this.onEditStatusModalRef} ></InterviewStatusPopUp> 
+                                            <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID}></InterviewStatusPopUp> 
                                             <span className="mr-2"> {data.interviewStatus}</span>
                                             <img src="../images/icons/iconfinder_Edit-01_1976055.svg" onClick={()=> this.editStatus(data.candidate.candidateId)}></img>
                                         </td>

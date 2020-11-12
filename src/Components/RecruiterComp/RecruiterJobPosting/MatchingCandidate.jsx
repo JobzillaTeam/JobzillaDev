@@ -38,7 +38,7 @@ export default class MatchingCandidate extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        this.MatchingCandidate.getViewAllMatchingCandidate1()
+        this.MatchingCandidate.getViewAllMatchingCandidate1(this.props.jobID)
         .then(Response => {
             if(Response.data.responseObject){
             this.setState({
@@ -64,7 +64,7 @@ export default class MatchingCandidate extends Component {
     acceptInvite(candidateID){
         localStorage.setItem("InviteCandidateId",candidateID)
         return (
-          this.MatchingCandidate.updateApplicationStatus()
+          this.MatchingCandidate.updateApplicationStatus(this.props.jobID)
             .then(Response => {
               console.log(Response)
               this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite send Successfully', life: 2000 })
@@ -80,7 +80,7 @@ export default class MatchingCandidate extends Component {
     declinInvite(candidateID){
         localStorage.setItem("InviteCandidateId",candidateID)
         return (
-          this.MatchingCandidate.updateApplicationStatus1()
+          this.MatchingCandidate.updateApplicationStatus1(this.props.jobID)
             .then(Response => {
               console.log(Response)
               this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Declined', life: 2000 })
@@ -105,6 +105,8 @@ export default class MatchingCandidate extends Component {
        
         return (
             <div className="datatable-editing-demo">
+                <Toast ref={(el) => this.toast = el} />
+                
                               <div>
                                     <div className="Show">Total Result {this.state.matcingCandidateLength} </div>
                                     {this.state.products ?

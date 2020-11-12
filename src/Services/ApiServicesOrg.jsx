@@ -272,77 +272,70 @@ class ApiServicesOrg extends Component {
     }
 
     //5.2 Active Job- VeiwDetails- View candidate Application list- Job Details Component
-    getViewAllCandidateApplication() {
-        const jobId = JSON.parse(localStorage.getItem('JobId'));
+    getViewAllCandidateApplication(jobID) {
         return (
             axios
-                .get(ApiBaseUrl + '/recruiter/listOfCandidateApplications/' + jobId, this.getToken())
+                .get(ApiBaseUrl + '/recruiter/listOfCandidateApplications/' + jobID, this.getToken())
                 .then(Response => Response)
         )
     }
 
     //5.3 Active Job- VeiwDetails- View Matching Candidate list- Job Details Component
-    getViewAllMatchingCandidate1() {
-        const jobId = JSON.parse(localStorage.getItem('JobId'));
+    getViewAllMatchingCandidate1(jobID) {
         return (
             axios
-                .get(ApiBaseUrl + '/recruiter/listOfMatchingCandidateApplications/' + jobId, this.getToken())
+                .get(ApiBaseUrl + '/recruiter/listOfMatchingCandidateApplications/' + jobID, this.getToken())
                 .then(Response => Response)
         )
     }
 
     //5.4 View Shortlisted Candidate list- Job Details Component
-    getViewAllShortlistedCandidate() {
-        const jobId = JSON.parse(localStorage.getItem('JobId'));
+    getViewAllShortlistedCandidate(jobID) {
         return (
             axios
-                .get(ApiBaseUrl + '/recruiter/listOfShortListedCandidate/' + jobId, this.getToken())
+                .get(ApiBaseUrl + '/recruiter/listOfShortListedCandidate/' + jobID, this.getToken())
                 .then(Response => Response)
         )
     }
 
     //5.5 View active job Details 
-    getAllJobDetails() {
-        const jobId = JSON.parse(localStorage.getItem('JobId'));
+    getAllJobDetails(jobID) {
         return (
             axios
-                .get(ApiBaseUrl + '/recruiter/jobDetailsById/' + jobId, this.getToken())
+                .get(ApiBaseUrl + '/recruiter/jobDetailsById/' + jobID, this.getToken())
                 .then(Response => Response)
         )
     }
 
     //5.6 update interview status in shortlisted candidate
-    updateInterviewStatus(fields) {
-        const jobId = JSON.parse(localStorage.getItem('JobId'));
+    updateInterviewStatus(fields, jobID) {
         const candidateId = localStorage.getItem("CandidateId")
         return (
             axios
-                .put(ApiBaseUrl + "/recruiter/updateInterviewStatus/" + `${jobId}/${candidateId}`, { 'interviewStatus': fields.interviewStatus, 'comment': fields.comment }, this.getToken())
+                .put(ApiBaseUrl + "/recruiter/updateInterviewStatus/" + `${jobID}/${candidateId}`, { 'interviewStatus': fields.interviewStatus, 'comment': fields.comment }, this.getToken())
                 .then(Response => Response)
         )
     }
 
     //5.7 Accept application in matching candidate
-    updateApplicationStatus() {
-        const jobId = JSON.parse(localStorage.getItem('JobId'));
+    updateApplicationStatus(jobID) {
         const candidateId = localStorage.getItem("InviteCandidateId")
         const applocationStatus = "Invite_Sent_By_Recruiter"
         return (
             axios
-                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobId}/${candidateId}/${applocationStatus}`, null, this.getToken())
+                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobID}/${candidateId}/${applocationStatus}`, null, this.getToken())
                 .then(Response => Response)
         )
 
     }
 
     //5.8 For Remove candidate from  Matching Candidate
-    updateApplicationStatus1() {
-        const jobId = JSON.parse(localStorage.getItem('JobId'));
+    updateApplicationStatus1(jobID) {
         const candidateId = localStorage.getItem("InviteCandidateId")
         const applocationStatus = "Invite_Removed_By_Recruiter"
         return (
             axios
-                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobId}/${candidateId}/${applocationStatus}`, null, this.getToken())
+                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobID}/${candidateId}/${applocationStatus}`, null, this.getToken())
                 .then(Response => Response)
         )
 

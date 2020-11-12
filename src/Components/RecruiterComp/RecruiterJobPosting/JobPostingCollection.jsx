@@ -26,8 +26,9 @@ export default class JobPostingCollection extends Component {
   }
 
   componentDidMount() {
+      const jobID = this.props.match.params.jobID;
     //To get job Detail
-        this.activeJob1.getAllJobDetails()
+        this.activeJob1.getAllJobDetails(jobID)
           .then(Response =>
            
             this.setState({
@@ -75,6 +76,7 @@ export default class JobPostingCollection extends Component {
 
  
 	render() {
+        const jobID = this.props.match.params.jobID;
         const d=new Date(this.state.postDate)
         
         const day=d.getDate()
@@ -210,13 +212,13 @@ export default class JobPostingCollection extends Component {
             <section className="white-middle-section2  mt-4">
                 <TabView  className="marB60">
                     <TabPanel header="Shortlisted Candidate">
-						            <ShortlistedCandidate></ShortlistedCandidate>
+						            <ShortlistedCandidate jobID={jobID}></ShortlistedCandidate>
                     </TabPanel>
 					          <TabPanel header="Matching Candidate">
-						            <MatchingCandidate></MatchingCandidate>
+						            <MatchingCandidate jobID={jobID}></MatchingCandidate>
                     </TabPanel>
                     <TabPanel header="CandidateApplication">
-						            <CandidateApplication></CandidateApplication>
+						            <CandidateApplication jobID={jobID}></CandidateApplication>
                     </TabPanel>
                 </TabView>
                    
