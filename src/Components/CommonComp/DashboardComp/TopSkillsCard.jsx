@@ -35,7 +35,7 @@ export default class TopSkillsCard extends Component {
                                 <tbody>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/dashboard-assets/Top-Skills/java-icon.svg" width="30" height="30" className="rounded-circle" />
+                                            <img src="/images/Dashboard-assets/Top-Skills/java-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section marT30 ">Java</span>
                                         </td>
                                         <td className="border-top-0">
@@ -48,7 +48,7 @@ export default class TopSkillsCard extends Component {
                                     </tr>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/dashboard-assets/Top-Skills/angular-icon.svg" width="30" height="30" className="rounded-circle" />
+                                            <img src="/images/Dashboard-assets/Top-Skills/angular-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">Angular</span>
                                         </td>
                                         <td className="border-top-0">
@@ -92,7 +92,7 @@ export default class TopSkillsCard extends Component {
                                     </tr>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/dashboard-assets/Top-Skills/python-icon.svg" width="30" height="30" className="rounded-circle" />
+                                            <img src="/images/Dashboard-assets/Top-Skills/python-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">Python</span>
                                         </td>
                                         <td className="border-top-0">

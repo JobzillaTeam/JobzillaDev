@@ -33,22 +33,19 @@ class profileToOpen extends Component {
 
     componentDidMount() {
         this.profileService.getCandidateInfo()
-        .then(Response =>
-         //console.log(Response.data.responseObject)
-          this.setState({
-            CandidateDetails: Response.data.responseObject,
-            candidateInfo:Response.data.responseObject.candidateInfo,
-            skillList:Response.data.responseObject.skillList,
-            educationDetailsList:Response.data.responseObject.educationDetailsList,
-            employmentDetailsList:Response.data.responseObject.employmentDetailsList,
-            candidateCertificatesList:Response.data.responseObject.candidateCertificatesList,
-            candidateLanguageList:Response.data.responseObject.candidateLanguageList
-            
-         },
-           () => { console.log(this.state.candidateInfo) },
-
-          ),
-          ) 
+        .then(Response => {
+          if (Response && Response.data && Response.data.responseObject) {
+            this.setState({
+              CandidateDetails: Response.data.responseObject,
+              candidateInfo:Response.data.responseObject.candidateInfo,
+              skillList:Response.data.responseObject.skillList,
+              educationDetailsList:Response.data.responseObject.educationDetailsList,
+              employmentDetailsList:Response.data.responseObject.employmentDetailsList,
+              candidateCertificatesList:Response.data.responseObject.candidateCertificatesList,
+              candidateLanguageList:Response.data.responseObject.candidateLanguageList
+            });    
+          }
+        }); 
     window.onscroll = function () { myFunction() };
 
     var navbar = document.getElementById("profileNavbar");
