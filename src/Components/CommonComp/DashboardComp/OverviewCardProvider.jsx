@@ -1,14 +1,31 @@
 import React, { Component } from 'react'
 import CountUp from 'react-countup';
+import ApiServicesOrg from '../../../Services/ApiServicesOrg'
 
-export default class OverviewCard extends Component {
+export default class OverviewCardProvider extends Component {
     constructor(){
         super()
         this.state={
-            profileUploaded:20345,
-            activeProfile:15145,
-            hiredProfile:1345
+            profileUploaded:'',
+            activeProfile:'',
+            hiredProfile:''
         }
+        this.dashboardDetails = new ApiServicesOrg();
+    }
+    componentDidMount(){
+        this.dashboardDetails.getProviderDashboardDetails()
+        .then(Response => {
+            if (Response && Response.data) {
+        //   console.log(Response.data.responseObject)
+           this.setState({
+            profileUploaded:Response.data.responseObject.jobsPosted,
+            activeProfile:Response.data.responseObject.openPositions,
+            hiredProfile:Response.data.responseObject.hiredPositions
+
+           })
+           }
+        });
+
     }
     render() {
         const {profileUploaded,activeProfile,hiredProfile} =this.state
@@ -17,7 +34,7 @@ export default class OverviewCard extends Component {
                 {/* Overview Section */}
                 <div className="row ml-0 mr-1">
                 <h5 className="wid100 ml-4 marT20">Dashboard</h5>
-                    <p1 className="wid100 ml-4 marT30 overview_text">Overview-2020</p1>
+                    <div className="wid100 overview ml-4 marT30 overview_text">Overview-2020</div>
                     <div className="col-12 col-sm-12 col-md-6 col-lg-4">
                         <section className="uploadedProfile_section_Card">
                             <div className="media">

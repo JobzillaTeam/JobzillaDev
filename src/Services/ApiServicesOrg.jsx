@@ -361,6 +361,26 @@ class ApiServicesOrg extends Component {
             }).then(Response => Response)
         )
     }
+    //Provider Dashboard api
+    getProviderDashboardDetails() {
+        const year=2020
+        return (
+            axios
+                .get(ApiBaseUrl + '/provider/providerDashboardDetails/'+ year,this.getToken())
+                .then(Response => Response)
+        )
+    }
+ 
+        //Recruiter Dashboard api
+        getRecruiterDashboardDetails() {
+            const orgId = localStorage.getItem("organizationId");
+            const year=2020
+            return (
+                axios
+                    .get(ApiBaseUrl + '/recruiter/recruiterDashboardDetails/'+ orgId +'/' +year,this.getToken())
+                    .then(Response => Response)
+            )
+        }
 
 
 }

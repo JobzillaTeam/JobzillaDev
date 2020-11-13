@@ -430,6 +430,13 @@ class ApiServicesOrgCandidate {
     )
   }
 
+//candidate Dashboard
+getcandidateDashboardDetails() {
+  const candidateId = localStorage.getItem('candidateId')
+  return axios
+  .get(ApiBaseUrl + "/candiadate/candidateDashboard/" + candidateId ,this.getToken())
+  .then((Response) => Response)
+}
 
 }
 

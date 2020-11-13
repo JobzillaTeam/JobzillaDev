@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TopSkillsCard from '../CommonComp/DashboardComp/TopSkillsCard';
 import RecentMatches from '../CommonComp/DashboardComp/RecentMatches';
 import Footer from '../CommonComp/Footer';
 import LeftNavCandidate from '../CommonComp/LeftNavCandidate'
@@ -8,6 +7,7 @@ import ScrollUpButton from "react-scroll-up-button";
 import OverviewCardCandidate from '../CommonComp/DashboardComp/OverviewCardCandidate';
 import Popup from '../CommonComp/Popup';
 import TermsCandidate from '../CommonComp/DashboardComp/TermsCandidate';
+import TopSkillsCandidate from '../CommonComp/DashboardComp/TopSkillsCandidate';
 
 const Dashboard = () => {
 	return (
@@ -21,7 +21,7 @@ const Dashboard = () => {
 							{/* Importing Overview Cards, Top skills card and monthly Report Bar Graph */}
 							{/* To display login User Details */}
 							<OverviewCardCandidate />
-							<TopSkillsCard />
+							<TopSkillsCandidate />
 							<RecentMatches />
 							{/* Importing Overview Cards, Top skills card and monthly Report Bar Graph */}
 
