@@ -80,7 +80,7 @@ class RouterSettings extends Component {
             <CandidateLayout path="/candidate/dashboard" component={Dashboard} />
             <CandidateLayout path="/candidate/jobOffers" component={JobOffers} />
             <CandidateLayout path="/candidate/searchJobs" component={SearchJobs} />
-            <CandidateLayout path="/candidate/searchJobsDetails" component={SearchJobsDetails} />
+            <CandidateLayout path="/candidate/searchJobsDetails/:jobID/" component={SearchJobsDetails} />
             <CandidateLayout path="/candidate/profile" component={CandidateProfile} />
             <CandidateLayout path="/candidate/profile1" component={Profile1} />
             <CandidateLayout path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>

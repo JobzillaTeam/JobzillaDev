@@ -441,6 +441,31 @@ class ApiServicesOrgCandidate {
         .then(Response => Response.data.responseObject)
     )
   }
+
+  fetchJobListForCandidate() {
+    const candidateId = localStorage.getItem('candidateId')
+    const authToken = localStorage.getItem('authToken')
+    return (
+      axios
+        .get(`${ApiBaseUrl}/candiadate/jobList/${candidateId}`, {
+          headers: {'Authorization': `Bearer ${authToken}`}
+        })
+        .then(Response => Response.data.responseObject)
+    )
+  }
+
+  fetchJobOffersForCandidate() {
+    const candidateId = localStorage.getItem('candidateId')
+    const authToken = localStorage.getItem('authToken')
+    return (
+      axios
+        .get(`${ApiBaseUrl}/candiadate/jobOffersForCandidate/${candidateId}`, {
+          headers: {'Authorization': `Bearer ${authToken}`}
+        })
+        .then(Response => Response.data.responseObject)
+    )
+  }
+
   //candidate Dashboard
   getcandidateDashboardDetails() {
     const candidateId = localStorage.getItem('candidateId')

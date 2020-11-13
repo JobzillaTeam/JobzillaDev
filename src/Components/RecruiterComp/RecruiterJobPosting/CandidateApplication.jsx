@@ -72,11 +72,11 @@ export default class CandidateApplication extends Component {
 
     acceptInvite(candidateID) {
         return (
-            this.MatchingCandidate.updateApplicationStatus(this.props.jobID, candidateID, 'Application_Accepted_By_Recruiter')
+            new ApiServicesOrg().updateApplicationStatus(this.props.jobID, candidateID, 'Application_Accepted_By_Recruiter')
                 .then(Response => {
                     console.log(Response)
                     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite send Successfully', life: 2000 })
-                    // window.location.reload()
+                    window.location.reload()
                 })
                 .catch(error => {
                     console.log("Error Occured..", error)
@@ -87,7 +87,7 @@ export default class CandidateApplication extends Component {
 
     declinInvite(candidateID) {
         return (
-            this.MatchingCandidate.updateApplicationStatus(this.props.jobID, candidateID, 'Application_Declined_By_Recruiter')
+            new ApiServicesOrg().updateApplicationStatus(this.props.jobID, candidateID, 'Application_Declined_By_Recruiter')
                 .then(Response => {
                     console.log(Response)
                     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Declined', life: 2000 })
