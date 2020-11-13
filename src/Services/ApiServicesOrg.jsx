@@ -308,8 +308,7 @@ class ApiServicesOrg extends Component {
     }
 
     //5.6 update interview status in shortlisted candidate
-    updateInterviewStatus(fields, jobID) {
-        const candidateId = localStorage.getItem("CandidateId")
+    updateInterviewStatus(fields, jobID, candidateId) {
         return (
             axios
                 .put(ApiBaseUrl + "/recruiter/updateInterviewStatus/" + `${jobID}/${candidateId}`, { 'interviewStatus': fields.interviewStatus, 'comment': fields.comment }, this.getToken())
@@ -318,28 +317,15 @@ class ApiServicesOrg extends Component {
     }
 
     //5.7 Accept application in matching candidate
-    updateApplicationStatus(jobID) {
-        const candidateId = localStorage.getItem("InviteCandidateId")
-        const applocationStatus = "Invite_Sent_By_Recruiter"
+    updateApplicationStatus(jobID, candidateID, applicationStatus) {
         return (
             axios
-                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobID}/${candidateId}/${applocationStatus}`, null, this.getToken())
+                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobID}/${candidateID}/${applicationStatus}`, null, this.getToken())
                 .then(Response => Response)
         )
 
     }
 
-    //5.8 For Remove candidate from  Matching Candidate
-    updateApplicationStatus1(jobID) {
-        const candidateId = localStorage.getItem("InviteCandidateId")
-        const applocationStatus = "Invite_Removed_By_Recruiter"
-        return (
-            axios
-                .put(ApiBaseUrl + "/recruiter/updateApplicationStatus/" + `${jobID}/${candidateId}/${applocationStatus}`, null, this.getToken())
-                .then(Response => Response)
-        )
-
-    }
 
     //5.9 Download Resume In Shortlisted Candidate
     downloadResumeFile1() {

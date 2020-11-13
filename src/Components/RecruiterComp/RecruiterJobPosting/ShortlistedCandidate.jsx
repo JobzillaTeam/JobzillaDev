@@ -130,7 +130,7 @@ export default class ShortlistedCandidate extends Component {
                                             <p><img src="/images/icons/location.svg" alt="location" className="pr-2"/>{data.candidate.address},{data.candidate.city}</p>
                                         </td>
                                         <td>           
-                                            <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID}></InterviewStatusPopUp> 
+                                            <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID} candidateId={data.candidate.candidateId}></InterviewStatusPopUp> 
                                             <span className="mr-2"> {data.interviewStatus}</span>
                                             <img src="../images/icons/iconfinder_Edit-01_1976055.svg" onClick={()=> this.editStatus(data.candidate.candidateId)}></img>
                                         </td>

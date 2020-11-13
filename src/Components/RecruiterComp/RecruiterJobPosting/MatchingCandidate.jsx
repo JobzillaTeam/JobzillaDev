@@ -62,13 +62,12 @@ export default class MatchingCandidate extends Component {
     }
 
     acceptInvite(candidateID){
-        localStorage.setItem("InviteCandidateId",candidateID)
         return (
-          this.MatchingCandidate.updateApplicationStatus(this.props.jobID)
+          this.MatchingCandidate.updateApplicationStatus(this.props.jobID, candidateID, 'Invite_Sent_By_Recruiter')
             .then(Response => {
               console.log(Response)
               this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite send Successfully', life: 2000 })
-             // window.location.reload()
+             window.location.reload()
             })
             .catch(error => {
               console.log("Error Occured..", error)
@@ -78,13 +77,12 @@ export default class MatchingCandidate extends Component {
     }
 
     declinInvite(candidateID){
-        localStorage.setItem("InviteCandidateId",candidateID)
         return (
-          this.MatchingCandidate.updateApplicationStatus1(this.props.jobID)
+          this.MatchingCandidate.updateApplicationStatus(this.props.jobID, candidateID, 'Invite_Removed_By_Recruiter')
             .then(Response => {
               console.log(Response)
               this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Declined', life: 2000 })
-            //  window.location.reload()
+             window.location.reload()
             })
             .catch(error => {
               console.log("Error Occured..", error)

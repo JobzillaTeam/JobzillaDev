@@ -3188,3 +3188,36 @@ textarea {
 
 
 /* Disbale delete resume*/
+
+
+/* closed jobs start*/
+
+.job-skills li {
+    display: inline-block;
+    font-size: 12px;
+    padding: 20px 27px 20px 0px;
+}
+  
+.job-skills img {
+    padding-right: 6px;
+}
+  
+.white-middle-section {
+    padding: 40px;
+    background: #fff;
+    border-radius: 0px !important;
+}
+  
+.job-posting {
+    color: #7b7b7b;
+    font-size: 12px;
+    padding-left: 20px !important;
+}
+  
+.job-title {
+    color: #007eff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+  /* closed jobs end */

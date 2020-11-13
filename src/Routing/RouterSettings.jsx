@@ -84,7 +84,7 @@ class RouterSettings extends Component {
             <CandidateLayout path="/candidate/profile" component={CandidateProfile} />
             <CandidateLayout path="/candidate/profile1" component={Profile1} />
             <CandidateLayout path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>
-            <CandidateLayout path="/candidate/interviews/InterviewInvitesJobdetails" component={InterviewInvitesJobdetails}/> 
+            <CandidateLayout path="/candidate/interviews/InterviewInvitesJobdetails/:jobID" component={InterviewInvitesJobdetails}/> 
             <CandidateLayout path="/candidate/interviews/acceptedInterviews" component={AcceptedInterviews}/>
             <CandidateLayout path="/candidate/interviews/AcceptedInviteJobDetails" component={AcceptedInviteJobDetails}/>
             <CandidateLayout path="/candidate/changePassword" component={ChangePassword}/>

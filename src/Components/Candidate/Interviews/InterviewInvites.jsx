@@ -32,9 +32,9 @@ const InterviewInvites = () => {
       const dateA = new Date(objA.createdDate).getTime()
       const dateB = new Date(objB.createdDate).getTime()
       if (value === "recent_First" || '') {
-        return dateB - dateA
-      } else if (value === "recent_Last") {
         return dateA - dateB
+      } else if (value === "recent_Last") {
+        return dateB - dateA
       }
     });
     return updatedInviteJobs;
@@ -83,6 +83,7 @@ const InterviewInvites = () => {
             </div>
             {
               inviteJobs && inviteJobs[0] && inviteJobs.map(inviteJob => {
+                console.log(inviteJob)
                 const { jobDetails } = inviteJob;
                 return (
                   <section class="job-white-card pb-4">
@@ -116,7 +117,7 @@ const InterviewInvites = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="row float-right job-full-detail"><a href="">view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></a></div>
+                    <div class="row float-right job-full-detail"><Link to={`/candidate/interviews/InterviewInvitesJobdetails/${jobDetails.jobId}`}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                   </section>
                 )
               })
