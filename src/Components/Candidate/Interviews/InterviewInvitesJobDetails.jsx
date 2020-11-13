@@ -2,12 +2,17 @@ import React, { useEffect, Fragment, useState } from 'react'
 import HeaderAll from '../../CommonComp/HeaderAll';
 import LeftNavCandidate from '../../CommonComp/LeftNavCandidate'
 import Footer from '../../CommonComp/Footer'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import ApiServicesOrg from '../../../Services/ApiServicesOrg';
 
+
 const InterviewInvitesJobdetails = (props) => {
-  const [jobDetails, setJobDetails] = useState();
   const jobID = props.match.params.jobID;
+  const applicationStatus = props.match.params.applicationStatus;
+  const isBottomActionButtonsVisible = applicationStatus === 'Invite_Sent_By_Recruiter';
+  const [jobDetails, setJobDetails] = useState();
+  const [isActionButtonsVisible, setIsActionButtonsVisible] = useState(isBottomActionButtonsVisible);
+  let history = useHistory();
   useEffect(() => {
     new ApiServicesOrg().getAllJobDetails(jobID)
       .then(Response => {
@@ -20,8 +25,11 @@ const InterviewInvitesJobdetails = (props) => {
     const status = isAccepted ? 'Invite_Accepted_By_Candidate' : 'Invite_Declined_By_Candidate'
     const candidateId = localStorage.getItem('candidateId');
     new ApiServicesOrg().updateApplicationStatus(jobID, candidateId, status)
-      .then(Response=>{
-      })  
+      .then(Response => {
+        const isVisible = Response && Response.responseObject && Response.responseObject.applicationStatus === 'Invite_Sent_By_Recruiter'
+        setIsActionButtonsVisible(isVisible);
+        history.goBack()
+      })
   }
   return (
     <Fragment>
@@ -126,10 +134,11 @@ const InterviewInvitesJobdetails = (props) => {
                   </div>
 
                 </div>
-                <div className="action_buttons">
+                {isActionButtonsVisible && <div className="action_buttons">
                   <button type="button" className="btn btn-primary" onClick={e => handleStatusUpdate(e, true)}>Accept</button>
                   <button type="button" className="btn btn-outline-primary ml-4" onClick={e => handleStatusUpdate(e, false)}>Decline</button>
-                </div>
+                </div>}
+
               </div>
             </div>
           </div>}
