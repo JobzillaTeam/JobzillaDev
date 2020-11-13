@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from '../CommonComp/Header'
 import Footer from '../CommonComp/Footer' 
 import ApiServicesOrg from '../../Services/ApiServicesOrg'
+import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate'
 
 //import TermsOfUse from '../Auth/TermsOfUse'
 //import PrivacyPolicy from '../Auth/PrivacyPolicy'
@@ -84,11 +85,21 @@ class LoginComp extends Component {
               let _redirectTo;
               if (Response && Response.data && Response.data.responseObject && Response.data.responseObject.userRole === "candidate_role") {
                 _redirectTo = '/candidate/dashboard';
+                ApiServicesOrgCandidate.fetchProfileInfo().then(
+                  response => {
+                    if (response && response.candidateInfo && response.candidateInfo.candidateId) {
+                      localStorage.setItem('candidateId', response.candidateInfo.candidateId)
+                    }
+                    this.props.history.push(_redirectTo);
+                  }
+                ).catch(error => {
+                  this.props.history.push(_redirectTo);
+                })
               } else {
                 _redirectTo = '/providerDashboard';
                 localStorage.setItem('status','provider');
+                this.props.history.push(_redirectTo);
               }
-              this.props.history.push(_redirectTo);
             }
           })
           .catch(error => {
