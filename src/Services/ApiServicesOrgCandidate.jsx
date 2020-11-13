@@ -430,6 +430,18 @@ class ApiServicesOrgCandidate {
     )
   }
 
+  fetchInterviewAcceptedByCandidate() {
+    const candidateId = localStorage.getItem('candidateId')
+    const authToken = localStorage.getItem('authToken')
+    return (
+      axios
+        .get(`${ApiBaseUrl}/candidate/acceptedInterviews/${candidateId}`, {
+          headers: {'Authorization': `Bearer ${authToken}`}
+        })
+        .then(Response => Response.data.responseObject)
+    )
+  }
+
 
 }
 
