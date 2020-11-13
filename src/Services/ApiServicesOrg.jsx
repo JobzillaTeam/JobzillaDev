@@ -185,7 +185,7 @@ class ApiServicesOrg extends Component {
     //5.5 View Candidate profile 
     getCandidateInfo() {
         // const userId = JSON.parse(localStorage.getItem('candidateId'));
-        const userId = 126
+        const userId = 1427
         return (
             axios
                 .get(ApiBaseUrl + '/candidate/profileview/' + userId, this.getToken())
@@ -228,6 +228,16 @@ class ApiServicesOrg extends Component {
                 .then(Response => Response)
         )
     }
+
+    viewProfileImage1() {
+        const candidateId = JSON.parse(localStorage.getItem('candidateUserId')); const authToken = localStorage.getItem('authToken');
+        const userId = 1427;
+        return( 
+            axios({ url: `${ApiBaseUrl}/user/viewImage/${userId}`, headers: { 'Authorization': `Bearer ${authToken}` } }).then(Response => Response)
+        );
+    }
+
+
 
     // For getting profile info
     getOrganizationProfile() {
@@ -325,7 +335,17 @@ class ApiServicesOrg extends Component {
         )
 
     }
+    //5.8 Download Resume For Candidate Profile
 
+    downloadResumeFile (){ 
+        // const candidateId = JSON.parse(localStorage.getItem('candidateId'));
+        const authToken = localStorage.getItem('authToken');
+        const candidateId=1428;
+        return( 
+            axios({
+                url: `${ApiBaseUrl}/user/viewResume/${candidateId}`,
+                headers: { 'Authorization': `Bearer ${authToken}`
+            }}).then(Response => Response) ) }
 
     //5.9 Download Resume In Shortlisted Candidate
     downloadResumeFile1() {
