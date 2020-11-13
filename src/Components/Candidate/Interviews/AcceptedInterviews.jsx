@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom'
 import ApiServicesOrgCandidate from '../../../Services/ApiServicesOrgCandidate';
 
 const AcceptedInterviews = () => {
-  const [inviteJobs, setInviteJobs] = useState([])
-  const [cloneInviteJobs, setCloneInviteJobs] = useState([])
+  const [resourceJobs, setResourceJobs] = useState([])
+  const [cloneResourceJobs, setCloneResourceJobs] = useState([])
   let sortMethod = '';
   useEffect(() => {
     ApiServicesOrgCandidate.fetchInterviewAcceptedByCandidate().then(response => {
-      setCloneInviteJobs(response);
-      setInviteJobs(response)
+      setCloneResourceJobs(response);
+      setResourceJobs(response)
     }).catch(error => {
       console.log(error)
     });
@@ -20,16 +20,16 @@ const AcceptedInterviews = () => {
 
   const handleInputChange = e => {
     const { value } = e.target;
-    const updatedInviteJobs = cloneInviteJobs.filter(inviteJob => {
-      const { jobDetails } = inviteJob;
+    const updatedResourceJobs = cloneResourceJobs.filter(resourceJob => {
+      const { jobDetails } = resourceJob;
       return jobDetails.jobTitle.toLowerCase().includes(value) || jobDetails.jobCity.toLowerCase().includes(value) || jobDetails.primarySkills.toLowerCase().includes(value)
     });
-    const sortJobs = getSortedInviteJobs(sortMethod.value, updatedInviteJobs)
-    setInviteJobs(sortJobs);
+    const sortJobs = getSortedResourceJobs(sortMethod.value, updatedResourceJobs)
+    setResourceJobs(sortJobs);
   }
 
-  const getSortedInviteJobs = (value, inviteJobsList) => {
-    const updatedInviteJobs = inviteJobsList && inviteJobsList.sort((objA, objB) => {
+  const getSortedResourceJobs = (value, resourceJobsList) => {
+    const updatedResourceJobs = resourceJobsList && resourceJobsList.sort((objA, objB) => {
       const dateA = new Date(objA.createdDate).getTime()
       const dateB = new Date(objB.createdDate).getTime()
       if (value === "recent_First" || '') {
@@ -38,16 +38,15 @@ const AcceptedInterviews = () => {
         return dateA - dateB
       }
     });
-    return updatedInviteJobs;
+    return updatedResourceJobs;
   }
 
   const handleDropdownChange = e => {
     const { value } = e.target;
-    const sortJobs = getSortedInviteJobs(value, inviteJobs)
+    const sortJobs = getSortedResourceJobs(value, resourceJobs)
     console.log('aa', sortJobs)
-    setInviteJobs(sortJobs);
+    setResourceJobs(sortJobs);
   }
-  console.log(inviteJobs)
   return (
     <Fragment>
       <LeftNavCandidate></LeftNavCandidate>
@@ -57,7 +56,7 @@ const AcceptedInterviews = () => {
           <div class="row">
             <div class="col-md-12 pb-2 pt-2">
               <h5 class="job-heading">Accepted Interviews</h5>
-              <p class="job-invite">You have {inviteJobs && inviteJobs.length ? inviteJobs.length : 0} accepted, View <span class="job-accepted"><Link to="/candidate/Interviews/InterviewInvites" class="job-accept">INTERVIEW INVITES</Link></span></p>
+              <p class="job-invite">You have {resourceJobs && resourceJobs.length ? resourceJobs.length : 0} accepted, View <span class="job-accepted"><Link to="/candidate/Interviews/InterviewInvites" class="job-accept">INTERVIEW INVITES</Link></span></p>
             </div>
           </div>
           <section class="white-middle-section ml-0 mr-1">
@@ -86,9 +85,8 @@ const AcceptedInterviews = () => {
               </div>
             </div>
             {
-              inviteJobs && inviteJobs[0] && inviteJobs.map(inviteJob => {
-                console.log(inviteJob)
-                const { jobDetails } = inviteJob;
+              resourceJobs && resourceJobs[0] && resourceJobs.map(resourceJob => {
+                const { jobDetails } = resourceJob;
                 return (
                   <section class="job-white-card pb-4">
                     <div class="row">
@@ -115,7 +113,7 @@ const AcceptedInterviews = () => {
                       <div class="col-md-3 ">
                         <div class="job-circle float-right">
                           <div class="job-text-wrap">
-                            <span>{inviteJob.matchingPercentage}%</span>
+                            <span>{resourceJob.matchingPercentage}%</span>
                             <span>Match</span>
                           </div>
                         </div>
