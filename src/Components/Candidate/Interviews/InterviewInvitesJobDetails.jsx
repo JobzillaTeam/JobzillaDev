@@ -26,9 +26,11 @@ const InterviewInvitesJobdetails = (props) => {
     const candidateId = localStorage.getItem('candidateId');
     new ApiServicesOrg().updateApplicationStatus(jobID, candidateId, status)
       .then(Response => {
-        const isVisible = Response && Response.responseObject && Response.responseObject.applicationStatus === 'Invite_Sent_By_Recruiter'
-        setIsActionButtonsVisible(isVisible);
-        history.goBack()
+        const applicationStatus = Response && Response.data && Response.data.responseObject && Response.data.responseObject.applicationStatus;
+        debugger
+        if (applicationStatus === 'Invite_Sent_By_Recruiter') setIsActionButtonsVisible(true);
+        if (applicationStatus === 'Invite_Accepted_By_Candidate') history.push(`/candidate/interviews/AcceptedInviteJobDetails/${jobID}`)
+        if (applicationStatus === 'Invite_Declined_By_Candidate') history.goBack();
       })
   }
   return (
