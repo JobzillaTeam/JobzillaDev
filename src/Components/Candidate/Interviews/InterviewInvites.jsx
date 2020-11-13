@@ -24,17 +24,18 @@ const InterviewInvites = () => {
       const {jobDetails} = inviteJob;
       return jobDetails.jobTitle.toLowerCase().includes(value) || jobDetails.jobCity.toLowerCase().includes(value) || jobDetails.primarySkills.toLowerCase().includes(value)
     });
-    setInviteJobs(getSortedInviteJobs(sortMethod.value, updatedInviteJobs));
+    const sortJobs = getSortedInviteJobs(sortMethod.value, updatedInviteJobs)
+    setInviteJobs(sortJobs);
   }
 
   const getSortedInviteJobs = (value, inviteJobsList) => {
-    const updatedInviteJobs = inviteJobsList.sort((objA, objB) => {
+    const updatedInviteJobs = inviteJobsList && inviteJobsList.sort((objA, objB) => {
       const dateA = new Date(objA.createdDate).getTime()
       const dateB = new Date(objB.createdDate).getTime()
       if (value === "recent_First" || '') {
-        return dateA - dateB
-      } else if (value === "recent_Last") {
         return dateB - dateA
+      } else if (value === "recent_Last") {
+        return dateA - dateB
       }
     });
     return updatedInviteJobs;
@@ -42,8 +43,11 @@ const InterviewInvites = () => {
 
   const handleDropdownChange = e => {
     const {value} = e.target;
-    setInviteJobs(getSortedInviteJobs(value, inviteJobs));
+    const sortJobs = getSortedInviteJobs(value, inviteJobs)
+    console.log('aa',sortJobs)
+    setInviteJobs(sortJobs);
   }
+  console.log(inviteJobs)
   return (
     <Fragment>
       <LeftNavCandidate></LeftNavCandidate>
@@ -117,7 +121,7 @@ const InterviewInvites = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="row float-right job-full-detail"><Link to={`/candidate/interviews/InterviewInvitesJobdetails/${jobDetails.jobId}`}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                    <div class="row float-right job-full-detail"><Link to={{pathname: `/candidate/interviews/InterviewInvitesJobdetails/${jobDetails.jobId}/${inviteJob.applicationStatus}`}}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                   </section>
                 )
               })
