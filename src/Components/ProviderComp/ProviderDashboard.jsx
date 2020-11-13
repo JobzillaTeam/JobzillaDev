@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import TopSkillsCard from '../CommonComp/DashboardComp/TopSkillsCard';
 import HeaderAll from '../CommonComp/HeaderAll'
 import Footer from '../CommonComp/Footer'
 import ScrollUpButton from "react-scroll-up-button";
 import LeftNavProvider from '../CommonComp/LeftNavProvider'
 import OverviewCardProvider from '../CommonComp/DashboardComp/OverviewCardProvider';
 import BarGraphProvider from '../CommonComp/DashboardComp/BarGraphProvider';
+import TopSkillsProvider from '../CommonComp/DashboardComp/TopSkillsProvider';
 
 export default class ProviderDashboard extends Component {
 	constructor(props) {
@@ -29,7 +29,7 @@ export default class ProviderDashboard extends Component {
 						<div className="row flex-xl-nowrap">
 							<section className="content_section col py-md-3 pl-md-4 bd-content">
 								<OverviewCardProvider />
-								<TopSkillsCard />
+								<TopSkillsProvider />
 								<BarGraphProvider />
 							</section>
 						</div>

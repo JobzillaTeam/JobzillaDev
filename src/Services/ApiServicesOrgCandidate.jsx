@@ -441,7 +441,13 @@ class ApiServicesOrgCandidate {
         .then(Response => Response.data.responseObject)
     )
   }
-
+  //candidate Dashboard
+  getcandidateDashboardDetails() {
+    const candidateId = localStorage.getItem('candidateId')
+    return axios
+    .get(ApiBaseUrl + "/candiadate/candidateDashboard/" + candidateId ,this.getToken())
+    .then((Response) => Response)
+  }
 
 }
 
