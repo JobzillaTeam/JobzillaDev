@@ -177,7 +177,6 @@ class ActiveJob extends Component {
                   <div className="white-middle-section5  mt-0 p-0 border-bottom-thin h-100">
                     <div className="px-5 pt-3" key={index}>
                       <div>
-                        {data.jobDescription.jobId}
                         <span className="mr-3 job-title-text" id="designation">{data.jobDescription.jobTitle}</span>
                         <span className="job-posted-time-text">Posted {data.jobDescription.postedAt} day ago</span>
                       </div>
