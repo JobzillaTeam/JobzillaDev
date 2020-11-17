@@ -126,35 +126,7 @@ class CloseJobs extends Component {
 
 
 
-    let closedJobs = this.state.closedJobs && this.state.closedJobs.filter((datas) => {
-
-      console.log(datas);
-
-      return (
-
-        datas.jobTitle
-
-          .toLowerCase()
-
-          .includes(this.state.search.toLowerCase()) ||
-
-        datas.primarySkills
-
-          .toLowerCase()
-
-          .includes(this.state.search.toLowerCase()) ||
-
-        datas.secondarySkills
-
-          .toLowerCase()
-
-          .includes(this.state.search.toLowerCase()) ||
-
-        datas.jobCity.toLowerCase().includes(this.state.search.toLowerCase())
-
-      );
-
-    });
+    let closedJobs = this.state.closedJobs;
 
     return (
 
@@ -302,222 +274,221 @@ class CloseJobs extends Component {
 
                 {closedJobs &&
 
-                  closedJobs.map((jobDetails) => (
+                  closedJobs.map((closedJob) => {
+                    const { jobDetails } = closedJob;
+                    return (
+                      <section className="white-middle-section mb-3 mt-0 p-0">
 
-                    <section className="white-middle-section mb-3 mt-0 p-0">
+                        <div className="px-4 pt-3">
 
-                      <div className="px-4 pt-3">
+                          <div>
 
-                        <div>
+                            <span className="job-title">
 
-                          <span className="job-title">
+                              {jobDetails.jobTitle}
 
-                            {jobDetails.jobTitle}
+                            </span>
+
+                            <span className="job-posting">
+
+                              Posted {jobDetails.postedAt} day ago
 
                           </span>
 
-                          <span className="job-posting">
+                          </div>
 
-                            Posted {jobDetails.postedAt} day ago
+                          <div>
 
-                          </span>
+                            <ul className="job-skills">
 
-                        </div>
+                              <li>
 
-                        <div>
+                                <img src="/images/Dashboard-assets/recent-matches/category.svg" />
 
-                          <ul className="job-skills">
+                                {jobDetails.category}
 
-                            <li>
+                              </li>
 
-                              <img src="/images/Dashboard-assets/recent-matches/category.svg" />
+                              <li>
 
-                              {jobDetails.category}
+                                <img src="/images/Dashboard-assets/recent-matches/experience.svg" />
 
-                            </li>
-
-                            <li>
-
-                              <img src="/images/Dashboard-assets/recent-matches/experience.svg" />
-
-                              {jobDetails.experienceReqFrom}-
+                                {jobDetails.experienceReqFrom}-
 
                               {jobDetails.experienceReqTo}years
 
                             </li>
 
-                            <li>
+                              <li>
 
-                              <img src="/images/Dashboard-assets/recent-matches/job_role.svg" />
+                                <img src="/images/Dashboard-assets/recent-matches/job_role.svg" />
 
-                              {jobDetails.employmentType}
+                                {jobDetails.employmentType}
 
-                            </li>
+                              </li>
 
-                            <li>
+                              <li>
 
-                              <img src="/images/Dashboard-assets/recent-matches/location.svg" />
+                                <img src="/images/Dashboard-assets/recent-matches/location.svg" />
 
-                              {jobDetails.jobCity}, {jobDetails.jobCountry}
+                                {jobDetails.jobCity}, {jobDetails.jobCountry}
 
-                            </li>
+                              </li>
 
-                            <li>
+                              <li>
 
-                              <img src="/images/Dashboard-assets/recent-matches/technology.svg" />{" "}
+                                <img src="/images/Dashboard-assets/recent-matches/technology.svg" />{" "}
 
-                              {jobDetails.primarySkills}
+                                {jobDetails.primarySkills}
 
-                            </li>
+                              </li>
 
-                            <li>
+                              <li>
 
-                              <img src="/images/Dashboard-assets/recent-matches/vaccency.svg" />
+                                <img src="/images/Dashboard-assets/recent-matches/vaccency.svg" />
 
-                              {jobDetails.noOfHiredPositions}
+                                {jobDetails.noOfHiredPositions}
 
-                            </li>
+                              </li>
 
-                          </ul>
+                            </ul>
+
+                          </div>
 
                         </div>
 
-                      </div>
+                        {/* Table */}
 
-                      {/* Table */}
+                        <div>
 
-                      <div>
+                          <table className="table table-borderless custom-table">
 
-                        <table className="table table-borderless custom-table">
+                            <thead>
 
-                          <thead>
+                              <tr>
 
-                            <tr>
+                                <th>#</th>
 
-                              <th>#</th>
+                                <th>Candidates</th>
 
-                              <th>Candidates</th>
+                                <th>Status</th>
 
-                              <th>Status</th>
+                                <th>Comments</th>
 
-                              <th>Comments</th>
+                                <th>Last updated</th>
 
-                              <th>Last updated</th>
+                              </tr>
 
-                            </tr>
+                            </thead>
 
-                          </thead>
+                            <tbody>
 
-                          <tbody>
+                              <tr>
 
-                            <tr>
+                                <td>1</td>
 
-                              <td>1</td>
+                                <td>
 
-                              <td>
+                                  <p className="tb-title-text">John Doe</p>
 
-                                <p className="tb-title-text">John Doe</p>
+                                  <p>Software developer at TCS</p>
 
-                                <p>Software developer at TCS</p>
+                                  <p>
 
-                                <p>
+                                    <img
 
-                                  <img
+                                      src="/images/icons/category.svg"
 
-                                    src="/images/icons/category.svg"
+                                      alt="email"
 
-                                    alt="email"
+                                      className="pr-2"
 
-                                    className="pr-2"
-
-                                  />
+                                    />
 
                                   johndoe@tcs.com
 
                                 </p>
 
-                                <p>
+                                  <p>
 
-                                  <img
+                                    <img
 
-                                    src="/images/icons/category.svg"
+                                      src="/images/icons/category.svg"
 
-                                    alt="mobile number"
+                                      alt="mobile number"
 
-                                    className="pr-2"
+                                      className="pr-2"
 
-                                  />
+                                    />
 
                                   +91 1234567890
 
                                 </p>
 
-                                <p>
+                                  <p>
 
-                                  <img
+                                    <img
 
-                                    src="/images/icons/location.svg"
+                                      src="/images/icons/location.svg"
 
-                                    alt="location"
+                                      alt="location"
 
-                                    className="pr-2"
+                                      className="pr-2"
 
-                                  />
+                                    />
 
-                                  {jobDetails.jobCity}, {jobDetails.jobCountry}
+                                    {jobDetails.jobCity}, {jobDetails.jobCountry}
 
-                                </p>
+                                  </p>
 
-                              </td>
+                                </td>
 
-                              <td>{jobDetails.jobStatus}</td>
+                                <td>{jobDetails.jobStatus}</td>
 
-                              <td>19 June Joining Date</td>
+                                <td>19 June Joining Date</td>
 
-                              <td>19 June, 2020</td>
+                                <td>19 June, 2020</td>
 
-                            </tr>
+                              </tr>
 
-                            <tr>
+                              <tr>
 
-                              <td
+                                <td
 
-                                colSpan="5"
+                                  colSpan="5"
 
-                                className="job-full-detail text-right"
+                                  className="job-full-detail text-right"
 
-                              >
+                                >
 
-                                <Link to="/closedjobdetails">
+                                  <Link to="/closedjobdetails">
 
-                                  VIEW Details{" "}
+                                    VIEW Details{" "}
 
-                                  <img
+                                    <img
 
-                                    src="/images/icons/view_details_arrow.svg"
+                                      src="/images/icons/view_details_arrow.svg"
 
-                                    class="detail-arrow"
+                                      class="detail-arrow"
 
-                                  />
+                                    />
 
-                                </Link>
+                                  </Link>
 
-                              </td>
+                                </td>
 
-                            </tr>
+                              </tr>
 
-                          </tbody>
+                            </tbody>
 
-                        </table>
+                          </table>
 
-                      </div>
+                        </div>
 
-                    </section>
-
-                  ))}
-
-
-
+                      </section>
+                    );
+                  }
+                  )}
                 {/* 2nd table */}
 
               </div>
