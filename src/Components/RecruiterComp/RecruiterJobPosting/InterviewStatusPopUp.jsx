@@ -139,11 +139,11 @@ class InterviewStatusPopUp extends Component{
                           <div className="errorMsg">{this.state.errors.interViewStatus}</div>:''                   
                       } 
                         <option>Select Status</option>
-                        <option value="interviewed">Interviewed</option>
-                          <option value="selected">Selected</option>
-                          <option value="rejected">Rejected</option>
-                          <option value="offered">Offered</option>
-                          <option value="joined">Joined</option>
+                        <option value="Interviewed">Interviewed</option>
+                          <option value="Selected">Selected</option>
+                          <option value="Rejected">Rejected</option>
+                          <option value="Offered">Offered</option>
+                          <option value="Joined">Joined</option>
                           
                       </select>
                   </div> 
