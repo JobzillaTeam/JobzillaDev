@@ -57,24 +57,46 @@ const CandidateJobDetails = (props) => {
   const { jobDetails } = JobAndCandidateDetails || {};
   const primaryButtonName = jobStatus === 'searchJobs' || jobStatus === 'recentMatches' ? 'Apply' : 'Accept'
   const secondaryButtonName = jobStatus === 'searchJobs' || jobStatus === 'recentMatches' ? 'Cancel' : 'Decline'
+  let perviousLink = '';
+  let perviousLinkText = '';
+  switch (jobStatus) {
+    case 'invites': {
+      perviousLink = '/candidate/Interviews/InterviewInvites';
+      perviousLinkText = 'Interview Invites';
+    }
+      break;
+    case 'accepted': {
+      perviousLink = '/candidate/Interviews/AcceptedInterviews';
+      perviousLinkText = 'Accepted Interviews';
+    }
+      break;
+    case 'jobOffers': {
+      perviousLink = '/candidate/JobOffers';
+      perviousLinkText = 'Job Offers';
+    }
+      break;
+    case 'searchJobs': {
+      perviousLink = '/candidate/SearchJobs';
+      perviousLinkText = 'Job Listings';
+    }
+      break;
+    case 'recentMatches': {
+      perviousLink = '/candidate/Dashboard';
+      perviousLinkText = 'Recent Matches';
+    }
+      break;
+  }
   return (
     <Fragment>
       <LeftNavCandidate></LeftNavCandidate>
       <div className="maincontent">
         <HeaderAll isCandidate={true}></HeaderAll>
         <div className="content_section">
-        <div class="row">
+          <div class="row">
             <div class="col-md-12 py-4">
-              <h5 class="job-heading">Job Details</h5>
+              <h5 class="job-heading"><Link to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
             </div>
           </div>
-          {/* <div class="" aria-label="breadcrumb">
-            <ol class="breadcrumb mx-0" style={{backgroundColor: '#F4F4F4'}}>
-              <li class="breadcrumb-item">
-                <Link to="/candidate/interviews/interviewInvites">Interview Invites</Link></li>
-              <li class="breadcrumb-item active" aria-current="page">Job Details</li>
-            </ol>
-          </div> */}
           {jobDetails && <div>
             <div className="card mb-4">
               <div className="card-body">
@@ -82,7 +104,7 @@ const CandidateJobDetails = (props) => {
                   <div class="col-md-12">
                     <div class="row">
                       <div class="col-md-12 job-title-link align-items-center" style={{ display: 'flex' }}>
-                        <a href=""><h5> {jobDetails.jobTitle}</h5></a>
+                        <a href="#"><h5> {jobDetails.jobTitle}</h5></a>
                         <span class="job-posting"> Posted {jobDetails.postedAt} day ago</span>
                       </div>
                     </div>
