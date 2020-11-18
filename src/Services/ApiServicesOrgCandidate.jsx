@@ -454,17 +454,17 @@ class ApiServicesOrgCandidate {
     )
   }
 
-  fetchJobOffersForCandidate() {
-    const candidateId = localStorage.getItem('candidateId')
-    const authToken = localStorage.getItem('authToken')
-    return (
-      axios
-        .get(`${ApiBaseUrl}/candiadate/jobOffersForCandidate/${candidateId}`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
-        })
-        .then(Response => Response.data.responseObject)
-    )
-  }
+  // fetchJobOffersForCandidate() {
+  //   const candidateId = localStorage.getItem('candidateId')
+  //   const authToken = localStorage.getItem('authToken')
+  //   return (
+  //     axios
+  //       .get(`${ApiBaseUrl}/candiadate/jobOffersForCandidate/${candidateId}`, {
+  //         headers: {'Authorization': `Bearer ${authToken}`}
+  //       })
+  //       .then(Response => Response.data.responseObject)
+  //   )
+  // }
 
   //candidate Dashboard
   getcandidateDashboardDetails() {
@@ -472,6 +472,42 @@ class ApiServicesOrgCandidate {
     return axios
     .get(ApiBaseUrl + "/candiadate/candidateDashboard/" + candidateId ,this.getToken())
     .then((Response) => Response)
+  }
+
+  getJobAndCandidateDetailsByIds = (jobID) => {
+    const authToken = localStorage.getItem('authToken');
+    const candidateId = localStorage.getItem('candidateId')
+    return( 
+      axios(
+        {
+          url: `${ApiBaseUrl}/candidate/jobAndCandidateDetailsByIds/${jobID}/${candidateId}`,
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        }
+      ).then(Response => Response.data.responseObject)
+      .catch(error => {
+        console.log(error);
+      })
+    )
+  }
+
+  getJobOffersForCandidate = () => {
+    const authToken = localStorage.getItem('authToken');
+    const candidateId = localStorage.getItem('candidateId')
+    return( 
+      axios(
+        {
+          url: `${ApiBaseUrl}/candidate/jobOffersForCandidate/${candidateId}`,
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        }
+      ).then(Response => Response.data.responseObject)
+      .catch(error => {
+        console.log(error);
+      })
+    )
   }
 
 }

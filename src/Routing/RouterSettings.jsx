@@ -24,7 +24,6 @@ import JobOffers from "../Components/Candidate/JobOffers";
 import SearchJobs from "../Components/Candidate/SearchJobs";
 //import RecentMatches from '../Components/Candidate/RecentMatches';
 import InterviewInvites from "../Components/Candidate/Interviews/InterviewInvites";
-import InterviewInvitesJobdetails from "../Components/Candidate/Interviews/InterviewInvitesJobDetails"
 //import JobListing from '../Components/Candidate/JobListing';
 import AcceptedInterviews from "../Components/Candidate/Interviews/AcceptedInterviews";
 //import JobsPipeline from "../Components/Candidate/JobsPipeline";
@@ -46,6 +45,7 @@ import OrganizationLayout from "../Layouts/OrganizationLayout";
 import AuthLayout from "../Layouts/AuthLayout";
 import { AppHelper } from "../Utils/AppHelper";
 import ForgotPassword from "../Components/Auth/ForgotPassword";
+import CandidateJobDetails from "../Components/Candidate/CandidateJobDetails";
 
 class RouterSettings extends Component {
 
@@ -84,7 +84,7 @@ class RouterSettings extends Component {
             <CandidateLayout path="/candidate/profile" component={CandidateProfile} />
             <CandidateLayout path="/candidate/profile1" component={Profile1} />
             <CandidateLayout path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>
-            <CandidateLayout path="/candidate/interviews/InterviewInvitesJobdetails/:jobID/:applicationStatus" component={InterviewInvitesJobdetails}/> 
+            <CandidateLayout path="/candidate/jobDetails/:jobID/:jobStatus" component={CandidateJobDetails}/>
             <CandidateLayout path="/candidate/interviews/acceptedInterviews" component={AcceptedInterviews}/>
             <CandidateLayout path="/candidate/interviews/AcceptedInviteJobDetails/:jobID" component={AcceptedInviteJobDetails}/>
             <CandidateLayout path="/candidate/changePassword" component={ChangePassword}/>

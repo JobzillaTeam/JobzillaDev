@@ -381,7 +381,6 @@ nav a {
 
 .recent_matches_section1 .row:nth-child(odd) {
     background: #FFFFFF;
-
 }
 
 .recent_matches_section1 .row .job-title-header {
@@ -3222,3 +3221,11 @@ textarea {
 }
 
   /* closed jobs end */
+
+.jobListItems > .jobListItem {
+    background: #F9F9FA;
+}
+
+.jobListItems .jobListItem:nth-child(odd) {
+    background: #FFFFFF;
+}

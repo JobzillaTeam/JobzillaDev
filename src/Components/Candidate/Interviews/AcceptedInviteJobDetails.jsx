@@ -2,7 +2,7 @@ import React, { useEffect, Fragment, useState } from 'react'
 import HeaderAll from '../../CommonComp/HeaderAll';
 import LeftNavCandidate from '../../CommonComp/LeftNavCandidate'
 import Footer from '../../CommonComp/Footer'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import ApiServicesOrg from '../../../Services/ApiServicesOrg';
 
 
