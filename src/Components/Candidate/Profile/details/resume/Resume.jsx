@@ -225,6 +225,8 @@ class Resume extends Component {
       </>
     );
 
+    const hasAttachedDocument = localStorage.getItem("SelectedFile") || localStorage.getItem("DraggedFile")
+
     return (
 
       <div class="bg-white px-4 py-4 section-divider align-items-center">
@@ -236,12 +238,12 @@ class Resume extends Component {
           </div>
         </div>
         <div class="col-12 mb-3">
-          <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class="ml-4 mr-2 left-sec-icon profile__editIcon" onClick={this.downloadResume} />
+          <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class={`ml-4 mr-2 left-sec-icon profile__editIcon ${hasAttachedDocument ? '' : 'disabledCursorOnIcon'}`} onClick={() => hasAttachedDocument ? this.downloadResume() : null } />
           <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("SelectedFile")}</span>
           <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span>
           {/* <span>Last updated on 10 sept 2020</span> */}
 
-          <span class="float-right"> {localStorage.getItem("SelectedFile") || localStorage.getItem("DraggedFile")
+          <span class="float-right"> {hasAttachedDocument
             ? <a className="download_sample_link d-block" href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>
             : <a className="download_sample_link d-block disabledCursor " href="#" >Delete Resume</a>}</span>
         </div>

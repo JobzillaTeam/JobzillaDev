@@ -3229,3 +3229,9 @@ textarea {
 .jobListItems .jobListItem:nth-child(odd) {
     background: #FFFFFF;
 }
+
+
+.disabledCursorOnIcon {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
