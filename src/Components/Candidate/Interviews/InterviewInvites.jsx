@@ -72,7 +72,7 @@ const InterviewInvites = () => {
 
   const handleDropdownChange = e => {
     const { value } = e.target;
-    const sortJobs = getSortedResourceJobs(value, resourceJobs)
+    const sortJobs = getSortedResourceJobs(value, cloneResourceJobs)
     setCloneResourceJobs([...sortJobs]);
     setResourceJobs([...sortJobs].slice(0, initialLength));
     setPageDataLength(initialLength)
