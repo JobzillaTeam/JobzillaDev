@@ -32,7 +32,8 @@ class profileToOpen extends Component {
     }
 
     componentDidMount() {
-        this.profileService.getCandidateInfo()
+        const userId = this.props.match.params.userId;
+        this.profileService.getCandidateInfo(userId)
         .then(Response => {
           if (Response && Response.data && Response.data.responseObject) {
             this.setState({

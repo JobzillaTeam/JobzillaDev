@@ -239,7 +239,7 @@ class Resume extends Component {
           <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class="ml-4 mr-2 left-sec-icon profile__editIcon" onClick={this.downloadResume} />
           <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("SelectedFile")}</span>
           <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span>
-          <span>Last updated on 10 sept 2020</span>
+          {/* <span>Last updated on 10 sept 2020</span> */}
 
           <span class="float-right"> {localStorage.getItem("SelectedFile") || localStorage.getItem("DraggedFile")
             ? <a className="download_sample_link d-block" href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>

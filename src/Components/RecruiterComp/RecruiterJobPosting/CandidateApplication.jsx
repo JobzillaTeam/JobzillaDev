@@ -142,7 +142,7 @@ export default class CandidateApplication extends Component {
                                             <td>{data.candidateId}</td>
                                             {/* onClick={localStorage.setItem('candidateID', data.candidateId)} */}
                                             <td>
-                                                <Link to="/candidateProfileToOpen" onClick={() => this.showProfile(data.candidateId)}><p className="tb-title-text">{data.firstName}</p> </Link>
+                                                <Link to={`/candidateProfileToOpen/${data.candidateId}`} onClick={() => this.showProfile(data.candidateId)}><p className="tb-title-text">{data.firstName}</p> </Link>
                                                 <p>{data.currentRole} at {data.company}</p>
                                                 <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address},{data.city}</p>
                                             </td>

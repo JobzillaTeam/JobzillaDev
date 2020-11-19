@@ -128,7 +128,7 @@ class UploadProfile extends Component {
                             <div className="ml-0 mr-1">
                                 <h5 className="font-weight-400 mt-3">Bulk Profile Upload</h5>
                                 <h6 className="mt-3 font-weight-400">
-                                    Bulk Upload provides the ability to add Candidate profiles who are getting released from their current organization to the digital workplace. Bulk uploading requires you to provide the Candidate information in a CSV formatted text file and also upload the resumes in zip file only.
+                                    Bulk Upload provides the ability to add Candidate profiles who are getting released from their current organization to the digital workplace. Bulk uploading requires you to provide the Candidate information in a CSV formatted text file only.
                                 </h6>
                                 <section className="white-middle-section mt-5">
                                     <div className="row">

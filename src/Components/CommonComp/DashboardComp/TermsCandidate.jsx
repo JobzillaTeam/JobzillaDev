@@ -37,7 +37,7 @@ const TermsCandidate = ({ showPopup }) => {
         <li class="pt-4 modal-body-content">If you do not agree to the above terms, promptly exit this page and stop accessing the Services.</li>
       </ul>
       <div class="pt-4">
-        <button class="btn lightBlue float-right" onClick={handleOnAccepted}>Accepted</button>
+        <button class="btn lightBlue float-right" onClick={handleOnAccepted}>Accept</button>
         <button class="btn btn-outline-info btn-outline-button float-right mr-4" onClick={handleOnDecline}>Decline</button>
       </div>
     </React.Fragment>

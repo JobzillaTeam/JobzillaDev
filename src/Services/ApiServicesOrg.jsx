@@ -183,12 +183,10 @@ class ApiServicesOrg extends Component {
     }
 
     //5.5 View Candidate profile 
-    getCandidateInfo() {
-        // const userId = JSON.parse(localStorage.getItem('candidateId'));
-        const userId = 1427
+    getCandidateInfo(candidateId) {
         return (
             axios
-                .get(ApiBaseUrl + '/candidate/profileview/' + userId, this.getToken())
+                .get(ApiBaseUrl + '/candidate/profileview/' + candidateId, this.getToken())
                 .then(Response => Response)
         )
     }
@@ -229,9 +227,8 @@ class ApiServicesOrg extends Component {
         )
     }
 
-    viewProfileImage1() {
-        const candidateId = JSON.parse(localStorage.getItem('candidateUserId')); const authToken = localStorage.getItem('authToken');
-        const userId = 1427;
+    viewProfileImage1(userId) {
+        const authToken = localStorage.getItem('authToken');
         return( 
             axios({ url: `${ApiBaseUrl}/user/viewImage/${userId}`, headers: { 'Authorization': `Bearer ${authToken}` } }).then(Response => Response)
         );

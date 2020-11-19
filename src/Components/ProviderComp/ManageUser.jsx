@@ -76,21 +76,21 @@ class ManageUser extends Component{
             
        }
 
-       componentDidUpdate(){
-            // // Calling Download Sample File Service from Service file:-
-            // this.userService.getViewAllUser()
-            // .then(Response => {
-            //     const myUser = JSON.parse(localStorage.getItem('userDetails')).id;
+    //    componentDidUpdate(){
+    //         // Calling Download Sample File Service from Service file:-
+    //         this.userService.getViewAllUser()
+    //         .then(Response => {
+    //             const myUser = JSON.parse(localStorage.getItem('userDetails')).id;
                
-            //     const selfUser= Response.data.responseObject; 
+    //             const selfUser= Response.data.responseObject; 
                
-            //     this.setState(
-            //     { users: selfUser.filter(selfUserId=> selfUserId.id != myUser)}
-            // )});
-            // // .then(Response => this.setState({ users: Response.data.responseObject }
-            // //     ));
+    //             this.setState(
+    //             { users: selfUser.filter(selfUserId=> selfUserId.id != myUser)}
+    //         )});
+    //         // .then(Response => this.setState({ users: Response.data.responseObject }
+    //         //     ));
 
-       }
+    //    }
 
 
        editUser(user){

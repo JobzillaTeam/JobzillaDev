@@ -35,7 +35,9 @@ class CandidateProfileToOpen extends Component {
   }
 
   componentDidMount() {
-    this.viewImage.viewProfileImage1().then(Response => {
+    const userId = this.props.match.params.userId;
+
+    this.viewImage.viewProfileImage1(userId).then(Response => {
       console.log(Response)
       this.setState({
         imageUrl: Response.data.responseObject,
@@ -50,7 +52,7 @@ class CandidateProfileToOpen extends Component {
         });
       });
 
-    this.profileService.getCandidateInfo()
+    this.profileService.getCandidateInfo(userId)
       .then(Response => {
         if (Response && Response.data && Response.data.responseObject) {
           this.setState({

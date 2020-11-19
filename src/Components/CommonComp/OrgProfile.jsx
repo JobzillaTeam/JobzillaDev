@@ -36,7 +36,7 @@ class Profile extends Component {
       let getGstin = "";
       let getMobile = "";
 
-      if (Response) {
+      if (Response && Response.data && Response.data.responseObject) {
         getOrgName = JSON.stringify(
           Response.data.responseObject.organizationName
         );
@@ -44,7 +44,7 @@ class Profile extends Component {
         getContactPersonName = JSON.stringify(
           Response.data.responseObject.contactPerson
         );
-        getGstin = JSON.stringify(Response.data.responseObject.gstin);
+        getGstin = Response.data.responseObject.gstin ? JSON.stringify(Response.data.responseObject.gstin) : '';
         getMobile = JSON.stringify(Response.data.responseObject.phoneNumber);
       }
 

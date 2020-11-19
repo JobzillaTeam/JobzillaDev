@@ -97,7 +97,7 @@ class RouterSettings extends Component {
             <OrganizationLayout path="/createJob" component={CreateJob} />
             <OrganizationLayout path="/jobPostingCollection/:jobID" component={JobPostingCollection} />
             <OrganizationLayout path="/closeJobs" component={CloseJobs}/>
-            <OrganizationLayout path="/candidateProfileToOpen" component={CandidateProfileToOpen}/>
+            <OrganizationLayout path="/candidateProfileToOpen/:userId" component={CandidateProfileToOpen}/>
 
           </Switch>
         </div>
