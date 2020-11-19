@@ -63,29 +63,32 @@ class ManageUser extends Component{
       
             this.userService.getViewAllUser()
             .then(Response => {
-                const myUser = JSON.parse(localStorage.getItem('userDetails')).id;
-               
-                const selfUser= Response.data.responseObject; 
-                
-                this.setState(
-                { users: selfUser.filter(selfUserId=> selfUserId.id != myUser)}
-            )});
+                if (Response && Response.data && Response.data.responseObject) {
+                    const myUser = JSON.parse(localStorage.getItem('userDetails')).id;
+                   
+                    const selfUser= Response.data.responseObject; 
+                    
+                    this.setState({
+                        users: selfUser.filter(selfUserId=> selfUserId.id != myUser && !selfUserId.isDeleted)
+                    });
+                }
+            });
             
        }
 
        componentDidUpdate(){
-            // Calling Download Sample File Service from Service file:-
-            this.userService.getViewAllUser()
-            .then(Response => {
-                const myUser = JSON.parse(localStorage.getItem('userDetails')).id;
+            // // Calling Download Sample File Service from Service file:-
+            // this.userService.getViewAllUser()
+            // .then(Response => {
+            //     const myUser = JSON.parse(localStorage.getItem('userDetails')).id;
                
-                const selfUser= Response.data.responseObject; 
+            //     const selfUser= Response.data.responseObject; 
                
-                this.setState(
-                { users: selfUser.filter(selfUserId=> selfUserId.id != myUser)}
-            )});
-            // .then(Response => this.setState({ users: Response.data.responseObject }
-            //     ));
+            //     this.setState(
+            //     { users: selfUser.filter(selfUserId=> selfUserId.id != myUser)}
+            // )});
+            // // .then(Response => this.setState({ users: Response.data.responseObject }
+            // //     ));
 
        }
 
