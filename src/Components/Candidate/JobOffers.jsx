@@ -7,13 +7,13 @@ import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate';
 import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollUpButton from "react-scroll-up-button";
 import RenderLoader from '../CommonComp/Loader';
+import { INITIAL_ITEM_LENGTH } from '../../Utils/AppConst';
 
 const JobOffers = () => {
-  const initialLength = 2;
   const [resourceJobs, setResourceJobs] = useState([]);
   const [cloneResourceJobs, setCloneResourceJobs] = useState([]);
   const [allResourceJobs, setAllResourceJobs] = useState([]);
-  const [pageDataLength, setPageDataLength] = useState(initialLength);
+  const [pageDataLength, setPageDataLength] = useState(INITIAL_ITEM_LENGTH);
   const [isLoading, setIsLoading] = useState(false);
   let sortMethod = 'recent_First';
 
@@ -23,8 +23,8 @@ const JobOffers = () => {
       setAllResourceJobs(response);
       const sortJobs = getSortedResourceJobs('recent_First', response)
       setCloneResourceJobs([...sortJobs]);
-      setResourceJobs([...sortJobs].slice(0, initialLength));
-      setPageDataLength(initialLength)
+      setResourceJobs([...sortJobs].slice(0, INITIAL_ITEM_LENGTH));
+      setPageDataLength(INITIAL_ITEM_LENGTH)
       setIsLoading(false);
     }).catch(error => {
       console.log(error);
@@ -49,8 +49,8 @@ const JobOffers = () => {
       });
       const sortJobs = getSortedResourceJobs(sortMethod.value, updatedResourceJobs)
       setCloneResourceJobs([...sortJobs])
-      setResourceJobs([...sortJobs].slice(0, initialLength));
-      setPageDataLength(initialLength);
+      setResourceJobs([...sortJobs].slice(0, INITIAL_ITEM_LENGTH));
+      setPageDataLength(INITIAL_ITEM_LENGTH);
       setIsLoading(false);
     } else {
       setIsLoading(false);
@@ -74,14 +74,14 @@ const JobOffers = () => {
     const { value } = e.target;
     const sortJobs = getSortedResourceJobs(value, cloneResourceJobs)
     setCloneResourceJobs([...sortJobs]);
-    setResourceJobs([...sortJobs].slice(0, initialLength));
-    setPageDataLength(initialLength)
+    setResourceJobs([...sortJobs].slice(0, INITIAL_ITEM_LENGTH));
+    setPageDataLength(INITIAL_ITEM_LENGTH)
   }
 
   const fetchMoreResourceJobs = () => {
     setTimeout(() => {
-      setResourceJobs([...cloneResourceJobs].slice(0, (pageDataLength + initialLength)));
-      setPageDataLength(pageDataLength + initialLength);
+      setResourceJobs([...cloneResourceJobs].slice(0, (pageDataLength + INITIAL_ITEM_LENGTH)));
+      setPageDataLength(pageDataLength + INITIAL_ITEM_LENGTH);
     }, 500);
   }
 

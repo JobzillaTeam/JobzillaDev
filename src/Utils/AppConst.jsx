@@ -38,3 +38,4 @@ export const PREFERRED_SHIFT_TYPE_ENUM = {
 
 export const HTTP_REGX = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/
 export const MAX_LENGTH = 4000;
+export const INITIAL_ITEM_LENGTH = 10;
