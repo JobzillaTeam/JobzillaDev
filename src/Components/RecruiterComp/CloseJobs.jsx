@@ -35,10 +35,10 @@ class CloseJobs extends Component {
 
   handleDropdownChange(e) {
     const updatedJobs = this.state.closedJobs.sort((objA, objB) => {
-      const dateA = new Date(objA.createdDate).getTime();
-      const dateB = new Date(objB.createdDate).getTime();
-      const PositionsA = objA.noOfHiredPositions;
-      const PositionsB = objB.noOfHiredPositions;
+      const dateA = new Date(objA.jobDetails.createdDate).getTime();
+      const dateB = new Date(objB.jobDetails.createdDate).getTime();
+      const PositionsA = objA.jobDetails.noOfHiredPositions;
+      const PositionsB = objB.jobDetails.noOfHiredPositions;
       if (e.target.value === "recent_First") {
         return dateB - dateA;
       } else if (e.target.value === "recent_Last") {
@@ -54,7 +54,15 @@ class CloseJobs extends Component {
     });
   }
   render() {
-    const {closedJobs} = this.state;
+    let closedJobsObjects = this.state.closedJobs;
+    const closedJobsFilterObjects = closedJobsObjects.filter(
+      (data) => {
+        return (data.jobDetails.jobTitle.toLowerCase().includes(this.state.search.toLowerCase()) ||
+          data.jobDetails.primarySkills.toLowerCase().includes(this.state.search.toLowerCase()) ||
+          data.jobDetails.secondarySkills.toLowerCase().includes(this.state.search.toLowerCase()) ||
+          data.jobDetails.jobCity.toLowerCase().includes(this.state.search.toLowerCase()))
+      }
+    );
     return (
       <Fragment>
         <LeftNavProvider></LeftNavProvider>
@@ -71,7 +79,7 @@ class CloseJobs extends Component {
                   <div className="col-md-6">
                     <h5 className="active_job_heading ">Closed Jobs</h5>
                     <div className="sub-title1">
-                      You have {closedJobs && closedJobs[0] ? closedJobs.length : 0} closed jobs, View <a href="#">ACTIVE</a>
+                      You have {closedJobsFilterObjects && closedJobsFilterObjects[0] ? closedJobsFilterObjects.length : 0} closed jobs, View <a href="#">ACTIVE</a>
                     </div>
                   </div>
                   <div className="col-md-6 text-md-right">
@@ -121,8 +129,8 @@ class CloseJobs extends Component {
                   </div>
                 </section>
                 {/* detail Sections */}
-                {closedJobs &&
-                  closedJobs.map((closedJob) => {
+                {closedJobsFilterObjects &&
+                  closedJobsFilterObjects.map((closedJob) => {
                     const { jobDetails } = closedJob;
                     return (
                       <section className="white-middle-section mb-3 mt-0 p-0">
