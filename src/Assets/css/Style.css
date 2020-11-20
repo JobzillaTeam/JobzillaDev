@@ -2442,7 +2442,7 @@ textarea.form-control {
     height: 100%;
     margin: 0 auto;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: normal;
     color: #2E2E2E;
     user-select: none;
 }
@@ -3082,6 +3082,10 @@ textarea {
 
 .custom-table tbody tr:nth-of-type(even) {
     background: #F9F9FA;
+}
+
+tr td:last-child,tr td:first-child{
+    white-space: nowrap !important;
 }
 
 

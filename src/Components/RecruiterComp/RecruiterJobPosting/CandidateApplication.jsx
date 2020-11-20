@@ -8,36 +8,45 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import ApiServicesOrg from '../../../Services/ApiServicesOrg.jsx';
 import { data } from 'jquery';
+import InfiniteScroll from "react-infinite-scroll-component";
+import RenderLoader from '../../CommonComp/Loader';
 
 export default class CandidateApplication extends Component {
 
-    emptyProduct = {
-        candidateId: '',
-        firstName: '',
-        skills: '',
-        yearsofExp: '',
-        availableFrom: 0,
-        matchingPercentage: '',
-
-    };
+  
 
     constructor(props) {
         super(props);
 
         this.state = {
-            products: [],
+            candidateData: [],
             match: [],
             matchPer: [],
             candidate: {},
             candidate1: [],
             candidateLength: '',
-
-            loading: false,
+            hasMore: true,
+            visible:2
+           
 
         };
 
         this.CandidateApplication = new ApiServicesOrg();
+        this.loadMore=this.loadMore.bind(this)
     }
+
+    loadMore() {
+        setTimeout(()=>{
+        if(this.state.candidateData.length>=1000){
+            this.setState({hasMore:false})
+            return
+        }
+        this.setState((prev) => {
+          return {visible: prev.visible + 4};
+        });
+    },
+    500)        
+      }
 
     componentDidMount() {
         this.setState({ loading: true });
@@ -46,7 +55,7 @@ export default class CandidateApplication extends Component {
                 if (Response.data.responseObject) {
 
                     this.setState({
-                        products: Response.data.responseObject,
+                        candidateData: Response.data.responseObject,
                         candidateLength: Response.data.responseObject.length,
                         match: (Response.data.responseObject).map((data2) => { this.state.matchPer.push(data2.matchingPercentage) }),
                         candidate: (Response.data.responseObject).map((data1) => { this.state.candidate1.push(data1.candidate) }),
@@ -54,7 +63,7 @@ export default class CandidateApplication extends Component {
                     },
                         () => {
                             console.log(this.state.matchPer)
-                            console.log(this.state.products)
+                            console.log(this.state.candidateData)
                             console.log(this.state.candidate1)
 
                         },
@@ -115,17 +124,24 @@ export default class CandidateApplication extends Component {
         return (
             <div className="datatable-editing-demo">
                 <Toast ref={(el) => this.toast = el} />
+                <InfiniteScroll
+                    dataLength={this.state.candidateData.length}
+                    next={this.loadMore}
+                    hasMore={this.state.candidateData.length>=this.state.visible}
+                    loader={<RenderLoader />}
+                    height={400}
+                > 
 
 
                 <div>
 
                     <div className="Show">Total Result {this.state.candidateLength} </div>
 
-                    {this.state.products ?
+                 
                         <table className="table table-borderless custom-table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    {/* <th>#</th> */}
                                     <th>Candidates</th>
                                     <th>Skills</th>
                                     <th>Experiance</th>
@@ -135,11 +151,11 @@ export default class CandidateApplication extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.products.map((product, index) => {
-                                    const data = product.candidate;
+                                {this.state.candidateData.map((candidateData, index) => {
+                                    const data = candidateData.candidate;
                                     return (
                                         <tr>
-                                            <td>{data.candidateId}</td>
+                                            {/* <td>{data.candidateId}</td> */}
                                             {/* onClick={localStorage.setItem('candidateID', data.candidateId)} */}
                                             <td>
                                                 <Link to={`/candidateProfileToOpen/${data.candidateId}`} onClick={() => this.showProfile(data.candidateId)}><p className="tb-title-text">{data.firstName}</p> </Link>
@@ -148,7 +164,7 @@ export default class CandidateApplication extends Component {
                                             </td>
 
                                             <td>
-                                                {product.candidateSkillsList && product.candidateSkillsList[0] && product.candidateSkillsList.map(skill => skill.skillName).join(', ')}
+                                                {candidateData.candidateSkillsList && candidateData.candidateSkillsList[0] && candidateData.candidateSkillsList.map(skill => skill.skillName).join(', ')}
                                             </td>
 
                                             <td>
@@ -197,12 +213,11 @@ export default class CandidateApplication extends Component {
                             </tbody>
 
                         </table>
-                        :
-                        <p>No Contect</p>}
+                     
                 </div>
 
 
-
+            </InfiniteScroll>   
 
             </div>
         );
