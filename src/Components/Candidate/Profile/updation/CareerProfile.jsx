@@ -130,7 +130,6 @@ const CareerProfileComponent = ({ showPopup }) => {
             suggestions={cities || []}
             onDelete={onDelete}
             onAddition={onAddition}
-            allowNew
           />
         </div>
         <div className="form-group">

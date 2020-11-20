@@ -12,7 +12,9 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
   const toast = useRef(null);
   if (state instanceof Promise) {
     state.then((data) => {
-      setCandidateInfo(data.candidateInfo)
+      if (data) {
+        setCandidateInfo(data.candidateInfo)
+      }
     })
   }
   const apiServicesOrg = new ApiServicesOrg();
@@ -53,7 +55,9 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
   React.useEffect(() => {
     apiServicesOrgCandidate.candidateGetProfileInfo()
     .then(Response => {
-      setProgressbar(Response.data.responseObject.progressBarCompletion)
+      if (Response && Response.data && Response.data.responseObject) {
+        setProgressbar(Response.data.responseObject.progressBarCompletion)
+      }
       //window.location.reload();
     })
   }, [])

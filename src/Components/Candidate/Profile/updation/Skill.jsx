@@ -19,7 +19,7 @@ const SkillComponent = ({ dataAttributes, showPopup }) => {
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   React.useEffect(() => {
     ApiServicesOrgCandidate.getListOfSkills().then((response) => {
-      if (response) {
+      if (response && response.data && response.data.responseObject) {
         const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].skills);
         setSkills(result);
       } else {
