@@ -238,7 +238,7 @@ class Resume extends Component {
           </div>
         </div>
         <div class="col-12 mb-3">
-          <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class={`ml-4 mr-2 left-sec-icon profile__editIcon ${hasAttachedDocument ? '' : 'disabledCursorOnIcon'}`} onClick={() => hasAttachedDocument ? this.downloadResume() : null } />
+          <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class={`ml-4 mr-2 left-sec-icon profile__editIcon ${hasAttachedDocument ? '' : 'disabledCursorOnIcon'}`} onClick={this.downloadResume} />
           <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("SelectedFile")}</span>
           <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span>
           {/* <span>Last updated on 10 sept 2020</span> */}
