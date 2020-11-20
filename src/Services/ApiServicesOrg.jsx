@@ -183,10 +183,10 @@ class ApiServicesOrg extends Component {
     }
 
     //5.5 View Candidate profile 
-    getCandidateInfo(candidateId) {
+    getCandidateInfo(userId) {
         return (
             axios
-                .get(ApiBaseUrl + '/candidate/profileview/' + candidateId, this.getToken())
+                .get(ApiBaseUrl + '/candidate/profileview/' + userId, this.getToken())
                 .then(Response => Response)
         )
     }
