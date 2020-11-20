@@ -130,7 +130,7 @@ class ForgotPassword extends Component {
         <div className="form-group">
           <div className="row">
             <div className="col-12 text-center mt-4">
-              <img src="/images/Dashboard-assets/active-profile.svg" height="150" width="150" />
+              <img src="/images/Dashboard-assets/email.svg" height="150" width="150" />
             </div>
             {<div className="col-12 text-center mt-4">
               <button className="btn btn-border" onClick={() => this.onLogin()}>Back To login</button>

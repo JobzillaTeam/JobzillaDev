@@ -113,8 +113,8 @@ class CloseJobs extends Component {
     });
 
   }
-
   render() {
+    console.log(this.state.closedJobs)
 
     // const { closedJobs } = this.state;
 
@@ -160,7 +160,7 @@ class CloseJobs extends Component {
 
                     <div className="sub-title1">
 
-                      You have 2 closed jobs, View <a href="#">ACTIVE</a>
+                      You have {closedJobs && closedJobs[0] ? closedJobs.length : 0} closed jobs, View <a href="#">ACTIVE</a>
 
                     </div>
 
@@ -296,195 +296,104 @@ class CloseJobs extends Component {
                           </span>
 
                           </div>
-
                           <div>
-
                             <ul className="job-skills">
-
                               <li>
-
                                 <img src="/images/Dashboard-assets/recent-matches/category.svg" />
-
                                 {jobDetails.category}
-
                               </li>
-
                               <li>
-
                                 <img src="/images/Dashboard-assets/recent-matches/experience.svg" />
-
-                                {jobDetails.experienceReqFrom}-
-
-                              {jobDetails.experienceReqTo}years
-
+                                {jobDetails.experienceReqFrom}-{jobDetails.experienceReqTo} years
                             </li>
-
                               <li>
-
                                 <img src="/images/Dashboard-assets/recent-matches/job_role.svg" />
-
                                 {jobDetails.employmentType}
-
                               </li>
-
                               <li>
-
                                 <img src="/images/Dashboard-assets/recent-matches/location.svg" />
-
                                 {jobDetails.jobCity}, {jobDetails.jobCountry}
-
                               </li>
-
                               <li>
-
                                 <img src="/images/Dashboard-assets/recent-matches/technology.svg" />{" "}
-
                                 {jobDetails.primarySkills}
-
                               </li>
-
                               <li>
-
                                 <img src="/images/Dashboard-assets/recent-matches/vaccency.svg" />
-
                                 {jobDetails.noOfHiredPositions}
-
                               </li>
-
                             </ul>
-
                           </div>
-
                         </div>
-
                         {/* Table */}
-
                         <div>
-
                           <table className="table table-borderless custom-table">
-
                             <thead>
-
                               <tr>
-
-                                <th>#</th>
-
+                                {/* <th>#</th> */}
                                 <th>Candidates</th>
-
                                 <th>Status</th>
-
                                 <th>Comments</th>
-
                                 <th>Last updated</th>
-
                               </tr>
-
                             </thead>
-
                             <tbody>
-
+                              {
+                                closedJob.joinedCandidateRecruitmentList && closedJob.joinedCandidateRecruitmentList.map(joinedCandidate => {
+                                  return (
+                                    <tr>
+                                      <td>
+                                        <p className="tb-title-text">{`${joinedCandidate.candidate.firstName} ${joinedCandidate.candidate.lastName}`}</p>
+                                        <p>{`${joinedCandidate.candidate.currentRole} at ${joinedCandidate.candidate.company}`}</p>
+                                        <p>
+                                          <img
+                                            src="/images/icons/category.svg"
+                                            alt="email"
+                                            className="pr-2"
+                                          />
+                                          {joinedCandidate.candidate.emailId}
+                                        </p>
+                                        <p>
+                                          <img
+                                            src="/images/icons/category.svg"
+                                            alt="mobile number"
+                                            className="pr-2"
+                                          />
+                                          {joinedCandidate.candidate.mobileNumber}
+                                        </p>
+                                        <p>
+                                          <img
+                                            src="/images/icons/location.svg"
+                                            alt="location"
+                                            className="pr-2"
+                                          />
+                                          {jobDetails.jobCity}, {jobDetails.jobCountry}
+                                        </p>
+                                      </td>
+                                      <td>{joinedCandidate.interviewStatus}</td>
+                                      <td>{joinedCandidate.comment}</td>
+                                      <td>{joinedCandidate.lastModifiedDate.slice(0, -19)}</td>
+                                    </tr>
+                                  );
+                                })
+                              }
                               <tr>
-
-                                <td>1</td>
-
-                                <td>
-
-                                  <p className="tb-title-text">John Doe</p>
-
-                                  <p>Software developer at TCS</p>
-
-                                  <p>
-
-                                    <img
-
-                                      src="/images/icons/category.svg"
-
-                                      alt="email"
-
-                                      className="pr-2"
-
-                                    />
-
-                                  johndoe@tcs.com
-
-                                </p>
-
-                                  <p>
-
-                                    <img
-
-                                      src="/images/icons/category.svg"
-
-                                      alt="mobile number"
-
-                                      className="pr-2"
-
-                                    />
-
-                                  +91 1234567890
-
-                                </p>
-
-                                  <p>
-
-                                    <img
-
-                                      src="/images/icons/location.svg"
-
-                                      alt="location"
-
-                                      className="pr-2"
-
-                                    />
-
-                                    {jobDetails.jobCity}, {jobDetails.jobCountry}
-
-                                  </p>
-
-                                </td>
-
-                                <td>{jobDetails.jobStatus}</td>
-
-                                <td>19 June Joining Date</td>
-
-                                <td>19 June, 2020</td>
-
-                              </tr>
-
-                              <tr>
-
                                 <td
-
                                   colSpan="5"
-
                                   className="job-full-detail text-right"
-
                                 >
-
-                                  <Link to="/closedjobdetails">
-
+                                  <Link to={`/jobPostingCollection/${jobDetails.jobId}`}>
                                     VIEW Details{" "}
-
                                     <img
-
                                       src="/images/icons/view_details_arrow.svg"
-
                                       class="detail-arrow"
-
                                     />
-
                                   </Link>
-
                                 </td>
-
                               </tr>
-
                             </tbody>
-
                           </table>
-
                         </div>
-
                       </section>
                     );
                   }
