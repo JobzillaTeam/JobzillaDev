@@ -1,300 +1,139 @@
 import React, { Component, Fragment } from "react";
-
 import LeftNavProvider from "../CommonComp/LeftNavProvider";
-
 import HeaderAll from "../CommonComp/HeaderAll";
-
 import Footer from "../CommonComp/Footer";
-
 import { Toast } from "primereact/toast";
-
 import { Link } from "react-router-dom";
-
 import ApiServicesOrgRecruiter from "../../Services/ApiServicesOrgRecruiter";
-
 class CloseJobs extends Component {
-
   constructor() {
-
     super();
-
     this.state = {
-
       closedJobs: [],
-
       selectValue: "",
-
       search: "",
-
       candidates: [],
-
     };
 
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
-
     this.updateSearch = this.updateSearch.bind(this);
-
   }
-
-
-
   updateSearch(e) {
-
-    console.log("++++++++++++++++++++++++++++++++" + e.target.value);
-
     this.setState({ search: e.target.value });
-
   }
-
-
-
   componentDidMount() {
-
     ApiServicesOrgRecruiter.getListOfClosedJobs().then((response) => {
-
       let closedJobList = [];
-
       if (response) {
-
         closedJobList = response.data.responseObject;
-
       }
-
       this.setState({
-
         closedJobs: closedJobList,
-
       });
-
-      // console.log(closedJobList);
-
     });
-
   }
-
-
 
   handleDropdownChange(e) {
-
     const updatedJobs = this.state.closedJobs.sort((objA, objB) => {
-
       const dateA = new Date(objA.createdDate).getTime();
-
       const dateB = new Date(objB.createdDate).getTime();
-
       const PositionsA = objA.noOfHiredPositions;
-
       const PositionsB = objB.noOfHiredPositions;
-
       if (e.target.value === "recent_First") {
-
         return dateB - dateA;
-
       } else if (e.target.value === "recent_Last") {
-
         return dateA - dateB;
-
       } else if (e.target.value === "unfulfilled_Highest") {
-
         return PositionsB - PositionsA;
-
       } else if (e.target.value === "unfulfilled_Lowest") {
-
         return PositionsA - PositionsB;
-
       }
-
     });
-
     this.setState({
-
       closedJobs: updatedJobs,
-
     });
-
   }
   render() {
-    console.log(this.state.closedJobs)
-
-    // const { closedJobs } = this.state;
-
-
-
-    // const closedJobs = this.state.closedJobs;
-
-    // console.log(closedJobs+"++++++++++++++++++++++++++++++++++++++++++++");
-
-
-
-    let closedJobs = this.state.closedJobs;
-
+    const {closedJobs} = this.state;
     return (
-
       <Fragment>
-
         <LeftNavProvider></LeftNavProvider>
-
         <div className="maincontent">
-
           <div className="content">
-
             {/*  Header */}
-
             <HeaderAll></HeaderAll>
-
             {/* Main Content on the page */}
-
             <div className="content_section main">
-
               <Toast ref={(el) => (this.toast = el)}></Toast>
-
               <div className=" main">
-
                 {/* top title */}
-
                 <div className="row">
-
                   <div className="col-md-6">
-
                     <h5 className="active_job_heading ">Closed Jobs</h5>
-
                     <div className="sub-title1">
-
                       You have {closedJobs && closedJobs[0] ? closedJobs.length : 0} closed jobs, View <a href="#">ACTIVE</a>
-
                     </div>
-
                   </div>
-
                   <div className="col-md-6 text-md-right">
-
                     {/* <button className="btn btn-blue">Create New Job</button> */}
-
                     <Link to="/createJob">
-
                       <button className="btn btn-blue">Create New Job</button>
-
                     </Link>
-
                   </div>
-
                 </div>
-
                 {/* main content display area */}
-
-
-
                 <section className="white-middle-section p-4 mt-5 mb-0 border-bottom">
-
                   <div className="row">
-
                     <div className="col-md-5">
-
                       <div className="input-group">
-
-                        {/* <input
-
-                          className="form-control py-2 border-right-0 border"
-
-                          type="text"
-
-                          value="search"
-
-                        /> */}
-
                         <input
-
                           className="form-control py-2 border-right-0 border"
-
                           type="text"
-
                           placeholder="search by job title, skills, location"
-
                           value={this.state.search}
-
                           onChange={this.updateSearch.bind(this)}
-
                         />
-
                         <span className="input-group-append">
-
                           <div className="input-group-text bg-transparent">
-
                             <i className="fa fa-search"></i>
-
                           </div>
-
                         </span>
-
                       </div>
-
                     </div>
-
                     <div className="col-md-2 offset-md-5">
-
                       <select
-
                         className="form-control"
-
                         id="dropdown"
-
                         name="dropdown"
-
                         onChange={this.handleDropdownChange}
-
                       >
-
                         <option value="NA">Sort by</option>
-
                         <option value="recent_First">Recent First</option>
-
                         <option value="recent_Last">Recent Last</option>
-
                         <option value="unfulfilled_Highest">
-
                           Unfulfilled Positions-Highest to Lowest
-
                         </option>
-
                         <option value="unfulfilled_Lowest">
-
                           Unfulfilled Positions-Lowest to Highest
-
                         </option>
-
                       </select>
-
                     </div>
-
                   </div>
-
                 </section>
-
                 {/* detail Sections */}
-
                 {closedJobs &&
-
                   closedJobs.map((closedJob) => {
                     const { jobDetails } = closedJob;
                     return (
                       <section className="white-middle-section mb-3 mt-0 p-0">
-
                         <div className="px-4 pt-3">
-
                           <div>
-
                             <span className="job-title">
-
                               {jobDetails.jobTitle}
-
                             </span>
-
                             <span className="job-posting">
-
                               Posted {jobDetails.postedAt} day ago
-
                           </span>
-
                           </div>
                           <div>
                             <ul className="job-skills">
