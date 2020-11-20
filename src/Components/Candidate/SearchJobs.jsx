@@ -85,7 +85,7 @@ const SearchJobs = () => {
       setPageDataLength(pageDataLength + initialLength);
     }, 500);
   }
-
+  
   return (
     <Fragment>
       <LeftNavCandidate></LeftNavCandidate>
@@ -131,13 +131,14 @@ const SearchJobs = () => {
                 {
                   resourceJobs && resourceJobs[0] ? resourceJobs.map((resourceJob, resourceIndex) => {
                     const { jobDetails } = resourceJob;
+                    const pathUrl = `/candidate/jobDetails/${jobDetails.jobId}/${ jobDetails.applicationStatus === 'Invite_Sent_By_Recruiter' ? 'invites' : 'searchJobs'}`
                     return (
                       <div class="jobListItem">
                         <section class={`row mx-0 px-4 ${resourceIndex !== 0 && 'pt-4'} pb-4`}>
                           <div class="col-md-9 px-0">
                             <div class="row">
                               <div class="col-md-12 job-title">
-                                <Link to={`/candidate/jobDetails/${jobDetails.jobId}/searchJobs`}>
+                                <Link to={{ pathname: pathUrl}}>
                                   {jobDetails.jobTitle}
                                 </Link>
                                 <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
@@ -162,7 +163,7 @@ const SearchJobs = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/${jobDetails.jobId}/searchJobs` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div class="col-12 px-0 text-right"><Link to={{ pathname: pathUrl}}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </section>
                       </div>
                     )
