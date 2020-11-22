@@ -41,7 +41,7 @@ class UploadProfile extends Component {
 
         if(this.state.drag==true)
         {
-            this.toast.show({severity: 'error', summary: 'Error', detail: 'You have already dragged  a file'},50000);
+            this.toast.show({severity: 'error', summary: 'Error', detail: 'You have already Selected  a file'},50000);
         }
         else
         {
@@ -198,10 +198,10 @@ class UploadProfile extends Component {
                                                         <input className="file-path validate" type="text" value={this.state.selectedFile.name} placeholder="No file choosen"/> 
                                                     </div>
                                                 </div>
-                                                <div className="d-flex-inline">
+                                                {/* <div className="d-flex-inline">
                                                     <img src="/images/Dashboard-assets/csv.svg" className="pt-1" alt="csv icon" />
                                                     <span className="pl-2 fontMiddle">CSV File</span>
-                                                </div>
+                                                </div> */}
                                             
                                             </div>
                                             </form>
