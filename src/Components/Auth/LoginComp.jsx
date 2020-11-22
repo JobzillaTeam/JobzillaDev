@@ -19,7 +19,7 @@ class LoginComp extends Component {
         touched: {},
         isChecked:false,
         formSubmitted: false,
-        errorMsg:'',
+        errorLoginMsg:'',
         submitDisabled: true    
       }
       this.onLogin = this.onLogin.bind(this);
@@ -104,7 +104,7 @@ class LoginComp extends Component {
           })
           .catch(error => {
             if(error){
-              this.setState({errorMsg: 'Invalid Email Or Password'})
+              this.setState({errorLoginMsg: 'Invalid Email Or Password'})
             }
             setTimeout(() => {
               //window.location.reload(false)
@@ -182,15 +182,15 @@ class LoginComp extends Component {
             <div className="row">
               <div className="col-md-5">
                 <h2>Login</h2>
-                <p className="small-title">Welcome!! Please login to your account.</p>
+                <p className="small-title">Welcome!   Please login to your account.</p>
                 {/* User Name */}
                 <div className="form-group">
-                  <label htmlFor="emailid">EmailId</label>
+                  <label htmlFor="emailid">Email Id</label>
                   <input type="text" id="emailid" value={this.state.fields.emailid} name="emailid" className="form-control"
                     onChange={(e) => { this.handleInputChange(e); this.validateForm(); }}
                     onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                 </div>
-                {this.state.formSubmitted || this.state.touched.emailid ? <div className="errorMsg">{this.state.errors.emailid}</div> : ''}
+                {this.state.formSubmitted || this.state.touched.emailid ? <div className="errorLoginMsg">{this.state.errors.emailid}</div> : ''}
                 {/* Password */}
                 <div className="form-group">
                   <label htmlFor="loginPwd">Password</label>
@@ -198,8 +198,8 @@ class LoginComp extends Component {
                     onChange={(e) => { this.handleInputChange(e); this.validateForm(); }}
                     onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                 </div>
-                {this.state.formSubmitted || this.state.touched.password ? <div className="errorMsg">{this.state.errors.password}</div> : ''}
-                <div className="errorMsg">{this.state.errorMsg ? <div>{this.state.errorMsg}</div> : null}</div>
+                {this.state.formSubmitted || this.state.touched.password ? <div className="errorLoginMsg">{this.state.errors.password}</div> : ''}
+                <div className="errorLoginMsg">{this.state.errorLoginMsg ? <div>{this.state.errorLoginMsg}</div> : null}</div>
                 {/* Remember and forget password link */}
                 <div className="form-group clearfix">
                   <div className="float-left">
@@ -226,11 +226,7 @@ class LoginComp extends Component {
                     
                   </div>
                 </div>
-                {/* Terms and policy */}
-                <div className="terms"><Link to={isSignupButtonVisible ? "/termsofUse" : "/termsofUse?role=candidate"}>Terms of use</Link>
-                </div>
-                {/*  */}
-              </div>
+                 </div>
               <div className="col-md-7">
                 <div className="text-right d-none d-md-block">
 				              <img src= "../images/login/login-img.png" className="img-fluid"/>

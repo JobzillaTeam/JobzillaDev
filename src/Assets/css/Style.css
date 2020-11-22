@@ -94,6 +94,11 @@ label {
     padding: 0.4rem 0.75rem!important;
 }
 
+.btn.disabled,
+.btn:disabled {
+    opacity: 0.9 !important;
+}
+
 .btn.btn-blue {
     background: #007EFF;
     border: 2px solid transparent;
@@ -367,13 +372,15 @@ nav a {
     display: flex;
     align-items: center;
 }
-.recent_matches_section1{
+
+.recent_matches_section1 {
     padding: 0px;
     background: #FFFFFF;
     /* padding: 15px; */
     margin: 20px;
     border-radius: 0px;
 }
+
 .recent_matches_section1 .row {
     background: #F9F9FA;
     padding: 30px 20px;
@@ -412,7 +419,7 @@ nav a {
     bottom: 0;
 }
 
-.topSkillsRequired_Text{
+.topSkillsRequired_Text {
     font-size: 20px;
     font-family: "Montserrat-Medium";
     color: #241c1c;
@@ -669,6 +676,8 @@ nav a {
     font-size: 0.9rem;
     font-weight: 500;
 }
+
+
 /*-----------*/
 
 .mr-30 {
@@ -681,43 +690,51 @@ nav a {
     color: #241c1c !important;
 }
 
-.table thead tr th:first-child, .table tbody tr td:first-child{
+.table thead tr th:first-child,
+.table tbody tr td:first-child {
     padding-top: 19px !important;
     padding-left: 20px !important;
-width: 170px !important;
+    width: 170px !important;
 }
 
-.table tbody tr:last-child td{
+.table tbody tr:last-child td {
     border-bottom: 0px !important;
 }
 
-.skillPosted_section{
+.skillPosted_section {
     padding-right: 40px !important;
     margin-right: 0px !important;
 }
-.skillsUnfulfilled_section{
+
+.skillsUnfulfilled_section {
     margin-left: 0px !important;
     padding-right: 40px !important;
     height: 230px;
 }
 
-.table th, .table td{
-    padding-left: 19px !important;    
+.table th,
+.table td {
+    padding-left: 19px !important;
 }
+
+
 /* .table thead tr th:first-child, .table tbody tr td:first-child{
     width: 12rem !important;
 } */
 
-.skills-section-padding{
+.skills-section-padding {
     padding-left: 20px !important;
 }
-.table thead td{
+
+.table thead td {
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
 }
+
 .progress2 .color-pink {
     background-color: #FF00CC;
 }
+
 .progress2 .color-yellow {
     background-color: #FFBE0B;
 }
@@ -726,9 +743,11 @@ width: 170px !important;
     border: 1px solid #ccc !important;
 }
 
-.mr-19{
+.mr-19 {
     margin-right: 19px;
 }
+
+
 /*-----------------------------------*/
 
 
@@ -1130,7 +1149,7 @@ input:checked+.slider:before {
 
 .p-datatable {
     min-width: 200px!important;
-    overflow-x: scroll!important;
+    /* overflow-x: scroll!important; */
 }
 
 .p-datatable-header {
@@ -2528,9 +2547,11 @@ textarea.form-control {
     background-color: #F4F4F4 !important;
     padding-bottom: 0px !important;
 }
-.noMatchingcandidateText{
+
+.noMatchingcandidateText {
     padding-left: 1rem;
 }
+
 #notNow {
     background-color: whitesmoke !important;
     border-color: #007EFF !important;
@@ -2913,13 +2934,13 @@ textarea {
     padding-left: 0px !important;
     padding-right: 0px !important;
 }
+
 .white-middle-section5 {
     padding: 40px;
     /* margin: 10px; */
     background: #fff;
     border-radius: 0px !important;
 }
-
 
 #body1 {
     font-weight: medium;
@@ -3034,7 +3055,7 @@ textarea {
     box-shadow: none !important;
 }
 
- .Show {
+.Show {
     display: flex;
     justify-content: flex-end;
     margin-right: 50px;
@@ -3084,7 +3105,8 @@ textarea {
     background: #F9F9FA;
 }
 
-tr td:last-child,tr td:first-child{
+tr td:last-child,
+tr td:first-child {
     white-space: nowrap !important;
 }
 
@@ -3201,32 +3223,33 @@ tr td:last-child,tr td:first-child{
     font-size: 12px;
     padding: 20px 27px 20px 0px;
 }
-  
+
 .job-skills img {
     padding-right: 6px;
 }
-  
+
 .white-middle-section {
     padding: 40px;
     background: #fff;
     border-radius: 0px !important;
 }
-  
+
 .job-posting {
     color: #7b7b7b;
     font-size: 12px;
     padding-left: 20px !important;
 }
-  
+
 .job-title {
     color: #007eff;
     font-weight: bold;
     font-size: 20px;
 }
 
-  /* closed jobs end */
 
-.jobListItems > .jobListItem {
+/* closed jobs end */
+
+.jobListItems>.jobListItem {
     background: #F9F9FA;
 }
 
@@ -3234,8 +3257,15 @@ tr td:last-child,tr td:first-child{
     background: #FFFFFF;
 }
 
-
 .disabledCursorOnIcon {
     cursor: not-allowed;
     opacity: 0.5;
+}
+
+
+/* loginerror messages by Prateek */
+
+.errorLoginMsg {
+    color: red;
+    margin-bottom: 20px;
 }

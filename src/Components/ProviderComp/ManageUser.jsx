@@ -257,7 +257,7 @@ class ManageUser extends Component{
  <Column field="contactNumber" header="Contact"  sortable></Column>
                         
                        
-<Column field="userRole" header="Role"  style={{width:'8%'}} sortable></Column>
+<Column field="userRole" header="Role"  style={{width:'15%'}} sortable></Column>
 <EditUser ref={this.onaEditUSerModalRef} ></EditUser>
 <Column header="Action" body={this.actionBodyTemplate}></Column>
                 </DataTable>

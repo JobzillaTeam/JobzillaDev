@@ -138,7 +138,7 @@ validateForm = () => {
         if (typeof fields["contactPerson"] !== "undefined") {
             if (!fields["contactPerson"].match(/^[a-zA-Z ]*$/)) {
                 formIsValid = false;
-                errors["organizationName"] = "*Please enter alphabet characters only.";
+                errors["contactPerson"] = "*Please enter alphabet characters only.";
             }
         }
 

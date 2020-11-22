@@ -390,7 +390,7 @@ export default class CreateJob extends React.Component {
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
                     <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
-                      <h5 class="recruiterForm__sectionHeading">Basic Information</h5>
+                      <h5 class="recruiterForm__sectionHeading"> Basic Information *</h5>
                       <div class="row col">
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Job Title</label></div>
@@ -443,7 +443,7 @@ export default class CreateJob extends React.Component {
                       <h5 class="recruiterForm__sectionHeading">Skills and Experience</h5>
                       <div class="row col">
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
-                          <div><label>Primary Skill</label></div>
+                          <div><label>Primary Skill *</label></div>
                           <Select
                             ref={inputEl => (this.primarySkills = inputEl)}
                             styles={this.customStyles(errors && errors.primarySkills)}
@@ -468,7 +468,7 @@ export default class CreateJob extends React.Component {
                           />
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
-                          <div><label>Experience Required (In Years)</label></div>
+                          <div><label>Experience Required (In Years) *</label></div>
                           <div style={{ display: 'flex', alignItems: 'center' }}>
                             <div class="col-md-6 p-0 pr-4">
                               <Select
@@ -564,7 +564,7 @@ export default class CreateJob extends React.Component {
                           </div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
-                          <div class="recruiterForm__noOfPositionsAvailable"><label>Number of Positions Available</label></div>
+                          <div class="recruiterForm__noOfPositionsAvailable"><label>Number of Positions Available *</label></div>
                           <input
                             ref={inputEl => (this.noOfPositionsAvailable = inputEl)}
                             class={`form-control ${errors && errors.noOfPositionsAvailable ? 'is-invalid' : ''}`}
@@ -596,7 +596,7 @@ export default class CreateJob extends React.Component {
                           </div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
-                          <div><label>Annual Salary</label></div>
+                          <div><label>Annual Salary *</label></div>
                           <div class="form-check form-check-inline mr-4">
                             <input class="form-check-input" type="radio" name="currency" id="exampleRadios1" value={CURRENCY_TYPE_ENUM.INR} checked={currency === CURRENCY_TYPE_ENUM.INR} onChange={this.handleChange} />
                             <label class="form-check-label ml-2" for="exampleRadios1">INR</label>
@@ -652,7 +652,7 @@ export default class CreateJob extends React.Component {
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
                     <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
-                      <h5 class="recruiterForm__sectionHeading">Hiring Location</h5>
+                      <h5 class="recruiterForm__sectionHeading">Hiring Location *</h5>
                       <div class="row col">
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Country</label></div>
