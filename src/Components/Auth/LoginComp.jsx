@@ -78,7 +78,7 @@ class LoginComp extends Component {
               localStorage.setItem('userId',Response.data.responseObject['id'])
               localStorage.setItem('organizationId',Response.data.responseObject['orgnaizationId'] )
               localStorage.setItem('rememberme',this.state.isChecked)
-              localStorage.setItem('emailId',this.state.isChecked ? Response.data.responseObject['email'] :'')
+              localStorage.setItem('emailId', Response.data.responseObject['email'])
               localStorage.setItem('authToken', Response.data.responseObject['authToken'])
               localStorage.setItem('acceptedTC', Response.data.responseObject['acceptedTC'])
               localStorage.setItem('userRole', Response.data.responseObject['userRole'])

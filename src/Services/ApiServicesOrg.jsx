@@ -7,6 +7,34 @@ import { parseJSON } from 'jquery';
 
 
 class ApiServicesOrg extends Component {
+    constructor() {
+        super();
+        axios.interceptors.response.use(response => {
+            return response;
+        }, err => {
+            return new Promise((resolve, reject) => {
+                console.log(err)
+                const originalReq = err.config;
+                const isAuthTokenExpired = err && err.response && err.response.status === 401 && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')
+                if (isAuthTokenExpired) {
+                    let userName = localStorage.getItem('emailId');
+                    if (!userName) userName = localStorage.getItem('userName');
+                    let res = fetch(`${ApiBaseUrl}/authenticate/${userName}`)
+                        .then(res => res.json()).then(res => {
+                            if (res && res.responseObject) {
+                                const authToken = res.responseObject;
+                                console.log(res);
+                                localStorage.setItem('authToken', authToken);
+                                originalReq.headers['Authorization'] = `Bearer ${authToken}`;
+                            }
+                            return axios(originalReq);
+                        });
+                    resolve(res);
+                }
+                return Promise.reject(err);
+            });
+        });
+    }
 
     getToken() {
         const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
@@ -229,7 +257,7 @@ class ApiServicesOrg extends Component {
 
     viewProfileImage1(userId) {
         const authToken = localStorage.getItem('authToken');
-        return( 
+        return (
             axios({ url: `${ApiBaseUrl}/user/viewImage/${userId}`, headers: { 'Authorization': `Bearer ${authToken}` } }).then(Response => Response)
         );
     }
@@ -334,15 +362,18 @@ class ApiServicesOrg extends Component {
     }
     //5.8 Download Resume For Candidate Profile
 
-    downloadResumeFile (){ 
+    downloadResumeFile() {
         // const candidateId = JSON.parse(localStorage.getItem('candidateId'));
         const authToken = localStorage.getItem('authToken');
-        const candidateId=1428;
-        return( 
+        const candidateId = 1428;
+        return (
             axios({
                 url: `${ApiBaseUrl}/user/viewResume/${candidateId}`,
-                headers: { 'Authorization': `Bearer ${authToken}`
-            }}).then(Response => Response) ) }
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            }).then(Response => Response))
+    }
 
     //5.9 Download Resume In Shortlisted Candidate
     downloadResumeFile1() {
@@ -360,24 +391,24 @@ class ApiServicesOrg extends Component {
     }
     //Provider Dashboard api
     getProviderDashboardDetails() {
-        const year=2020
+        const year = 2020
         return (
             axios
-                .get(ApiBaseUrl + '/provider/providerDashboardDetails/'+ year,this.getToken())
+                .get(ApiBaseUrl + '/provider/providerDashboardDetails/' + year, this.getToken())
                 .then(Response => Response)
         )
     }
- 
-        //Recruiter Dashboard api
-        getRecruiterDashboardDetails() {
-            const orgId = localStorage.getItem("organizationId");
-            const year=2020
-            return (
-                axios
-                    .get(ApiBaseUrl + '/recruiter/recruiterDashboardDetails/'+ orgId +'/' +year,this.getToken())
-                    .then(Response => Response)
-            )
-        }
+
+    //Recruiter Dashboard api
+    getRecruiterDashboardDetails() {
+        const orgId = localStorage.getItem("organizationId");
+        const year = 2020
+        return (
+            axios
+                .get(ApiBaseUrl + '/recruiter/recruiterDashboardDetails/' + orgId + '/' + year, this.getToken())
+                .then(Response => Response)
+        )
+    }
 
 
 }
