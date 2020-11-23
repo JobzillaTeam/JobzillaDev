@@ -115,7 +115,6 @@ class ActiveJob extends Component {
         //console.log(data)
         return (data.jobDescription.jobTitle.toLowerCase().includes(this.state.search.toLowerCase()) ||
           data.jobDescription.primarySkills.toLowerCase().includes(this.state.search.toLowerCase()) ||
-          data.jobDescription.secondarySkills.toLowerCase().includes(this.state.search.toLowerCase()) ||
           data.jobDescription.jobCity.toLowerCase().includes(this.state.search.toLowerCase()))
       }
     );
