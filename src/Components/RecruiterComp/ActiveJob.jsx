@@ -17,7 +17,7 @@ class ActiveJob extends Component {
       search: '',
       noOfActiveJobs: '',
       daysPostedAgo: '',
-       days: [],
+      days: [],
       candidates: [],
       jobId: '',
       jobDescription: [],
@@ -39,10 +39,9 @@ class ActiveJob extends Component {
     //To get all active jobs
 
     this.activeJobs.getAllActiveJobs()
-      .then(Response =>
-        {
+      .then(Response => {
         //console.log(Response.data.responseObject),
-        if(Response.data.responseObject){
+        if (Response.data.responseObject) {
           this.setState({
             jobDetails: Response.data.responseObject,
             noOfActiveJobs: Response.data.responseObject.length,
@@ -50,7 +49,7 @@ class ActiveJob extends Component {
             this.state.jobDetails && this.state.jobDetails[0] && this.state.jobDetails.map(job => {
               this.MatchingCandidate.getViewAllMatchingCandidate(job.jobId)
                 .then(Response => {
-  
+
                   //console.log(Response.data.responseObject)
                   const detail = {
                     jobDescription: job,
@@ -63,9 +62,11 @@ class ActiveJob extends Component {
                 })
             })
           })
-        }}
-          )}
-          
+        }
+      }
+      )
+  }
+
   onInviteButtonClick = (jobId, candidateId, applicationStatus) => {
     applicationStatus = 'Invite_Sent_By_Recruiter'
     return (
@@ -84,30 +85,30 @@ class ActiveJob extends Component {
 
   handleDropdownChange(e) {
     const updatedJobs = this.state.candidates.sort((objA, objB) => {
-    const dateA = new Date(objA.jobDescription.createdDate).getTime()
-    const dateB = new Date(objB.jobDescription.createdDate).getTime()
-    const PositionsA = objA.jobDescription.noOfPositionsAvailable
-    const PositionsB = objB.jobDescription.noOfPositionsAvailable
-    if (e.target.value === "recent_First") {
-    return dateB - dateA
-    } else if (e.target.value === "recent_Last") {
-    return dateA - dateB
-    } else if(e.target.value ==="unfulfilled_Highest"){
-      return PositionsB - PositionsA
-    } else if(e.target.value ==="unfulfilled_Lowest"){
-      return PositionsA - PositionsB
-    }
+      const dateA = new Date(objA.jobDescription.createdDate).getTime()
+      const dateB = new Date(objB.jobDescription.createdDate).getTime()
+      const PositionsA = objA.jobDescription.noOfPositionsAvailable
+      const PositionsB = objB.jobDescription.noOfPositionsAvailable
+      if (e.target.value === "recent_First") {
+        return dateB - dateA
+      } else if (e.target.value === "recent_Last") {
+        return dateA - dateB
+      } else if (e.target.value === "unfulfilled_Highest") {
+        return PositionsB - PositionsA
+      } else if (e.target.value === "unfulfilled_Lowest") {
+        return PositionsA - PositionsB
+      }
     });
     this.setState({
-    candidates: updatedJobs
+      candidates: updatedJobs
     });
-    }
-
-    showProfile(jobId){
-      localStorage.setItem("JobId",jobId)
   }
-  
-    render() {
+
+  showProfile(jobId) {
+    localStorage.setItem("JobId", jobId)
+  }
+
+  render() {
     const jobs = this.state.jobs
     let candidates = this.state.candidates.filter(
       (data) => {
@@ -159,7 +160,7 @@ class ActiveJob extends Component {
                         </span>
                       </div>
                     </div>
-                    
+
                     <div className="col-md-2 offset-md-6">
                       <select className="form-control" id="dropdown" name="dropdown"
                         onChange={this.handleDropdownChange}>
@@ -224,7 +225,7 @@ class ActiveJob extends Component {
                                 </div>
                                 <div className="row pt-4" >
                                   <div className="col-md-12 p-0">
-                                    <button type="button" id="footer" style={{bottom:"0px", position:"relative"}} className="btn w-100 btn-blue" onClick={() => this.onInviteButtonClick(data.jobDescription.jobId, match.candidate.candidateId)}>Invite</button>
+                                    <button type="button" id="footer" style={{ bottom: "0px", position: "relative" }} className="btn w-100 btn-blue" onClick={() => this.onInviteButtonClick(data.jobDescription.jobId, match.candidate.candidateId)}>Invite</button>
                                   </div>
                                 </div>
                               </Card>)}
@@ -232,12 +233,12 @@ class ActiveJob extends Component {
                         ) : <div className="noMatchingcandidateText">No matching Candidates Found</div>}
                       </div>
                       <div>
-                      <div className="job-full-detail text-right text-md-right mt-4 mb-4"><Link to={`/jobPostingCollection/${data.jobDescription.jobId}`}>VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                        <div className="job-full-detail text-right text-md-right mt-4 mb-4"><Link to={`/recruiter/jobDetails/${data.jobDescription.jobId}/active`}>VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                       </div>
-                    </div> 
+                    </div>
                   </div>
-                 )):
-                 <div className=" white-middle-section5 ">You have no active jobs</div>}
+                )) :
+                  <div className=" white-middle-section5 ">You have no active jobs</div>}
               </div>
             </div>
             <Footer></Footer>

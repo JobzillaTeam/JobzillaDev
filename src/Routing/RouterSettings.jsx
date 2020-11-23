@@ -46,6 +46,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import { AppHelper } from "../Utils/AppHelper";
 import ForgotPassword from "../Components/Auth/ForgotPassword";
 import CandidateJobDetails from "../Components/Candidate/CandidateJobDetails";
+import RecruiterJobDetails from "../Components/RecruiterComp/RecruiterJobDetails";
 
 class RouterSettings extends Component {
 
@@ -97,6 +98,7 @@ class RouterSettings extends Component {
             <OrganizationLayout path="/createJob" component={CreateJob} />
             <OrganizationLayout path="/jobPostingCollection/:jobID" component={JobPostingCollection} />
             <OrganizationLayout path="/closeJobs" component={CloseJobs}/>
+            <OrganizationLayout path="/recruiter/jobDetails/:jobID/:jobStatus" component={RecruiterJobDetails}/>
             <OrganizationLayout path="/candidateProfileToOpen/:userId" component={CandidateProfileToOpen}/>
 
           </Switch>
