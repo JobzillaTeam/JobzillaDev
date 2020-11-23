@@ -86,7 +86,13 @@ class CandidateEmailSetting extends Component {
     onNewInviteChange = () => {
         this.setState(initialState => ({
             newInvite: !initialState.newInvite,
-        })
+        }), () => {
+            if (this.state.newInvite && this.state.inviteAcceptedDeclinedByRecruiter && this.state.changeInApplicationStatus && this.state.newOffer) {
+                this.setState({
+                  allowNotification: true
+                })
+              }
+        }
         )
         /* If new invite checkbox is disabled then allow notification is also disabled */
         if (!this.state.newInvite === false) {
@@ -100,7 +106,13 @@ class CandidateEmailSetting extends Component {
     onInviteAcceptedDeclineChange = () => {
         this.setState(initialState => ({
             inviteAcceptedDeclinedByRecruiter: !initialState.inviteAcceptedDeclinedByRecruiter,
-        })
+        }), () => {
+            if (this.state.newInvite && this.state.inviteAcceptedDeclinedByRecruiter && this.state.changeInApplicationStatus && this.state.newOffer) {
+                this.setState({
+                  allowNotification: true
+                })
+              }
+        }
         )
         /* If Invite Accepted/Declined by recruiter checkbox is disabled then allow notification is also disabled */
         if (!this.state.inviteAcceptedDeclinedByRecruiter === false) {
@@ -114,7 +126,13 @@ class CandidateEmailSetting extends Component {
     onChangeInApplicationStatusChange = () => {
         this.setState(initialState => ({
             changeInApplicationStatus: !initialState.changeInApplicationStatus,
-        })
+        }), () => {
+            if (this.state.newInvite && this.state.inviteAcceptedDeclinedByRecruiter && this.state.changeInApplicationStatus && this.state.newOffer) {
+                this.setState({
+                  allowNotification: true
+                })
+              }
+        }
         )
         /* If change in application status is disabled then allow notification is also disabled */
         if (!this.state.changeInApplicationStatus === false) {
@@ -128,7 +146,13 @@ class CandidateEmailSetting extends Component {
     onNewOfferChange = () => {
         this.setState(initialState => ({
             newOffer: !initialState.newOffer,
-        })
+        }), () => {
+            if (this.state.newInvite && this.state.inviteAcceptedDeclinedByRecruiter && this.state.changeInApplicationStatus && this.state.newOffer) {
+                this.setState({
+                  allowNotification: true
+                })
+              }
+        }
         )
         /* If new Offer is disabled then allow notification is also disabled */
         if (!this.state.newOffer === false) {

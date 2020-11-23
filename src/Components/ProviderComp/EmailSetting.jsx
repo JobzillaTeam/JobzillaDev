@@ -104,7 +104,13 @@ class EmailSetting extends Component {
     onCandidateTermsChange = () => {
         this.setState(initialState => ({
             canCandidateHasAcceptedTermsAndConditions: !initialState.canCandidateHasAcceptedTermsAndConditions,
-        })
+        }), () => {
+            if (this.state.canCandidateHasAcceptedTermsAndConditions && this.state.canOfferMadeToTheirCandidate) {
+                this.setState({
+                    canAllowNotificationForProvider: true
+                })    
+            } 
+        }
         )
         /* If Candidate Terms and conditions checkbox is disabled then allow notification is also disabled */
         if (!this.state.canCandidateHasAcceptedTermsAndConditions === false) {
@@ -118,7 +124,13 @@ class EmailSetting extends Component {
     onOffersMadeToCandidateChange = () => {
         this.setState(initialState => ({
             canOfferMadeToTheirCandidate: !initialState.canOfferMadeToTheirCandidate,
-        })
+        }), () => {
+            if (this.state.canCandidateHasAcceptedTermsAndConditions && this.state.canOfferMadeToTheirCandidate) {
+                this.setState({
+                    canAllowNotificationForProvider: true
+                })    
+            }
+        }
         )
         /* If Candidate Terms and conditions checkbox is disabled then provider allow notification is also disabled */
         if (!this.state.canOfferMadeToTheirCandidate === false) {
@@ -132,7 +144,13 @@ class EmailSetting extends Component {
     onSuccessfulJobPostChange = () => {
         this.setState(initialState => ({
             canSuccessfulJobPost: !initialState.canSuccessfulJobPost,
-        })
+        }), () => {
+            if (this.state.canSuccessfulJobPost && this.state.canNewApplicationOnPostedJobs && this.state.canInterviewInviteAcceptedDeclinedByCandidate) {
+                this.setState({
+                  canAllowNotificationForRecruite: true
+                })
+            }
+        }
         )
         /* If successful Job Post is disabled then recruiter allow notification is also disabled */
         if (!this.state.canSuccessfulJobPost === false) {
@@ -146,7 +164,13 @@ class EmailSetting extends Component {
     onNewAppJobPostChange = () => {
         this.setState(initialState => ({
             canNewApplicationOnPostedJobs: !initialState.canNewApplicationOnPostedJobs,
-        })
+        }), () => {
+            if (this.state.canSuccessfulJobPost && this.state.canNewApplicationOnPostedJobs && this.state.canInterviewInviteAcceptedDeclinedByCandidate) {
+                this.setState({
+                  canAllowNotificationForRecruite: true
+                })
+              }
+        }
         )
         /* If new Application Job Post is disabled then allow notification is also disabled */
         if (!this.state.canNewApplicationOnPostedJobs === false) {
@@ -160,7 +184,13 @@ class EmailSetting extends Component {
     onInterviewAcceptedDeclinedChange = () => {
         this.setState(initialState => ({
             canInterviewInviteAcceptedDeclinedByCandidate: !initialState.canInterviewInviteAcceptedDeclinedByCandidate,
-        })
+        }), () => {
+            if (this.state.canSuccessfulJobPost && this.state.canNewApplicationOnPostedJobs && this.state.canInterviewInviteAcceptedDeclinedByCandidate) {
+                this.setState({
+                  canAllowNotificationForRecruite: true
+                })
+              }
+        }
         )
         /* If new interview accepted/declined is disabled then recruiter allow notification is also disabled */
         if (!this.state.canInterviewInviteAcceptedDeclinedByCandidate === false) {
