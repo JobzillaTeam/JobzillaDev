@@ -6,14 +6,42 @@ import { Context } from '../Context/ProfileContext';
 import Resume from '../Components/Candidate/Profile/details/resume/Resume.jsx';
 
 class ApiServicesOrgCandidate {
-  
+  constructor() {
+    // super();
+    axios.interceptors.response.use(response => {
+      return response;
+    }, err => {
+      return new Promise((resolve, reject) => {
+        console.log(err)
+        const originalReq = err.config;
+        const isAuthTokenExpired = err && err.response && err.response.status === 401 && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')
+        if (isAuthTokenExpired) {
+          let userName = localStorage.getItem('emailId');
+          if (!userName) userName = localStorage.getItem('userName');
+          let res = fetch(`${ApiBaseUrl}/authenticate/${userName}`)
+            .then(res => res.json()).then(res => {
+              if (res && res.responseObject) {
+                const authToken = res.responseObject;
+                console.log(res);
+                localStorage.setItem('authToken', authToken);
+                originalReq.headers['Authorization'] = `Bearer ${authToken}`;
+              }
+              return axios(originalReq);
+            });
+          resolve(res);
+        }
+        return Promise.reject(err);
+      });
+    });
+  }
+
   fetchProfileInfo() {
     const userID = localStorage.getItem('userId')
     const authToken = localStorage.getItem('authToken')
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/profileview/${userID}`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response.data.responseObject)
     )
@@ -24,7 +52,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .put(`${ApiBaseUrl}/candidate/candidateinfo/`, careerInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -37,7 +65,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .put(`${ApiBaseUrl}/candidate/candidateinfo/`, profileInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -51,7 +79,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .put(`${ApiBaseUrl}/candidate/skill?candidateId=${candidateId}`, skillInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -65,7 +93,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .post(`${ApiBaseUrl}/candidate/skill/${candidateId}`, skillInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -79,7 +107,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .delete(`${ApiBaseUrl}/candidate/skill?candidateId=${candidateId}&skillId=${id}`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileInfo()).catch(error => {
           console.log(error);
@@ -94,7 +122,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .put(`${ApiBaseUrl}/candidate/certificate?candidateId=${candidateId}`, certificationInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -108,7 +136,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .post(`${ApiBaseUrl}/candidate/languages/${candidateId}`, languageInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -123,7 +151,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .post(`${ApiBaseUrl}/candidate/certificate/${candidateId}`, certificationInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -137,7 +165,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .put(`${ApiBaseUrl}/candidate/languages?candidateId=${candidateId}`, updateLanguage, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -152,7 +180,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .delete(`${ApiBaseUrl}/candidate/languages?langaugeId=${id}&candidateId=${candidateId}`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileInfo()).catch(error => {
           console.log(error);
@@ -166,7 +194,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .post(`${ApiBaseUrl}/candidate/employment/${candidateId}`, employmentInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -180,7 +208,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .put(`${ApiBaseUrl}/candidate/employment?candidateId=${candidateId}`, employmentInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -195,7 +223,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .put(`${ApiBaseUrl}/candidate/education?candidateId=${candidateId}`, educationInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -209,7 +237,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .post(`${ApiBaseUrl}/candidate/education/${candidateId}`, educationInfo, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
           console.log(error);
@@ -222,7 +250,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/listOfStates`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -235,7 +263,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/ListOfCities?stateCode=${stateCode}`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -248,7 +276,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/listOfInstitutes`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -261,7 +289,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/listOfOrganizations`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -274,7 +302,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/listOfCertificates`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -287,7 +315,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/listOfBoards`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -300,7 +328,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/listOfLanguages`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -313,7 +341,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/listOfEducationType`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -326,7 +354,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/listOfSkills`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
           console.log(error);
@@ -334,87 +362,87 @@ class ApiServicesOrgCandidate {
     )
   }
 
-      // Post Email notifications Settings of Candidate with Token
-      getToken() {
-        const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
-        const tokenHeader = { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token } }
-        return tokenHeader;
-      }
+  // Post Email notifications Settings of Candidate with Token
+  getToken() {
+    const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
+    const tokenHeader = { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token } }
+    return tokenHeader;
+  }
 
-      putCandidateEmailSettings(data) {
-        return (
-          axios
-            .put(ApiBaseUrl + "/candidate/notificationSettingForCandidate", data, this.getToken())
-            .then(Response => Response)
-        )
-      }
+  putCandidateEmailSettings(data) {
+    return (
+      axios
+        .put(ApiBaseUrl + "/candidate/notificationSettingForCandidate", data, this.getToken())
+        .then(Response => Response)
+    )
+  }
 
-      //Get candidate Email notifications Settings
-      getCandidateSettings() {
-        const candidateId = JSON.parse(localStorage.getItem('userDetails')).id;
-        return (
-          axios
-            .get(ApiBaseUrl + '/candidate/notificationSettingForCandidate?candidateId=' +candidateId, this.getToken())
-            .then(Response => Response)
-        )
-      }
+  //Get candidate Email notifications Settings
+  getCandidateSettings() {
+    const candidateId = JSON.parse(localStorage.getItem('userDetails')).id;
+    return (
+      axios
+        .get(ApiBaseUrl + '/candidate/notificationSettingForCandidate?candidateId=' + candidateId, this.getToken())
+        .then(Response => Response)
+    )
+  }
 
-      //Candidate ResumeUpload Service
-      postResumeFile (formdata, formheader){
-        const candidateId = JSON.parse(localStorage.getItem('candidateId'));
-        return(
-            axios
-            .post(ApiBaseUrl + "/user/uplaodResume/" + candidateId, formdata, formheader)
-            .then(Response => Response)
-         
-        )
-        }
+  //Candidate ResumeUpload Service
+  postResumeFile(formdata, formheader) {
+    const candidateId = JSON.parse(localStorage.getItem('candidateId'));
+    return (
+      axios
+        .post(ApiBaseUrl + "/user/uplaodResume/" + candidateId, formdata, formheader)
+        .then(Response => Response)
 
-      //Candidate ResumeDelete Service
-      deleteSampleFile (){
-        const candidateId = JSON.parse(localStorage.getItem('candidateId'));
-        return(
-          axios
-          .delete(ApiBaseUrl + "/user/deleteResume/"+ candidateId, this.getToken())
-          .then(Response => Response)
-        )
-      }
+    )
+  }
 
-    //dowload candidate Resume
-    fetchResumeFile (){
-      const candidateId = JSON.parse(localStorage.getItem('candidateId'));
-        return(
-       axios
-         .get (ApiBaseUrl +"/user/viewResume/" + candidateId ,this.getToken())
-         .then(Response => Response)
-     )
- }
+  //Candidate ResumeDelete Service
+  deleteSampleFile() {
+    const candidateId = JSON.parse(localStorage.getItem('candidateId'));
+    return (
+      axios
+        .delete(ApiBaseUrl + "/user/deleteResume/" + candidateId, this.getToken())
+        .then(Response => Response)
+    )
+  }
 
- // Candidate Profile Progressbar
-        candidateGetProfileInfo() {
-            //const authToken = localStorage.getItem("authToken");
-            const userId = JSON.parse(localStorage.getItem('userDetails')).id
-            return axios
-            .get(ApiBaseUrl + "/candidate/profileview/" + userId ,this.getToken())
-            .then((Response) => Response)
-          }
+  //dowload candidate Resume
+  fetchResumeFile() {
+    const candidateId = JSON.parse(localStorage.getItem('candidateId'));
+    return (
+      axios
+        .get(ApiBaseUrl + "/user/viewResume/" + candidateId, this.getToken())
+        .then(Response => Response)
+    )
+  }
 
-          //Change Password  
-          getChangePassword(oldPassword, password){
-            const emailID = JSON.parse(localStorage.getItem('userDetails')).email;
-            return(
-              axios 
-              .get(ApiBaseUrl + `/user/changePassword/${emailID}/${oldPassword}/${password}`,  this.getToken())
-              .then(Response => Response) 
-  )
-}
+  // Candidate Profile Progressbar
+  candidateGetProfileInfo() {
+    //const authToken = localStorage.getItem("authToken");
+    const userId = JSON.parse(localStorage.getItem('userDetails')).id
+    return axios
+      .get(ApiBaseUrl + "/candidate/profileview/" + userId, this.getToken())
+      .then((Response) => Response)
+  }
+
   //Change Password  
-  putChangePassword(oldPassword, newPassword){
+  getChangePassword(oldPassword, password) {
     const emailID = JSON.parse(localStorage.getItem('userDetails')).email;
-    return(
-      axios 
-      .put(ApiBaseUrl + "/user/changePassword/"+`${emailID}/${oldPassword}/${newPassword}`,null , this.getToken())
-      .then(Response => Response) 
+    return (
+      axios
+        .get(ApiBaseUrl + `/user/changePassword/${emailID}/${oldPassword}/${password}`, this.getToken())
+        .then(Response => Response)
+    )
+  }
+  //Change Password  
+  putChangePassword(oldPassword, newPassword) {
+    const emailID = JSON.parse(localStorage.getItem('userDetails')).email;
+    return (
+      axios
+        .put(ApiBaseUrl + "/user/changePassword/" + `${emailID}/${oldPassword}/${newPassword}`, null, this.getToken())
+        .then(Response => Response)
     )
   }
 
@@ -424,7 +452,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/interviewInvitesForCandidate/${candidateId}`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response.data.responseObject)
     )
@@ -436,7 +464,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candidate/acceptedInterviews/${candidateId}`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response.data.responseObject)
     )
@@ -448,7 +476,7 @@ class ApiServicesOrgCandidate {
     return (
       axios
         .get(`${ApiBaseUrl}/candiadate/jobList/${candidateId}`, {
-          headers: {'Authorization': `Bearer ${authToken}`}
+          headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response.data.responseObject)
     )
@@ -470,14 +498,14 @@ class ApiServicesOrgCandidate {
   getcandidateDashboardDetails() {
     const candidateId = localStorage.getItem('candidateId')
     return axios
-    .get(ApiBaseUrl + "/candiadate/candidateDashboard/" + candidateId ,this.getToken())
-    .then((Response) => Response)
+      .get(ApiBaseUrl + "/candiadate/candidateDashboard/" + candidateId, this.getToken())
+      .then((Response) => Response)
   }
 
   getJobAndCandidateDetailsByIds = (jobID) => {
     const authToken = localStorage.getItem('authToken');
     const candidateId = localStorage.getItem('candidateId')
-    return( 
+    return (
       axios(
         {
           url: `${ApiBaseUrl}/candidate/jobAndCandidateDetailsByIds/${jobID}/${candidateId}`,
@@ -486,16 +514,16 @@ class ApiServicesOrgCandidate {
           }
         }
       ).then(Response => Response.data.responseObject)
-      .catch(error => {
-        console.log(error);
-      })
+        .catch(error => {
+          console.log(error);
+        })
     )
   }
 
   getJobOffersForCandidate = () => {
     const authToken = localStorage.getItem('authToken');
     const candidateId = localStorage.getItem('candidateId')
-    return( 
+    return (
       axios(
         {
           url: `${ApiBaseUrl}/candidate/jobOffersForCandidate/${candidateId}`,
@@ -504,9 +532,9 @@ class ApiServicesOrgCandidate {
           }
         }
       ).then(Response => Response.data.responseObject)
-      .catch(error => {
-        console.log(error);
-      })
+        .catch(error => {
+          console.log(error);
+        })
     )
   }
 

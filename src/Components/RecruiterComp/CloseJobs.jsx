@@ -56,7 +56,7 @@ class CloseJobs extends Component {
   }
   render() {
     let closedJobsObjects = this.state.closedJobs;
-    const closedJobsFilterObjects = closedJobsObjects.filter(
+    const closedJobsFilterObjects = closedJobsObjects && closedJobsObjects.filter(
       (data) => {
         return (data.jobDetails.jobTitle.toLowerCase().includes(this.state.search.toLowerCase()) ||
           data.jobDetails.primarySkills.toLowerCase().includes(this.state.search.toLowerCase()) ||
