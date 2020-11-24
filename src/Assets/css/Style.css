@@ -704,6 +704,8 @@ nav a {
 .skillPosted_section {
     padding-right: 40px !important;
     margin-right: 0px !important;
+    height: 230px;
+
 }
 
 .skillsUnfulfilled_section {
