@@ -10,6 +10,7 @@ import ApiServicesOrg from '../../../Services/ApiServicesOrg.jsx';
 import { data } from 'jquery';
 import InfiniteScroll from "react-infinite-scroll-component";
 import RenderLoader from '../../CommonComp/Loader';
+import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst.jsx';
 
 export default class CandidateApplication extends Component {
 
@@ -19,14 +20,15 @@ export default class CandidateApplication extends Component {
         super(props);
 
         this.state = {
+           pageDataLength: INITIAL_ITEM_LENGTH,
+            candidate: [],
             candidateData: [],
             match: [],
             matchPer: [],
-            candidate: {},
-            candidate1: [],
+            error: false,
             candidateLength: '',
-            hasMore: true,
-            visible:2
+            hasMore: true
+           
            
 
         };
@@ -36,17 +38,14 @@ export default class CandidateApplication extends Component {
     }
 
     loadMore() {
-        setTimeout(()=>{
-        if(this.state.candidateData.length>=1000){
-            this.setState({hasMore:false})
-            return
-        }
-        this.setState((prev) => {
-          return {visible: prev.visible + 4};
-        });
-    },
-    500)        
-      }
+        setTimeout(() => {
+            this.setState({
+                candidate: [...this.state.candidateData.slice(0, (this.state.pageDataLength + INITIAL_ITEM_LENGTH))],
+                pageDataLength: this.state.pageDataLength + INITIAL_ITEM_LENGTH
+            });
+        }, 100);
+    }
+
 
     componentDidMount() {
         this.setState({ loading: true });
@@ -57,16 +56,13 @@ export default class CandidateApplication extends Component {
                     this.setState({
                         candidateData: Response.data.responseObject,
                         candidateLength: Response.data.responseObject.length,
+                        candidate: Response.data.responseObject.slice(0, INITIAL_ITEM_LENGTH),
                         match: (Response.data.responseObject).map((data2) => { this.state.matchPer.push(data2.matchingPercentage) }),
-                        candidate: (Response.data.responseObject).map((data1) => { this.state.candidate1.push(data1.candidate) }),
-                        loading: false
+                       
                     },
                         () => {
-                            console.log(this.state.matchPer)
                             console.log(this.state.candidateData)
-                            console.log(this.state.candidate1)
-
-                        },
+                            },
 
 
                     )
@@ -84,23 +80,23 @@ export default class CandidateApplication extends Component {
             new ApiServicesOrg().updateApplicationStatus(this.props.jobID, candidateID, 'Application_Accepted_By_Recruiter')
                 .then(Response => {
                     console.log(Response)
-                    this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite send Successfully', life: 2000 })
+                    this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Application accepted successfully', life: 2000 })
                     window.location.reload()
                 })
                 .catch(error => {
-                    console.log("Error Occured..", error)
+                    console.log("Error Ocurred...", error)
                     this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
     }
 
-    declinInvite(candidateID) {
+    declineInvite(candidateID) {
         return (
             new ApiServicesOrg().updateApplicationStatus(this.props.jobID, candidateID, 'Application_Declined_By_Recruiter')
                 .then(Response => {
                     console.log(Response)
-                    this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Declined', life: 2000 })
-                    //  window.location.reload()
+                    this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Application Declined', life: 2000 })
+                     window.location.reload()
                 })
                 .catch(error => {
                     console.log("Error Occured..", error)
@@ -108,14 +104,6 @@ export default class CandidateApplication extends Component {
                 })
         )
     }
-
-
-
-    showProfile(candidateID) {
-        localStorage.setItem("candidateId", candidateID)
-    }
-
-
 
     render() {
 
@@ -125,11 +113,10 @@ export default class CandidateApplication extends Component {
             <div className="datatable-editing-demo">
                 <Toast ref={(el) => this.toast = el} />
                 <InfiniteScroll
-                    dataLength={this.state.candidateData.length}
+                    dataLength={this.state.candidate.length}
                     next={this.loadMore}
-                    hasMore={this.state.candidateData.length>=this.state.visible}
+                    hasMore={this.state.candidateData.length>=this.state.pageDataLength}
                     loader={<RenderLoader />}
-                    height={400}
                 > 
 
 
@@ -144,27 +131,27 @@ export default class CandidateApplication extends Component {
                                     {/* <th>#</th> */}
                                     <th>Candidates</th>
                                     <th>Skills</th>
-                                    <th>Experiance</th>
+                                    <th>Experience</th>
                                     <th>AvailableFrom</th>
                                     <th>Match</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.candidateData.map((candidateData, index) => {
-                                    const data = candidateData.candidate;
+                                {this.state.candidate.map((data1, index) => {
+                                    const data = data1.candidate;
                                     return (
                                         <tr>
                                             {/* <td>{data.candidateId}</td> */}
                                             {/* onClick={localStorage.setItem('candidateID', data.candidateId)} */}
                                             <td>
-                                                <Link to={`/candidateProfileToOpen/${data.candidateId}`} onClick={() => this.showProfile(data.candidateId)}><p className="tb-title-text">{data.firstName}</p> </Link>
+                                                <Link to={`/candidateProfileToOpen/${data.user.id}`}><p className="tb-title-text">{data.firstName}</p> </Link>
                                                 <p>{data.currentRole} at {data.company}</p>
                                                 <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address},{data.city}</p>
                                             </td>
 
                                             <td>
-                                                {candidateData.candidateSkillsList && candidateData.candidateSkillsList[0] && candidateData.candidateSkillsList.map(skill => skill.skillName).join(', ')}
+                                                {data1.candidateSkillsList && data1.candidateSkillsList[0] && data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}
                                             </td>
 
                                             <td>
@@ -201,7 +188,7 @@ export default class CandidateApplication extends Component {
                                             <td>
                                                 <button className="btn btn-blue1 mr-2" onClick={() => this.acceptInvite(data.candidateId)}>Accept</button>
 
-                                                <button className="btn btn-border1" onClick={() => this.declinInvite(data.candidateId)}>Declain</button>
+                                                <button className="btn btn-border1" onClick={() => this.declineInvite(data.candidateId)}>Decline</button>
                                             </td>
 
                                         </tr>

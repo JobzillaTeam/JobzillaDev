@@ -10,6 +10,7 @@ import ApiServicesOrg from '../../../Services/ApiServicesOrg.jsx';
 import { data } from 'jquery';
 import InfiniteScroll from "react-infinite-scroll-component";
 import RenderLoader from '../../CommonComp/Loader';
+import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst.jsx';
 
 export default class MatchingCandidate extends Component {
 
@@ -18,34 +19,30 @@ export default class MatchingCandidate extends Component {
     constructor(props) {
         super(props);
         this.state = {
+           
+            pageDataLength: INITIAL_ITEM_LENGTH,
+            candidate: [],
             matchingCandidateData: [],
             match: [],
             matchPer: [],
-            candidate: {},
-            candidate1: [],
+            error: false,
+            candidateLength: '',
             hasMore: true,
-            visible:2
+            matchingCandidateLength:''
 
         };
 
         this.MatchingCandidate = new ApiServicesOrg();
         this.loadMore=this.loadMore.bind(this)
     }
-
     loadMore() {
-        setTimeout(()=>{
-        if(this.state.matchingCandidateData.length>=1000){
-            this.setState({hasMore:false});
-            return
-        }
-        this.setState((prev) => {
-          return {visible: prev.visible + 4};
-        });
-    },
-        500
-        )
-        
-      }
+        setTimeout(() => {
+            this.setState({
+                candidate: [...this.state.matchingCandidateData.slice(0, (this.state.pageDataLength + INITIAL_ITEM_LENGTH))],
+                pageDataLength: this.state.pageDataLength + INITIAL_ITEM_LENGTH
+            });
+        }, 100);
+    }
 
     componentDidMount() {
         this.setState({ loading: true });
@@ -54,16 +51,13 @@ export default class MatchingCandidate extends Component {
                 if (Response.data.responseObject) {
                     this.setState({
                         matchingCandidateData: Response.data.responseObject,
-                        matcingCandidateLength: Response.data.responseObject.length,
-                        match: (Response.data.responseObject).map((data2) => { this.state.matchPer.push(data2.matchingPercentage) }),
-                        candidate: (Response.data.responseObject).map((data1) => { this.state.candidate1.push(data1.candidate) }),
-                        loading: false
+                        candidate: Response.data.responseObject.slice(0, INITIAL_ITEM_LENGTH),
+                        matchingCandidateLength: Response.data.responseObject.length,
+                         match: (Response.data.responseObject).map((data2) => { this.state.matchPer.push(data2.matchingPercentage) }),
+                      
                     },
                         () => {
-                            console.log(this.state.matchPer)
                             console.log(this.state.  matchingCandidateData)
-                            console.log(this.state.candidate1)
-
                         },
 
 
@@ -82,32 +76,26 @@ export default class MatchingCandidate extends Component {
                     window.location.reload()
                 })
                 .catch(error => {
-                    console.log("Error Occured..", error)
+                    console.log("Error Ocurred..", error)
                     this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
     }
 
-    declinInvite(candidateID) {
+    declineInvite(candidateID) {
         return (
             this.MatchingCandidate.updateApplicationStatus(this.props.jobID, candidateID, 'Invite_Removed_By_Recruiter')
                 .then(Response => {
                     console.log(Response)
-                    this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Declined', life: 2000 })
+                    this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Removed', life: 2000 })
                     window.location.reload()
                 })
                 .catch(error => {
-                    console.log("Error Occured..", error)
+                    console.log("Error Ocurred..", error)
                     this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
     }
-
-    showProfile(candidateID) {
-        localStorage.setItem("candidateId", candidateID)
-    }
-
-
 
     render() {
         return (
@@ -116,16 +104,16 @@ export default class MatchingCandidate extends Component {
               
                 <Toast ref={(el) => this.toast = el} />
                 <InfiniteScroll
-                    dataLength={this.state.matchingCandidateData.length}
+                    dataLength={this.state.candidate.length}
                     next={this.loadMore}
-                    hasMore={this.state.matchingCandidateData.length>=this.state.visible}
+                    hasMore={this.state.matchingCandidateData.length>this.state.pageDataLength}
                     loader={<RenderLoader />}
-                    height={450}
+                 
          
         > 
 
                 <div>
-                    <div className="Show">Total Result {this.state.matcingCandidateLength} </div>
+                    <div className="Show">Total Result {this.state.matchingCandidateLength} </div>
                 
                         <table className="table table-borderless custom-table">
                             <thead>
@@ -133,27 +121,27 @@ export default class MatchingCandidate extends Component {
                                     {/* <th>#</th> */}
                                     <th>Candidates</th>
                                     <th>Skills</th>
-                                    <th>Experiance</th>
+                                    <th>Experience</th>
                                     <th>AvailableFrom</th>
                                     <th>Match</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.matchingCandidateData.map((  matchingCandidateData, index) => {
-                                    const data =   matchingCandidateData.candidate;
+                                {this.state.candidate.map((  data1, index) => {
+                                    const data = data1.candidate;
                                     return (
                                         <tr>
                                             {/* <td>{data.candidateId}</td> */}
                                             {/* onClick={localStorage.setItem('candidateID', data.candidateId)} */}
                                             <td>
-                                    <Link to={`/candidateProfileToOpen/${data.candidateId}`} onClick={() => this.showProfile(data.candidateId)}><p className="tb-title-text">{data.firstName} {data.lastName}</p> </Link>
+                                    <Link to={`/candidateProfileToOpen/${data.user.id}`}><p className="tb-title-text">{data.firstName} {data.lastName}</p> </Link>
                                                 <p>{data.currentRole} at {data.company}</p>
                                                 <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address},{data.city}</p>
                                             </td>
 
                                             <td>
-                                                {  matchingCandidateData.candidateSkillsList &&   matchingCandidateData.candidateSkillsList[0] &&   matchingCandidateData.candidateSkillsList.map(skill => skill.skillName).join(', ')}
+                                                {  data1.candidateSkillsList &&   data1.candidateSkillsList[0] &&   data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}
                                             </td>
 
                                             <td>
@@ -177,11 +165,12 @@ export default class MatchingCandidate extends Component {
                                                     cut={20}
                                                     trackStrokeWidth={2}
                                                     progress={this.state.matchPer}>
-                                                    {this.state.matchPer.map((data2) =>
+                                                     {this.state.matchPer.map((data2) => 
                                                         <div className="indicator">
                                                             <div>{data2}%
                                                             Match</div>
-                                                        </div>)}
+                                                        </div>
+                                                         )} 
                                                 </ProgressBar>
 
                                             </td>
@@ -190,7 +179,7 @@ export default class MatchingCandidate extends Component {
                                             <td>
                                                 <button className="btn btn-blue1 mr-2" onClick={() => this.acceptInvite(data.candidateId)}>Invite</button>
 
-                                                <button className="btn btn-border1" onClick={() => this.declinInvite(data.candidateId)}>Remove</button>
+                                                <button className="btn btn-border1" onClick={() => this.declineInvite(data.candidateId)}>Remove</button>
                                             </td>
 
                                         </tr>

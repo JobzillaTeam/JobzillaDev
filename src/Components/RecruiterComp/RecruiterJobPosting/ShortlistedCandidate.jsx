@@ -109,12 +109,7 @@ export default class ShortlistedCandidate extends Component {
         return blob;
     }
 
-    showProfile(candidateID) {
-        localStorage.setItem("candidateId", candidateID)
-    }
-
     render() {
-
         return (
             <div>
 
@@ -144,7 +139,7 @@ export default class ShortlistedCandidate extends Component {
                                 <tr>
                                     {/* <td>{data.candidate.candidateId}</td> */}
                                     <td>
-                                        <Link to={`/candidateProfileToOpen/${data.candidate.candidateId}`} onClick={() => this.showProfile(data.candidate.candidateId)}><p className="tb-title-text">{data.candidate.firstName} {data.candidate.lastName}</p> </Link>
+                                        <Link to={`/candidateProfileToOpen/${data.candidate.user.id}`}><p className="tb-title-text">{data.candidate.firstName} {data.candidate.lastName}</p> </Link>
                                         <p>{data.candidate.currentRole} at {data.candidate.company}</p>
                                         <p><i className="pi pi-envelope mr-2"></i>{data.candidate.emailId}</p>
                                         <p><i className="pi pi-mobile mr-2"></i>{data.candidate.mobileNumber}</p>
