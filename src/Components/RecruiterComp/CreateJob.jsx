@@ -1,5 +1,6 @@
 import React from "react";
 import Select from "react-select";
+import CreatableSelect from 'react-select/creatable';
 import HeaderAll from "../CommonComp/HeaderAll";
 import Footer from "../CommonComp/Footer";
 import LeftNavProvider from "../CommonComp/LeftNavProvider";
@@ -362,7 +363,7 @@ export default class CreateJob extends React.Component {
   render() {
     const { values, errors, categories, remainingTextLength, primarySkillsList, states, cities } = this.state;
     const { jobTitle, secondarySkills, noOfPositionsAvailable, currency, visa, mustHavePasport, jobDescription, responsibilities } = values;
-    const employmentTypes = Array.from(Array('PART TIME', 'FULL TIME', 'INTERNSHIP')).map(el => ({ value: el, label: el }));
+    const employmentTypes = Array.from(Array('PART TIME', 'FULL TIME', 'INTERNSHIP', 'CONTRACTUAL')).map(el => ({ value: el, label: el }));
     const expRequired = Array.from(Array(31).keys()).map(el => ({ value: el, label: el }))
     const annualSalaryInLakh = Array.from(Array(501).keys()).map(el => ({ value: el, label: el }));
     const annualSalaryInThousands = Array.from(Array(101).keys()).map(el => ({ value: el, label: el }));
@@ -420,7 +421,7 @@ export default class CreateJob extends React.Component {
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Category</label></div>
-                          <Select
+                          <CreatableSelect
                             ref={inputEl => (this.category = inputEl)}
                             styles={this.customStyles(errors && errors.category)}
                             name="category"
@@ -444,7 +445,7 @@ export default class CreateJob extends React.Component {
                       <div class="row col">
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Primary Skill *</label></div>
-                          <Select
+                          <CreatableSelect
                             ref={inputEl => (this.primarySkills = inputEl)}
                             styles={this.customStyles(errors && errors.primarySkills)}
                             name="primarySkills"
