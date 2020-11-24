@@ -392,9 +392,10 @@ class ApiServicesOrg extends Component {
   //Provider Dashboard api
   getProviderDashboardDetails() {
     const year = 2020
+    const orgId = localStorage.getItem("organizationId");
     return (
       axios
-        .get(ApiBaseUrl + '/provider/providerDashboardDetails/' + year, this.getToken())
+        .get(ApiBaseUrl + '/provider/providerDashboardDetails/'+ orgId + '/' + year, this.getToken())
         .then(Response => Response)
     )
   }

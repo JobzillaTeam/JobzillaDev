@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ApiServicesOrg from '../../../Services/ApiServicesOrg'
+import ApiServicesOrgCandidate from '../../../Services/ApiServicesOrgCandidate';
 
 export default class TopSkillsCandidate extends Component {
     constructor(props) {
@@ -13,17 +13,13 @@ export default class TopSkillsCandidate extends Component {
             skill2Count:'',
             skill3Count:'',
             skill4Count:'',
-            skill1EndValue:50,
-            skill2EndValue:50,
-            skill3EndValue:50,
-            skill4EndValue:50,
-
+            totalOpenPositions:''
         }
-        this.dashboardDetails = new ApiServicesOrg();
+        this.dashboardDetails = ApiServicesOrgCandidate;
     }
 
     componentDidMount(){
-        this.dashboardDetails.getProviderDashboardDetails()
+        this.dashboardDetails.getcandidateDashboardDetails()
         .then(Response => {
             if (Response && Response.data) {
           this.setState({
@@ -35,13 +31,11 @@ export default class TopSkillsCandidate extends Component {
             skill2Count:Response.data.responseObject.topSkills[1].count,
             skill3Count:Response.data.responseObject.topSkills[2].count,
             skill4Count:Response.data.responseObject.topSkills[3].count,
+            totalOpenPositions:Response.data.responseObject.totalOpenPositions,
            })
-
             }
         });
-
     }
-
 
     render() {
         return (
@@ -62,26 +56,24 @@ export default class TopSkillsCandidate extends Component {
                                 <tbody>
                                     <tr>
                                     <td className="border-top-0">
-                                            <img src="/images/Dashboard-assets/Top-Skills/java-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">{this.state.skill1}</span>
                                         </td>
                                         <td className="border-top-0">
-                                            <div className="progressbar-text" style={{ width: `${(this.state.skill1Count/this.state.skill1EndValue)*100}%` }}>{this.state.skill1Count}</div>
+                                            <div className="progressbar-text" style={{ width: `${(this.state.skill1Count/this.state.totalOpenPositions)*100}%` }}>{this.state.skill1Count}</div>
                                             <div class="progress2 progress-fashion2 marB20" >
-                                                <div class="progress-bar2 color-blue marT20" style={{ width: `${(this.state.skill1Count/this.state.skill1EndValue)*100}%` }} role="progressbar" aria-valuenow={this.state.skill2Count} aria-valuemin="0" aria-valuemax="5">
+                                                <div class="progress-bar2 color-blue marT20" style={{ width: `${(this.state.skill1Count/this.state.totalOpenPositions)*100}%` }} role="progressbar" aria-valuenow={this.state.skill2Count} aria-valuemin="0" aria-valuemax="5">
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/Dashboard-assets/Top-Skills/angular-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">{this.state.skill2}</span>
                                         </td>
                                         <td className="border-top-0">
-                                            <div className="progressbar-text" style={{ width: `${(this.state.skill2Count/this.state.skill2EndValue)*100}%` }}>{this.state.skill2Count}</div>
+                                            <div className="progressbar-text" style={{ width: `${(this.state.skill2Count/this.state.totalOpenPositions)*100}%` }}>{this.state.skill2Count}</div>
                                             <div class="progress2 progress-fashion2 marB20" >
-                                                <div class="progress-bar2 color-pink marT20" style={{ width: `${(this.state.skill2Count/this.state.skill2EndValue)*100}%` }} role="progressbar" aria-valuenow={this.state.angular} aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar2 color-pink marT20" style={{ width: `${(this.state.skill2Count/this.state.totalOpenPositions)*100}%` }} role="progressbar" aria-valuenow={this.state.angular} aria-valuemin="0" aria-valuemax="100">
                                                 </div>
                                             </div>
                                         </td>
@@ -106,26 +98,24 @@ export default class TopSkillsCandidate extends Component {
                                 <tbody>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/Dashboard-assets/Top-Skills/mongoDb-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">{this.state.skill3}</span>
                                         </td>
                                         <td className="border-top-0">
-                                        <div className="progressbar-text" style={{ width: `${(this.state.skill3Count/this.state.skill3EndValue)*100}%` }}>{this.state.skill3Count}</div>
+                                        <div className="progressbar-text" style={{ width: `${(this.state.skill3Count/this.state.totalOpenPositions)*100}%` }}>{this.state.skill3Count}</div>
                                             <div class="progress2 progress-fashion2 marB20 " >
-                                                <div class="progress-bar2 color-green marT20"style={{ width: `${(this.state.skill3Count/this.state.skill3EndValue)*100}%` }} role="progressbar" aria-valuenow={this.state.mongoDb} aria-valuemin="0" aria-valuemax="3000">
+                                                <div class="progress-bar2 color-green marT20"style={{ width: `${(this.state.skill3Count/this.state.totalOpenPositions)*100}%` }} role="progressbar" aria-valuenow={this.state.mongoDb} aria-valuemin="0" aria-valuemax="3000">
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/Dashboard-assets/Top-Skills/python-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">{this.state.skill4}</span>
                                         </td>
                                         <td className="border-top-0">
-                                            <div className="progressbar-text" style={{ width: `${(this.state.skill4Count/this.state.skill4EndValue)*100}%` }}>{this.state.skill4Count}</div>
+                                            <div className="progressbar-text" style={{ width: `${(this.state.skill4Count/this.state.totalOpenPositions)*100}%` }}>{this.state.skill4Count}</div>
                                             <div class="progress2 progress-fashion2 marB20" >
-                                                <div class="progress-bar2 color-yellow marT20" style={{ width: `${(this.state.skill4Count/this.state.skill4EndValue)*100}%` }} role="progressbar" aria-valuenow="80%" aria-valuemin="0" aria-valuemax="3000">
+                                                <div class="progress-bar2 color-yellow marT20" style={{ width: `${(this.state.skill4Count/this.state.totalOpenPositions)*100}%` }} role="progressbar" aria-valuenow="80%" aria-valuemin="0" aria-valuemax="3000">
                                                 </div>
                                             </div>
 
