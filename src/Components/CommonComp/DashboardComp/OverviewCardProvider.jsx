@@ -18,9 +18,9 @@ export default class OverviewCardProvider extends Component {
             if (Response && Response.data) {
         //   console.log(Response.data.responseObject)
            this.setState({
-            profileUploaded:Response.data.responseObject.jobsPosted,
-            activeProfile:Response.data.responseObject.openPositions,
-            hiredProfile:Response.data.responseObject.hiredPositions
+            profileUploaded:Response.data.responseObject.profileUploadedCount,
+            activeProfile:Response.data.responseObject.activeProfilesCount,
+            hiredProfile:Response.data.responseObject.hiredProfilesCount
 
            })
            }

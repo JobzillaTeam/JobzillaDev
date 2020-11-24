@@ -36,7 +36,7 @@ const LeftNavProvider = () => {
                             <NavLink to={'/recruiterDashboard'}
                                 activeClassName="active"
                                 isActive={isActive.bind(this, '/recruiterDashboard')}>
-                                <i><img src="images/NavBar/dashboard_icon.png" aria-hidden="true" /></i>
+                                <i><img src="/images/NavBar/dashboard_icon.png" aria-hidden="true" /></i>
                                 <span className="menuText">Dashboard</span>
                             </NavLink>
                         </li>)
@@ -45,7 +45,7 @@ const LeftNavProvider = () => {
                             <NavLink to={'/providerDashboard'}
                                 activeClassName="active"
                                 isActive={isActive.bind(this, '/providerDashboard')}>
-                                <i><img src="images/NavBar/dashboard_icon.png" aria-hidden="true" /></i>
+                                <i><img src="/images/NavBar/dashboard_icon.png" aria-hidden="true" /></i>
                                 <span className="menuText">Dashboard</span>
                             </NavLink>
                         </li>)
