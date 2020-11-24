@@ -60,7 +60,6 @@ export default class TopSkillsRecruiter extends Component {
                                 <tbody>
                                     <tr>
                                     <td className="border-top-0">
-                                            <img src="/images/Dashboard-assets/Top-Skills/java-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">{this.state.skill1}</span>
                                         </td>
                                         <td className="border-top-0">
@@ -73,7 +72,6 @@ export default class TopSkillsRecruiter extends Component {
                                     </tr>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/Dashboard-assets/Top-Skills/angular-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">{this.state.skill2}</span>
                                         </td>
                                         <td className="border-top-0">
@@ -104,7 +102,6 @@ export default class TopSkillsRecruiter extends Component {
                                 <tbody>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/Dashboard-assets/Top-Skills/mongoDb-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">{this.state.skill3}</span>
                                         </td>
                                         <td className="border-top-0">
@@ -117,7 +114,6 @@ export default class TopSkillsRecruiter extends Component {
                                     </tr>
                                     <tr>
                                         <td className="border-top-0">
-                                            <img src="/images/Dashboard-assets/Top-Skills/python-icon.svg" width="30" height="30" className="rounded-circle" />
                                             <span className="skills-section">{this.state.skill4}</span>
                                         </td>
                                         <td className="border-top-0">
