@@ -508,7 +508,7 @@ class ApiServicesOrgCandidate {
     return (
       axios(
         {
-          url: `${ApiBaseUrl}/candidate/jobAndCandidateDetailsByIds/${jobID}/${candidateId}`,
+          url: `${ApiBaseUrl}/candidate/jobAndCandidateDetailsByIdsForCandidate/${jobID}/${candidateId}`,
           headers: {
             'Authorization': `Bearer ${authToken}`
           }

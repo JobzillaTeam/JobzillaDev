@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ApiServicesOrg from '../../../Services/ApiServicesOrg.jsx';
 import RenderLoader from '../../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst.jsx';
+import ScrollUpButton from "react-scroll-up-button";
 
 export default class ShortlistedCandidate extends Component {
 
@@ -159,6 +160,8 @@ export default class ShortlistedCandidate extends Component {
                         </tbody>
                     </table>
                 </InfiniteScroll>
+                <ScrollUpButton/>
+           
             </div>
 
         );

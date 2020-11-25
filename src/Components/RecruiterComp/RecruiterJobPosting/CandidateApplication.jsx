@@ -11,6 +11,7 @@ import { data } from 'jquery';
 import InfiniteScroll from "react-infinite-scroll-component";
 import RenderLoader from '../../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst.jsx';
+import ScrollUpButton from "react-scroll-up-button";
 
 export default class CandidateApplication extends Component {
 
@@ -204,7 +205,8 @@ export default class CandidateApplication extends Component {
                 </div>
 
 
-            </InfiniteScroll>   
+            </InfiniteScroll> 
+            <ScrollUpButton/>  
 
             </div>
         );

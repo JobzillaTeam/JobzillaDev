@@ -153,7 +153,7 @@ class UploadProfile extends Component {
                                 <h6 className="mt-3 font-weight-400">
                                     Bulk Upload provides the ability to add Candidate profiles who are getting released from their current organization to the digital workplace. Bulk uploading requires you to provide the Candidate information in a CSV formatted text file only.
                                 </h6>
-                                <section className="white-middle-section mt-5">
+                                <section className="white-middle-section1 mt-5">
                                     <div className="row">
                                         {/* CSV file upload */}
                                        
@@ -166,7 +166,7 @@ class UploadProfile extends Component {
                                             >
                                             {({getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles}) => {
                                             return (
-                                                <div {...getRootProps({className:"dropzone"})}>
+                                                <div {...getRootProps({className:"dropzone1"})}>
                                                     <img src="/images/Dashboard-assets/cloud-upload.svg" alt="cloud upload" className="cloud_upload_logo pb-2" />
                                                 <input {...getInputProps() }   />
                                                 
