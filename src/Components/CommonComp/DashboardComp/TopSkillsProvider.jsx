@@ -22,7 +22,7 @@ export default class TopSkillsProvider extends Component {
         this.dashboardDetails.getProviderDashboardDetails()
         .then(Response => {
             if (Response && Response.data) {
-        //   console.log(Response.data.responseObject.topSkills)
+        //  console.log(Response.data.responseObject)
           this.setState({
             skill1:Response.data.responseObject.topSkills[0].skill,
             skill2:Response.data.responseObject.topSkills[1].skill,
@@ -58,6 +58,7 @@ export default class TopSkillsProvider extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                {(this.state.skill1 && this.state.skill1Count) ?
                                     <tr>
                                     <td className="border-top-0">
                                             <div className="skills-section">{this.state.skill1}</div>
@@ -70,7 +71,10 @@ export default class TopSkillsProvider extends Component {
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
+                            : <div className="skills-section mt-4 skills-section-padding">No Skills Found</div>
+                                }
+                                {(this.state.skill2 && this.state.skill2Count) ?
+                                   <tr>
                                         <td className="border-top-0">
                                             <span className="skills-section">{this.state.skill2}</span>
                                         </td>
@@ -82,6 +86,8 @@ export default class TopSkillsProvider extends Component {
                                             </div>
                                         </td>
                                     </tr>
+                                :null
+    }
                                 </tbody>
                             </table>
                         </section>
@@ -100,6 +106,7 @@ export default class TopSkillsProvider extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                {(this.state.skill3 && this.state.skill3Count) ?
                                     <tr>
                                         <td className="border-top-0">
                                             <span className="skills-section">{this.state.skill3}</span>
@@ -112,6 +119,9 @@ export default class TopSkillsProvider extends Component {
                                             </div>
                                         </td>
                                     </tr>
+                                    : null 
+                                }
+                            {(this.state.skill4 && this.state.skill4Count) ?
                                     <tr>
                                         <td className="border-top-0">
                                             <span className="skills-section">{this.state.skill4}</span>
@@ -125,6 +135,8 @@ export default class TopSkillsProvider extends Component {
 
                                         </td>
                                     </tr>
+                                : null
+                            }
                                 </tbody>
                             </table>
                         </section>
