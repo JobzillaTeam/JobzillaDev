@@ -3,18 +3,17 @@ import $ from 'jquery'
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const LeftNavCandidate = () => {
-
+    // const jobStatus = '';
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         $(".maincontent").toggleClass("toggled");
     });
-
+    
     //To move dot to active page
     const isActive = (path, match, location) => !!(match || path === location.pathname);
     let location = useLocation();
     const query =  new URLSearchParams(location.search);
-    debugger
     const isJobDropdownOpen = query.get('isInterviewsDropdown');
     return (
         <div id="wrapper" className="">
@@ -48,14 +47,13 @@ const LeftNavCandidate = () => {
                             <ul className="flex-column nav submenuLink">
                                 <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Invites"
                                 >
-                                    <NavLink  to={{pathname: '/candidate/interviews/interviewInvites/?isInterviewsDropdown=true'}} >
+                                    <NavLink to={{pathname: '/candidate/interviews/interviewInvites/?isInterviewsDropdown=true'}} >
                                         {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}
                                         <span className="menuText">Invites</span>
                                     </NavLink>
                                 </li>
                                 <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Accepted">
                                     <NavLink  to="/candidate/Interviews/AcceptedInterviews/?isInterviewsDropdown=true"
-                                    activeClassName="active"
                                     isActive={isActive.bind(this,'/Candidate/Interviews/Accepted')}
                                     >
                                      {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}
