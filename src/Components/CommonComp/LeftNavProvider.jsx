@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery'
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const LeftNavProvider = () => {
 
@@ -13,6 +13,10 @@ const LeftNavProvider = () => {
     const userRole = JSON.parse(localStorage.getItem('userDetails')).userRole;
     //To move dot to active page
     const isActive = (path, match, location) => !!(match || path === location.pathname);
+    let location = useLocation();
+    const query =  new URLSearchParams(location.search);
+    query.get('isInterviewsDropdown')
+    const isJobDropdownOpen = query.get('isInterviewsDropdown');
     return (
         <div id="wrapper" className="">
             <div id="sidebar-wrapper">
@@ -59,12 +63,12 @@ const LeftNavProvider = () => {
                     {localStorage.getItem('status') === "recruiter" ?
                         (
                             <li data-toggle="tooltip" data-placement="right" title="Jobs">
-                                <Link className="subMenu collapsed" id="navbarDropdown" role="button"
+                                <Link className={`subMenu ${!isJobDropdownOpen ? 'collapsed' : ''}`} id="navbarDropdown" role="button"
                                     data-toggle="collapse" data-target="#submenu1sub1">
                                     <i><img src="/images/Candidate-Navbar-assets/job-offers.svg" aria-hidden="true" /></i>
                                     <span className="menuText">Jobs</span>
                                 </Link>
-                                <div className="collapse" id="submenu1sub1" aria-expanded="false">
+                                <div className={`collapse ${isJobDropdownOpen ? 'show' : ''}`} id="submenu1sub1" aria-expanded={isJobDropdownOpen}>
                                     <ul className="flex-column nav submenuLink">
                                         <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Active Jobs">
                                             <Link to="/activeJob"

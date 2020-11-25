@@ -20,7 +20,7 @@ const CandidateJobDetails = (props) => {
           console.log('applicationStatus', applicationStatus)
           if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
             if (applicationStatus === 'Invite_Sent_By_Recruiter') {
-              history.push(`/candidate/jobDetails/${jobID}/invites`)
+              history.push(`/candidate/jobDetails/${jobID}/invites/?isInterviewsDropdown=true`)
             } else if (applicationStatus === 'Application_Matched') {
               setIsActionButtonsVisible(true)
             }
@@ -47,7 +47,7 @@ const CandidateJobDetails = (props) => {
       .then(Response => {
         const interviewStatusResponse = Response && Response.data && Response.data.responseObject && Response.data.responseObject.applicationStatus;
         if (interviewStatusResponse === 'Invite_Accepted_By_Candidate') {
-          history.push(`/candidate/jobDetails/${jobDetails.jobId}/accepted`);
+          history.push(`/candidate/jobDetails/${jobDetails.jobId}/accepted/?isInterviewsDropdown=true`);
         } else if (interviewStatusResponse === 'Invite_Declined_By_Candidate') {
           history.goBack();
         }
@@ -61,12 +61,12 @@ const CandidateJobDetails = (props) => {
   let perviousLinkText = '';
   switch (jobStatus) {
     case 'invites': {
-      perviousLink = '/candidate/Interviews/InterviewInvites';
+      perviousLink = '/candidate/Interviews/InterviewInvites/?isInterviewsDropdown=true';
       perviousLinkText = 'Interview Invites';
     }
       break;
     case 'accepted': {
-      perviousLink = '/candidate/Interviews/AcceptedInterviews';
+      perviousLink = '/candidate/Interviews/AcceptedInterviews/?isInterviewsDropdown=true';
       perviousLinkText = 'Accepted Interviews';
     }
       break;
