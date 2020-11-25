@@ -3,6 +3,7 @@ import React from 'react';
 
 export default class ClosedJobCandidates extends React.Component {
   render() {
+    console.log(this.props)
     const { joinedCandidates } = this.props;
     return (
       <div>
@@ -17,7 +18,7 @@ export default class ClosedJobCandidates extends React.Component {
           </thead>
           <tbody>
             {
-              joinedCandidates && joinedCandidates.slice(0, 3).map(joinedCandidate => {
+              joinedCandidates && joinedCandidates.map(joinedCandidate => {
                 return (
                   <tr>
                     <td>

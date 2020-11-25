@@ -411,6 +411,15 @@ class ApiServicesOrg extends Component {
     )
   }
 
+    //5.5 View closed job Details 
+    getClosedJobsAndJoinedCandidates(jobID) {
+      return (
+        axios
+          .get(ApiBaseUrl + '/recruiter/closedJobAndJoinedCandidates/' + jobID, this.getToken())
+          .then(Response => Response)
+      )
+    }
+
 
 }
 export default ApiServicesOrg
