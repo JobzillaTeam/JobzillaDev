@@ -91,7 +91,7 @@ class UploadProfile extends Component {
             if  (this.fileValidation())
             {
                     const formData = new FormData(); 
-                    const token= JSON.parse(localStorage.getItem('userDetails')).authToken;
+                    const token= localStorage.getItem('authToken');
                     const formheader = { 
                         headers: { 
                         'Content-Type':'multipart/form-data',
@@ -149,11 +149,13 @@ class UploadProfile extends Component {
                         {/* Content on the page */}
                         <section className="content_section">
                             <div className="ml-0 mr-1">
+                                <div className="bulkUploadText">
                                 <h5 className="font-weight-400 mt-3">Bulk Profile Upload</h5>
-                                <h6 className="mt-3 font-weight-400">
-                                    Bulk Upload provides the ability to add Candidate profiles who are getting released from their current organization to the digital workplace. Bulk uploading requires you to provide the Candidate information in a CSV formatted text file only.
-                                </h6>
-                                <section className="white-middle-section mt-5">
+                                    <h6 className="mt-3 font-weight-400">
+                                        Bulk Upload provides the ability to add Candidate profiles who are getting released from their current organization to the digital workplace. Bulk uploading requires you to provide the Candidate information in a CSV formatted text file only.
+                                    </h6>
+                                </div>
+                                <section className="white-middle-section3 mt-5">
                                     <div className="row">
                                         {/* CSV file upload */}
                                        
@@ -166,7 +168,7 @@ class UploadProfile extends Component {
                                             >
                                             {({getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles}) => {
                                             return (
-                                                <div {...getRootProps({className:"dropzone"})}>
+                                                <div {...getRootProps({className:"dropzone1"})}>
                                                     <img src="/images/Dashboard-assets/cloud-upload.svg" alt="cloud upload" className="cloud_upload_logo pb-2" />
                                                 <input {...getInputProps() }   />
                                                 

@@ -20,7 +20,7 @@ const CandidateJobDetails = (props) => {
           console.log('applicationStatus', applicationStatus)
           if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
             if (applicationStatus === 'Invite_Sent_By_Recruiter') {
-              history.push(`/candidate/jobDetails/${jobID}/invites`)
+              history.push(`/candidate/jobDetails/invites/${jobID}`)
             } else if (applicationStatus === 'Application_Matched') {
               setIsActionButtonsVisible(true)
             }
@@ -47,7 +47,7 @@ const CandidateJobDetails = (props) => {
       .then(Response => {
         const interviewStatusResponse = Response && Response.data && Response.data.responseObject && Response.data.responseObject.applicationStatus;
         if (interviewStatusResponse === 'Invite_Accepted_By_Candidate') {
-          history.push(`/candidate/jobDetails/${jobDetails.jobId}/accepted`);
+          history.push(`/candidate/jobDetails/accepted/${jobDetails.jobId}`);
         } else if (interviewStatusResponse === 'Invite_Declined_By_Candidate') {
           history.goBack();
         }
@@ -161,10 +161,10 @@ const CandidateJobDetails = (props) => {
                       <h6>Others</h6>
                       <div className="row">
                         <div className="col-xs-12 col-md-5 others_section_firstcol">
-                          <div>Working Hours</div>
+                          <div>Shifts</div>
                         </div>
                         <div className="col-xs-12 col-md-6 others_section_secondcol">
-                          <div>{jobDetails.expectedWorkinghrsFrom}</div>
+                          <div>{jobDetails.shift}</div>
                         </div>
                       </div>
                       <div className="row">

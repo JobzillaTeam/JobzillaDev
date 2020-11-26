@@ -76,7 +76,9 @@ export default class Signup extends Component {
             this.toast.show({ severity: 'error', summary: 'Error', detail: 'User already exist' }, 80000);
         } else {
             this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'User Signup Successfully' }, 80000);
-        this.props.history.push('/')
+        setTimeout(() => {
+            this.props.history.push('/')
+        }, 1000)
 
         }
     })

@@ -22,7 +22,6 @@ import {Profile as CandidateProfile} from "../Components/Candidate/Profile";
 // import Accepted from "../Components/Candidate/Interviews/Accepted";
 import JobOffers from "../Components/Candidate/JobOffers";
 import SearchJobs from "../Components/Candidate/SearchJobs";
-//import RecentMatches from '../Components/Candidate/RecentMatches';
 import InterviewInvites from "../Components/Candidate/Interviews/InterviewInvites";
 //import JobListing from '../Components/Candidate/JobListing';
 import AcceptedInterviews from "../Components/Candidate/Interviews/AcceptedInterviews";
@@ -31,12 +30,7 @@ import ChangePassword from "../Components/Candidate/ChangePassword"
 import RecruiterDashboard from '../Components/RecruiterComp/RecruiterDashboard'
 import ActiveJob from "../Components/RecruiterComp/ActiveJob";
 import CreateJob from "../Components/RecruiterComp/CreateJob"
-import JobPostingCollection from "../Components/RecruiterComp/RecruiterJobPosting/JobPostingCollection"
 import CandidateEmailsetting from "../Components/Candidate/CandidateEmailsetting"
-import RecentMatchesJobDetails from "../Components/Candidate/RecentMatchesJobDetails"
-import JobOfferDetails from "../Components/Candidate/JobOfferDetails"
-import AcceptedInviteJobDetails from "../Components/Candidate/Interviews/AcceptedInviteJobDetails"
-import SearchJobsDetails from "../Components/Candidate/SearchJobsDetails"
 import CloseJobs from "../Components/RecruiterComp/CloseJobs"
 import CandidateProfileToOpen from "../Components/RecruiterComp/CandidateProfileToOpen"
 //import Resume from '../Components/Candidate/Resume'
@@ -46,7 +40,8 @@ import AuthLayout from "../Layouts/AuthLayout";
 import { AppHelper } from "../Utils/AppHelper";
 import ForgotPassword from "../Components/Auth/ForgotPassword";
 import CandidateJobDetails from "../Components/Candidate/CandidateJobDetails";
-import RecruiterJobDetails from "../Components/RecruiterComp/RecruiterJobDetails";
+import RecruiterActiveJobDetails from "../Components/RecruiterComp/RecruiterActiveJobDetails";
+import RecruiterClosedJobDetails from "../Components/RecruiterComp/RecruiterClosedJobDetails";
 
 class RouterSettings extends Component {
 
@@ -81,24 +76,21 @@ class RouterSettings extends Component {
             <CandidateLayout path="/candidate/dashboard" component={Dashboard} />
             <CandidateLayout path="/candidate/jobOffers" component={JobOffers} />
             <CandidateLayout path="/candidate/searchJobs" component={SearchJobs} />
-            <CandidateLayout path="/candidate/searchJobsDetails/:jobID/" component={SearchJobsDetails} />
             <CandidateLayout path="/candidate/profile" component={CandidateProfile} />
             <CandidateLayout path="/candidate/profile1" component={Profile1} />
             <CandidateLayout path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>
-            <CandidateLayout path="/candidate/jobDetails/:jobID/:jobStatus" component={CandidateJobDetails}/>
+            <CandidateLayout path="/candidate/jobDetails/:jobStatus/:jobID" component={CandidateJobDetails}/>
             <CandidateLayout path="/candidate/interviews/acceptedInterviews" component={AcceptedInterviews}/>
-            <CandidateLayout path="/candidate/interviews/AcceptedInviteJobDetails/:jobID" component={AcceptedInviteJobDetails}/>
             <CandidateLayout path="/candidate/changePassword" component={ChangePassword}/>
             <CandidateLayout path="/candidate/candidateEmailsetting" component={CandidateEmailsetting}/>
-            <CandidateLayout path="/candidate/recentMatchesJobDetails" component={RecentMatchesJobDetails}/>
-            <CandidateLayout path="/candidate/jobOfferDetails" component={JobOfferDetails}/>
+
 
             <OrganizationLayout path="/recruiterDashboard" component={RecruiterDashboard} />
             <OrganizationLayout path="/activeJob" component={ActiveJob} />
             <OrganizationLayout path="/createJob" component={CreateJob} />
-            <OrganizationLayout path="/jobPostingCollection/:jobID" component={JobPostingCollection} />
             <OrganizationLayout path="/closeJobs" component={CloseJobs}/>
-            <OrganizationLayout path="/recruiter/jobDetails/:jobID/:jobStatus" component={RecruiterJobDetails}/>
+            <OrganizationLayout path="/recruiter/jobDetails/active/:jobID" component={RecruiterActiveJobDetails}/>
+            <OrganizationLayout path="/recruiter/jobDetails/closed/:jobID" component={RecruiterClosedJobDetails}/>
             <OrganizationLayout path="/candidateProfileToOpen/:userId" component={CandidateProfileToOpen}/>
 
           </Switch>

@@ -43,14 +43,14 @@ export default class CreateJob extends React.Component {
       if (response) {
         skillsList = response.data.responseObject.map(skill => ({ value: skill.skills, label: skill.skills }));
       }
-      this.setState({primarySkillsList: skillsList});
+      this.setState({ primarySkillsList: skillsList });
     });
     ApiServicesOrgCandidate.getListOfStates().then((response) => {
       let statesList = [];
       if (response) {
         statesList = response.data.responseObject.map(state => ({ value: state.stateName, label: state.stateName, stateCode: state.stateCode }));
       }
-      this.setState({states: statesList});
+      this.setState({ states: statesList });
     });
   }
 
@@ -74,7 +74,7 @@ export default class CreateJob extends React.Component {
   }
 
   getErrorMsg = (name) => {
-    switch(name) {
+    switch (name) {
       case 'jobTitle': {
         return 'Job Title cannot be left blank'
       }
@@ -120,8 +120,8 @@ export default class CreateJob extends React.Component {
     const { values, errors, isFormValid } = this.state;
     if (value || value === 0) {
       if (!isFormValid) {
-        if (['annualSalaryFrom','annualSalaryTo','experienceReqFrom','experienceReqTo'].includes(name)) {
-          if (['annualSalaryFrom','annualSalaryTo'].includes(name)) {
+        if (['annualSalaryFrom', 'annualSalaryTo', 'experienceReqFrom', 'experienceReqTo'].includes(name)) {
+          if (['annualSalaryFrom', 'annualSalaryTo'].includes(name)) {
             const annualSalaryFrom = name === 'annualSalaryFrom' ? value : values.annualSalaryFrom;
             const annualSalaryTo = name === 'annualSalaryTo' ? value : values.annualSalaryTo;
             if (annualSalaryFrom > annualSalaryTo) {
@@ -158,9 +158,9 @@ export default class CreateJob extends React.Component {
           if (response) {
             citiesList = response.data.responseObject.map(city => ({ value: city.city_name, label: city.city_name }));
           }
-          this.setState({cities: citiesList});
+          this.setState({ cities: citiesList });
         });
-      } 
+      }
     });
   }
 
@@ -185,37 +185,6 @@ export default class CreateJob extends React.Component {
     this.setState({
       values: { ...values, [name]: checked }
     })
-  }
-
-  handleExpectedHoursChange = obj => {
-    const { name, value } = obj;
-    const { fromHour, fromMin, fromMode, toHour, toMin, toMode, values } = this.state;
-    if (value) {
-      if (name === 'fromHour' || name === 'fromMin' || name === 'fromMode') {
-        const getFromHour = name === 'fromHour' ? value : fromHour;
-        const getFromMin = name === 'fromMin' ? value : fromMin;
-        const getFromMode = name === 'fromMode' ? value : fromMode;
-        const getExpectedWorkinghrsFrom = `${getFromHour}:${getFromMin} ${getFromMode}`
-        this.setState({
-          [name]: value,
-          values: {
-            ...values, expectedWorkinghrsFrom: getFromHour && getFromMin && getFromMode ? getExpectedWorkinghrsFrom : null
-          }
-        });
-      }
-      else if (name === 'toHour' || name === 'toMin' || name === 'toMode') {
-        const getToHour = name === 'toHour' ? value : toHour;
-        const getToMin = name === 'toMin' ? value : toMin;
-        const getToMode = name === 'toMode' ? value : toMode;
-        const expectedWorkinghrsTo = `${getToHour}:${getToMin} ${getToMode}`
-        this.setState({
-          [name]: value,
-          values: {
-            ...values, expectedWorkinghrsTo: getToHour && getToMin && getToMode ? expectedWorkinghrsTo : null
-          }
-        });
-      }
-    }
   }
 
   handleValidate = _ => {
@@ -364,12 +333,10 @@ export default class CreateJob extends React.Component {
     const { values, errors, categories, remainingTextLength, primarySkillsList, states, cities } = this.state;
     const { jobTitle, secondarySkills, noOfPositionsAvailable, currency, visa, mustHavePasport, jobDescription, responsibilities } = values;
     const employmentTypes = Array.from(Array('PART TIME', 'FULL TIME', 'INTERNSHIP', 'CONTRACTUAL')).map(el => ({ value: el, label: el }));
+    const shiftTypes = Array.from(Array('Morning Shift', 'Afternoon Shift', 'Night Shift', 'General Shift')).map(el => ({ value: el, label: el }));
     const expRequired = Array.from(Array(31).keys()).map(el => ({ value: el, label: el }))
     const annualSalaryInLakh = Array.from(Array(501).keys()).map(el => ({ value: el, label: el }));
     const annualSalaryInThousands = Array.from(Array(101).keys()).map(el => ({ value: el, label: el }));
-    const hours = Array.from(Array(12).keys()).map(el => ({ value: ('0' + el).slice(-2), label: ('0' + el).slice(-2) }));
-    const mins = Array.from(Array(60).keys()).map(el => ({ value: ('0' + el).slice(-2), label: ('0' + el).slice(-2) }));
-    const modes = Array.from(Array('AM', 'PM')).map(el => ({ value: el, label: el }));
 
     return (
       <div>
@@ -508,61 +475,18 @@ export default class CreateJob extends React.Component {
                     <div className="col-md-12 pt-4 pb-4 pl-4 pr-3">
                       <h5 class="recruiterForm__sectionHeading">Others</h5>
                       <div class="row col">
-                        <div className="col-md-12 pt-3 pl-0 recruiterForm__rightSpace">
-                          <div><label>Expected Working Hours</label></div>
-                          <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div class="col-md-5 pt-0 pl-0 pr-0">
-                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Select
-                                  placeholder="HRS"
-                                  name="fromHour"
-                                  className="selectone w-100"
-                                  options={hours}
-                                  onChange={obj => this.handleExpectedHoursChange({ name: 'fromHour', value: obj.value })}
-                                />
-                                <Select
-                                  placeholder="MIN"
-                                  name="fromMin"
-                                  className="selectone w-100 ml-5 mr-5"
-                                  options={mins}
-                                  onChange={obj => this.handleExpectedHoursChange({ name: 'fromMin', value: obj.value })}
-                                />
-                                <Select
-                                  placeholder=""
-                                  name="fromMode"
-                                  className="selectone w-100"
-                                  options={modes}
-                                  onChange={obj => this.handleExpectedHoursChange({ name: 'fromMode', value: obj.value })}
-                                />
-                              </div>
-                            </div>
-                            <div class="col-md-2 text-center"><span>To</span></div>
-                            <div class="col-md-5 pt-0 pl-0 pr-0">
-                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Select
-                                  placeholder="HRS"
-                                  name="toHour"
-                                  className="selectone w-100"
-                                  options={hours}
-                                  onChange={obj => this.handleExpectedHoursChange({ name: 'toHour', value: obj.value })}
-                                />
-                                <Select
-                                  placeholder="MIN"
-                                  name="toMin"
-                                  className="selectone w-100 ml-5 mr-5"
-                                  options={mins}
-                                  onChange={obj => this.handleExpectedHoursChange({ name: 'toMin', value: obj.value })}
-                                />
-                                <Select
-                                  placeholder=""
-                                  name="toMode"
-                                  className="selectone w-100"
-                                  options={modes}
-                                  onChange={obj => this.handleExpectedHoursChange({ name: 'toMode', value: obj.value })}
-                                />
-                              </div>
-                            </div>
-                          </div>
+                        <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
+                          <div><label>Shifts</label></div>
+                          <Select
+                            ref={inputEl => (this.shift = inputEl)}
+                            styles={this.customStyles(errors && errors.shift)}
+                            name="shift"
+                            className="selectone"
+                            options={shiftTypes}
+                            placeholder="Select Shift type"
+                            onChange={obj => this.handleSelect({ name: 'shift', value: obj.value })}
+                          />
+                          <div class="error-message">{errors && errors.employmentType}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div class="recruiterForm__noOfPositionsAvailable"><label>Number of Positions Available *</label></div>
@@ -577,7 +501,10 @@ export default class CreateJob extends React.Component {
                             placeholder='Number of Positions Available'
                           />
                           <div class="invalid-feedback" >{errors && errors.noOfPositionsAvailable}</div>
-                          <div class="pt-3"><label>Visa</label></div>
+
+                        </div>
+                        <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
+                          <div><label>Visa</label></div>
                           <input
                             class="form-control"
                             type="text"
@@ -662,7 +589,7 @@ export default class CreateJob extends React.Component {
                             styles={this.customStyles(errors && errors.jobCountry)}
                             name="jobCountry"
                             className="selectone"
-                            options={[{value: 'India', label: 'India'}]}
+                            options={[{ value: 'India', label: 'India' }]}
                             placeholder="Select"
                             onChange={obj => this.handleSelect({ name: 'jobCountry', value: obj.value })}
                           />
@@ -752,7 +679,7 @@ export default class CreateJob extends React.Component {
             <div class="pt-5" />
             <div class="pt-3" />
             <Footer></Footer>
-            </div>
+          </div>
         </div>
       </div>
     );

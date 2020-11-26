@@ -136,7 +136,7 @@ const JobOffers = () => {
                           <div class="col-md-9 px-0">
                             <div class="row">
                               <div class="col-md-12 job-title">
-                                <Link to={`/candidate/jobDetails/${jobDetails.jobId}/jobOffers`}>
+                                <Link to={`/candidate/jobDetails/jobOffers/${jobDetails.jobId}`}>
                                   {jobDetails.jobTitle}
                                 </Link>
                                 <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
@@ -153,7 +153,7 @@ const JobOffers = () => {
                             <h6 class="job-desc">Job Description</h6>
                             {jobDetails.jobDescription}
                           </div>
-                          <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/${jobDetails.jobId}/jobOffers` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/jobOffers/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </section>
                       </div>
                     )

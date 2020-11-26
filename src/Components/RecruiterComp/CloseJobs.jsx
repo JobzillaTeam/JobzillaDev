@@ -175,10 +175,10 @@ class CloseJobs extends Component {
                         </div>
                         {/* Table */}
                         <div>
-                          <ClosedJobCandidates joinedCandidates={closedJob.joinedCandidateRecruitmentList} />
+                          <ClosedJobCandidates joinedCandidates={closedJob.joinedCandidateRecruitmentList && closedJob.joinedCandidateRecruitmentList && closedJob.joinedCandidateRecruitmentList[0] && closedJob.joinedCandidateRecruitmentList.slice(0, 3)} />
                         </div>
                         <div className="px-4 pt-1 pb-4 text-right">
-                          <Link class="" to={`/recruiter/jobDetails/${jobDetails.jobId}/closed`}>
+                          <Link class="" to={`/recruiter/jobDetails/closed/${jobDetails.jobId}`}>
                             VIEW Details{" "}
                             <img
                               src="/images/icons/view_details_arrow.svg"

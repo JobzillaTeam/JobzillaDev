@@ -1,17 +1,26 @@
 import React from 'react';
 import $ from 'jquery'
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const LeftNavCandidate = () => {
-
+    // const jobStatus = '';
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         $(".maincontent").toggleClass("toggled");
     });
-
+    
     //To move dot to active page
     const isActive = (path, match, location) => !!(match || path === location.pathname);
+    let location = useLocation();
+    const matchUrls = ['/candidate/interviews/interviewInvites', '/candidate/Interviews/AcceptedInterviews', '/candidate/jobDetails/invites/', '/candidate/jobDetails/accepted/']
+    let isJobDropdownOpen = false;
+    for (let i = 0; i < matchUrls.length; i++ ) {
+        if (location.pathname.includes(matchUrls[i])) {
+            isJobDropdownOpen = true;
+            break;
+        }
+    }
     return (
         <div id="wrapper" className="">
             <div id="sidebar-wrapper">
@@ -35,23 +44,22 @@ const LeftNavCandidate = () => {
                         </NavLink>
                     </li>
                      <li data-toggle="tooltip" data-placement="right" title="Interviews">
-                        <Link className="subMenu collapsed" id="navbarDropdown" role="button"
+                        <Link className={`subMenu ${!isJobDropdownOpen ? 'collapsed' : ''}`} id="navbarDropdown" role="button"
                             data-toggle="collapse" data-target="#submenu1sub1">
                             <i><img src="/images/Candidate-Navbar-assets/interviews-icon.svg" aria-hidden="true" /></i>
                              <span className="menuText">Interviews</span>
                         </Link>
-                        <div className="collapse" id="submenu1sub1" aria-expanded="false">
+                        <div className={`collapse ${isJobDropdownOpen ? 'show' : ''}`} id="submenu1sub1" aria-expanded={isJobDropdownOpen}>
                             <ul className="flex-column nav submenuLink">
                                 <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Invites"
                                 >
-                                    <NavLink  to="/candidate/Interviews/InterviewInvites" >
+                                    <NavLink to={{pathname: '/candidate/interviews/interviewInvites'}} >
                                         {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}
                                         <span className="menuText">Invites</span>
                                     </NavLink>
                                 </li>
                                 <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Accepted">
                                     <NavLink  to="/candidate/Interviews/AcceptedInterviews"
-                                    activeClassName="active"
                                     isActive={isActive.bind(this,'/Candidate/Interviews/Accepted')}
                                     >
                                      {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}

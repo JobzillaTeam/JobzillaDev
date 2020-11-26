@@ -232,7 +232,7 @@ class ActiveJob extends Component {
                         ) : <div className="noMatchingcandidateText">No matching Candidates Found</div>}
                       </div>
                       <div>
-                        <div className="job-full-detail text-right text-md-right mt-4 mb-4"><Link to={`/recruiter/jobDetails/${data.jobDescription.jobId}/active`}>VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                        <div className="job-full-detail text-right text-md-right mt-4 mb-4"><Link to={`/recruiter/jobDetails/active/${data.jobDescription.jobId}`}>VIEW Details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                       </div>
                     </div>
                   </div>

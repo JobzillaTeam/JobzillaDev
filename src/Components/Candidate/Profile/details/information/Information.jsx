@@ -23,7 +23,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
   const [progressbar,setProgressbar] = useState();
   const uploadHandler = (e) => {
     const files = e.target.files;
-    const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
+    const token = localStorage.getItem('authToken');
     const formData = new FormData()
     formData.append(
       'imageFile',

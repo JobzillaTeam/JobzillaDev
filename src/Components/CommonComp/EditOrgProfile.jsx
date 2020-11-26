@@ -17,6 +17,7 @@ class EditProfile extends Component {
       contactPersonName: "",
       gstin: "",
       mobile: "",
+      // userRole: ""
     };
     this.viewImage = new ApiServicesOrg();
     this.fileService = new ApiServicesOrg();
@@ -92,7 +93,7 @@ class EditProfile extends Component {
       let getContactPersonName = "";
       let getGstin = "";
       let getMobile = "";
-
+      // let getRole = "";
       if (Response) {
         getOrgName = JSON.stringify(
           Response.data.responseObject.organizationName
@@ -104,6 +105,7 @@ class EditProfile extends Component {
         getGstin = JSON.stringify(Response.data.responseObject.gstin);
 
         getMobile = JSON.stringify(Response.data.responseObject.phoneNumber);
+        // getRole = JSON.stringify(Response.data.responseObject.userRole);
       }
 
       this.setState({
@@ -112,6 +114,7 @@ class EditProfile extends Component {
         contactPersonName: getContactPersonName.slice(1, -1),
         gstin: getGstin.slice(1, -1),
         mobile: getMobile.slice(1, -1),
+        // userRole: getRole.slice(1, -1)
       });
     });
   }
@@ -175,7 +178,7 @@ class EditProfile extends Component {
           <h4>Edit Profile</h4>
           <div className="d-flex justify-content-between">
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+              You can manage your profile details and change password from here
             </div>
             <ChangePasswordOrg ref={this.onChangePassModalRef}>
               {" "}
@@ -230,8 +233,8 @@ class EditProfile extends Component {
                 )}
               </div>
               <div className="pt-3">
-                <div>{this.state.contactPersonName}</div>
-                <p>Admin</p>
+                <div class="orgProfileFont">{this.state.contactPersonName}</div>
+                <p class="orgProfileFont">Admin</p>
               </div>
             </div>
             <h5 className="my-4 pt-3 border-top">Profile Details</h5>

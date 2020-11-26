@@ -11,6 +11,7 @@ import { data } from 'jquery';
 import InfiniteScroll from "react-infinite-scroll-component";
 import RenderLoader from '../../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst.jsx';
+import ScrollUpButton from "react-scroll-up-button";
 
 export default class CandidateApplication extends Component {
 
@@ -122,7 +123,7 @@ export default class CandidateApplication extends Component {
 
                 <div>
 
-                    <div className="Show">Total Result {this.state.candidateLength} </div>
+                    <div className="Show">Total Result {this.state.candidateData.length} </div>
 
                  
                         <table className="table table-borderless custom-table">
@@ -134,14 +135,14 @@ export default class CandidateApplication extends Component {
                                     <th>Experience</th>
                                     <th>AvailableFrom</th>
                                     <th>Match</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {this.state.candidate.map((data1, index) => {
                                     const data = data1.candidate;
                                     return (
-                                        <tr>
+                                        <tr className="candidateTable">
                                             {/* <td>{data.candidateId}</td> */}
                                             {/* onClick={localStorage.setItem('candidateID', data.candidateId)} */}
                                             <td>
@@ -204,7 +205,8 @@ export default class CandidateApplication extends Component {
                 </div>
 
 
-            </InfiniteScroll>   
+            </InfiniteScroll> 
+            <ScrollUpButton/>  
 
             </div>
         );

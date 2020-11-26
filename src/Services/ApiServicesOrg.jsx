@@ -37,7 +37,7 @@ class ApiServicesOrg extends Component {
   }
 
   getToken() {
-    const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
+    const token = localStorage.getItem('authToken');
     const tokenHeader = { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token } }
     return tokenHeader;
   }
@@ -391,7 +391,8 @@ class ApiServicesOrg extends Component {
   }
   //Provider Dashboard api
   getProviderDashboardDetails() {
-    const year = 2020
+    const today=new Date()
+    const year= today.getFullYear()
     const orgId = localStorage.getItem("organizationId");
     return (
       axios
@@ -403,13 +404,23 @@ class ApiServicesOrg extends Component {
   //Recruiter Dashboard api
   getRecruiterDashboardDetails() {
     const orgId = localStorage.getItem("organizationId");
-    const year = 2020
+    const today=new Date()
+    const year= today.getFullYear()
     return (
       axios
         .get(ApiBaseUrl + '/recruiter/recruiterDashboardDetails/' + orgId + '/' + year, this.getToken())
         .then(Response => Response)
     )
   }
+
+    //5.5 View closed job Details 
+    getClosedJobsAndJoinedCandidates(jobID) {
+      return (
+        axios
+          .get(ApiBaseUrl + '/recruiter/closedJobAndJoinedCandidates/' + jobID, this.getToken())
+          .then(Response => Response)
+      )
+    }
 
 
 }

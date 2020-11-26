@@ -364,7 +364,7 @@ class ApiServicesOrgCandidate {
 
   // Post Email notifications Settings of Candidate with Token
   getToken() {
-    const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
+    const token = localStorage.getItem('authToken');
     const tokenHeader = { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token } }
     return tokenHeader;
   }
@@ -508,7 +508,7 @@ class ApiServicesOrgCandidate {
     return (
       axios(
         {
-          url: `${ApiBaseUrl}/candidate/jobAndCandidateDetailsByIds/${jobID}/${candidateId}`,
+          url: `${ApiBaseUrl}/candidate/jobAndCandidateDetailsByIdsForCandidate/${jobID}/${candidateId}`,
           headers: {
             'Authorization': `Bearer ${authToken}`
           }
