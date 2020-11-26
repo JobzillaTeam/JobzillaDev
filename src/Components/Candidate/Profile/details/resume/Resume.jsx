@@ -17,20 +17,32 @@ class Resume extends Component {
     this.hideDeleteProductDialog = this.hideDeleteProductDialog.bind(this);
   }
 
+  componentDidMount() {
+
+    this.fileService1.fetchResumeFile()
+      .then(Response => {
+        if (Response && Response.data && Response.data.responseObject) {
+        var data2 = Response.data.responseObject
+        console.log(data2)
+        this.setState({
+          data1:Response.data.responseObject.cvInBytes,
+          fileName: Response.data.responseObject.fileName,
+          createdDate:Response.data.responseObject.createdDate
+        });
+      }
+  })
+}
   //Download Resume
 
   downloadResume = () => {
 
     // Calling Download Resume File Service from Service file:-
-    var blob;
-    this.fileService1.fetchResumeFile()
-      .then(Response => {
-        var data1 = Response.data.responseObject
-        blob = this.convertBase64toBlob(data1, 'application/msword');
+        var blob;
+        blob = this.convertBase64toBlob(this.state.data1, 'application/msword');
         var blobURL = URL.createObjectURL(blob)
         var blobURL = URL.createObjectURL(blob);
         window.open(blobURL);
-      })
+      
   }
 
   convertBase64toBlob(content, contentType) {
@@ -60,21 +72,19 @@ class Resume extends Component {
     // Calling Download Sample File Service from Service file:-
     this.fileService1.deleteSampleFile()
       .then(response => {
-        localStorage.removeItem("SelectedFile")
+        //localStorage.removeItem("SelectedFile")
         this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'User Deleted Successfully' }, 60000);
-
+        window.location.reload()
       })
       .catch(error => {
         console.log("Error Occured...", error)
       })
-
-
-
+    
 
     this.setState({
       deleteProductDialog: false
     })
-
+    
   }
 
   //Delete Resume  
@@ -93,7 +103,7 @@ class Resume extends Component {
   onFileChange = event => {
 
     if (this.state.drag == true) {
-      this.toast.show({ severity: 'error', summary: 'Error', detail: 'You have already dragged  a file' }, 50000);
+      this.toast.show({ severity: 'error', summary: 'Error', detail: 'You have already selected  a file' }, 50000);
     }
     else {
       this.setState({
@@ -173,7 +183,7 @@ class Resume extends Component {
 
         .then(Response => {
 
-          localStorage.setItem("SelectedFile", this.state.selectedFile.name || this.state.DraggedFile.name)
+          //localStorage.setItem("SelectedFile", this.state.selectedFile.name || this.state.DraggedFile.name)
           this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'File uploaded Successfully' }, 60000);
           window.location.reload()
 
@@ -216,6 +226,7 @@ class Resume extends Component {
   }
 
   render() {
+    var day, month, year, fullDate,d;
     const { showing } = this.state
     const deleteProductDialogFooter = (
       <>
@@ -225,7 +236,7 @@ class Resume extends Component {
       </>
     );
 
-    const hasAttachedDocument = localStorage.getItem("SelectedFile") || localStorage.getItem("DraggedFile")
+    const hasAttachedDocument = this.state.fileName
 
     return (
 
@@ -238,10 +249,19 @@ class Resume extends Component {
           </div>
         </div>
         <div class="col-12 mb-3">
+          { 
+            d = new Date(this.state.createdDate),
+            day = d.getDate(),
+            month = d.getMonth() + 1,
+            year = d.getFullYear(),
+            fullDate = day + '-' + month + '-' + year,
+            console.log(fullDate)
+          }
           <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class={`ml-4 mr-2 left-sec-icon profile__editIcon ${hasAttachedDocument ? '' : 'disabledCursorOnIcon'}`} onClick={this.downloadResume} />
-          <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("SelectedFile")}</span>
-          <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span>
-          {/* <span>Last updated on 10 sept 2020</span> */}
+          <span class="mr-3" style={{ color: '#007EFF' }}>{this.state.fileName}</span>
+          {/* <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span> */}
+          
+        <span>{this.state.createdDate ?<span> Last updated on {fullDate}</span> :<span></span> }</span>
 
           <span class="float-right"> {hasAttachedDocument
             ? <a className="download_sample_link d-block" href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>

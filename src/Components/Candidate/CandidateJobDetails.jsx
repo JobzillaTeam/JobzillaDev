@@ -161,10 +161,10 @@ const CandidateJobDetails = (props) => {
                       <h6>Others</h6>
                       <div className="row">
                         <div className="col-xs-12 col-md-5 others_section_firstcol">
-                          <div>Working Hours</div>
+                          <div>Shifts</div>
                         </div>
                         <div className="col-xs-12 col-md-6 others_section_secondcol">
-                          <div>{jobDetails.expectedWorkinghrsFrom}</div>
+                          <div>{jobDetails.shift}</div>
                         </div>
                       </div>
                       <div className="row">
