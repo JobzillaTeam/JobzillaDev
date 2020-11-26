@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CountUp from 'react-countup';
 import ApiServicesOrgCandidate from '../../../Services/ApiServicesOrgCandidate';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class CandidateOverviewCard extends Component {
     constructor() {
@@ -10,7 +10,7 @@ export default class CandidateOverviewCard extends Component {
             jobsApplied: '',
             selectedForInterviews: '',
             jobOffers: '',
-            progressBarPercentage:''
+            progressBarPercentage: ''
         }
         this.candidateDashboard = ApiServicesOrgCandidate;
 
@@ -20,21 +20,21 @@ export default class CandidateOverviewCard extends Component {
             .then(Response => {
                 // console.log(Response.data.responseObject.matchingJobs)
                 if (Response && Response.data) {
-                  this.setState({
-                    jobsApplied: Response.data.responseObject.jobApplied,
-                    selectedForInterviews: Response.data.responseObject.selectedForInterviews,
-                    jobOffers: Response.data.responseObject.jobOffers
-                  })  
+                    this.setState({
+                        jobsApplied: Response.data.responseObject.jobApplied,
+                        selectedForInterviews: Response.data.responseObject.selectedForInterviews,
+                        jobOffers: Response.data.responseObject.jobOffers
+                    })
                 }
             });
 
-            this.candidateDashboard.candidateGetProfileInfo()
+        this.candidateDashboard.candidateGetProfileInfo()
             .then(Response => {
                 //console.log(Response.data.responseObject)
                 if (Response && Response.data) {
-                  this.setState({
-                    progressBarPercentage: Response.data.responseObject.progressBarCompletion
-                  })  
+                    this.setState({
+                        progressBarPercentage: Response.data.responseObject.progressBarCompletion
+                    })
                 }
             });
 
@@ -46,17 +46,19 @@ export default class CandidateOverviewCard extends Component {
             <div>
                 {/* Overview Section */}
                 <div className="row ml-0 mr-1 clearfix">
-                    
+
                     <div className="wid100 ml-4 marT20  profile_strength_text clearfix">Profile Strength</div>
-                    <div class="col-md-6">
-        <div className="progressbar-text font-blue " style={{ width :`${this.state.progressBarPercentage}%`}}>{this.state.progressBarPercentage}%</div>
-                        <div class="progress1 progress-fashion1 marB20 ml-2 " >
-                            <div class="progress-bar1 bg-success marT20" role="progressbar" aria-valuenow={this.state.progressBarPercentage} aria-valuemin="0" aria-valuemax="100">
+                    <div class="col-6">
+                        <div className="progressbar-text font-blue" style={{ width: `${this.state.progressBarPercentage}%` }}>{this.state.progressBarPercentage}%</div>
+                        <div class="progress1 progress-fashion1 marB20 ml-2" >
+                            <div class="progress-bar bg-success marT20" style={{ width: `${this.state.progressBarPercentage}%` }} role="progressbar" aria-valuenow={this.state.progressBarPercentage} aria-valuemin="0" aria-valuemax="100">
                             </div>
                         </div>
                     </div>
 
-                    <div className="row ml-4 marT20 profile_strength_subtext clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ullamcorper.<span className="font-blue complete-now-text"><Link to="/candidate/profile">COMPLETE NOW</Link></span></div>
+
+                    {/* <div className="row ml-4 marT20 profile_strength_subtext clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ullamcorper.<span className="font-blue complete-now-text"><Link to="/candidate/profile">COMPLETE NOW</Link></span></div> */}
+                    <div className=" w-100 font-blue complete-now-text ml-4 marT20"><Link to="/candidate/profile">COMPLETE NOW</Link></div>
                     <div className="wid100 ml-4 overview marT30 overview_text">Overview-2020</div>
                     <div className="col-12 col-sm-12 col-md-6 col-lg-4">
                         <section className="jobPosted_section_Card">

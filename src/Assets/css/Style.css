@@ -655,8 +655,7 @@ nav a {
 
 .progress-fashion1 {
     /* margin-top: 10px; */
-    width: 75%;
-    height: 10px;
+    height: 8px !important;
 }
 
 .progress1 .bg-success {
@@ -1526,7 +1525,10 @@ input:checked+.slider:before {
 
 .progress1 {
     background-color: #A5B1C45A !important;
-    border-radius: 5px;
+    border-radius: 0.25rem;
+    display: flex;
+    overflow: hidden;
+
 }
 
 .progress-bar1 {
@@ -3319,3 +3321,9 @@ tr td:first-child {
 }
 
 /* CSS END by Anuja*/
+
+/* Manage users Search bar changes */
+.p-input-icon-left > .p-inputtext {
+    padding-left: 2rem;
+    width: 250px;
+}
