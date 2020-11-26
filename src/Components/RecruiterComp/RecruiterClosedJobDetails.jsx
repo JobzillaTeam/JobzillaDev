@@ -25,6 +25,7 @@ export default class RecruiterClosedJobDetails extends React.Component {
       joinedCandidateRecruitmentList: null,
       joinedCandidateList: null,
       pageDataLength: INITIAL_ITEM_LENGTH,
+      open:false
     }
   }
   componentDidMount() {
@@ -49,6 +50,12 @@ export default class RecruiterClosedJobDetails extends React.Component {
         pageDataLength: this.state.pageDataLength + INITIAL_ITEM_LENGTH
       });
     }, 100);
+  }
+
+  toggle=()=>{
+    this.setState({
+      open: !this.state.open
+    })
   }
   render() {
     const jobID = this.props.match.params.jobID;
@@ -91,8 +98,8 @@ export default class RecruiterClosedJobDetails extends React.Component {
                 </div>
               </div>
               <div className="card my-4">
-                <Accordion defaultActiveKey="0">
-                  <Accordion.Collapse eventKey="0">
+              <section className="white-middle-section4  mt-4">
+                     {this.state.open ? (
                     <div className="card-body">
                       <div className="row">
                         <div className="col-md-6">
@@ -157,10 +164,12 @@ export default class RecruiterClosedJobDetails extends React.Component {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </Accordion.Collapse>
-                </Accordion>
+                    </div> 
+                     ) :  <div className="viewdetails">View More Details</div>}
+                 
+                  </section> 
               </div>
+              <div className="arrowButton"><img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img></div> 
               <div class="bg-white">
                 <InfiniteScroll
                   dataLength={this.state.joinedCandidateList.length}
