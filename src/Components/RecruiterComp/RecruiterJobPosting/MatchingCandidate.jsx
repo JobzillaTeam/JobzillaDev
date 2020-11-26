@@ -114,7 +114,7 @@ export default class MatchingCandidate extends Component {
         > 
 
                 <div>
-                    <div className="Show">Total Result {this.state.matchingCandidateLength} </div>
+                    <div className="Show">Total Result {this.state.matchingCandidateData.length} </div>
                 
                         <table className="table table-borderless custom-table">
                             <thead>
@@ -125,14 +125,14 @@ export default class MatchingCandidate extends Component {
                                     <th>Experience</th>
                                     <th>AvailableFrom</th>
                                     <th>Match</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {this.state.candidate.map((  data1, index) => {
                                     const data = data1.candidate;
                                     return (
-                                        <tr>
+                                        <tr className="candidateTable">
                                             {/* <td>{data.candidateId}</td> */}
                                             {/* onClick={localStorage.setItem('candidateID', data.candidateId)} */}
                                             <td>
