@@ -53,7 +53,7 @@ const LeftNavCandidate = () => {
                             <ul className="flex-column nav submenuLink">
                                 <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Invites"
                                 >
-                                    <NavLink to={{pathname: '/candidate/interviews/interviewInvites'}} >
+                                    <NavLink to={{pathname: '/candidate/interviews/interviewInvites'}} className={`${location.pathname.includes('/candidate/jobDetails/invites/') && 'active'}`} >
                                         {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}
                                         <span className="menuText">Invites</span>
                                     </NavLink>
@@ -61,6 +61,7 @@ const LeftNavCandidate = () => {
                                 <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Accepted">
                                     <NavLink  to="/candidate/Interviews/AcceptedInterviews"
                                     isActive={isActive.bind(this,'/Candidate/Interviews/Accepted')}
+                                    className={`${location.pathname.includes('/candidate/jobDetails/accepted/') && 'active'}`}
                                     >
                                      {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}
                                     <span className="menuText">Accepted</span>
