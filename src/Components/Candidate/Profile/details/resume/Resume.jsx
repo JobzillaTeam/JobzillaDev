@@ -155,7 +155,7 @@ class Resume extends Component {
 
     if (this.fileValidation()) {
       const formData = new FormData();
-      const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
+      const token = localStorage.getItem('authToken');
       console.log(token)
       const formheader = {
 

@@ -37,7 +37,7 @@ class ApiServicesOrg extends Component {
   }
 
   getToken() {
-    const token = JSON.parse(localStorage.getItem('userDetails')).authToken;
+    const token = localStorage.getItem('authToken');
     const tokenHeader = { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token } }
     return tokenHeader;
   }
