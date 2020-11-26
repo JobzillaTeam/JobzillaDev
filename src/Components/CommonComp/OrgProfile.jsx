@@ -3,6 +3,7 @@ import HeaderAll from "./HeaderAll";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import ApiServicesOrg from "../../Services/ApiServicesOrg";
+import ChangePasswordOrg from "../Auth/ChangePasswordOrg";
 
 class Profile extends Component {
   constructor() {
@@ -35,7 +36,7 @@ class Profile extends Component {
       let getContactPersonName = "";
       let getGstin = "";
       let getMobile = "";
-
+      console.log(Response)
       if (Response && Response.data && Response.data.responseObject) {
         getOrgName = JSON.stringify(
           Response.data.responseObject.organizationName
@@ -44,7 +45,9 @@ class Profile extends Component {
         getContactPersonName = JSON.stringify(
           Response.data.responseObject.contactPerson
         );
-        getGstin = Response.data.responseObject.gstin ? JSON.stringify(Response.data.responseObject.gstin) : '';
+        getGstin = Response.data.responseObject.gstin
+          ? JSON.stringify(Response.data.responseObject.gstin)
+          : "";
         getMobile = JSON.stringify(Response.data.responseObject.phoneNumber);
       }
 
@@ -57,6 +60,12 @@ class Profile extends Component {
       });
     });
   }
+  onChangePassModalRef = (obj) => {
+    this.showModal = obj && obj.showModal;
+  };
+  changePass = () => {
+    this.showModal();
+  };
 
   render() {
     return (
@@ -77,7 +86,21 @@ class Profile extends Component {
           </div>
 
           <h4>My Profile</h4>
-          {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p> */}
+          {/* <p>
+            You can manage your profile details and change password from here
+          </p> */}
+
+          <div className="d-flex justify-content-between">
+            <div className="editHeading">
+              You can manage your profile details and change password from here
+            </div>
+            <ChangePasswordOrg ref={this.onChangePassModalRef}>
+              {" "}
+            </ChangePasswordOrg>
+            <button className="btn btn-blue" onClick={this.changePass}>
+              Change Password
+            </button>
+          </div>
           <section className="white-middle-section mt-4">
             <div className="profile text-center">
               <div className="text-center">
@@ -92,7 +115,10 @@ class Profile extends Component {
                 ) : (
                   <img
                     className="mr-3 rounded-circle"
-                    src="images/Dashboard-assets/user-f.png" alt="User profile" width="133px" height="133px"
+                    src="images/Dashboard-assets/user-f.png"
+                    alt="User profile"
+                    width="133px"
+                    height="133px"
                     alt="User profile"
                     width="133px"
                     height="133px"
@@ -100,35 +126,47 @@ class Profile extends Component {
                 )}
               </div>
 
-              <div className="pt-3">{this.state.contactPersonName}</div>
-              <p>Admin</p>
+              <div className="pt-3 orgProfileFont">
+                {this.state.contactPersonName}
+              </div>
+              <p className="orgProfileFont">Admin</p>
               {/* <div>rosadodson@techmahindra.com</div> */}
             </div>
 
-            <h6 className="mt-4 pt-3 border-top">Profile Details</h6>
+            <h6 className="mt-4 pt-3 border-top profileDetailFont">
+              Profile Details
+            </h6>
             <div className="row mt-3">
               <div className="col-md-6">
                 <div className="form-group row">
-                  <div className="col-sm-4">Organisation Name : </div>
+                  <div className="col-sm-4 orgProfileFont">
+                    Organisation Name :{" "}
+                  </div>
                   <div className="col-sm-8">{this.state.orgName}</div>
                 </div>
                 <div className="form-group row">
-                  <div className="col-sm-4">Official Email : </div>
+                  <div className="col-sm-4 orgProfileFont">
+                    Official Email :{" "}
+                  </div>
                   <div className="col-sm-8">{this.state.officialEmail}</div>
                 </div>
                 <div className="form-group row">
-                  <div className="col-sm-4">Mobile/Landline : </div>
+                  <div className="col-sm-4 orgProfileFont">
+                    Mobile/Landline :{" "}
+                  </div>
                   <div className="col-sm-8">{this.state.mobile}</div>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group row">
-                  <div className="col-sm-4">Contact Person Name : </div>
+                  <div className="col-sm-4 orgProfileFont">
+                    Contact Person Name :{" "}
+                  </div>
                   <div className="col-sm-8">{this.state.contactPersonName}</div>
                 </div>
 
                 <div className="form-group row">
-                  <div className="col-sm-4">GSTIN : </div>
+                  <div className="col-sm-4 orgProfileFont">GSTIN : </div>
                   <div className="col-sm-8">{this.state.gstin}</div>
                 </div>
               </div>

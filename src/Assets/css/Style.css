@@ -1105,7 +1105,7 @@ input:checked+.slider:before {
 
 .setting_arrow {
     margin-bottom: 3px;
-    margin-left: 16px !important;
+    /* margin-left: 16px !important; */
 }
 
 .settingTitle_text {
@@ -3319,3 +3319,20 @@ tr td:first-child {
 }
 
 /* CSS END by Anuja*/
+
+/* CSS START by Prateek*/
+
+.editHeading {
+    margin-top: 10px;
+}
+  
+.orgProfileFont {
+    font-weight: bold;
+}
+  
+.profileDetailFont {
+    font-weight: bold;
+    font-size: 18px; 
+}
+
+/* CSS END by Prateek*/

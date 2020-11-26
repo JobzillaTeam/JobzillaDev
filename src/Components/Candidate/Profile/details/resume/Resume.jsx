@@ -338,4 +338,4 @@ class Resume extends Component {
     );
   }
 }
-export default Resume;
+export default React.memo(Resume);
