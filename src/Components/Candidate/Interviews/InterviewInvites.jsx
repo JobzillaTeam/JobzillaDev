@@ -94,7 +94,7 @@ const InterviewInvites = () => {
           <div class="row">
             <div class="col-md-12 py-4">
               <h5 class="job-heading">Interview Invites</h5>
-              <p class="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} invites, View <span class="job-accepted"><Link to="/candidate/Interviews/AcceptedInterviews/?isInterviewsDropdown=true" class="job-accept">Accepted interviews</Link></span></p>
+              <p class="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} invites, View <span class="job-accepted"><Link to="/candidate/Interviews/AcceptedInterviews" class="job-accept">Accepted interviews</Link></span></p>
             </div>
           </div>
           <section class="bg-white ml-0">
@@ -136,7 +136,7 @@ const InterviewInvites = () => {
                           <div class="col-md-9 px-0">
                             <div class="row">
                               <div class="col-md-12 job-title">
-                                <Link to={`/candidate/jobDetails/${jobDetails.jobId}/invites/?isInterviewsDropdown=true`}>
+                                <Link to={`/candidate/jobDetails/invites/${jobDetails.jobId}`}>
                                   {jobDetails.jobTitle}
                                 </Link>
                                 <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
@@ -161,7 +161,7 @@ const InterviewInvites = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/${jobDetails.jobId}/invites/?isInterviewsDropdown=true` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/invites/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </section>
                       </div>
                     )

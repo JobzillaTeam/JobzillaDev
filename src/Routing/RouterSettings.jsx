@@ -79,7 +79,7 @@ class RouterSettings extends Component {
             <CandidateLayout path="/candidate/profile" component={CandidateProfile} />
             <CandidateLayout path="/candidate/profile1" component={Profile1} />
             <CandidateLayout path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>
-            <CandidateLayout path="/candidate/jobDetails/:jobID/:jobStatus" component={CandidateJobDetails}/>
+            <CandidateLayout path="/candidate/jobDetails/:jobStatus/:jobID" component={CandidateJobDetails}/>
             <CandidateLayout path="/candidate/interviews/acceptedInterviews" component={AcceptedInterviews}/>
             <CandidateLayout path="/candidate/changePassword" component={ChangePassword}/>
             <CandidateLayout path="/candidate/candidateEmailsetting" component={CandidateEmailsetting}/>
@@ -89,8 +89,8 @@ class RouterSettings extends Component {
             <OrganizationLayout path="/activeJob" component={ActiveJob} />
             <OrganizationLayout path="/createJob" component={CreateJob} />
             <OrganizationLayout path="/closeJobs" component={CloseJobs}/>
-            <OrganizationLayout path="/recruiter/jobDetails/:jobID/active" component={RecruiterActiveJobDetails}/>
-            <OrganizationLayout path="/recruiter/jobDetails/:jobID/closed" component={RecruiterClosedJobDetails}/>
+            <OrganizationLayout path="/recruiter/jobDetails/active/:jobID" component={RecruiterActiveJobDetails}/>
+            <OrganizationLayout path="/recruiter/jobDetails/closed/:jobID" component={RecruiterClosedJobDetails}/>
             <OrganizationLayout path="/candidateProfileToOpen/:userId" component={CandidateProfileToOpen}/>
 
           </Switch>

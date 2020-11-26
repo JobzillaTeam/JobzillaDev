@@ -94,7 +94,7 @@ const AcceptedInterviews = () => {
           <div class="row">
             <div class="col-md-12 py-4">
               <h5 class="job-heading">Accepted Interviews</h5>
-              <p class="job-invite mb-0">You have Accepted {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} Jobs, View <span class="job-accepted"><Link to={{pathname: '/candidate/interviews/interviewInvites/?isInterviewsDropdown=true'}} class="job-accept">Invites interviews</Link></span></p>
+              <p class="job-invite mb-0">You have Accepted {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} Jobs, View <span class="job-accepted"><Link to={{pathname: '/candidate/interviews/interviewInvites'}} class="job-accept">Invites interviews</Link></span></p>
             </div>
           </div>
           <section class="bg-white ml-0">
@@ -136,7 +136,7 @@ const AcceptedInterviews = () => {
                           <div class="col-md-9 px-0">
                             <div class="row">
                               <div class="col-md-12 job-title">
-                                <Link to={`/candidate/jobDetails/${jobDetails.jobId}/accepted/?isInterviewsDropdown=true`}>
+                                <Link to={`/candidate/jobDetails/accepted/${jobDetails.jobId}`}>
                                   {jobDetails.jobTitle}
                                 </Link>
                                 <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
@@ -162,7 +162,7 @@ const AcceptedInterviews = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/${jobDetails.jobId}/accepted/?isInterviewsDropdown=true` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/accepted/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </section>
                       </div>
                     )

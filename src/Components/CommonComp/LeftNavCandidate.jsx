@@ -13,8 +13,14 @@ const LeftNavCandidate = () => {
     //To move dot to active page
     const isActive = (path, match, location) => !!(match || path === location.pathname);
     let location = useLocation();
-    const query =  new URLSearchParams(location.search);
-    const isJobDropdownOpen = query.get('isInterviewsDropdown');
+    const matchUrls = ['/candidate/interviews/interviewInvites', '/candidate/Interviews/AcceptedInterviews', '/candidate/jobDetails/invites/', '/candidate/jobDetails/accepted/']
+    let isJobDropdownOpen = false;
+    for (let i = 0; i < matchUrls.length; i++ ) {
+        if (location.pathname.includes(matchUrls[i])) {
+            isJobDropdownOpen = true;
+            break;
+        }
+    }
     return (
         <div id="wrapper" className="">
             <div id="sidebar-wrapper">
@@ -47,13 +53,13 @@ const LeftNavCandidate = () => {
                             <ul className="flex-column nav submenuLink">
                                 <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Invites"
                                 >
-                                    <NavLink to={{pathname: '/candidate/interviews/interviewInvites/?isInterviewsDropdown=true'}} >
+                                    <NavLink to={{pathname: '/candidate/interviews/interviewInvites'}} >
                                         {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}
                                         <span className="menuText">Invites</span>
                                     </NavLink>
                                 </li>
                                 <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Accepted">
-                                    <NavLink  to="/candidate/Interviews/AcceptedInterviews/?isInterviewsDropdown=true"
+                                    <NavLink  to="/candidate/Interviews/AcceptedInterviews"
                                     isActive={isActive.bind(this,'/Candidate/Interviews/Accepted')}
                                     >
                                      {/* <i><img src="/images/Candidate-Navbar-assets/Group538.svg" aria-hidden="true" /></i> */}

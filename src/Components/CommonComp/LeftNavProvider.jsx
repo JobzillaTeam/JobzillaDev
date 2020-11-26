@@ -14,9 +14,14 @@ const LeftNavProvider = () => {
     //To move dot to active page
     const isActive = (path, match, location) => !!(match || path === location.pathname);
     let location = useLocation();
-    const query =  new URLSearchParams(location.search);
-    query.get('isInterviewsDropdown')
-    const isJobDropdownOpen = query.get('isInterviewsDropdown');
+    const matchUrls = ['/activeJob', '/closeJobs', '/recruiter/jobDetails/active/', '/recruiter/jobDetails/closed/']
+    let isJobDropdownOpen = false;
+    for (let i = 0; i < matchUrls.length; i++ ) {
+        if (location.pathname.includes(matchUrls[i])) {
+            isJobDropdownOpen = true;
+            break;
+        }
+    }
     return (
         <div id="wrapper" className="">
             <div id="sidebar-wrapper">

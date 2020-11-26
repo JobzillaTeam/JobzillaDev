@@ -131,7 +131,8 @@ const SearchJobs = () => {
                 {
                   resourceJobs && resourceJobs[0] ? resourceJobs.map((resourceJob, resourceIndex) => {
                     const { jobDetails } = resourceJob;
-                    const pathUrl = `/candidate/jobDetails/${jobDetails.jobId}/${ jobDetails.applicationStatus === 'Invite_Sent_By_Recruiter' ? 'invites/?isInterviewsDropdown=true' : 'searchJobs'}`
+                    const pathFor = jobDetails.applicationStatus === 'Invite_Sent_By_Recruiter' ? 'invites' : 'searchJobs'
+                    const pathUrl = `/candidate/jobDetails/${pathFor}/${jobDetails.jobId}`;
                     return (
                       <div class="jobListItem">
                         <section class={`row mx-0 px-4 ${resourceIndex !== 0 && 'pt-4'} pb-4`}>
