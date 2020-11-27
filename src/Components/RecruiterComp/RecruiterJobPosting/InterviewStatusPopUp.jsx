@@ -81,7 +81,7 @@ class InterviewStatusPopUp extends Component{
                 })
                 .catch(error=>{
                 this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},20000);})
-                this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User is added Successfully'},20000);
+                this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Status is updated Successfully'},20000);
                 
               
                     
