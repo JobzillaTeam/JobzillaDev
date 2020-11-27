@@ -135,8 +135,8 @@ class CloseJobs extends React.Component {
             </div>
             <section class="ml-0">
               <div class="bg-white">
-                <div class="col-md-12 mx-0 py-4 px-4">
-                  <div className="form-group">
+                <div class="col-md-12 mx-0 py-4 px-4" style={{marginBottom: '1px'}}>
+                  <div className="form-group mb-0">
                     <div class="row mx-0 d-flex justify-content-between">
                       <div class="input-group job-search">
                         <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search by job title, skills, location" id="example-search-input" onChange={this.handleInputChange} />
@@ -174,7 +174,7 @@ class CloseJobs extends React.Component {
                       const { jobDetails } = resourceJob;
                       return (
                         <div class="bg-white mb-4">
-                          <section class={`row mx-0 px-4 ${resourceIndex !== 0 && 'pt-4'} pb-4`}>
+                          <section class={`row mx-0 px-4 pt-4 pb-4`}>
                             <div class="col-md-12 px-0">
                               <div class="row">
                                 <div class="col-md-12 job-title">
