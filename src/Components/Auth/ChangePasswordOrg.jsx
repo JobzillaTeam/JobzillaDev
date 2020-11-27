@@ -195,7 +195,7 @@ class ChangePasswordOrg extends Component {
                   {/* Confirm Password */}
                   <div className="form-group">
 
-                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <label htmlFor="confirmPassword">Confirm New Password</label>
                     <input ref={this.confirmPasswordRef} onChange={this.onChange} type="password" id="confirmPassword" className="form-control" name="confirmPassword" value={this.state.fields.confirmPassword}
                       onChange={(e) => { this.handleChange(e); this.validateForm(); }}
                       onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />

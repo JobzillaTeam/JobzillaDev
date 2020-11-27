@@ -476,7 +476,7 @@ export default class CreateJob extends React.Component {
                       <h5 class="recruiterForm__sectionHeading">Others</h5>
                       <div class="row col">
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
-                          <div><label>Shifts</label></div>
+                          <div><label>Shifts *</label></div>
                           <Select
                             ref={inputEl => (this.shift = inputEl)}
                             styles={this.customStyles(errors && errors.shift)}
