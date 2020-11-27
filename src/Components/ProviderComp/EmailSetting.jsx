@@ -94,7 +94,7 @@ class EmailSetting extends Component {
                     this.toast.show({ severity: 'success',summary: 'Success Message', detail: 'Data Saved Successfully', life: 2000 })
                 })
                 .catch(error => {
-                    console.log("Error Occured..", error)
+                    // console.log("Error Occured..", error)
                     this.toast.show({ severity: 'error',summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )

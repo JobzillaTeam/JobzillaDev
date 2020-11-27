@@ -56,7 +56,7 @@ class ForgotPassword extends Component {
         } else {
           this.toast.show({ severity: 'error', summary: 'Error Message', detail: 'Something went wrong' }, 80000);
         }
-        console.log(error)
+        //console.log(error)
       });
     }
   }

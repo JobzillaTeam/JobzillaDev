@@ -68,7 +68,7 @@ class UploadProfile extends Component {
 
         //Dragging csv file to upload
         uploadFile=()=> {
-           console.log("hi")
+        //    console.log("hi")
             if  (this.fileValidation())
             {
                     const formData = new FormData(); 
@@ -96,7 +96,7 @@ class UploadProfile extends Component {
             // Calling Upload Sample File Service from Service file:-
                         this.fileService.postSampleFile(formData, formheader) 
                         .then(Response=>{
-                                    console.log(Response.status)
+                                    // console.log(Response.status)
                                     if(Response.status===208){
 
                                         this.toast.show({severity: 'error', summary: 'Error', detail: 'Email Id already exist'},80000);
@@ -108,7 +108,7 @@ class UploadProfile extends Component {
                                 })
 
                         .catch(error=>{
-                                    console.log(error)
+                                    // console.log(error)
                                     this.toast.show({severity: 'error', summary: 'Error', detail: 'Please fill data in each coloumn of CSV file '},50000);})
         }
 

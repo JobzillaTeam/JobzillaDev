@@ -13,7 +13,7 @@ class ApiServicesOrg extends Component {
       return response;
     }, err => {
       return new Promise((resolve, reject) => {
-        console.log(err)
+        // console.log(err)
         const originalReq = err.config;
         const isAuthTokenExpired = err && err.response && err.response.status === 401 && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')
         if (isAuthTokenExpired) {
@@ -23,7 +23,7 @@ class ApiServicesOrg extends Component {
             .then(res => res.json()).then(res => {
               if (res && res.responseObject) {
                 const authToken = res.responseObject;
-                console.log(res);
+                // console.log(res);
                 localStorage.setItem('authToken', authToken);
                 originalReq.headers['Authorization'] = `Bearer ${authToken}`;
               }
@@ -132,7 +132,7 @@ class ApiServicesOrg extends Component {
 
   postAddUser(fields) {
 
-    console.log(fields)
+    // console.log(fields)
     return (
       axios
         .post(ApiBaseUrl + "/user/user", fields, this.getToken())
@@ -168,7 +168,7 @@ class ApiServicesOrg extends Component {
   //         )    
   // }
   deleteMultiUser(updatedUserId) {
-    console.log(ApiBaseUrl + "/user/multipleUsersById/" + updatedUserId)
+    // console.log(ApiBaseUrl + "/user/multipleUsersById/" + updatedUserId)
     return (
       axios
         .delete(ApiBaseUrl + "/user/multipleUsersById/" + updatedUserId, this.getToken())
@@ -192,7 +192,7 @@ class ApiServicesOrg extends Component {
 
   //5.2 post api for active job-- invite button
   putApplicationStatus(jobId, candidateId, applicationStatus) {
-    console.log(ApiBaseUrl + `/recruiter/updateApplicationStatus/${jobId}/${candidateId}/${applicationStatus}`, this.getToken())
+    // console.log(ApiBaseUrl + `/recruiter/updateApplicationStatus/${jobId}/${candidateId}/${applicationStatus}`, this.getToken())
     return (
       axios
         .put(ApiBaseUrl + '/recruiter/updateApplicationStatus/' + jobId + '/' + candidateId + '/' + applicationStatus, null, this.getToken())
@@ -271,7 +271,7 @@ class ApiServicesOrg extends Component {
       .get(`${ApiBaseUrl}/user/organizationProfile/${orgId}`, this.getToken())
       .then((Response) => Response)
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -283,7 +283,7 @@ class ApiServicesOrg extends Component {
       .put(`${ApiBaseUrl}/user/updateOrganizationProfile`, employee, this.getToken())
       .then((Response) => console.log(Response))
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
 
   }

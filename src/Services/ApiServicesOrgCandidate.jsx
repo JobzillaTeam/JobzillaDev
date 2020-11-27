@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { ApiBaseUrl } from '../Config.jsx'
-
 import React, { Component, useContext } from 'react';
 import { Context } from '../Context/ProfileContext';
 import Resume from '../Components/Candidate/Profile/details/resume/Resume.jsx';
@@ -12,7 +11,7 @@ class ApiServicesOrgCandidate {
       return response;
     }, err => {
       return new Promise((resolve, reject) => {
-        console.log(err)
+        // console.log(err)
         const originalReq = err.config;
         const isAuthTokenExpired = err && err.response && err.response.status === 401 && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')
         if (isAuthTokenExpired) {
@@ -22,7 +21,7 @@ class ApiServicesOrgCandidate {
             .then(res => res.json()).then(res => {
               if (res && res.responseObject) {
                 const authToken = res.responseObject;
-                console.log(res);
+                // console.log(res);
                 localStorage.setItem('authToken', authToken);
                 originalReq.headers['Authorization'] = `Bearer ${authToken}`;
               }
@@ -117,7 +116,7 @@ class ApiServicesOrgCandidate {
 
   updateCertification(certificationInfo, getProfileRefresh, showPopup) {
     const candidateId = localStorage.getItem('candidateId')
-    console.log(certificationInfo);
+    // console.log(certificationInfo);
     const authToken = localStorage.getItem('authToken')
     return (
       axios
@@ -146,7 +145,7 @@ class ApiServicesOrgCandidate {
 
   addCertification(certificationInfo, getProfileRefresh, showPopup) {
     const candidateId = localStorage.getItem('candidateId')
-    console.log(certificationInfo);
+    // console.log(certificationInfo);
     const authToken = localStorage.getItem('authToken')
     return (
       axios
@@ -218,7 +217,7 @@ class ApiServicesOrgCandidate {
 
   updateEducation(educationInfo, getProfileRefresh, showPopup) {
     const candidateId = localStorage.getItem('candidateId')
-    console.log(educationInfo);
+    // console.log(educationInfo);
     const authToken = localStorage.getItem('authToken')
     return (
       axios

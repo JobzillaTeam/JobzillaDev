@@ -23,7 +23,7 @@ class Resume extends Component {
       .then(Response => {
         if (Response && Response.data && Response.data.responseObject) {
         var data2 = Response.data.responseObject
-        console.log(data2)
+        // console.log(data2)
         this.setState({
           data1:Response.data.responseObject.cvInBytes,
           fileName: Response.data.responseObject.fileName,
@@ -77,7 +77,7 @@ class Resume extends Component {
         window.location.reload()
       })
       .catch(error => {
-        console.log("Error Occured...", error)
+        // console.log("Error Occured...", error)
       })
     
 
@@ -141,7 +141,7 @@ class Resume extends Component {
       // var allowedExtensions = /(\.doc)$/i;
       if (!allowedExtensions.exec(fileInput.name)) {
         this.toast.show({ severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .doc and .docx only.' }, 50000);
-        console.log("Please upload file having extensions .doc and .docx only.")
+        // console.log("Please upload file having extensions .doc and .docx only.")
         fileInput.value = '';
         return false;
       }
@@ -156,7 +156,7 @@ class Resume extends Component {
     if (this.fileValidation()) {
       const formData = new FormData();
       const token = localStorage.getItem('authToken');
-      console.log(token)
+      // console.log(token)
       const formheader = {
 
         headers: {

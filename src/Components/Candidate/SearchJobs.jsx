@@ -28,7 +28,7 @@ const SearchJobs = () => {
       setPageDataLength(INITIAL_ITEM_LENGTH)
       setIsLoading(false);
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
       setIsLoading(false);
     });
   }, []);

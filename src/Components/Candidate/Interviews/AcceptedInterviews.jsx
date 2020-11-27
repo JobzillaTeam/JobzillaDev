@@ -28,7 +28,7 @@ const AcceptedInterviews = () => {
       setIsLoading(false);
     }).catch(error => {
       setIsLoading(false);
-      console.log(error)
+      // console.log(error)
     });
   }, []);
 

@@ -50,7 +50,7 @@ const CareerProfileComponent = ({ showPopup }) => {
           const preferredLocation = response.candidateInfo.preferredLocation?.split(',');
           if (cities) {
             let intersection = cities.filter(x => preferredLocation.includes(x.name));
-            console.log(intersection)
+            // console.log(intersection)
             setPreferredLocations(intersection);
             intersection.map((val) => setAddPreferredLocation(oldArray => [...oldArray, val.name]))
           }

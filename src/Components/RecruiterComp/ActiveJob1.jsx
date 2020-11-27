@@ -53,7 +53,7 @@ class ActiveJob extends React.Component {
         })
       }
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
       this.setState({
         isLoading: false
       })
@@ -132,7 +132,7 @@ class ActiveJob extends React.Component {
   }
   render() {
     const { cloneResourceJobs, pageDataLength, isLoading, resourceJobs } = this.state;
-    console.log(this.state.allResourceJobs)
+    // console.log(this.state.allResourceJobs)
     return (
       <Fragment>
         <LeftNavProvider></LeftNavProvider>

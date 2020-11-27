@@ -17,7 +17,7 @@ const CandidateJobDetails = (props) => {
       .then(response => {
         if (response) {
           const { applicationStatus } = response;
-          console.log('applicationStatus', applicationStatus)
+          // console.log('applicationStatus', applicationStatus)
           if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
             if (applicationStatus === 'Invite_Sent_By_Recruiter') {
               history.push(`/candidate/jobDetails/invites/${jobID}`)
