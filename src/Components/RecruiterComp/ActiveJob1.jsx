@@ -10,8 +10,10 @@ import { INITIAL_ITEM_LENGTH } from '../../Utils/AppConst';
 import ApiServicesOrgRecruiter from '../../Services/ApiServicesOrgRecruiter';
 import ClosedJobCandidates from './RecruiterJobPosting/ClosedJobCandidates';
 import LeftNavProvider from '../CommonComp/LeftNavProvider';
+import ApiServicesOrg from '../../Services/ApiServicesOrg';
+import MatchingCandidate from './RecruiterJobPosting/MatchingCandidate';
 
-class CloseJobs extends React.Component {
+class ActiveJob extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,12 +31,21 @@ class CloseJobs extends React.Component {
   }
 
   componentDidMount() {
-    ApiServicesOrgRecruiter.getListOfClosedJobs().then(response => {
+    new ApiServicesOrg().getAllActiveJobs().then(response => {
       if (response && response.data && response.data.responseObject) {
         const { responseObject } = response.data;
-        const sortJobs = this.getSortedResourceJobs('recent_First', responseObject)
+        responseObject[0] && responseObject.map(respObj => {
+          res = new ApiServicesOrg().getViewAllMatchingCandidate(respObj.jobId)
+          const singleObj =  ({
+            jobDetails: respObj,
+            matchingCandidate: res && res.data && res.data.responseObject ? res.data.responseObject : []
+          });
+          this.state.allResourceJobs.push(singleObj)
+          buildResponseObject.push(singleObj);
+        })
+        const sortJobs = this.getSortedResourceJobs('recent_First', buildResponseObject)
         this.setState({
-          allResourceJobs: responseObject,
+          allResourceJobs: buildResponseObject,
           cloneResourceJobs: [...sortJobs],
           resourceJobs: [...sortJobs].slice(0, INITIAL_ITEM_LENGTH),
           pageDataLength: INITIAL_ITEM_LENGTH,
@@ -121,11 +132,12 @@ class CloseJobs extends React.Component {
   }
   render() {
     const { cloneResourceJobs, pageDataLength, isLoading, resourceJobs } = this.state;
+    console.log(this.state.allResourceJobs)
     return (
       <Fragment>
         <LeftNavProvider></LeftNavProvider>
         <div className="maincontent">
-          <HeaderAll></HeaderAll>
+          <HeaderAll isCandidate={true}></HeaderAll>
           <section class="content_section">
             <div class="row">
               <div class="col-md-12 py-4">
@@ -194,7 +206,7 @@ class CloseJobs extends React.Component {
                               </ul>
                             </div>
                           </section>
-                          <ClosedJobCandidates joinedCandidates={resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList[0] && resourceJob.joinedCandidateRecruitmentList.slice(0, 3)} />
+                          {/* <ClosedJobCandidates joinedCandidates={resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList[0] && resourceJob.joinedCandidateRecruitmentList.slice(0, 3)} /> */}
                           <div class="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/candidate/jobDetails/invites/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </div>
                       )
@@ -211,6 +223,5 @@ class CloseJobs extends React.Component {
       </Fragment >
     );
   }
-
 }
-export default React.memo(CloseJobs)
+export default React.memo(ActiveJob)

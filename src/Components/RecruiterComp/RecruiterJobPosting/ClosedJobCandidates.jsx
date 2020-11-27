@@ -46,7 +46,7 @@ export default class ClosedJobCandidates extends React.Component {
                           alt="location"
                           className="pr-2"
                         />
-                        {/* {jobDetails.jobCity}, {jobDetails.jobCountry} */}
+                        {joinedCandidate.candidate.address}
                       </p>
                     </td>
                     <td>{joinedCandidate.interviewStatus}</td>
