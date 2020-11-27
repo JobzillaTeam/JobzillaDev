@@ -89,10 +89,10 @@ class ApiServicesOrg extends Component {
 
 
   //3.2 Uploading CSV with Drag-Drop, File explore facilities
-  postSampleFile(formdata, formheader) {
+  postSampleFile(formdata, formheader,orgId,supervisorId) {
     return (
       axios
-        .post(ApiBaseUrl + "/user/uploadcsv", formdata, formheader)
+        .post(ApiBaseUrl + "/user/uploadcsv/" +orgId+'/'+ supervisorId+'/' ,formdata, formheader)
         .then(Response => Response)
     )
   }

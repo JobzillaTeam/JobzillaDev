@@ -34,7 +34,7 @@ class UploadProfile extends Component {
         selectedFile: '',
         DraggedFile:'',
         select:false,
-        drag:false
+        drag:false,
       }; 
        
       onFileChange = event => { 
@@ -87,7 +87,6 @@ class UploadProfile extends Component {
 
         //Dragging csv file to upload
         uploadFile=()=> {
-           console.log("hi")
             if  (this.fileValidation())
             {
                     const formData = new FormData(); 
@@ -112,10 +111,18 @@ class UploadProfile extends Component {
                         ); 
                     
             }
+            var supervisorId=''
             // Calling Upload Sample File Service from Service file:-
-                        this.fileService.postSampleFile(formData, formheader) 
+            if(JSON.parse(localStorage.getItem('userDetails')).userRole==="Owner"){
+             supervisorId=JSON.parse(localStorage.getItem('userDetails')).id
+            }
+            else{
+             supervisorId= JSON.parse(localStorage.getItem('userDetails')).supervisorId;
+            }
+            const orgId = JSON.parse(localStorage.getItem('userDetails')).orgnaizationId;
+                        this.fileService.postSampleFile(formData, formheader,orgId,supervisorId) 
                         .then(Response=>{
-                                    console.log(Response.status)
+                                    // console.log(Response.status)
                                     if(Response.status===208){
 
                                         this.toast.show({severity: 'error', summary: 'Error', detail: 'Email Id already exist'},80000);
@@ -123,11 +130,11 @@ class UploadProfile extends Component {
                                     else {
                                     this.toast.show({severity: 'success', summary: 'Success Message', detail: 'File uploaded Successfully'},60000);
                                     }
-                                    window.location.reload();
+                                   // window.location.reload();
                                 })
 
                         .catch(error=>{
-                                    console.log(error)
+                                    // console.log(error)
                                     this.toast.show({severity: 'error', summary: 'Error', detail: 'Please fill data in each coloumn of CSV file '},50000);})
         }
             this.setState({
