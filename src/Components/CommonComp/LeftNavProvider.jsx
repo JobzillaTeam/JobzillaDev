@@ -76,17 +76,19 @@ const LeftNavProvider = () => {
                                 <div className={`collapse ${isJobDropdownOpen ? 'show' : ''}`} id="submenu1sub1" aria-expanded={isJobDropdownOpen}>
                                     <ul className="flex-column nav submenuLink">
                                         <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Active Jobs">
-                                            <Link to="/activeJob"
+                                            <NavLink to="/activeJob"
                                                 activeClassName="active"
+                                                className={`${location.pathname.includes('/recruiter/jobDetails/active/') && 'active'}`}
                                                 isActive={isActive.bind(this, '/activeJob')}
                                             >
                                                 <i><img src="/images/Candidate-Navbar-assets/Recruiter-active-jobs-icon.svg" aria-hidden="true" /></i>
                                                 <span className="menuText">Active Jobs</span>
-                                            </Link>
+                                            </NavLink>
                                         </li>
                                         <li class="dropdown-item" data-toggle="tooltip" data-placement="right" title="Closed Jobs">
                                             <NavLink to="/closeJobs"
                                                 activeClassName="active"
+                                                className={`${location.pathname.includes('/recruiter/jobDetails/closed/') && 'active'}`}
                                                 isActive={isActive.bind(this, '/closeJobs')}
                                             >
                                                 <i><img src="/images/Candidate-Navbar-assets/Recruiter-closed-job-icons.svg" aria-hidden="true" /></i>
