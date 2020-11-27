@@ -198,7 +198,7 @@ class ManageUser extends Component{
             <div className="table-header d-flex justify-content-between ">
                 <div className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText onInput={(e) => this.setState({ globalFilter: e.target.value })}type="search" placeholder="Search by Name, EmailId..." />
+                <InputText onInput={(e) => this.setState({ globalFilter: e.target.value })}type="search" placeholder="Search by Name, EmailId" />
                 </div>
                 <div className="tbl-hdr-btn">
                 <AddUser ref={this.onaAddUSerModalRef} ></AddUser>
