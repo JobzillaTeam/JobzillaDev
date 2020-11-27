@@ -181,8 +181,8 @@ class CandidateEmailSetting extends Component {
                                 <img className="setting_arrow marR5" src="/images/EmailSettings/backward-link-arrow.svg" alt="arrow" />
                             </Link>
                             Dashboard</div>
-                        <div className="setting settingTitle_text mb-2">Email Notification Preferences</div>
-                        <div className="setting setting_text">You can manage your preferences for email notifications from here</div>
+                        <div className="settingTitle_text mb-2">Email Notification Preferences</div>
+                        <div className="setting_text">You can manage your preferences for email notifications from here</div>
                         <section className="white-middle-section mt-4">
                             <div className="row">
                                 <div className="col-md-8 offset-md-2">
