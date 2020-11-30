@@ -3358,3 +3358,9 @@ tr td:first-child {
      justify-content: center;
      margin-top: -24px !important;
 }
+
+/* Active Job Card Items */
+
+.activeJobCardItems {
+    height: 100px;
+}

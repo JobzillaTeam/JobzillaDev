@@ -200,8 +200,10 @@ class ActiveJob extends Component {
                                 <div className="row">
                                   <div className="location" className="col-md-8">
                                     {/* {console.log(match)} */}
-                                    <h5 id="name">{match.candidate.firstName} {match.candidate.lastName}</h5>
-                                    <p id="body">{match.candidate.currentRole} at {match.candidate.company}</p>
+                                    <div class="activeJobCardItems">
+                                      <h5 id="name">{match.candidate.firstName} {match.candidate.lastName}</h5>
+                                      <p id="body">{match.candidate.currentRole} at {match.candidate.company}</p>
+                                    </div>
                                     <hr></hr>
                                     <i className="pi pi-map-marker mr-2"></i>{match.candidate.city}, {match.candidate.country}
                                   </div>
