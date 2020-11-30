@@ -165,13 +165,13 @@ export default class MatchingCandidate extends Component {
                                                     steps={100}
                                                     cut={20}
                                                     trackStrokeWidth={2}
-                                                    progress={this.state.matchPer}>
-                                                     {this.state.matchPer.map((data2) => 
+                                                    progress={data1.matchingPercentage}>
+                                                     {/* {this.state.matchPer.map((data2) =>  */}
                                                         <div className="indicator">
-                                                            <div>{data2}%
+                                                            <div>{data1.matchingPercentage}%
                                                             Match</div>
                                                         </div>
-                                                         )} 
+                                                         {/* )}  */}
                                                 </ProgressBar>
 
                                             </td>

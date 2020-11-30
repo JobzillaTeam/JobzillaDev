@@ -43,7 +43,6 @@ export default class RecruiterClosedJobDetails extends React.Component {
   }
   loadMore() {
     setTimeout(() => {
-      debugger
       
       this.setState({
         joinedCandidateList: [...this.state.joinedCandidateRecruitmentList.slice(0, (this.state.pageDataLength + INITIAL_ITEM_LENGTH))],
