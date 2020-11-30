@@ -25,14 +25,14 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
     ApiServicesOrgCandidate.getListOfOrganizations().then((response) => {
       if (response) {
         const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].organizations);
-        console.log(result)
+        // console.log(result)
         setOrganizations(result);
       } else {
         setOrganizations('');
       }
     })
     state.then((response) => {
-      console.log(resourceId)
+      // console.log(resourceId)
       if (response && response.employmentDetailsList && resourceId) {
         const resourceObj = response.employmentDetailsList.filter(resObj => {
           return resObj.employmentId === resourceId

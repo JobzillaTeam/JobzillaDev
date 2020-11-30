@@ -31,7 +31,7 @@ const PersonalComponent = ({ showPopup }) => {
   const [city, setCity] = useState('');
   const { register, errors, handleSubmit } = useForm({mode: 'all'});
   const onSubmit = (d) => {
-    console.log(d)
+    // console.log(d)
     // e.preventDefault();
     const candidateId = localStorage.getItem('candidateId');
     const DOB = Moment(startDate);
@@ -103,7 +103,7 @@ const PersonalComponent = ({ showPopup }) => {
   const handleFormInputData = (e) => {
     if (e.target.name === 'state') {
       ApiServicesOrgCandidate.getListOfCity(e.target.value).then((response) => {
-        console.log(response)
+        // console.log(response)
         if (response) {
           setCity(response.data.responseObject);
         } else {
@@ -118,7 +118,7 @@ const PersonalComponent = ({ showPopup }) => {
       })
     )
   }
-  console.log(errors)
+  // console.log(errors)
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -129,7 +129,9 @@ const PersonalComponent = ({ showPopup }) => {
               <DatePicker
                 value={startDate}
                 format='y-MM-dd'
-                onChange={date => { setStartDate(date); console.log(date) }}
+                onChange={date => { setStartDate(date); 
+                  // console.log(date) 
+                }}
                 calendarIcon={<img src="../images/profile/calendar.png" style={{ width: '16px' }} />}
                 clearIcon={null}
                 className={"wid100"}

@@ -83,7 +83,7 @@ export default class Signup extends Component {
         }
     })
     .catch(error => {
-        console.log(error)
+        // console.log(error)
         this.toast.show({ severity: 'error', summary: 'Error', detail: 'Internal server error' }, 80000);
     })
 }

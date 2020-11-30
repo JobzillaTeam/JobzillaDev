@@ -38,13 +38,13 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
 
     apiServicesOrg.postProfilePhoto(formData, formheader)
       .then(Response => {
-          console.log(Response)
+          // console.log(Response)
           toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully'},60000);
           setAvatar();
           // window.location.reload();
       })
       .catch(error => {
-          console.log(error)
+          // console.log(error)
           toast.current.show({severity: 'error', summary: 'Error', detail: 'Server Error '},50000)
       })
   }

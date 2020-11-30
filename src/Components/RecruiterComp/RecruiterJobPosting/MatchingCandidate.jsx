@@ -58,7 +58,7 @@ export default class MatchingCandidate extends Component {
                       
                     },
                         () => {
-                            console.log(this.state.  matchingCandidateData)
+                            // console.log(this.state.  matchingCandidateData)
                         },
 
 

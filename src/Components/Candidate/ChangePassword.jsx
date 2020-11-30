@@ -68,7 +68,7 @@ class ChangePassword extends Component {
       return (
         this.updatePassword.putChangePassword(this.state.fields.oldPassword, this.state.fields.newPassword)
           .then(Response => {
-                 console.log(Response)
+                //  console.log(Response)
             //     if(Response.status===417){
 
             //         this.toast.show({severity: 'error', summary: 'Error', detail: 'Old password does not match'},600000);
@@ -85,7 +85,7 @@ class ChangePassword extends Component {
             window.location.reload()
           })
           .catch(error => {
-            console.log("Error Occured..", error)
+            // console.log("Error Occured..", error)
             this.toast.show({ severity: 'error', summary: 'Error', detail: 'Old Password does not match', life: 4000 });
             window.location.reload()
           })

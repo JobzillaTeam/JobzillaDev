@@ -7,7 +7,7 @@ const CTCComponent = ({ showPopup }) => {
   const { state } = useContext(Context);
   const [ctc, setCtc] = useState('');
   state.then((data) => {
-    console.log(data.candidateInfo.currencyType)
+    // console.log(data.candidateInfo.currencyType)
     setCtc(data)
   })
   if (ctc && ctc.candidateInfo) {

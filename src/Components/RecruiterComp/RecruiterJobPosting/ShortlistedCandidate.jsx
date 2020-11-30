@@ -47,9 +47,9 @@ export default class ShortlistedCandidate extends Component {
                     },
                         //  this.loadMore(),
 
-                        () => {
-                            console.log(this.state.candidate1)
-                        }
+                        // () => {
+                        //     console.log(this.state.candidate1)
+                        // }
                     )
                 }
             }

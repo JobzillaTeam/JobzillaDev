@@ -3,7 +3,7 @@ import React from 'react';
 
 export default class ClosedJobCandidates extends React.Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const { joinedCandidates } = this.props;
     return (
       <div>

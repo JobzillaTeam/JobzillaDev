@@ -74,14 +74,14 @@ class InterviewStatusPopUp extends Component{
           // this.state.fields['jobId'] = localStorage.getItem('JobId');
               this.interViewStatus.updateInterviewStatus(this.state.fields, this.props.jobID, this.props.candidateId)
                 .then(Response=>{
-                  console.log(Response)
+                  // console.log(Response)
                   this.hideModal()
                   window.location.reload()
                 
                 })
                 .catch(error=>{
                 this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},20000);})
-                this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User is added Successfully'},20000);
+                this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Status is updated Successfully'},20000);
                 
               
                     

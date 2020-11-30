@@ -48,10 +48,10 @@ export default class CandidateOverviewCard extends Component {
                 <div className="row ml-0 mr-1 clearfix">
 
                     <div className="wid100 ml-4 marT20  profile_strength_text clearfix">Profile Strength</div>
-                    <div class="col-6">
+                    <div className="col-6">
                         <div className="progressbar-text font-blue" style={{ width: `${this.state.progressBarPercentage}%` }}>{this.state.progressBarPercentage}%</div>
-                        <div class="progress1 progress-fashion1 marB20 ml-2" >
-                            <div class="progress-bar bg-success marT20" style={{ width: `${this.state.progressBarPercentage}%` }} role="progressbar" aria-valuenow={this.state.progressBarPercentage} aria-valuemin="0" aria-valuemax="100">
+                        <div className="progress1 progress-fashion1 marB20 ml-2" >
+                            <div className="progress-bar bg-success marT20" style={{ width: `${this.state.progressBarPercentage}%` }} role="progressbar" aria-valuenow={this.state.progressBarPercentage} aria-valuemin="0" aria-valuemax="100">
                             </div>
                         </div>
                     </div>

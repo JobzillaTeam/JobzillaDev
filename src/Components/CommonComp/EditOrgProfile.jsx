@@ -45,7 +45,7 @@ class EditProfile extends Component {
       phoneNumber: this.state.mobile,
       id: localStorage.getItem("organizationId"),
     };
-    console.log("employee => " + JSON.stringify(employee));
+    // console.log("employee => " + JSON.stringify(employee));
 
     this.viewImage.updateOrganizationProfile(employee).then((res) => {
       this.props.history.push("/orgProfile");
@@ -120,7 +120,7 @@ class EditProfile extends Component {
   }
 
   uploadHandler = (e) => {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     const files = e.target.files;
     const token = JSON.parse(localStorage.getItem("userDetails")).authToken;
     const formData = new FormData();
@@ -135,7 +135,7 @@ class EditProfile extends Component {
     this.fileService
       .postProfilePhoto(formData, formheader)
       .then((Response) => {
-        console.log(Response);
+        // console.log(Response);
         this.toast.show(
           {
             severity: "success",
@@ -148,7 +148,7 @@ class EditProfile extends Component {
       })
 
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         this.toast.show(
           { severity: "error", summary: "Error", detail: "Server Error " },
           50000

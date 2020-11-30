@@ -72,12 +72,12 @@ class ActiveJob extends Component {
     return (
       this.inviteCandidate.putApplicationStatus(jobId, candidateId, applicationStatus)
         .then(Response => {
-          console.log(Response)
+          // console.log(Response)
           this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite send Successfully', life: 2000 })
           window.location.reload()
         })
         .catch(error => {
-          console.log("Error Occured..", error)
+          // console.log("Error Occured..", error)
           this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
         })
     )

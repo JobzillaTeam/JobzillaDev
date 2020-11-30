@@ -94,7 +94,7 @@ class EmailSetting extends Component {
                     this.toast.show({ severity: 'success',summary: 'Success Message', detail: 'Data Saved Successfully', life: 2000 })
                 })
                 .catch(error => {
-                    console.log("Error Occured..", error)
+                    // console.log("Error Occured..", error)
                     this.toast.show({ severity: 'error',summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
@@ -227,8 +227,8 @@ class EmailSetting extends Component {
                                         </Link>
                                 }
                             Dashboard</div>
-                            <div className="setting settingTitle_text mb-2">Email Notification Preferences</div>
-                            <div className="setting setting_text">You can manage your preferences for email notifications from here</div>
+                            <div className="settingTitle_text mb-2">Email Notification Preferences</div>
+                            <div className="setting_text">You can manage your preferences for email notifications from here</div>
                             <section className="white-middle-section mt-4">
                                 <div className="row">
                                     <div className="col-md-8 offset-md-2">

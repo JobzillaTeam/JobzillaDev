@@ -608,7 +608,9 @@ class Profile extends Component {
                   </div>
                   <Tabs
                     defaultTab="one"
-                    onChange={(tabId) => { console.log(tabId) }}
+                    onChange={(tabId) => 
+                      { console.log(tabId) }
+                    }
                   >
                     <TabList>
                       <Tab tabFor="one">About</Tab>

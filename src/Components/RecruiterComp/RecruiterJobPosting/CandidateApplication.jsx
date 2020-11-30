@@ -62,7 +62,7 @@ export default class CandidateApplication extends Component {
                        
                     },
                         () => {
-                            console.log(this.state.candidateData)
+                            // console.log(this.state.candidateData)
                             },
 
 

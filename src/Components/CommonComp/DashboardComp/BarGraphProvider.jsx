@@ -17,7 +17,7 @@ export default class BarGraphProvider extends Component {
         this.dashboardDetails.getProviderDashboardDetails()
         .then(Response => {
             if (Response && Response.data && Response.data.responseObject && Response.data.responseObject.monthlyReport) {
-                console.log(Response.data.responseObject)
+                //console.log(Response.data.responseObject)
                 const activeProfiles = [];
                 const hiredPositions = [];
                 const profileUploads = [];
@@ -50,7 +50,7 @@ export default class BarGraphProvider extends Component {
                     hiredPositions.push(ele2);
                     profileUploads.push(ele3);
                 }
-                console.log(activeProfiles, hiredPositions, profileUploads)
+                // console.log(activeProfiles, hiredPositions, profileUploads)
                 this.setState(
                     {
                         chartData: {

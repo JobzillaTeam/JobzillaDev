@@ -42,7 +42,7 @@ class CloseJobs extends React.Component {
         })
       }
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
       this.setState({
         isLoading: false
       })

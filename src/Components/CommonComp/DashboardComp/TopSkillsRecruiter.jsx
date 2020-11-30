@@ -41,7 +41,6 @@ export default class TopSkillsRecruiter extends Component {
     }
 
     render() {
-        console.log(this.state.skill1)
         return (
             <div>
                 {/* <!--TOP Skills section--> */}
