@@ -149,7 +149,7 @@ export default class RecruiterClosedJobDetails extends React.Component {
                                 <div>Visa</div>
                               </div>
                               <div className="col-xs-12 col-md-6 others_section_secondcol">
-                                <div>{jobDetails.visa ? 'Nice to have H1B' : ''}</div>
+                                <div>{jobDetails.visa}</div>
                               </div>
                             </div>
                             <div className="row">
