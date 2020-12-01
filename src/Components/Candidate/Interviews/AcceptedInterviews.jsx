@@ -158,7 +158,7 @@ const AcceptedInterviews = () => {
                               <div class="interview-status">
                                 <div class="float-left"><img src="/images/icons/interview_status.svg" /></div>
                                 <div class="float-left"> <span>Interview Status</span>
-                                  <p>Shortlisted</p></div>
+                                  <p>{resourceJob.interviewStatus}</p></div>
                               </div>
                             </div>
                           </div>
