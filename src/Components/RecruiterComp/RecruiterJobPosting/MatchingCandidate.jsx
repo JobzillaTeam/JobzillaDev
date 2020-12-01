@@ -24,8 +24,6 @@ export default class MatchingCandidate extends Component {
             pageDataLength: INITIAL_ITEM_LENGTH,
             candidate: [],
             matchingCandidateData: [],
-            match: [],
-            matchPer: [],
             error: false,
             candidateLength: '',
             hasMore: true,
@@ -54,7 +52,7 @@ export default class MatchingCandidate extends Component {
                         matchingCandidateData: Response.data.responseObject,
                         candidate: Response.data.responseObject.slice(0, INITIAL_ITEM_LENGTH),
                         matchingCandidateLength: Response.data.responseObject.length,
-                         match: (Response.data.responseObject).map((data2) => { this.state.matchPer.push(data2.matchingPercentage) }),
+                       
                       
                     },
                         () => {
@@ -117,7 +115,7 @@ export default class MatchingCandidate extends Component {
                     <div className="Show">Total Result {this.state.matchingCandidateData.length} </div>
                 
                         <table className="table table-borderless custom-table">
-                            <thead>
+                            <thead className="candidateTableHeader">
                                 <tr>
                                     {/* <th>#</th> */}
                                     <th>Candidates</th>
@@ -154,11 +152,11 @@ export default class MatchingCandidate extends Component {
 
 
 
-                                            <td>
+                                            <td className='candidateProgress'>
 
-                                                <span className="p-column-title"></span>
+                                                                                        
                                                 <ProgressBar className="circle"
-                                                    progress={this.state.matchPer}
+                                                    progress={data1.matchingPercentage}
                                                     radius={32}
                                                     strokeWidth={3}
                                                     strokeColor="#147AD6"
@@ -166,13 +164,13 @@ export default class MatchingCandidate extends Component {
                                                     cut={20}
                                                     trackStrokeWidth={2}
                                                     progress={data1.matchingPercentage}>
-                                                     {/* {this.state.matchPer.map((data2) =>  */}
+                                                    
                                                         <div className="indicator">
                                                             <div>{data1.matchingPercentage}%
                                                             Match</div>
                                                         </div>
-                                                         {/* )}  */}
-                                                </ProgressBar>
+                                                        
+                                                </ProgressBar> 
 
                                             </td>
 

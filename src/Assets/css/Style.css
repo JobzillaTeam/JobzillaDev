@@ -3284,18 +3284,24 @@ tr td:first-child {
 }
 
 .candidateTable td:nth-child(2) {
-    padding-top: 50px;
+    padding-top: 53px;
   }
   .candidateTable  td:nth-child(3) {
-    padding-top: 50px;
+    padding-top: 53px;
   }
   .candidateTable td:nth-child(4) {
-    padding-top: 50px;
+    padding-top: 53px;
   }
   .candidateTable td:nth-child(5) {
-    padding-top: 50px;
+    padding-top: 53px;
   } 
+  .candidateTable .candidateProgress:nth-child(5){
+    padding-top: 38px;
+  }
 
+  .custom-table .candidateTableHeader tr th:nth-child(5){
+    padding-left: 40px !important;
+}
 
   .dropzone1 {
     text-align: center;

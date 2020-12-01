@@ -48,8 +48,16 @@ class EditProfile extends Component {
     // console.log("employee => " + JSON.stringify(employee));
 
     this.viewImage.updateOrganizationProfile(employee).then((res) => {
-      this.props.history.push("/orgProfile");
-    });
+      this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully'},20000);
+      setTimeout(() => {
+        this.props.history.push("/orgProfile");
+    }, 1000)
+    
+    }) .catch(error =>{
+      if(error){
+        this.toast.show({severity: 'success', summary: 'Error Message', detail: 'Something Went Wrong'},20000);
+      }
+     })
   }
 
   changeOrgNameHandler = (event) => {

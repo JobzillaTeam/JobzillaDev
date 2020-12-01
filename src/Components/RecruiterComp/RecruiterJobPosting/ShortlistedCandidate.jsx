@@ -78,7 +78,7 @@ export default class ShortlistedCandidate extends Component {
 
                 if (Response && Response.data && Response.data.responseObject) {
 
-                    var data1 = Response.data.responseObject
+                    var data1 = Response.data.responseObject.cvInBytes
                     blob = this.convertBase64toBlob(data1, 'application/msword');
                     var blobURL = URL.createObjectURL(blob)
                     var blobURL = URL.createObjectURL(blob);
@@ -148,7 +148,7 @@ export default class ShortlistedCandidate extends Component {
                                     </td>
                                     <td>
                                         <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID} candidateId={data.candidate.candidateId}></InterviewStatusPopUp>
-                                        <span className="mr-2"> {data.interviewStatus}</span>
+                                        <span className="mr-2"> {data.interviewStatus==="NULL" ? data.applicationStatus :data.interviewStatus}</span>
                                         <img src="/images/icons/iconfinder_Edit-01_1976055.svg" onClick={() => this.editStatus(data.candidate.candidateId)}></img>
                                     </td>
                                     <td>{data.comment}</td>
