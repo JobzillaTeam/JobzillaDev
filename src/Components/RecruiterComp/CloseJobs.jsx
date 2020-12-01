@@ -178,7 +178,7 @@ class CloseJobs extends React.Component {
                             <div class="col-md-12 px-0">
                               <div class="row">
                                 <div class="col-md-12 job-title">
-                                  <Link to={`/candidate/jobDetails/invites/${jobDetails.jobId}`}>
+                                  <Link to={`/recruiter/jobDetails/closed/${jobDetails.jobId}`}>
                                     {jobDetails.jobTitle}
                                   </Link>
                                   <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
