@@ -89,9 +89,16 @@
     padding: 30px 30px
 }
 
+.progress {
+    background-color: #BBBBBB !important;
+    border-radius: 0.25rem;
+    display: flex;
+    overflow: hidden;
+
+}
+
 .progress-fashion {
-    margin-top: 50px;
-    height: 10px !important;
+    height: 8px !important;
 }
 
 .dropzone-input {
