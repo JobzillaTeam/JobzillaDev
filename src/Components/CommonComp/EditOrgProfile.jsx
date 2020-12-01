@@ -5,7 +5,6 @@ import { Toast } from "primereact/toast";
 import { Link } from "react-router-dom";
 import ChangePasswordOrg from "../Auth/ChangePasswordOrg";
 import ApiServicesOrg from "../../Services/ApiServicesOrg";
-
 class EditProfile extends Component {
   constructor() {
     super();
