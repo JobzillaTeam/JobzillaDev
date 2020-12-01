@@ -195,7 +195,7 @@ class CloseJobs extends React.Component {
                             </div>
                           </section>
                           <ClosedJobCandidates joinedCandidates={resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList[0] && resourceJob.joinedCandidateRecruitmentList.slice(0, 3)} />
-                          <div class="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/recruiter/jobDetails/closed//${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div class="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/recruiter/jobDetails/closed/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </div>
                       )
                     }) : null
