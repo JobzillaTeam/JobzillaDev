@@ -132,11 +132,16 @@ class ActiveJob extends React.Component {
         <div className="maincontent">
           <HeaderAll isCandidate={true}></HeaderAll>
           <section class="content_section">
-          <Toast ref={(el) => this.toast = el}></Toast>
-            <div class="row">
-              <div class="col-md-12 py-4">
+            <Toast ref={(el) => this.toast = el}></Toast>
+            <div class="row py-4">
+              <div class="col-md-6">
                 <h5 class="job-heading">Active Jobs</h5>
                 <p class="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} Active jobs, View <span class="job-accepted"><Link to="/closeJobs" class="job-accept">Closed</Link></span></p>
+              </div>
+              <div className="col-md-6 text-md-right">
+                <Link to="/createJob">
+                  <button className="btn btn-blue">Create New Job</button>
+                </Link>
               </div>
             </div>
             <section class="ml-0">
@@ -184,7 +189,7 @@ class ActiveJob extends React.Component {
                             <div class="col-md-12 px-0">
                               <div class="row">
                                 <div class="col-md-12 job-title">
-                                  <Link to={`/candidate/jobDetails/invites/${jobDetails.jobId}`}>
+                                  <Link to={`/recruiter/jobDetails/active/${jobDetails.jobId}`}>
                                     {jobDetails.jobTitle}
                                   </Link>
                                   <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
@@ -201,7 +206,7 @@ class ActiveJob extends React.Component {
                             </div>
                           </section>
                           <ActiveJobCandidates toast={this.toast} matchingCandidates={candidateRecruitmentList} jobId={jobDetails.jobId} />
-                          <div class="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/candidate/jobDetails/invites/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div class="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/recruiter/jobDetails/active/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </div>
                       )
                     }) : null
