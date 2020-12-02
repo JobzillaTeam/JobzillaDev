@@ -102,8 +102,10 @@ class EditProfile extends Component {
         getContactPersonName = JSON.stringify(
           Response.data.responseObject.contactPerson
         );
-        getGstin = JSON.stringify(Response.data.responseObject.gstin);
-
+        //getGstin = JSON.stringify(Response.data.responseObject.gstin);
+        getGstin = Response.data.responseObject.gstin
+        ? JSON.stringify(Response.data.responseObject.gstin)
+        : "";
         getMobile = JSON.stringify(Response.data.responseObject.phoneNumber);
         // getRole = JSON.stringify(Response.data.responseObject.userRole);
       }
@@ -234,7 +236,7 @@ class EditProfile extends Component {
               </div>
               <div className="pt-3">
                 <div class="orgProfileFont">{this.state.contactPersonName}</div>
-                <p class="orgProfileFont">Admin</p>
+                <p class="orgProfileFont">{JSON.parse(localStorage.getItem("userDetails")).userRole}</p>
               </div>
             </div>
             <h5 className="my-4 pt-3 border-top">Profile Details</h5>

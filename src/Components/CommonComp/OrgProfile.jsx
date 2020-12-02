@@ -129,7 +129,7 @@ class Profile extends Component {
               <div className="pt-3 orgProfileFont">
                 {this.state.contactPersonName}
               </div>
-              <p className="orgProfileFont">Admin</p>
+               <p className="orgProfileFont">{JSON.parse(localStorage.getItem("userDetails")).userRole}</p> 
               {/* <div>rosadodson@techmahindra.com</div> */}
             </div>
 
