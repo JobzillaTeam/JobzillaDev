@@ -23,6 +23,14 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
   const [progressbar, setProgressbar] = useState();
   const uploadHandler = (e) => {
     const files = e.target.files;
+    var fileInput= files[0]
+    var filePath =fileInput.name;
+    var allowedExtensions = (/(\.jpg|\.png|\.JPG|\.PNG|\.jpeg|\.JPEG)$/);
+    if(!allowedExtensions.exec(filePath)){
+      toast.current.show({severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .jpg, jpeg or .png'},50000);
+    fileInput=""
+    return false;
+    }else{
     const token = localStorage.getItem('authToken');
     const formData = new FormData()
     formData.append(
@@ -48,6 +56,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
         toast.current.show({ severity: 'error', summary: 'Error', detail: 'Server Error ' }, 50000)
       })
   }
+}
   React.useEffect(() => {
     setAvatar();
   }, [])
