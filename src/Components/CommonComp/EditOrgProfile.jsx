@@ -109,8 +109,10 @@ class EditProfile extends Component {
         getContactPersonName = JSON.stringify(
           Response.data.responseObject.contactPerson
         );
-        getGstin = JSON.stringify(Response.data.responseObject.gstin);
-
+        //getGstin = JSON.stringify(Response.data.responseObject.gstin);
+        getGstin = Response.data.responseObject.gstin
+        ? JSON.stringify(Response.data.responseObject.gstin)
+        : "";
         getMobile = JSON.stringify(Response.data.responseObject.phoneNumber);
         // getRole = JSON.stringify(Response.data.responseObject.userRole);
       }
@@ -129,38 +131,48 @@ class EditProfile extends Component {
   uploadHandler = (e) => {
     // console.log(e.target.files);
     const files = e.target.files;
-    const token = JSON.parse(localStorage.getItem("userDetails")).authToken;
-    const formData = new FormData();
-    formData.append("imageFile", files[0]);
-    const formheader = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + token,
-      },
-    };
-    // Calling Upload profile photo File Service from Service file:-
-    this.fileService
-      .postProfilePhoto(formData, formheader)
-      .then((Response) => {
-        // console.log(Response);
-        this.toast.show(
-          {
-            severity: "success",
-            summary: "Success Message",
-            detail: "Profile Photo uploaded Successfully",
-          },
-          60000
-        );
-        window.location.reload();
-      })
-
-      .catch((error) => {
-        // console.log(error);
-        this.toast.show(
-          { severity: "error", summary: "Error", detail: "Server Error " },
-          50000
-        );
-      });
+    var fileInput= files[0]
+    var filePath =fileInput.name;
+    var allowedExtensions = (/(\.jpg|\.png|\.JPG|\.PNG|\.jpeg|\.JPEG)$/);
+    if(!allowedExtensions.exec(filePath)){
+      this.toast.show({severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .jpg, jpeg or .png'},50000);
+    fileInput=""
+    return false;
+    }else{
+      const token = JSON.parse(localStorage.getItem("userDetails")).authToken;
+      const formData = new FormData();
+      formData.append("imageFile", files[0]);
+      const formheader = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + token,
+        },
+      };
+      // Calling Upload profile photo File Service from Service file:-
+      this.fileService
+        .postProfilePhoto(formData, formheader)
+        .then((Response) => {
+          // console.log(Response);
+          // this.toast.show(
+          //   {
+          //     severity: "success",
+          //     summary: "Success Message",
+          //     detail: "Profile Photo uploaded Successfully",
+          //   },
+          //   60000
+          // );
+          window.location.reload();
+        })
+  
+        .catch((error) => {
+          // console.log(error);
+          this.toast.show(
+            { severity: "error", summary: "Error", detail: "Server Error " },
+            50000
+          );
+        });
+  
+    }
   };
 
   render() {
@@ -241,7 +253,7 @@ class EditProfile extends Component {
               </div>
               <div className="pt-3">
                 <div class="orgProfileFont">{this.state.contactPersonName}</div>
-                <p class="orgProfileFont">Admin</p>
+                <p class="orgProfileFont">{JSON.parse(localStorage.getItem("userDetails")).userRole}</p>
               </div>
             </div>
             <h5 className="my-4 pt-3 border-top">Profile Details</h5>

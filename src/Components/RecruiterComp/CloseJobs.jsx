@@ -127,10 +127,15 @@ class CloseJobs extends React.Component {
         <div className="maincontent">
           <HeaderAll></HeaderAll>
           <section class="content_section">
-            <div class="row">
-              <div class="col-md-12 py-4">
+            <div class="row py-4">
+              <div class="col-md-6">
                 <h5 class="job-heading">Closed Jobs</h5>
                 <p class="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} closed jobs, View <span class="job-accepted"><Link to="/activeJob" class="job-accept">Active</Link></span></p>
+              </div>
+              <div className="col-md-6 text-md-right">
+                <Link to="/createJob">
+                  <button className="btn btn-blue">Create New Job</button>
+                </Link>
               </div>
             </div>
             <section class="ml-0">
