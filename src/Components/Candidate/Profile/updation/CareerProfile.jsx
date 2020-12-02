@@ -115,9 +115,10 @@ const CareerProfileComponent = ({ showPopup }) => {
             })}
           >
             <option value="" selected>Select Employment Type</option>
-            <option>Permanent</option>
-            <option>Contractual</option>
+            <option>Part Time</option>
+            <option>Full Time</option>
             <option>Internship</option>
+            <option>Contractual</option>
           </select>
           {errors.employmentType && <div class="error-message">{errors.employmentType.message}</div>}
         </div>

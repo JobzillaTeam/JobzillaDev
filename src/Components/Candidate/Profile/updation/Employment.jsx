@@ -181,9 +181,10 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
                 })}
               >
                 <option value="" selected>Select Employment Type</option>
-                <option>Permanent</option>
-                <option>Contractual</option>
+                <option>Part Time</option>
+                <option>Full Time</option>
                 <option>Internship</option>
+                <option>Contractual</option>
               </select>
               {errors.employmentType && <div class="error-message">{errors.employmentType.message}</div>}
             </div>
@@ -221,7 +222,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
           {errors.currentCompany && <div class="error-message">{errors.currentCompany.message}</div>}
         </div>
         <div className="form-group">
-          <label htmlFor="startedWorkingFromYear" class="mt-2">Started working from</label>
+          <label htmlFor="startedWorkingFromYear" class="mt-2">Started working from<span>*</span></label>
           <div class="form-row">
             <div className="col mr-3">
               <select
@@ -259,7 +260,7 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
             <div class="col-12">{errors.startDate && <div class="error-message">{errors.startDate.message}</div>}</div>
           </div>
         </div>
-        {!customInputValues.currentCompany ? <div> <label htmlFor="workedTillYear">Worked Till</label>
+        {!customInputValues.currentCompany ? <div> <label htmlFor="workedTillYear">Worked Till<span>*</span></label>
           <div className="form-group">
             <div class="form-row">
               <div className="col mr-3">
