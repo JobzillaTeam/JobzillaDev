@@ -34,7 +34,7 @@ export const Certifications = ({ showPopup }) => {
               </div>
               {/* <p class="normal-text-light mb-0">Quisque congue dignissim efficitur. Vestibulum ultrices pulvinar ex, a dignissim neque tincidunt sed.</p> */}
               <div><span class="normal-text-light">Issued on {data.issueMonth}{data.issueYear && data.issueMonth ? ' , ' : ''}{data.issueYear} | {data.expirationMonth || data.expirationYear ? `${data.expirationMonth} ${data.expirationMonth && data.expirationYear ? ' , ' : ''} ${data.expirationYear}` : 'No Expiration Date'}</span></div>
-              <div><span class="normal-text-light">Credential ID {data.credentialId}</span></div>
+              {(data.credentialId) ? (<div><span class="normal-text-light">Credential ID {data.credentialId}</span></div>) : null}
               <a className="forgot_link" target="_blank" href={data.credentialURL}>{data.credentialURL}</a>
             </div>
           )) : null}
