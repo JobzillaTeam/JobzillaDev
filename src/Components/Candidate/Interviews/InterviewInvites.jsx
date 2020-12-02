@@ -108,7 +108,8 @@ const InterviewInvites = () => {
                         <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
                       </span>
                     </div>
-                    <div class="dropdown">
+                    <div className="sortDropdown mx-10 justify-content-between">
+                    <div className="input-group sortBy"></div>
                       <select ref={input => sortMethod = input} className="form-control" id="dropdown" name="dropdown"
                         onChange={handleDropdownChange}>
                         <option value="" disabled>Sort by</option>

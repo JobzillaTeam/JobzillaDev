@@ -2194,6 +2194,9 @@ textarea.form-control {
     /*  height: 50px !important; */
     width: 411px !important;
 }
+.sortBy{
+    width: 30px !important;
+}
 
 .job-accepted {
     font-size: 16px;
@@ -3369,4 +3372,12 @@ tr td:first-child {
 
 .activeJobCardItems {
     height: 100px;
+}
+
+.sortDropdown {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-right: 5px;
 }
