@@ -128,7 +128,7 @@ const PersonalComponent = ({ showPopup }) => {
             <div>
               <DatePicker
                 value={startDate}
-                format='y-MM-dd'
+                format='dd-MM-yy'
                 onChange={date => { setStartDate(date); 
                   // console.log(date) 
                 }}

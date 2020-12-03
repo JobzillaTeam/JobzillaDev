@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { EDIT_PERSONAL } from '../../../../../Utils/AppConst'
 import { Context } from '../../../../../Context/ProfileContext';
+import moment from 'moment';
+
 
 const PersonalDetailsComponent = ({ showPopup }) => {
   const { state } = useContext(Context);
@@ -20,7 +22,7 @@ const PersonalDetailsComponent = ({ showPopup }) => {
         <div class="row col-9 px-4">
           <div class="col-4 mb-4">
             <div><span class="font-weight-bold">Date of Birth</span></div>
-            {(candidateInfo && candidateInfo.dob) ? <div><span class="small-text-light">{candidateInfo.dob}</span></div> : null}
+            {(candidateInfo && candidateInfo.dob) ? <div><span class="small-text-light">{moment(candidateInfo.dob).format('DD MMMM YYYY')}</span></div> : null}
           </div>
           <div class="col-4 mb-4">
             <div><span class="font-weight-bold">Gender</span></div>
