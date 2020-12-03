@@ -157,7 +157,7 @@ class CandidateProfileToOpen extends Component {
                 <div aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <Link to="/jobPostingCollection">Active Jobs > Job Details </Link></li>
+                      <Link to="/activeJob">Active Jobs > Job Details </Link></li>
                     <li class="breadcrumb-item active" aria-current="page"> Profile </li>
                   </ol>
                 </div>
@@ -179,7 +179,7 @@ class CandidateProfileToOpen extends Component {
                       ) : (
                           <img
                             className="mr-3 rounded-circle"
-                            src="images/Dashboard-assets/user-f.png" alt="User profile" width="133px" height="133px"
+                            src="/images/Dashboard-assets/user-f.png" alt="User profile" width="133px" height="133px"
                             alt="User profile"
                             width="133px"
                             height="133px"

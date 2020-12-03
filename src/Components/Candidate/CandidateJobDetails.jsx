@@ -94,6 +94,10 @@ const CandidateJobDetails = (props) => {
         <div className="content_section">
           <div class="row">
             <div class="col-md-12 py-4">
+            <span class="float-right">
+              <span class="interview-status float-left"><img src="/images/icons/interview_status.svg" /></span>
+                                <div class="float-left"> <span>Interview Status</span>
+                                  <p>hello</p></div></span>
               <h5 class="job-heading"><Link to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
             </div>
           </div>
