@@ -3381,3 +3381,32 @@ tr td:first-child {
     margin-left: -15px;
     margin-right: 5px;
 }
+
+/* Sayali */
+.top-padding {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+}
+.top-margin{
+   margin-top: 0.5rem !important;
+}
+
+.download-right{
+
+    padding-left: 32rem !important;
+}
+.breadcrumb {
+
+    background-color: #F1F1F1 !important;
+    padding: 0.75rem 0rem !important;
+    margin-bottom: 0rem !important
+}
+.link {
+    color:#7B7B7B !important;
+  }
+  .link:hover {
+     color: #00F
+  }
+.bottom-margin{
+margin-bottom: 0rem !important;
+}
