@@ -74,7 +74,7 @@ export default class RecentMatches extends Component {
                     </div>
                   </div>     
                 );
-              }):<div>No Jobs Found</div>}
+              }):<div className="no-matches">No Matches Found</div>}
             </section>
           </div>
         </div>
