@@ -25,19 +25,11 @@ export default class ClosedJobCandidates extends React.Component {
                       <p className="tb-title-text">{`${joinedCandidate.candidate.firstName} ${joinedCandidate.candidate.lastName}`}</p>
                       <p>{`${joinedCandidate.candidate.currentRole} at ${joinedCandidate.candidate.company}`}</p>
                       <p>
-                        <img
-                          src="/images/icons/category.svg"
-                          alt="email"
-                          className="pr-2"
-                        />
+                      <i className="pi pi-envelope mr-2"></i>
                         {joinedCandidate.candidate.emailId}
                       </p>
                       <p>
-                        <img
-                          src="/images/icons/category.svg"
-                          alt="mobile number"
-                          className="pr-2"
-                        />
+                      <i className="pi pi-mobile mr-2"></i>
                         {joinedCandidate.candidate.mobileNumber}
                       </p>
                       <p>

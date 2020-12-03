@@ -68,23 +68,19 @@ class Resume extends Component {
 
   //Delete Resume
   deleteResume = () => {
-
-    // Calling Download Sample File Service from Service file:-
     this.fileService1.deleteSampleFile()
       .then(response => {
-        //localStorage.removeItem("SelectedFile")
-        this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'User Deleted Successfully' }, 60000);
+        if(response && response.data){
+        this.toast.show({severity:'success',summary:'Success Message',detail:'Resume Deleted Successfully'},2000);
         window.location.reload()
+        }
+      },
+      ).catch(error => {
+         this.toast.show({severity:'error',summary:'Error Message',detail:'Something Went Wrong'},200)
       })
-      .catch(error => {
-        // console.log("Error Occured...", error)
-      })
-    
-
     this.setState({
       deleteProductDialog: false
     })
-    
   }
 
   //Delete Resume  
@@ -114,7 +110,6 @@ class Resume extends Component {
 
   };
 
-
   onFileChange1 = (fileAccept) => {
     if (this.state.select == true) {
       this.toast.show({ severity: 'error', summary: 'Error', detail: 'You have already selected  a file' }, 50000);
@@ -128,7 +123,6 @@ class Resume extends Component {
     };
 
   };
-
 
   fileValidation = () => {
     var filemode1 = this.state.DraggedFile
@@ -152,13 +146,11 @@ class Resume extends Component {
   //Dragging doc file to upload
   uploadFile = (e) => {
     e.preventDefault()
-
     if (this.fileValidation()) {
       const formData = new FormData();
       const token = localStorage.getItem('authToken');
       // console.log(token)
       const formheader = {
-
         headers: {
           //'Content-Type':'multipart/form-data',
           'Authorization': 'Bearer ' + token
@@ -177,33 +169,24 @@ class Resume extends Component {
           this.state.selectedFile,
         );
       }
-
       // Calling Upload Sample File Service from Service file:-
       this.fileService1.postResumeFile(formData, formheader)
-
         .then(Response => {
-
           //localStorage.setItem("SelectedFile", this.state.selectedFile.name || this.state.DraggedFile.name)
           this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'File uploaded Successfully' }, 60000);
           window.location.reload()
-
         },
-        )
-
-        .catch(error => {
+        ).catch(error => {
           this.toast.show({ severity: 'error', summary: 'Error', detail: 'Server Error ' }, 50000);
         })
     }
     this.setState({
-
       showing: false
     })
-
     this.setState({
       select: false,
       drag: false
     })
-
   }
 
   hideDialog() {
@@ -229,8 +212,7 @@ class Resume extends Component {
     var day, month, year, fullDate,d;
     const { showing } = this.state
     const deleteProductDialogFooter = (
-      <>
-        <Toast ref={(el) => this.toast = el} />
+      <>  
         <Button label="No" icon="pi pi-times" className="p-button-text" onClick={this.hideDeleteProductDialog} />
         <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={this.deleteResume} />
       </>
