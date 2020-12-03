@@ -12,16 +12,23 @@ const CandidateJobDetails = (props) => {
   const [JobAndCandidateDetails, setJobAndCandidateDetails] = useState();
   const [isActionButtonsVisible, setIsActionButtonsVisible] = useState(false);
   let history = useHistory();
+  const search = history.location.search;
+  const queryItem = new URLSearchParams(search)
+  let isFreshJob = false;
+  if (props.location.isFreshJob) {
+    isFreshJob = props.location.isFreshJob
+  } else {
+    isFreshJob = queryItem.get('isFreshJob')
+    if (isFreshJob) isFreshJob = isFreshJob.toLowerCase() === true
+  }
   useEffect(() => {
-    ApiServicesOrgCandidate.getJobAndCandidateDetailsByIds(jobID)
-      .then(response => {
+    ApiServicesOrgCandidate.getJobAndCandidateDetailsByIds(jobID, isFreshJob)
+    .then(response => {
         if (response) {
           const { applicationStatus } = response;
-          // console.log('applicationStatus', applicationStatus)
+          console.log('applicationStatus', applicationStatus)
           if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
-            if (applicationStatus === 'Invite_Sent_By_Recruiter') {
-              history.push(`/candidate/jobDetails/invites/${jobID}`)
-            } else if (applicationStatus === 'Application_Matched') {
+            if (applicationStatus === 'Application_Matched' || isFreshJob) {
               setIsActionButtonsVisible(true)
             }
           }

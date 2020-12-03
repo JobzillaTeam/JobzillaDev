@@ -3381,3 +3381,7 @@ tr td:first-child {
     margin-left: -15px;
     margin-right: 5px;
 }
+
+.wd-br {
+    word-break: break-all;
+}
