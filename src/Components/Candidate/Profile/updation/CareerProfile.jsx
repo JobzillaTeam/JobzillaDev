@@ -93,7 +93,7 @@ const CareerProfileComponent = ({ showPopup }) => {
   const onSubmit = values => {
     const candidateId = localStorage.getItem('candidateId');
     let data = {
-      "preferredShift": customInputValues.preferredShift,
+      "preferredShift": !customInputValues.preferredShift ? 'Flexible' : customInputValues.preferredShift,
       "employmentType": values.employmentType,
       "preferredLocation": addPreferredLocation.join(),
       "candidateId": candidateId
@@ -182,7 +182,7 @@ const CareerProfileComponent = ({ showPopup }) => {
                   class="custom-control-input"
                   id="Flexible"
                   value="Flexible"
-                  checked={customInputValues.preferredShift === PREFERRED_SHIFT_TYPE_ENUM.FLEXIBLE}
+                  checked={customInputValues.preferredShift === PREFERRED_SHIFT_TYPE_ENUM.FLEXIBLE || !customInputValues.preferredShift}
                   onChange={onValueChange}
                 />
                 <label class="custom-control-label" for="Flexible">Flexible</label>
