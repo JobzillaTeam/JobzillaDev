@@ -85,6 +85,19 @@ const SearchJobs = () => {
       setPageDataLength(pageDataLength + INITIAL_ITEM_LENGTH);
     }, 500);
   }
+  const getPath = (jobId, applicationStatus) => {
+    if (!applicationStatus) {
+      return ({
+        pathname: `/candidate/jobDetails/searchJobs/${jobId}/?isFreshJob=true`,
+        isFreshJob: true
+      })
+    } else {
+      const pathFor = applicationStatus === 'Invite_Sent_By_Recruiter' ? 'invites' : 'searchJobs'
+      return ({
+        pathname: `/candidate/jobDetails/${pathFor}/${jobId}`
+      });
+    }
+  }
   
   return (
     <Fragment>
@@ -109,7 +122,8 @@ const SearchJobs = () => {
                         <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
                       </span>
                     </div>
-                    <div class="dropdown">
+                    <div className="sortDropdown mx-10 justify-content-between">
+                    <div className="input-group sortBy"></div>
                       <select ref={input => sortMethod = input} className="form-control" id="dropdown" name="dropdown"
                         onChange={handleDropdownChange}>
                         <option value="" disabled>Sort by</option>
@@ -131,15 +145,13 @@ const SearchJobs = () => {
                 {
                   resourceJobs && resourceJobs[0] ? resourceJobs.map((resourceJob, resourceIndex) => {
                     const { jobDetails } = resourceJob;
-                    const pathFor = jobDetails.applicationStatus === 'Invite_Sent_By_Recruiter' ? 'invites' : 'searchJobs'
-                    const pathUrl = `/candidate/jobDetails/${pathFor}/${jobDetails.jobId}`;
                     return (
                       <div class="jobListItem">
                         <section class={`row mx-0 px-4 ${resourceIndex !== 0 && 'pt-4'} pb-4`}>
                           <div class="col-md-9 px-0">
                             <div class="row">
                               <div class="col-md-12 job-title">
-                                <Link to={{ pathname: pathUrl}}>
+                                <Link to={getPath(jobDetails.jobId, jobDetails.applicationStatus)}>
                                   {jobDetails.jobTitle}
                                 </Link>
                                 <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
@@ -164,7 +176,7 @@ const SearchJobs = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 px-0 text-right"><Link to={{ pathname: pathUrl}}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div class="col-12 px-0 text-right"><Link to={getPath(jobDetails.jobId, jobDetails.applicationStatus)}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </section>
                       </div>
                     )

@@ -8,7 +8,6 @@ import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst.jsx';
 import ScrollUpButton from "react-scroll-up-button";
 
 export default class ShortlistedCandidate extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -35,18 +34,15 @@ export default class ShortlistedCandidate extends Component {
 
 
     componentDidMount() {
-
         this.ShortlistedCandidateService.getViewAllShortlistedCandidate(this.props.jobID)
             .then(Response => {
                 if (Response.data.responseObject) {
-
                     this.setState({
                         candidate1: Response.data.responseObject,
                         candidate: Response.data.responseObject.slice(0, INITIAL_ITEM_LENGTH),
                         candidateLength: Response.data.responseObject.length
                     },
                         //  this.loadMore(),
-
                         // () => {
                         //     console.log(this.state.candidate1)
                         // }
@@ -75,18 +71,14 @@ export default class ShortlistedCandidate extends Component {
         var blob;
         this.ShortlistedCandidateService.downloadResumeFile1()
             .then(Response => {
-
                 if (Response && Response.data && Response.data.responseObject) {
-
-                    var data1 = Response.data.responseObject
+                    var data1 = Response.data.responseObject.cvInBytes
                     blob = this.convertBase64toBlob(data1, 'application/msword');
                     var blobURL = URL.createObjectURL(blob)
                     var blobURL = URL.createObjectURL(blob);
                     window.open(blobURL);
                 }
             })
-
-
     }
 
     convertBase64toBlob(content, contentType) {
@@ -113,23 +105,19 @@ export default class ShortlistedCandidate extends Component {
     render() {
         return (
             <div>
-
                 <InfiniteScroll
                     dataLength={this.state.candidate.length}
                     next={this.loadMore}
                     hasMore={this.state.candidate1.length > this.state.pageDataLength}
                     loader={<RenderLoader />}
-                // height={450}
-
                 >
                     <div className="Show">Total Result {this.state.candidate1.length} </div>
-
                     <table className="table table-borderless custom-table ">
-                        <thead >
+                        <thead className="candidateTableHeader">
                             <tr>
                                 {/* <th>#</th> */}
                                 <th>Candidates</th>
-                                <th>Status<img src="/images/icons/Group 615.svg" alt="down arrow" className="pr-2" /></th>
+                                <th>Status <img src="/images/icons/Group 615.svg" alt="down arrow" className="pr-2" /></th>
                                 <th>Comments</th>
                                 <th>Last updated <img src="/images/icons/Group 615.svg" alt="down arrow" className="pr-2" /></th>
                                 <th>Action</th>
@@ -148,7 +136,7 @@ export default class ShortlistedCandidate extends Component {
                                     </td>
                                     <td>
                                         <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID} candidateId={data.candidate.candidateId}></InterviewStatusPopUp>
-                                        <span className="mr-2"> {data.interviewStatus}</span>
+                                        <span className="mr-2"> {data.interviewStatus==="NULL" ? data.applicationStatus :data.interviewStatus}</span>
                                         <img src="/images/icons/iconfinder_Edit-01_1976055.svg" onClick={() => this.editStatus(data.candidate.candidateId)}></img>
                                     </td>
                                     <td>{data.comment}</td>
@@ -161,9 +149,7 @@ export default class ShortlistedCandidate extends Component {
                     </table>
                 </InfiniteScroll>
                 <ScrollUpButton/>
-           
             </div>
-
         );
     }
 }

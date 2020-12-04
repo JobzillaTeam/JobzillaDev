@@ -12,16 +12,23 @@ const CandidateJobDetails = (props) => {
   const [JobAndCandidateDetails, setJobAndCandidateDetails] = useState();
   const [isActionButtonsVisible, setIsActionButtonsVisible] = useState(false);
   let history = useHistory();
+  const search = history.location.search;
+  const queryItem = new URLSearchParams(search)
+  let isFreshJob = false;
+  if (props.location.isFreshJob) {
+    isFreshJob = props.location.isFreshJob
+  } else {
+    isFreshJob = queryItem.get('isFreshJob')
+    if (isFreshJob) isFreshJob = isFreshJob.toLowerCase() === true
+  }
   useEffect(() => {
-    ApiServicesOrgCandidate.getJobAndCandidateDetailsByIds(jobID)
-      .then(response => {
+    ApiServicesOrgCandidate.getJobAndCandidateDetailsByIds(jobID, isFreshJob)
+    .then(response => {
         if (response) {
           const { applicationStatus } = response;
-          // console.log('applicationStatus', applicationStatus)
+          console.log('applicationStatus', applicationStatus)
           if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
-            if (applicationStatus === 'Invite_Sent_By_Recruiter') {
-              history.push(`/candidate/jobDetails/invites/${jobID}`)
-            } else if (applicationStatus === 'Application_Matched') {
+            if (applicationStatus === 'Application_Matched' || isFreshJob) {
               setIsActionButtonsVisible(true)
             }
           }
@@ -94,6 +101,10 @@ const CandidateJobDetails = (props) => {
         <div className="content_section">
           <div class="row">
             <div class="col-md-12 py-4">
+            <span class="float-right">
+              <span class="interview-status float-left"><img src="/images/icons/interview_status.svg" /></span>
+                                <div class="float-left"> <span>Interview Status</span>
+                                  <p>hello</p></div></span>
               <h5 class="job-heading"><Link to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
             </div>
           </div>

@@ -5,7 +5,6 @@ import { Toast } from "primereact/toast";
 import { Link } from "react-router-dom";
 import ChangePasswordOrg from "../Auth/ChangePasswordOrg";
 import ApiServicesOrg from "../../Services/ApiServicesOrg";
-
 class EditProfile extends Component {
   constructor() {
     super();
@@ -48,8 +47,16 @@ class EditProfile extends Component {
     // console.log("employee => " + JSON.stringify(employee));
 
     this.viewImage.updateOrganizationProfile(employee).then((res) => {
-      this.props.history.push("/orgProfile");
-    });
+      this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully'},20000);
+      setTimeout(() => {
+        this.props.history.push("/orgProfile");
+    }, 1000)
+    
+    }) .catch(error =>{
+      if(error){
+        this.toast.show({severity: 'success', summary: 'Error Message', detail: 'Something Went Wrong'},20000);
+      }
+     })
   }
 
   changeOrgNameHandler = (event) => {
@@ -174,7 +181,7 @@ class EditProfile extends Component {
         {/*  Header */}
         <HeaderAll isProfile={true}></HeaderAll>
         {/* Main Content on the page */}
-        <div className="content_section main">
+        <div className="content_section main top-padding">
           <Toast ref={(el) => (this.toast = el)} />
           <div className="mt-3 mb-3 setting_text1">
             <Link to="/providerDashboard">
@@ -201,7 +208,7 @@ class EditProfile extends Component {
             {/* <div> <button className="btn btn-blue">Change Password</button>
                     </div> */}
           </div>
-          <section className="white-middle-section mt-4">
+          <section className="top-padding white-middle-section mt-4">
             <div className="profile text-center">
               <div className="img-wrapper">
                 <label htmlFor="picture">
@@ -249,7 +256,7 @@ class EditProfile extends Component {
                 <p class="orgProfileFont">{JSON.parse(localStorage.getItem("userDetails")).userRole}</p>
               </div>
             </div>
-            <h5 className="my-4 pt-3 border-top">Profile Details</h5>
+            <h5 className="top-margin my-4 pt-3 border-top">Profile Details</h5>
             <form>
               <div className="row">
                 <div className="col-md-6">
@@ -320,9 +327,9 @@ class EditProfile extends Component {
                   </div>
                 </div>
               </div>
-              <div className="mt-3 text-right">
+              <div className="top-margin mt-3 text-right">
                 <button
-                  className="btn btn-blue mt-2rem"
+                  className="top-margin btn btn-blue mt-2rem"
                   onClick={this.UpdateProfile}
                 >
                   Update

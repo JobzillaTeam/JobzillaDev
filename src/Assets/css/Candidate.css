@@ -366,3 +366,16 @@ select {
 
 
 /* Profile Nav End */
+.no-matches{
+    height: 50px;
+    background: #FFFFFF;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 0px;
+    font-size: 16px;
+    font-family: Montserrat-Medium !important;
+
+}
+.first-letter {
+    text-transform:capitalize;
+}

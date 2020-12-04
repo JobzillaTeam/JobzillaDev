@@ -17,7 +17,7 @@ const AboutComponent = ({ showPopup }) => {
           <span class="subtitle-semi-bold">About</span>
         </div>
         <div class="pl-4 pr-4">
-          <p class="normal-text-light mb-0 pr-4">{about}</p>
+          <p class="normal-text-light mb-0 pr-4 wd-br">{about}</p>
         </div>
       </div>
     </div>

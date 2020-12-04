@@ -501,13 +501,14 @@ class ApiServicesOrgCandidate {
       .then((Response) => Response)
   }
 
-  getJobAndCandidateDetailsByIds = (jobID) => {
+  getJobAndCandidateDetailsByIds = (jobID, isFreshJob) => {
     const authToken = localStorage.getItem('authToken');
     const candidateId = localStorage.getItem('candidateId')
+    const path = isFreshJob ? '/candidate/jobAndCandidateDetailsByIdsForCandidate/' : '/recruiter/jobAndCandidateDetailsByIdsForRecruiter/'
     return (
       axios(
         {
-          url: `${ApiBaseUrl}/candidate/jobAndCandidateDetailsByIdsForCandidate/${jobID}/${candidateId}`,
+          url: `${ApiBaseUrl}${path}${jobID}/${candidateId}`,
           headers: {
             'Authorization': `Bearer ${authToken}`
           }

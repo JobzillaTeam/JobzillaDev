@@ -9,18 +9,19 @@ import ApiServicesOrgCandidate from '../../../../../Services/ApiServicesOrgCandi
 const InformationComponent = ({ showPopup, candidateProfile }) => {
   const { state } = React.useContext(Context);
   const [candidateInfo, setCandidateInfo] = React.useState();
+  const [progressbar, setProgressbar] = useState();
   const toast = useRef(null);
   if (state instanceof Promise) {
     state.then((data) => {
       if (data) {
         setCandidateInfo(data.candidateInfo)
+        setProgressbar(data.progressBarCompletion)
       }
     })
   }
   const apiServicesOrg = new ApiServicesOrg();
   const apiServicesOrgCandidate = ApiServicesOrgCandidate;
   const [imagUrl, setImageUrl] = React.useState();
-  const [progressbar, setProgressbar] = useState();
   const uploadHandler = (e) => {
     const files = e.target.files;
     var fileInput= files[0]
@@ -59,16 +60,6 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
 }
   React.useEffect(() => {
     setAvatar();
-  }, [])
-
-  React.useEffect(() => {
-    apiServicesOrgCandidate.candidateGetProfileInfo()
-      .then(Response => {
-        if (Response && Response.data && Response.data.responseObject) {
-          setProgressbar(Response.data.responseObject.progressBarCompletion)
-        }
-        //window.location.reload();
-      })
   }, [])
 
   const setAvatar = () => {

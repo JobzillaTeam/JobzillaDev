@@ -73,8 +73,8 @@ class Profile extends Component {
         {/*  Header */}
         <HeaderAll isProfile={true}></HeaderAll>
         {/* Main Content on the page */}
-        <div className="content_section main">
-          <div className="mt-3 mb-3 setting_text1">
+        <div className="content_section main top-padding">
+          <div className="mt-3 mb-3 setting_text1 top-margin">
             <Link to="/providerDashboard">
               <img
                 className="setting_arrow marR5"
@@ -101,7 +101,7 @@ class Profile extends Component {
               Change Password
             </button>
           </div>
-          <section className="white-middle-section mt-4">
+          <section className="top-padding top-margin white-middle-section mt-4">
             <div className="profile text-center">
               <div className="text-center">
                 {this.state.imageUrl ? (
@@ -133,7 +133,7 @@ class Profile extends Component {
               {/* <div>rosadodson@techmahindra.com</div> */}
             </div>
 
-            <h6 className="mt-4 pt-3 border-top profileDetailFont">
+            <h6 className="top-padding mt-4 pt-3 border-top profileDetailFont">
               Profile Details
             </h6>
             <div className="row mt-3">

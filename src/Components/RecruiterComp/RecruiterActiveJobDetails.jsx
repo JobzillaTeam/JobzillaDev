@@ -150,7 +150,9 @@ export default class RecruiterActiveJobDetails extends React.Component {
                      ) :  <div className="viewdetails">View More Details</div>}
                  </section> 
                 </div>
-              <div className="arrowButton"><img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img></div> 
+                <div className="arrowButton">
+                  {this.state.open ? <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img>  : <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img> }
+              </div>
               <div>
                 <section className="white-middle-section2  mt-4">
                   <TabView className="marB60">

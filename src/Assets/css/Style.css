@@ -377,7 +377,7 @@ nav a {
     padding: 0px;
     background: #FFFFFF;
     /* padding: 15px; */
-    margin: 20px;
+    margin: 24px;
     border-radius: 0px;
 }
 
@@ -2194,6 +2194,9 @@ textarea.form-control {
     /*  height: 50px !important; */
     width: 411px !important;
 }
+.sortBy{
+    width: 30px !important;
+}
 
 .job-accepted {
     font-size: 16px;
@@ -3082,7 +3085,7 @@ textarea {
     color: #2E2E2EE5;
 }
 
-.custom-table thead th {
+.custom-table .thead th {
     color: #2E2E2EE5;
     font-family: Montserrat-Medium!important;
     font-size: 16px;
@@ -3095,6 +3098,7 @@ textarea {
     padding-left: inherit;
 }
 
+
 .custom-table .tb-title-text {
     font-family: Montserrat-SemiBold;
     font-size: 18px;
@@ -3103,6 +3107,8 @@ textarea {
 
 .custom-table p {
     margin-bottom: .5rem;
+    width:260px;
+    white-space: pre-line !important
 }
 
 .custom-table tbody tr:nth-of-type(even) {
@@ -3207,7 +3213,7 @@ tr td:first-child {
 }
 
 
-/* Disbale delete resume by Anuja*/
+/* Disable delete resume by Anuja*/
 
 .disabledCursor {
     color: currentColor;
@@ -3274,28 +3280,30 @@ tr td:first-child {
     margin-bottom: 20px;
 }
 
-
-
-
 /* CSS START by Anuja*/
 .candidateTable td:last-child,
 .candidateTable td:first-child {
     white-space: nowrap !important;
 }
-
 .candidateTable td:nth-child(2) {
-    padding-top: 50px;
+    padding-top: 53px;
   }
   .candidateTable  td:nth-child(3) {
-    padding-top: 50px;
+    padding-top: 53px;
   }
   .candidateTable td:nth-child(4) {
-    padding-top: 50px;
+    padding-top: 53px;
   }
   .candidateTable td:nth-child(5) {
-    padding-top: 50px;
+    padding-top: 53px;
   } 
+  .candidateTable .candidateProgress:nth-child(5){
+    padding-top: 53px;
+  }
 
+  .custom-table .candidateTableHeader tr th:nth-child(5){
+    padding-left: 23px !important;
+}
 
   .dropzone1 {
     text-align: center;
@@ -3319,7 +3327,6 @@ tr td:first-child {
     padding: 0rem !important;
     margin-top: 1rem !important
 }
-
 /* CSS END by Anuja*/
 
 /* CSS START by Prateek*/
@@ -3349,7 +3356,7 @@ tr td:first-child {
     background: #fff;
     border-radius: 10px;
     padding: 0.6rem !important;
-    margin-top: 1rem !important;
+    margin-top: 0rem !important;
     padding-bottom: 20px;
  }
  
@@ -3363,4 +3370,44 @@ tr td:first-child {
 
 .activeJobCardItems {
     height: 100px;
+}
+
+.sortDropdown {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-right: 5px;
+}
+
+.wd-br {
+    word-break: break-all;
+}
+/* Sayali */
+.top-padding {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+}
+.top-margin{
+   margin-top: 0.5rem !important;
+}
+
+.download-right{
+
+    padding-left: 32rem !important;
+}
+.breadcrumb {
+
+    background-color: #F1F1F1 !important;
+    padding: 0.75rem 0rem !important;
+    margin-bottom: 0rem !important
+}
+.link {
+    color:#7B7B7B !important;
+  }
+  .link:hover {
+     color: #00F
+  }
+.bottom-margin{
+margin-bottom: 0rem !important;
 }
