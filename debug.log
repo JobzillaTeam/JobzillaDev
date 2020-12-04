@@ -27,3 +27,5 @@
 =======
 [1202/092655.511:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 >>>>>>> e1a6116b042436746e9131ca61e803a2c0cfc8b1
+[1202/172128.639:ERROR:exit_code_watcher_win.cc(87)] Failed to wait for process exit or stop event
+[1202/172128.794:ERROR:registration_protocol_win.cc(130)] TransactNamedPipe: The pipe has been ended. (0x6D)
