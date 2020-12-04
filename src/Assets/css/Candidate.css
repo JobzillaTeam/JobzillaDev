@@ -376,3 +376,6 @@ select {
     font-family: Montserrat-Medium !important;
 
 }
+.first-letter {
+    text-transform:capitalize;
+}

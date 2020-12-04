@@ -26,7 +26,7 @@ const PersonalDetailsComponent = ({ showPopup }) => {
           </div>
           <div class="col-4 mb-4">
             <div><span class="font-weight-bold">Gender</span></div>
-            {(candidateInfo && candidateInfo.gender==="male") ? <div><span class="small-text-light">Male</span></div> : <div><span class="small-text-light">Female</span></div>}
+  {(candidateInfo && candidateInfo.gender) ? <div><span class="small-text-light first-letter">{candidateInfo.gender}</span></div> : null}
           </div>
           <div class="col-4">
             <div><span class="font-weight-bold">Marital Status</span></div>
