@@ -22,8 +22,6 @@ const SkillsComponent = ({ showPopup }) => {
       .then((willDelete) => {
         if (willDelete) {
           ApiServicesOrgCandidate.deleteSkill(id, getProfileInfo);
-        } else {
-
         }
       });
   }

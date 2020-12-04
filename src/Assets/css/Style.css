@@ -2125,7 +2125,8 @@ textarea.form-control {
 .job-skills li {
     display: inline-block;
     font-size: 12px;
-    padding: 20px 20px 20px 0px;
+    padding: 15px 27px 15px 1px;
+    margin-bottom: -9rem;
 }
 
 .job-skills img {
@@ -3115,10 +3116,10 @@ textarea {
     background: #F9F9FA;
 }
 
-tr td:last-child,
+/* tr td:last-child,
 tr td:first-child {
     white-space: nowrap !important;
-}
+} */
 
 
 /* =================== (END) CSS ADD by CSS for interviews-section  */
@@ -3380,8 +3381,8 @@ tr td:first-child {
     margin-right: 5px;
 }
 
-.wd-br {
-    word-break: break-all;
+.wd-ba {
+    word-break: break-all !important;
 }
 /* Sayali */
 .top-padding {
