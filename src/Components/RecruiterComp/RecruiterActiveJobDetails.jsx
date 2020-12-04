@@ -104,7 +104,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
                         <div className="col-md-6">
                           <div className="content_headings">
                             <span><img src="/images/icons/job_desc.svg" /></span>
-                            <h6 >Job Description</h6>
+                            <h6>Job Description</h6>
                             {jobDetails.jobDescription}
                           </div>
                         </div>

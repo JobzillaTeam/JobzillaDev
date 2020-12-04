@@ -93,6 +93,8 @@ const CandidateJobDetails = (props) => {
     }
       break;
   }
+  const interviewStatus = JobAndCandidateDetails && JobAndCandidateDetails.interviewStatus;
+  const isInterviewStatus = jobStatus === 'accepted' || jobStatus === 'searchJobs';
   return (
     <Fragment>
       <LeftNavCandidate></LeftNavCandidate>
@@ -101,10 +103,6 @@ const CandidateJobDetails = (props) => {
         <div className="content_section">
           <div class="row">
             <div class="col-md-12 py-4">
-            <span class="float-right">
-              <span class="interview-status float-left"><img src="/images/icons/interview_status.svg" /></span>
-                                <div class="float-left"> <span>Interview Status</span>
-                                  <p>hello</p></div></span>
               <h5 class="job-heading"><Link to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
             </div>
           </div>
@@ -114,9 +112,13 @@ const CandidateJobDetails = (props) => {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="row">
-                      <div class="col-md-12 job-title-link align-items-center" style={{ display: 'flex' }}>
-                        <a href="#"><h5> {jobDetails.jobTitle}</h5></a>
+                      <div class="col-md-12 job-title-link align-items-center" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div  style={{ display: 'flex' }}>
+                        <a href="#"><h5 class="mb-0"> {jobDetails.jobTitle}</h5></a>
                         <span class="job-posting"> Posted {jobDetails.postedAt} day ago</span>
+                        </div>
+                        {isInterviewStatus ? <div><img src="/images/icons/interview_status.svg" /><span class="ml-2"><strong>Interview Status:</strong></span><span class="ml-2" style={{color: '#768594'}}>{interviewStatus}</span></div> : ''}
+                        
                       </div>
                     </div>
                     <ul class="job-skills">
