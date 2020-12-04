@@ -2125,7 +2125,8 @@ textarea.form-control {
 .job-skills li {
     display: inline-block;
     font-size: 12px;
-    padding: 20px 20px 20px 0px;
+    padding: 15px 27px 15px 1px;
+    margin-bottom: -9rem;
 }
 
 .job-skills img {
