@@ -7,7 +7,7 @@ import RenderLoader from '../../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst.jsx';
 import ScrollUpButton from "react-scroll-up-button";
 
-export default class ShortlistedCandidate extends Component {
+class ShortlistedCandidate extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,8 @@ export default class ShortlistedCandidate extends Component {
             visible: 2,
             error: false,
             candidateLength: '',
-            hasMore: true
+            hasMore: true,
+            candidateIdForUpdateStatus: null
         };
         this.ShortlistedCandidateService = new ApiServicesOrg()
         this.loadMore = this.loadMore.bind(this);
@@ -56,7 +57,9 @@ export default class ShortlistedCandidate extends Component {
     }
 
     editStatus = (candidateId) => {
-        localStorage.setItem("CandidateId", candidateId)
+        this.setState({
+            candidateIdForUpdateStatus: candidateId
+        });
         this.showModal();
     }
 
@@ -135,8 +138,8 @@ export default class ShortlistedCandidate extends Component {
                                         <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.candidate.address},{data.candidate.city}</p>
                                     </td>
                                     <td>
-                                        <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID} candidateId={data.candidate.candidateId}></InterviewStatusPopUp>
-                                        <span className="mr-2"> {data.interviewStatus==="NULL" ? data.applicationStatus :data.interviewStatus}</span>
+                                        <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID} candidateId={this.state.candidateIdForUpdateStatus}></InterviewStatusPopUp>
+                                        <span className="mr-2"> {data.interviewStatus==="NULL" ? data.applicationStatus : data.interviewStatus}</span>
                                         <img src="/images/icons/iconfinder_Edit-01_1976055.svg" onClick={() => this.editStatus(data.candidate.candidateId)}></img>
                                     </td>
                                     <td>{data.comment}</td>
@@ -154,5 +157,4 @@ export default class ShortlistedCandidate extends Component {
     }
 }
 
-
-
+export default React.memo(ShortlistedCandidate)

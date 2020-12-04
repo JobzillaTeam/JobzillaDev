@@ -3119,10 +3119,10 @@ textarea {
     background: #F9F9FA;
 }
 
-tr td:last-child,
+/* tr td:last-child,
 tr td:first-child {
     white-space: nowrap !important;
-}
+} */
 
 
 /* =================== (END) CSS ADD by CSS for interviews-section  */
@@ -3384,8 +3384,8 @@ tr td:first-child {
     margin-right: 5px;
 }
 
-.wd-br {
-    word-break: break-all;
+.wd-ba {
+    word-break: break-all !important;
 }
 /* Sayali */
 .top-padding {
