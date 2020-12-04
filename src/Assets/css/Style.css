@@ -2148,10 +2148,10 @@ textarea.form-control {
 .job-circle {
     border-radius: 50%;
     display: inline-block;
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     color: black;
-    border: 2px solid #147AD6;
+    /* border: 2px solid #147AD6; */
     text-align: center;
     position: relative;
 }
@@ -3084,6 +3084,8 @@ textarea {
     font-family: Montserrat-Medium!important;
     font-size: 14px;
     color: #2E2E2EE5;
+    width: 260px !important;
+    white-space: pre-line !important;
 }
 
 .custom-table .thead th {
@@ -3105,6 +3107,7 @@ textarea {
     font-size: 18px;
     color: #25282B;
 }
+
 
 .custom-table p {
     margin-bottom: .5rem;
@@ -3411,4 +3414,53 @@ tr td:first-child {
   }
 .bottom-margin{
 margin-bottom: 0rem !important;
+}
+
+.white-middle-section5 {
+    height: 18.5rem;
+    padding: 10px;
+    background: #fff;
+    border-radius: 0px !important;
+}
+
+.content_section1 {
+    background: #f1f1f1;
+    padding: 1rem 3rem;
+    width: 100%;
+    height: 25.5rem;
+}
+.dropzone3 {
+    text-align: center;
+    padding: 20px;
+    border: 3px dashed #eeeeee;
+    background-color: #fafafa;
+    color: #bdbdbd;
+    position: relative;
+    bottom: 5.5rem;
+    margin-top: 5.5rem;
+}
+
+.text-center1{
+    text-align: center !important;
+}
+
+p.text-center1{
+    margin-top: -4.9rem;
+    margin-bottom: -0.2rem;
+}
+
+.mt-6{
+    margin-top: inherit;
+    margin-top: 0.5rem !important;
+    text-align: center !important;
+}
+.mt-7{
+    margin-top: 1rem !important;
+}
+.btn.btn-blue-upload {
+    background: #007EFF;
+    border: 2px solid transparent;
+    color: #fff;
+    float: left;
+    margin-top: 1rem;
 }

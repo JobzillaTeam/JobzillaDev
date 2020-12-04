@@ -105,7 +105,7 @@ const CandidateJobDetails = (props) => {
               <span class="interview-status float-left"><img src="/images/icons/interview_status.svg" /></span>
                                 <div class="float-left"> <span>Interview Status</span>
                                   <p>hello</p></div></span>
-              <h5 class="job-heading"><Link to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
+              <h5 class="job-heading"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
             </div>
           </div>
           {jobDetails && <div>

@@ -8,6 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollUpButton from "react-scroll-up-button";
 import RenderLoader from '../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../Utils/AppConst';
+import {CircularProgressbarWithChildren} from 'react-circular-progressbar'
 
 const SearchJobs = () => {
   const [resourceJobs, setResourceJobs] = useState([]);
@@ -171,8 +172,20 @@ const SearchJobs = () => {
                           <div class="col-md-3 px-0">
                             <div class="job-circle float-right">
                               <div class="job-text-wrap">
-                                <span>{jobDetails.matchingPercentage}%</span>
-                                <span>Match</span>
+                              <div style={{ width: 65, height: 65 }}>
+                                  <CircularProgressbarWithChildren styles={{
+                                      path: {
+                                              stroke: '#147AD6',
+                                      }
+                                  }} strokeWidth={4} value={resourceJob.matchingPercentage} >
+                                    <strong><span style={{ fontSize: 12 }}>
+                                    {resourceJob.matchingPercentage}%
+                                      </span></strong>
+                                      <span className="Circular_ProgressBar_text">
+                                          Match
+                                      </span>
+                                  </CircularProgressbarWithChildren>
+                                </div>
                               </div>
                             </div>
                           </div>
