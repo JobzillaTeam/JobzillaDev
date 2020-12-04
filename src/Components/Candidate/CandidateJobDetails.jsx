@@ -19,7 +19,7 @@ const CandidateJobDetails = (props) => {
     isFreshJob = props.location.isFreshJob
   } else {
     isFreshJob = queryItem.get('isFreshJob')
-    if (isFreshJob) isFreshJob = isFreshJob.toLowerCase() === true
+    if (isFreshJob) isFreshJob = isFreshJob.toLowerCase() === "true"
   }
   useEffect(() => {
     ApiServicesOrgCandidate.getJobAndCandidateDetailsByIds(jobID, isFreshJob)
