@@ -130,7 +130,7 @@ class ActiveJob extends React.Component {
       <Fragment>
         <LeftNavProvider></LeftNavProvider>
         <div className="maincontent">
-          <HeaderAll isCandidate={true}></HeaderAll>
+          <HeaderAll></HeaderAll>
           <section class="content_section">
             <Toast ref={(el) => this.toast = el}></Toast>
             <div class="row py-4">
