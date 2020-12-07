@@ -3,6 +3,8 @@ import { ApiBaseUrl } from '../Config.jsx'
 import React, { Component, useContext } from 'react';
 import { Context } from '../Context/ProfileContext';
 import Resume from '../Components/Candidate/Profile/details/resume/Resume.jsx';
+import { AppHelper } from '../Utils/AppHelper.js';
+import swal from 'sweetalert';
 
 class ApiServicesOrgCandidate {
   constructor() {
@@ -11,8 +13,28 @@ class ApiServicesOrgCandidate {
       return response;
     }, err => {
       return new Promise((resolve, reject) => {
-        // console.log(err)
         const originalReq = err.config;
+        if (err.response.data.responseCode === "403" && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')) {
+          swal({
+            title: 'Error',
+            text: 'You are no more authorized to login to the system',
+            icon: "warning",
+            button: "Ok",
+            dangerMode: true,
+          }).then(() => {
+            return AppHelper.onLogout(true)
+          });
+          return Promise.reject(err);
+        }
+        if (err.response.data.responseCode === "403 FORBIDDEN") {
+          swal({
+            title: 'Error',
+            text: 'You are no more authorized to login to the system',
+            icon: "warning",
+            button: "Ok",
+            dangerMode: true,
+          })
+        }
         const isAuthTokenExpired = err && err.response && err.response.status === 401 && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')
         if (isAuthTokenExpired) {
           let userName = localStorage.getItem('emailId');

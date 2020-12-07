@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from "react-router-dom";
 
 const orgRoles = ['owner', 'admin', 'user'];
-const onLogout = _ => {
+const onLogout = isWindowAccess => {
   let pathName = '/login'
   const rememberme = localStorage.getItem('rememberme');
   const userRole = localStorage.getItem('userRole');
@@ -28,7 +28,11 @@ const onLogout = _ => {
     localStorage.removeItem('emailId');
     localStorage.removeItem('rememberme');
   }
-  return <Redirect to={pathName} />
+  if (isWindowAccess) {
+    window.location.href = pathName
+  } else {
+    return <Redirect to={pathName} />
+  }
 }
 const isLoggedIn = (userType, isAuthorizationCheck) => {
   let isLoggedIn = true;
