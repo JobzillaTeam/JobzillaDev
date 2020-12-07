@@ -5,6 +5,7 @@ import Footer from '../CommonComp/Footer'
 import { Link, useHistory } from 'react-router-dom'
 import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate';
 import ApiServicesOrg from '../../Services/ApiServicesOrg';
+import { getApplicationStatus } from '../../Utils/AppHelper';
 
 const CandidateJobDetails = (props) => {
   const jobID = props.match.params.jobID;
@@ -93,8 +94,9 @@ const CandidateJobDetails = (props) => {
     }
       break;
   }
-  const interviewStatus = JobAndCandidateDetails && JobAndCandidateDetails.interviewStatus;
-  const isInterviewStatus = jobStatus === 'accepted' || jobStatus === 'searchJobs';
+  let interviewStatus = JobAndCandidateDetails && JobAndCandidateDetails.interviewStatus;
+  interviewStatus = interviewStatus === "NULL" ? getApplicationStatus(JobAndCandidateDetails.applicationStatus) : interviewStatus;
+  const isInterviewStatus = (JobAndCandidateDetails && JobAndCandidateDetails.interviewStatus &&  JobAndCandidateDetails.interviewStatus !== "NULL") && (jobStatus === 'accepted' || jobStatus === 'searchJobs') ? true : false;
   return (
     <Fragment>
       <LeftNavCandidate></LeftNavCandidate>

@@ -61,3 +61,29 @@ export const AppHelper = {
   isLoggedIn,
   isOrganizationRelatedUser
 }
+
+export const getApplicationStatus = (status) => {
+  switch(status) {
+    case "Invite_Sent_By_Recruiter": {
+      return "Invite Sent" 
+    }
+    case "Invite_Removed_By_Recruiter": {
+      return "Invite Removed"
+    }
+    case "Invite_Accepted_By_Candidate": {
+      return "Invite Accepted"
+    }
+    case "Invite_Declined_By_Candidate": {
+      return "Invite Declined"
+    }
+    case "Application_Sent_By_Candidate": {
+      return "Application Sent"
+    }
+    case "Application_Accepted_By_Recruiter": {
+      return "Application Accepted"
+    }
+    case "Application_Declined_By_Recruiter": {
+      return "Application Declined"
+    }
+  }
+}

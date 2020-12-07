@@ -6,6 +6,7 @@ import ApiServicesOrg from '../../../Services/ApiServicesOrg.jsx';
 import RenderLoader from '../../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst.jsx';
 import ScrollUpButton from "react-scroll-up-button";
+import { getApplicationStatus } from '../../../Utils/AppHelper.js';
 
 class ShortlistedCandidate extends Component {
     constructor(props) {
@@ -142,7 +143,7 @@ class ShortlistedCandidate extends Component {
                                     </td>
                                     <td>
                                         <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID} candidateId={this.state.candidateIdForUpdateStatus}></InterviewStatusPopUp>
-                                        <span className="mr-2"> {data.interviewStatus==="NULL" ? data.applicationStatus : data.interviewStatus}</span>
+                                        <span className="mr-2"> {data.interviewStatus==="NULL" ? getApplicationStatus(data.applicationStatus) : data.interviewStatus}</span>
                                         <img src="/images/icons/iconfinder_Edit-01_1976055.svg" onClick={() => this.editStatus(data.candidate.candidateId)}></img>
                                     </td>
                                     <td>{data.comment}</td>
