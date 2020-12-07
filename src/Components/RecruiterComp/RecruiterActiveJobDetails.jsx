@@ -51,7 +51,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
           <div className="content_section">
             <div class="row">
               <div class="col-md-12 py-4">
-                <h5 class="job-heading"><Link to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
+                <h5 class="job-heading"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
               </div>
             </div>
             {jobDetails && <div>
@@ -156,13 +156,13 @@ export default class RecruiterActiveJobDetails extends React.Component {
               <div>
                 <section className="white-middle-section2  mt-4">
                   <TabView className="marB60">
-                    <TabPanel header="Shortlisted Candidate">
+                    <TabPanel header="Shortlisted Candidates">
                       <ShortlistedCandidate jobID={jobID}></ShortlistedCandidate>
                     </TabPanel>
-                    <TabPanel header="Matching Candidate">
+                    <TabPanel header="Matching Candidates">
                       <MatchingCandidate jobID={jobID}></MatchingCandidate>
                     </TabPanel>
-                    <TabPanel header="CandidateApplication">
+                    <TabPanel header="Candidate Applications">
                       <CandidateApplication jobID={jobID}></CandidateApplication>
                     </TabPanel>
                   </TabView>

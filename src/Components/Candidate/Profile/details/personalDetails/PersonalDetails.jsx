@@ -33,7 +33,7 @@ const PersonalDetailsComponent = ({ showPopup }) => {
             {(candidateInfo && candidateInfo.maritalStatus) ? <div><span class="small-text-light">{candidateInfo.maritalStatus}</span></div> : null}
           </div>
           <div class="col-4 mb-4">
-            <div><span class="font-weight-bold">Address</span></div>
+            <div><span class="font-weight-bold  wd-ba">Address</span></div>
             {(candidateInfo && candidateInfo.address) ? <div><span class="small-text-light">{candidateInfo.address}</span></div> : null}
           </div>
           <div class="col-4">

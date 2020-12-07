@@ -99,6 +99,7 @@ export default class CandidateApplication extends Component {
                 > 
                 <div>
                     <div className="Show">Total Result {this.state.candidateData.length} </div>
+                    {this.state.candidateData.constructor === Array && this.state.candidateData && this.state.candidateData[0]?
                         <table className="table table-borderless custom-table">
                             <thead className="candidateTableHeader">
                                 <tr>
@@ -115,14 +116,14 @@ export default class CandidateApplication extends Component {
                                 {this.state.candidate.map((data1, index) => {
                                     const data = data1.candidate;
                                     return (
-                                        <tr className="candidateTable">
+                                        <tr className="candidateTable  wd-ba">
                                             <td>
                                                 <Link to={`/candidateProfileToOpen/${data.user.id}`}><p className="tb-title-text">{data.firstName} {data.lastName}</p> </Link>
                                                 <p>{data.currentRole} at {data.company}</p>
                                                 <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address},{data.city}</p>
                                             </td>
                                             <td>
-                                                {data1.candidateSkillsList && data1.candidateSkillsList[0] && data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}
+                                              <p>  {data1.candidateSkillsList && data1.candidateSkillsList[0] && data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}</p>
                                             </td>
                                             <td>
                                                 {data.yearsofExp}
@@ -158,7 +159,9 @@ export default class CandidateApplication extends Component {
                                 )}
                             </tbody>
                           </table>
+                          :<div className="viewdetails1">No Candidates Applications Found</div>}
                 </div>
+                
             </InfiniteScroll> 
             <ScrollUpButton/>  
             </div>
