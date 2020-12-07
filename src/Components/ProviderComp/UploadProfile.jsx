@@ -5,6 +5,7 @@ import Footer from '../CommonComp/Footer'
 import Dropzone from 'react-dropzone';
 import LeftNavProvider from '../CommonComp/LeftNavProvider'
 import ApiServicesOrg from '../../Services/ApiServicesOrg'
+import RenderLoader from '../CommonComp/Loader';
 //import axios from 'axios'
 
 class UploadProfile extends Component {
@@ -35,6 +36,7 @@ class UploadProfile extends Component {
         DraggedFile:'',
         select:false,
         drag:false,
+        isLoading: false
       }; 
        
       onFileChange = event => { 
@@ -120,15 +122,23 @@ class UploadProfile extends Component {
              supervisorId= JSON.parse(localStorage.getItem('userDetails')).supervisorId;
             }
             const orgId = JSON.parse(localStorage.getItem('userDetails')).orgnaizationId;
+                    this.setState({
+                        isLoading: true
+                    });
                         this.fileService.postSampleFile(formData, formheader,orgId,supervisorId) 
                         .then(Response=>{
                                     // console.log(Response.status)
                                     if(Response.status===208){
-
+                                        this.setState({
+                                            isLoading: false
+                                        })
                                         this.toast.show({severity: 'error', summary: 'Error', detail: 'Email Id already exist'},80000);
                                     }
                                     else {
-                                    this.toast.show({severity: 'success', summary: 'Success Message', detail: 'File uploaded Successfully'},60000);
+                                        this.setState({
+                                            isLoading: false
+                                        })
+                                        this.toast.show({severity: 'success', summary: 'Success Message', detail: 'File uploaded Successfully'},60000);
                                     }
                                    // window.location.reload();
                                 })
@@ -165,8 +175,7 @@ class UploadProfile extends Component {
                                 <section className="white-middle-section3 mt-5">
                                     <div className="row">
                                         {/* CSV file upload */}
-                                       
-                                        <div className="col-md-6 offset-md-3 p-4">
+                                       <div className="col-md-6 offset-md-3 p-4">
                                             
                                             <div className="text-center mt-5">
                                             <Dropzone
@@ -207,6 +216,7 @@ class UploadProfile extends Component {
                                                         <input className="file-path validate" type="text" value={this.state.selectedFile.name} placeholder="No file choosen"/> 
                                                     </div>
                                                 </div>
+
                                                 {/* <div className="d-flex-inline">
                                                     <img src="/images/Dashboard-assets/csv.svg" className="pt-1" alt="csv icon" />
                                                     <span className="pl-2 fontMiddle">CSV File</span>
@@ -217,7 +227,9 @@ class UploadProfile extends Component {
                                             <p className="text-center mt-4">Upload the CSV file with candidate details here. All fields in the CSV file are mandatory for successful creation of Candidate profile.</p>
                                             {/* Download sample file with API input */}
                                             <a className="download_sample_link d-block text-center" href="#" onClick={this.downloadEmployeeData}>Download CSV file template</a>
+                                            {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
                                         </div>
+                                        
                                         
                                     </div>    
                                 </section>
