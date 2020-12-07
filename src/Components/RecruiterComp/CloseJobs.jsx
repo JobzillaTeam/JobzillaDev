@@ -195,7 +195,7 @@ class CloseJobs extends React.Component {
                                 <li><img src="/images/icons/job_role.svg" />{jobDetails.employmentType}</li>
                                 <li><img src="/images/icons/location.svg" />{jobDetails.jobCity}, {jobDetails.jobCountry}</li>
                                 <li><img src="/images/icons/technology.svg" /> {jobDetails.primarySkills}</li>
-                                <li><img src="/images/icons/vaccency.svg" />{jobDetails.noOfPositionsAvailable}</li>
+                                <li><img src="/images/icons/vaccency.svg" />{jobDetails.noOfHiredPositions}</li>
                               </ul>
                             </div>
                           </section>

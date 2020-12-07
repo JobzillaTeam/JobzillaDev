@@ -9,7 +9,7 @@ const TermsofUse =()=>{
     <div className="content">
         <Header></Header>
         <div className="main px-5 py-4">
-        <div class="pb-4"><Link to="/signup"> <span> > </span> Back to signup </Link></div>
+        <div class="pb-4"><Link to="/signup"> <span> {'<'} </span> Back to signup </Link></div>
       <p class="modal-body-title">
       Terms and Conditions:
       </p>
