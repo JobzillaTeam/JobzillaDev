@@ -147,8 +147,10 @@ export default class CandidateApplication extends Component {
                                                 </div>
                                             </td>
                                             <td>
+                                                <p>
                                                 <button className="btn btn-blue1 mr-2" onClick={() => this.acceptInvite(data.candidateId)}>Accept</button>
                                                 <button className="btn btn-border1" onClick={() => this.declineInvite(data.candidateId)}>Decline</button>
+                                                </p>
                                             </td>
                                         </tr>
                                     );

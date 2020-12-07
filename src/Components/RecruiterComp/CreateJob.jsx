@@ -389,6 +389,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Category</label></div>
                           <CreatableSelect
+                            components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
                             ref={inputEl => (this.category = inputEl)}
                             styles={this.customStyles(errors && errors.category)}
                             name="category"
@@ -413,6 +414,7 @@ export default class CreateJob extends React.Component {
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Primary Skill *</label></div>
                           <CreatableSelect
+                            components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
                             ref={inputEl => (this.primarySkills = inputEl)}
                             styles={this.customStyles(errors && errors.primarySkills)}
                             name="primarySkills"

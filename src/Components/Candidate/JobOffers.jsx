@@ -151,7 +151,7 @@ const JobOffers = () => {
                               <li><img src="/images/icons/technology.svg" /> {jobDetails.primarySkills}</li>
                               <li><img src="/images/icons/vaccency.svg" />{jobDetails.noOfPositionsAvailable}</li>
                             </ul>
-                            <h6 class="job-desc">Job Description</h6>
+                            <h6 class="job-desc mt-3">Job Description</h6>
                             {jobDetails.jobDescription}
                           </div>
                           <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/jobOffers/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>

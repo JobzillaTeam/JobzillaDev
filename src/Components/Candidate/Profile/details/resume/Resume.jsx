@@ -250,19 +250,19 @@ class Resume extends Component {
             : <a className="download_sample_link d-block disabledCursor " href="#" >Delete Resume</a>}</span>
         </div>
         <div class="col">
-          <section className="content_section">
+          <section className="content_section1">
             <div className="ml-0 mr-1">
-              <section className="white-middle-section mt-5">
+              <section className="white-middle-section5 mt-7">
                 <div className="row">
                   {/*  file upload */}
                   <div className="col-md-6 offset-md-3 p-4">
-                    <div className="text-center mt-5">
+                    <div className="text-center1 mt-7">
                       <Dropzone
                         onDrop={this.onFileChange1}
                       >
                         {({ getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles }) => {
                           return (
-                            <div {...getRootProps({ className: "dropzone" })}>
+                            <div {...getRootProps({ className: "dropzone3" })}>
                               <img src="/images/Dashboard-assets/cloud-upload.svg" alt="cloud upload" className="cloud_upload_logo pb-2" />
                               <input {...getInputProps()} />
                               {!isDragActive && 'Click here or drop a file to upload!'}
@@ -278,9 +278,9 @@ class Resume extends Component {
                         }
                       </Dropzone>
                     </div>
-                    <p className="text-center">or</p>
+                    <p className="text-center1">or</p>
                     <form action="">
-                      <div className="text-center d-flex justify-content-center">
+                      <div className="text-center1 d-flex justify-content-center">
                         <div className="file-field d-flex-inline">
                           <div className="btn btn-blue btn-sm float-left waves-effect waves-light">
                             <span>Choose file</span>
@@ -300,12 +300,12 @@ class Resume extends Component {
                         </div>
                       </div>
                     </form>
-                    <p className="text-center mt-4"></p>
+                    <p className="text-center1 mt-6"></p>
                   </div>
                 </div>
               </section>
-              <div className="ml-2 mt-4">
-                <button type="button" className="btn btn-blue" onClick={this.uploadFile}>Upload</button>
+              <div className="ml-2 mt-6">
+                <button type="button" className="btn btn-blue-upload" onClick={this.uploadFile}>Upload</button>
               </div>
               <Dialog visible={this.state.deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={this.hideDeleteProductDialog}>
                 <div className="confirmation-content">

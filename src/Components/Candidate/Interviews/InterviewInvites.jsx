@@ -8,6 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollUpButton from "react-scroll-up-button";
 import RenderLoader from '../../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../../Utils/AppConst';
+import {CircularProgressbarWithChildren} from 'react-circular-progressbar'
 
 const InterviewInvites = () => {
   const [resourceJobs, setResourceJobs] = useState([]);
@@ -157,11 +158,23 @@ const InterviewInvites = () => {
                           <div class="col-md-3 px-0">
                             <div class="job-circle float-right">
                               <div class="job-text-wrap">
-                                <span>{resourceJob.matchingPercentage}%</span>
-                                <span>Match</span>
+                              <div style={{ width: 65, height: 65 }}>
+                                  <CircularProgressbarWithChildren styles={{
+                                      path: {
+                                              stroke: '#147AD6',
+                                      }
+                                  }} strokeWidth={4} value={resourceJob.matchingPercentage} >
+                                    <strong><span style={{ fontSize: 12 }}>
+                                    {resourceJob.matchingPercentage}%
+                                      </span></strong>
+                                      <span className="Circular_ProgressBar_text">
+                                          Match
+                                      </span>
+                                  </CircularProgressbarWithChildren>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                            </div>
                           <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/invites/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </section>
                       </div>
