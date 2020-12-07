@@ -97,20 +97,20 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
               <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_PROFILE_NAME, true)} />
               <h3 class="mb-2 wd-ba">{firstName} {lastName}</h3>
             </div>
-            <span class="visible-lg-inline">{currentRole} at {company}</span>
+            <span class="visible-lg-inline  wd-ba">{currentRole} at {company}</span>
             <hr class="mb-4" />
             <div class="row">
               <div class="col col-md-4 col-xs-12">
                 <img src="/images/Dashboard-assets/candidate/location.png" alt="Cinque Terre" />
-                <span class="normal-text-medium mgl-10">{address}</span>
+                <span class="normal-text-medium mgl-10  wd-ba">{address}</span>
               </div>
               <div class="col col-md-4 col-xs-12 pl-0">
                 <img src="/images/Dashboard-assets/candidate/mobile.png" alt="Cinque Terre" />
-                <span class="normal-text-medium mgl-10">{mobileNumber}</span>
+                <span class="normal-text-medium mgl-10  wd-ba">{mobileNumber}</span>
               </div>
               <div class="col col-md-4 col-xs-12 pl-0">
                 <img src="/images/Dashboard-assets/candidate/message.png" alt="Cinque Terre" />
-                <span class="normal-text-medium mgl-10">{emailId}</span>
+                <span class="normal-text-medium mgl-10  wd-ba">{emailId}</span>
               </div>
             </div>
             <div class="col-9 pl-0 mt-3">

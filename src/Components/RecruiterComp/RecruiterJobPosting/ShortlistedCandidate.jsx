@@ -115,8 +115,11 @@ class ShortlistedCandidate extends Component {
                     loader={<RenderLoader />}
                 >
                     <div className="Show">Total Result {this.state.candidate1.length} </div>
+                    {this.state.candidate1.constructor === Array && this.state.candidate1 && this.state.candidate1[0]?
                     <table className="table table-borderless custom-table ">
+                        
                         <thead className="candidateTableHeader">
+                            
                             <tr>
                                 {/* <th>#</th> */}
                                 <th>Candidates</th>
@@ -128,7 +131,7 @@ class ShortlistedCandidate extends Component {
                         </thead>
                         <tbody>
                             {this.state.candidate.map((data, index) =>
-                                <tr className="candidateTable">
+                                <tr className="candidateTable  wd-ba">
                                     {/* <td>{data.candidate.candidateId}</td> */}
                                     <td>
                                         <Link to={`/candidateProfileToOpen/${data.candidate.user.id}`}><p className="tb-title-text">{data.candidate.firstName} {data.candidate.lastName}</p> </Link>
@@ -150,6 +153,7 @@ class ShortlistedCandidate extends Component {
                                 </tr>)}
                         </tbody>
                     </table>
+                    :<div className="viewdetails1">No Shortlisted Candidates Found</div>}
                 </InfiniteScroll>
                 <ScrollUpButton/>
             </div>

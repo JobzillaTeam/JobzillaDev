@@ -3017,7 +3017,6 @@ textarea {
     font-size: 14px;
     color: #333333;
     font-family: Montserrat-Medium!important;
-    ;
 }
 
 .mr-4 {
@@ -3111,7 +3110,7 @@ textarea {
 
 .custom-table p {
     margin-bottom: .5rem;
-    width:260px;
+    width:230px;
     white-space: pre-line !important
 }
 
@@ -3326,8 +3325,8 @@ tr td:first-child {
 
  .white-middle-section3.mt-5 {
     padding: 40px;
-   background: #fff;
-    border-radius: 10px;
+    background: #fff;
+    border-radius: 0px !important;
     padding: 0rem !important;
     margin-top: 1rem !important
 }
@@ -3463,4 +3462,13 @@ p.text-center1{
     color: #fff;
     float: left;
     margin-top: 1rem;
+}
+.viewdetails1 {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    color: #333333;
+    font-family: Montserrat-Medium!important;
+    margin-top: -30px;
+    margin-bottom: 10px;
 }

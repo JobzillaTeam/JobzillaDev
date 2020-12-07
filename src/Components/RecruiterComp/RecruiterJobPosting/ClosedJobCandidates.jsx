@@ -20,7 +20,7 @@ export default class ClosedJobCandidates extends React.Component {
             {
               joinedCandidates && joinedCandidates.map(joinedCandidate => {
                 return (
-                  <tr className="candidateTable">
+                  <tr className="candidateTable  wd-ba">
                     <td>
                       <p className="tb-title-text">{`${joinedCandidate.candidate.firstName} ${joinedCandidate.candidate.lastName}`}</p>
                       <p>{`${joinedCandidate.candidate.currentRole} at ${joinedCandidate.candidate.company}`}</p>

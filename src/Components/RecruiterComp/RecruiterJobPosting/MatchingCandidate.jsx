@@ -99,6 +99,7 @@ export default class MatchingCandidate extends Component {
                 > 
                 <div>
                     <div className="Show">Total Result {this.state.matchingCandidateData.length} </div>
+                    {this.state.matchingCandidateData.constructor === Array && this.state.matchingCandidateData && this.state.matchingCandidateData[0]?
                         <table className="table table-borderless custom-table">
                             <thead className="candidateTableHeader">
                                 <tr>
@@ -112,17 +113,17 @@ export default class MatchingCandidate extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.candidate.map((  data1, index) => {
+                              {this.state.candidate.map((  data1, index) => {
                                     const data = data1.candidate;
                                     return (
-                                        <tr className="candidateTable">
+                                        <tr className="candidateTable  wd-ba">
                                             <td>
                                                 <Link to={`/candidateProfileToOpen/${data.user.id}`}><p className="tb-title-text">{data.firstName} {data.lastName}</p> </Link>
                                                 <p>{data.currentRole} at {data.company}</p>
                                                 <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address},{data.city}</p>
                                             </td>
                                             <td>
-                                                {  data1.candidateSkillsList &&   data1.candidateSkillsList[0] &&   data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}
+                                               <p> {  data1.candidateSkillsList &&   data1.candidateSkillsList[0] &&   data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}</p>
                                             </td>
                                             <td>
                                                 {data.yearsofExp}
@@ -147,10 +148,10 @@ export default class MatchingCandidate extends Component {
                                                 </div>
                                             </td>
                                             <td>
-                                                <p>
+                                                
                                                 <button className="btn btn-blue1 mr-2" onClick={() => this.acceptInvite(data.candidateId)}>Invite</button>
                                                 <button className="btn btn-border1" onClick={() => this.declineInvite(data.candidateId)}>Remove</button>
-                                                </p>
+                                                
                                             </td>
                                         </tr>
                                     );
@@ -159,6 +160,7 @@ export default class MatchingCandidate extends Component {
                             </tbody>
 
                         </table>
+                        :<div className="viewdetails1">No Matching Candidates Found</div>}
                    </div>
                 </InfiniteScroll>
                 <ScrollUpButton/>

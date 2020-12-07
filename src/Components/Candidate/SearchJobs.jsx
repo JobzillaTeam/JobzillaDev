@@ -177,9 +177,9 @@ const SearchJobs = () => {
                                       path: {
                                               stroke: '#147AD6',
                                       }
-                                  }} strokeWidth={4} value={resourceJob.matchingPercentage} >
+                                  }} strokeWidth={4} value={jobDetails.matchingPercentage} >
                                     <strong><span style={{ fontSize: 12 }}>
-                                    {resourceJob.matchingPercentage}%
+                                    {jobDetails.matchingPercentage}%
                                       </span></strong>
                                       <span className="Circular_ProgressBar_text">
                                           Match

@@ -70,7 +70,7 @@ export default class RecruiterClosedJobDetails extends React.Component {
           <div className="content_section">
             <div class="row">
               <div class="col-md-12 py-4">
-                <h5 class="job-heading"><Link to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
+                <h5 class="job-heading"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
               </div>
             </div>
             {jobDetails && <div>
