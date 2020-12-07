@@ -123,7 +123,7 @@ export default class CandidateApplication extends Component {
                                                 <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address},{data.city}</p>
                                             </td>
                                             <td>
-                                              <p>  {data1.candidateSkillsList && data1.candidateSkillsList[0] && data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}</p>
+                                              {data1.candidateSkillsList && data1.candidateSkillsList[0] && data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}
                                             </td>
                                             <td>
                                                 {data.yearsofExp}

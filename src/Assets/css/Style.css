@@ -3472,3 +3472,7 @@ p.text-center1{
     margin-top: -30px;
     margin-bottom: 10px;
 }
+
+.paddingBottom {
+    padding-bottom: 14rem !important;
+}

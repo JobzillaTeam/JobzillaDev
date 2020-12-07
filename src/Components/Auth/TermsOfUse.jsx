@@ -13,7 +13,7 @@ const TermsofUse =()=>{
       <p class="modal-body-title">
       Terms and Conditions:
       </p>
-      <ul>
+      <ul class="paddingBottom">
 
         <li class="modal-body-content">All data pertaining to the Client, such as, Company details, employee details and details of roles and vacancies will be kept confidential and will not be discussed with anyone ex-cept the Client or representatives of the Client.</li>
 
