@@ -171,7 +171,7 @@ export default class RecruiterClosedJobDetails extends React.Component {
               <div className="arrowButton">
                   {this.state.open ? <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img>  : <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img> }
               </div>
-              <div class="bg-white">
+              <div class="bg-white mt-4">
                 <InfiniteScroll
                   dataLength={this.state.joinedCandidateList.length}
                   next={this.loadMore}

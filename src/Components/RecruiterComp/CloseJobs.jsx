@@ -112,12 +112,10 @@ class CloseJobs extends React.Component {
 
   fetchMoreResourceJobs = () => {
     const { cloneResourceJobs, pageDataLength } = this.state;
-    setTimeout(() => {
-      this.setState({
-        resourceJobs: [...cloneResourceJobs].slice(0, (pageDataLength + INITIAL_ITEM_LENGTH)),
-        pageDataLength: pageDataLength + INITIAL_ITEM_LENGTH
-      })
-    }, 500);
+    this.setState({
+      resourceJobs: [...cloneResourceJobs].slice(0, (pageDataLength + INITIAL_ITEM_LENGTH)),
+      pageDataLength: pageDataLength + INITIAL_ITEM_LENGTH
+    })
   }
   render() {
     const { cloneResourceJobs, pageDataLength, isLoading, resourceJobs } = this.state;
