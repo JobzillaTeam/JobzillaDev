@@ -21,17 +21,17 @@ export default class TopSkillsProvider extends Component {
     componentDidMount(){
         this.dashboardDetails.getProviderDashboardDetails()
         .then(Response => {
-            if (Response && Response.data) {
+            if (Response && Response.data && Response.data.responseObject) {
         //  console.log(Response.data.responseObject)
           this.setState({
-            skill1:Response.data.responseObject.topSkills[0].skill,
-            skill2:Response.data.responseObject.topSkills[1].skill,
-            skill3: Response.data.responseObject.topSkills[2].skill,
-            skill4: Response.data.responseObject.topSkills[3].skill,
-            skill1Count:Response.data.responseObject.topSkills[0].count,
-            skill2Count:Response.data.responseObject.topSkills[1].count,
-            skill3Count:Response.data.responseObject.topSkills[2].count,
-            skill4Count:Response.data.responseObject.topSkills[3].count,
+            skill1: Response.data.responseObject.topSkills[0] && Response.data.responseObject.topSkills[0].skill,
+            skill2: Response.data.responseObject.topSkills[1] && Response.data.responseObject.topSkills[1].skill,
+            skill3: Response.data.responseObject.topSkills[2] && Response.data.responseObject.topSkills[2].skill,
+            skill4: Response.data.responseObject.topSkills[3] && Response.data.responseObject.topSkills[3].skill,
+            skill1Count: Response.data.responseObject.topSkills[0] && Response.data.responseObject.topSkills[0].count,
+            skill2Count: Response.data.responseObject.topSkills[1] && Response.data.responseObject.topSkills[1].count,
+            skill3Count: Response.data.responseObject.topSkills[2] && Response.data.responseObject.topSkills[2].count,
+            skill4Count: Response.data.responseObject.topSkills[3] && Response.data.responseObject.topSkills[3].count,
             totalOpenPositions: Response.data.responseObject.totalOpenPositions
            })
 
