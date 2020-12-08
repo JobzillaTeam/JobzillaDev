@@ -176,7 +176,7 @@ class ActiveJob extends React.Component {
               <InfiniteScroll
                 dataLength={resourceJobs.length}
                 next={this.fetchMoreResourceJobs}
-                hasMore={cloneResourceJobs.length >= pageDataLength}
+                hasMore={cloneResourceJobs.length > 0 && cloneResourceJobs.length >= pageDataLength}
                 loader={<RenderLoader />}
               >
                 <div>

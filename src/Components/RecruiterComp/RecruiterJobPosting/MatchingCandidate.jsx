@@ -107,7 +107,6 @@ export default class MatchingCandidate extends Component {
                                     <th>Candidates</th>
                                     <th>Skills</th>
                                     <th>Experience</th>
-                                    <th>AvailableFrom</th>
                                     <th>Match</th>
                                     <th>Action</th>
                                 </tr>
@@ -127,9 +126,6 @@ export default class MatchingCandidate extends Component {
                                             </td>
                                             <td>
                                                 {data.yearsofExp}
-                                            </td>
-                                            <td>
-                                                {data.availableFrom}
                                             </td>
                                             <td className='candidateProgress'>                                       
                                                 <div style={{ width: 65, height: 65 }}>

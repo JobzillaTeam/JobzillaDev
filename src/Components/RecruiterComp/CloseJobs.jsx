@@ -90,9 +90,9 @@ class CloseJobs extends React.Component {
         return dateB - dateA
       } else if (value === "recent_Last") {
         return dateA - dateB
-      } else if (value === "unfulfilled_Highest") {
+      } else if (value === "fulfilled_Highest") {
         return PositionsB - PositionsA;
-      } else if (value === "unfulfilled_Lowest") {
+      } else if (value === "fulfilled_Lowest") {
         return PositionsA - PositionsB;
       }
     });
@@ -153,11 +153,11 @@ class CloseJobs extends React.Component {
                           <option value="" disabled>Sort by</option>
                           <option value="recent_First">Recent First</option>
                           <option value="recent_Last">Recent Last</option>
-                          <option value="unfulfilled_Highest">
-                            Unfulfilled Positions-Highest to Lowest
+                          <option value="fulfilled_Highest">
+                            Fulfilled Positions-Highest to Lowest
                           </option>
-                          <option value="unfulfilled_Lowest">
-                            Unfulfilled Positions-Lowest to Highest
+                          <option value="fulfilled_Lowest">
+                            Fulfilled Positions-Lowest to Highest
                           </option>
                         </select>
                       </div>
@@ -168,7 +168,7 @@ class CloseJobs extends React.Component {
               <InfiniteScroll
                 dataLength={resourceJobs.length}
                 next={this.fetchMoreResourceJobs}
-                hasMore={cloneResourceJobs.length >= pageDataLength}
+                hasMore={cloneResourceJobs.length > 0 && cloneResourceJobs.length >= pageDataLength}
                 loader={<RenderLoader />}
               >
                 <div>
