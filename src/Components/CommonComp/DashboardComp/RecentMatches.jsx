@@ -36,8 +36,9 @@ export default class RecentMatches extends Component {
           isFreshJob: true
         })
       } else {
+        const pathFor = applicationStatus === 'Invite_Sent_By_Recruiter' ? 'invites' : 'recentMatches'
         return ({
-          pathname: `/candidate/jobDetails/recentMatches/${jobId}`
+          pathname: `/candidate/jobDetails/${pathFor}/${jobId}`
         });
       }
     }
