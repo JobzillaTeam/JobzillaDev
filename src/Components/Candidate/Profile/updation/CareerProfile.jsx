@@ -136,56 +136,56 @@ const CareerProfileComponent = ({ showPopup }) => {
         <div className="form-group">
           <label htmlFor="University">Preferred Shift</label>
           <div class="form-row">
-            <div className="col-2">
-              <div class="custom-control custom-checkbox mr-sm-2">
+            <div className="col-3.5">
+              <div class="custom-checkbox mr-sm-2">
                 <input
                   type="checkbox"
-                  class="custom-control-input"
+                  class="form-control-input"
                   id="Day"
                   value="Day"
                   checked={customInputValues.preferredShift === PREFERRED_SHIFT_TYPE_ENUM.DAY}
                   onChange={onValueChange}
                 />
-                <label class="custom-control-label" for="Day">Day</label>
+                <label for="Day">Day</label>
               </div>
             </div>
             <div className="col-3.5">
-              <div class="custom-control custom-checkbox mr-sm-2">
+              <div class="custom-checkbox mr-sm-2">
                 <input
                   type="checkbox"
-                  class="custom-control-input"
+                  class="form-control-input"
                   id="AfterNoon"
                   value="AfterNoon"
                   checked={customInputValues.preferredShift === PREFERRED_SHIFT_TYPE_ENUM.AFTER_NOON}
                   onChange={onValueChange}
                 />
-                <label class="custom-control-label" for="AfterNoon">AfterNoon</label>
+                <label for="AfterNoon">AfterNoon</label>
               </div>
             </div>
-            <div className="col-2.5">
-              <div class="custom-control custom-checkbox mr-sm-2">
+            <div className="col-3.5">
+              <div class="custom-checkbox mr-sm-2">
                 <input
                   type="checkbox"
-                  class="custom-control-input"
+                  class="form-control-input"
                   id="Night"
                   value="Night"
                   checked={customInputValues.preferredShift === PREFERRED_SHIFT_TYPE_ENUM.NIGHT}
                   onChange={onValueChange}
                 />
-                <label class="custom-control-label" for="Night">Night</label>
+                <label for="Night">Night</label>
               </div>
             </div>
-            <div className="col-3">
-              <div class="custom-control custom-checkbox mr-sm-2">
+            <div className="col-3.5">
+              <div class="custom-checkbox mr-sm-2">
                 <input
                   type="checkbox"
-                  class="custom-control-input"
+                  class="form-control-input"
                   id="Flexible"
                   value="Flexible"
                   checked={customInputValues.preferredShift === PREFERRED_SHIFT_TYPE_ENUM.FLEXIBLE || !customInputValues.preferredShift}
                   onChange={onValueChange}
                 />
-                <label class="custom-control-label" for="Flexible">Flexible</label>
+                <label for="Flexible">Flexible</label>
               </div>
             </div>
           </div>
