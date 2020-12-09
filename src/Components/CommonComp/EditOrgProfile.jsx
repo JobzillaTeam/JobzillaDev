@@ -329,7 +329,7 @@ class EditProfile extends Component {
               </div>
               <div className="top-margin mt-3 text-right">
                 <button
-                  className="top-margin btn btn-blue mt-2rem"
+                  className="top-margin btn btn-blue mt-2rem marB-50"
                   onClick={this.UpdateProfile}
                 >
                   Update
