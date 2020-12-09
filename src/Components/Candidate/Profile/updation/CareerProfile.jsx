@@ -46,6 +46,7 @@ const CareerProfileComponent = ({ showPopup }) => {
         const { preferredShift, employmentType } = candidateInfo;
         setCustomInputValues({ preferredShift: preferredShift });
         setValue('employmentType', employmentType);
+        let modifiedCities = [];
         if (response.candidateInfo.preferredLocation !== null) {
           const preferredLocation = response.candidateInfo.preferredLocation?.split(',');
           if (cities) {
@@ -53,9 +54,10 @@ const CareerProfileComponent = ({ showPopup }) => {
             // console.log(intersection)
             setPreferredLocations(intersection);
             intersection.map((val) => setAddPreferredLocation(oldArray => [...oldArray, val.name]))
+            modifiedCities = cities.filter(city => !preferredLocation.includes(city.name));
           }
         }
-        setCities(cities ? cities : [])
+        setCities(modifiedCities ? modifiedCities : [])
       }
     })
   }
@@ -79,7 +81,8 @@ const CareerProfileComponent = ({ showPopup }) => {
 
   const onDelete = (i) => {
     const preferredLocationCnt = preferredLocations.slice(0)
-    preferredLocationCnt.splice(i, 1)
+    const removedLocation = preferredLocationCnt.splice(i, 1)
+    setCities([...cities, ...removedLocation])
     setAddPreferredLocation(Array.prototype.map.call(preferredLocationCnt, s => s.name))
     setPreferredLocations(preferredLocationCnt)
   }
