@@ -45,7 +45,7 @@ const PersonalComponent = ({ showPopup }) => {
       "city": inputData.city,
       "state": inputData.state,
       "country": inputData.country,
-      "workPermit": workPermit.join(),
+      "workPermit": inputData.workPermit,
       "candidateId": candidateId
     }
     ApiServicesOrgCandidate.updateCareerInfo(data, getProfileInfo, showPopup);
@@ -70,7 +70,8 @@ const PersonalComponent = ({ showPopup }) => {
           "pincode": response.candidateInfo.pincode,
           "city": response.candidateInfo.city,
           "state": response.candidateInfo.state,
-          "country": response.candidateInfo.country
+          "country": response.candidateInfo.country,
+          "workPermit": response.candidateInfo.workPermit
         });
       }
     });
@@ -217,13 +218,23 @@ const PersonalComponent = ({ showPopup }) => {
           </div>
           <div className="form-group">
             <label className="modal-label" htmlFor="University">Work Permit for countries</label>
-            <ReactTags
+            
+            <input class="form-control"
+              type="text"
+              placeholder="Enter Country"
+              id="workPermit"
+              name="workPermit"
+              register
+              value={inputData.workPermit}
+              onChange={(e) => handleFormInputData(e)}
+            />
+            {/* <ReactTags
               placeholderText={'Add New Country'}
               minQueryLength={1}
               tags={tags}
               suggestions={COUNTRY_LIST}
               onDelete={onDelete}
-              onAddition={onAddition} />
+              onAddition={onAddition} /> */}
           </div>
         </div>
         <button class="btn lightBlue float-right px-5"> Save</button>

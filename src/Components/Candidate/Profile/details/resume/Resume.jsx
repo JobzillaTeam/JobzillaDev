@@ -5,6 +5,7 @@ import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast'
 import axios from 'axios'
 import ApiServicesOrgCandidate from '../../../../../Services/ApiServicesOrgCandidate';
+import RenderLoader from '../../../../CommonComp/Loader';
 
 
 class Resume extends Component {
@@ -93,7 +94,8 @@ class Resume extends Component {
     deleteProductDialog: false,
     submitted: false,
     showing: true,
-    submitDisabled: true
+    submitDisabled: true,
+    isLoading: false
   };
 
   onFileChange = event => {
@@ -169,14 +171,23 @@ class Resume extends Component {
           this.state.selectedFile,
         );
       }
+      this.setState({
+        isLoading: true
+      });
       // Calling Upload Sample File Service from Service file:-
       this.fileService1.postResumeFile(formData, formheader)
         .then(Response => {
           //localStorage.setItem("SelectedFile", this.state.selectedFile.name || this.state.DraggedFile.name)
+          this.setState({
+            isLoading: false
+          })
           this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'File uploaded Successfully' }, 60000);
           window.location.reload()
         },
         ).catch(error => {
+          this.setState({
+            isLoading: false
+        })
           this.toast.show({ severity: 'error', summary: 'Error', detail: 'Server Error ' }, 50000);
         })
     }
@@ -303,6 +314,7 @@ class Resume extends Component {
                     <p className="text-center1 mt-6"></p>
                   </div>
                 </div>
+                {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
               </section>
               <div className="ml-2 mt-6">
                 <button type="button" className="btn btn-blue-upload" onClick={this.uploadFile}>Upload</button>

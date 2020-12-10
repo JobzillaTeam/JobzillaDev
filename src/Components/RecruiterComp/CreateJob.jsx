@@ -14,7 +14,7 @@ export default class CreateJob extends React.Component {
   constructor() {
     super();
     this.state = {
-      values: { jobTitle: '', secondarySkills: '', noOfPositionsAvailable: '', currency: CURRENCY_TYPE_ENUM.INR, visa: '', mustHavePasport: '', jobDescription: '', responsibilities: '' },
+      values: { jobTitle: '', secondarySkills: '', noOfPositionsAvailable: 1, currency: CURRENCY_TYPE_ENUM.INR, visa: '', mustHavePasport: '', jobDescription: '', responsibilities: '' },
       errors: {},
       remainingTextLength: {
         jobDescription: MAX_LENGTH,
@@ -496,7 +496,7 @@ export default class CreateJob extends React.Component {
                             ref={inputEl => (this.noOfPositionsAvailable = inputEl)}
                             class={`form-control ${errors && errors.noOfPositionsAvailable ? 'is-invalid' : ''}`}
                             type="number"
-                            min={0}
+                            min={1}
                             name="noOfPositionsAvailable"
                             value={noOfPositionsAvailable}
                             onChange={this.handleChange}

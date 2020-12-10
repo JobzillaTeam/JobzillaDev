@@ -94,9 +94,8 @@ const CandidateJobDetails = (props) => {
     }
       break;
   }
-  let interviewStatus = JobAndCandidateDetails && JobAndCandidateDetails.interviewStatus;
-  interviewStatus = interviewStatus === "NULL" ? getApplicationStatus(JobAndCandidateDetails.applicationStatus) : interviewStatus;
-  const isInterviewStatus = (JobAndCandidateDetails && JobAndCandidateDetails.interviewStatus &&  JobAndCandidateDetails.interviewStatus !== "NULL") && (jobStatus === 'accepted' || jobStatus === 'searchJobs') ? true : false;
+  const interviewStatus = JobAndCandidateDetails && JobAndCandidateDetails.interviewStatus;
+  const isInterviewStatus = (JobAndCandidateDetails && JobAndCandidateDetails.interviewStatus && JobAndCandidateDetails.interviewStatus !== "NULL") ? true : false;
   return (
     <Fragment>
       <LeftNavCandidate></LeftNavCandidate>

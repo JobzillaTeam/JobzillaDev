@@ -46,7 +46,7 @@ const CareerProfileComponent = ({ showPopup }) => {
         const { preferredShift, employmentType } = candidateInfo;
         setCustomInputValues({ preferredShift: preferredShift });
         setValue('employmentType', employmentType);
-        let modifiedCities = [];
+        let modifiedCities = cities;
         if (response.candidateInfo.preferredLocation !== null) {
           const preferredLocation = response.candidateInfo.preferredLocation?.split(',');
           if (cities) {

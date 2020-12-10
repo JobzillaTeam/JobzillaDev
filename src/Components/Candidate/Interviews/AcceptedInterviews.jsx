@@ -131,6 +131,8 @@ const AcceptedInterviews = () => {
                 {
                   resourceJobs && resourceJobs[0] ? resourceJobs.map((resourceJob, resourceIndex) => {
                     const { jobDetails } = resourceJob;
+                    const interviewStatus = resourceJob && resourceJob.interviewStatus;
+                    const isInterviewStatus = (resourceJob && resourceJob.interviewStatus && resourceJob.interviewStatus !== "NULL") ? true : false;
                     return (
                       <div class="jobListItem">
                         <section class={`row mx-0 px-4 ${resourceIndex !== 0 && 'pt-4'} pb-4`}>
@@ -154,15 +156,18 @@ const AcceptedInterviews = () => {
                             <h6 class="job-desc mt-3">Job Description</h6>
                             {jobDetails.jobDescription}
                           </div>
-                          <div class="col-md-3 ">
+                          {
+                            isInterviewStatus ? <div class="col-md-3 ">
                             <div class="float-right">
                               <div class="interview-status">
                                 <div class="float-left"><img src="/images/icons/interview_status.svg" /></div>
                                 <div class="float-left"> <span>Interview Status</span>
-                                  <p>{resourceJob.interviewStatus}</p></div>
+                                  <p>{interviewStatus}</p></div>
                               </div>
                             </div>
-                          </div>
+                          </div> : undefined
+                          }
+                          
                           <div class="col-12 px-0 text-right"><Link to={{ pathname: `/candidate/jobDetails/accepted/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </section>
                       </div>

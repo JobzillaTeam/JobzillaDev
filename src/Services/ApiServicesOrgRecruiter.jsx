@@ -3,31 +3,31 @@ import { ApiBaseUrl } from '../Config.jsx'
 
 class ApiServicesOrgRecruiter {
   constructor() {
-    // super();
     axios.interceptors.response.use(response => {
       return response;
     }, err => {
-      return new Promise((resolve, reject) => {
-        console.log(err)
-        const originalReq = err.config;
-        const isAuthTokenExpired = err && err.response && err.response.status === 401 && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')
-        if (isAuthTokenExpired) {
-          let userName = localStorage.getItem('emailId');
-          if (!userName) userName = localStorage.getItem('userName');
-          let res = fetch(`${ApiBaseUrl}/authenticate/${userName}`)
-            .then(res => res.json()).then(res => {
-              if (res && res.responseObject) {
-                const authToken = res.responseObject;
-                console.log(res);
-                localStorage.setItem('authToken', authToken);
-                originalReq.headers['Authorization'] = `Bearer ${authToken}`;
-              }
-              return axios(originalReq);
-            });
-          resolve(res);
-        }
+      const originalReq = err.config;
+      const isAuthTokenExpired = err && err.response && err.response.status === 401 && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')
+      if (isAuthTokenExpired) {
+        return new Promise((resolve, reject) => {
+            let userName = localStorage.getItem('emailId');
+            if (!userName) userName = localStorage.getItem('userName');
+            let res = fetch(`${ApiBaseUrl}/authenticate/${userName}`)
+              .then(res => res.json()).then(res => {
+                if (res && res.responseObject) {
+                  const authToken = res.responseObject;
+                  // console.log(res);
+                  localStorage.setItem('authToken', authToken);
+                  originalReq.headers['Authorization'] = `Bearer ${authToken}`;
+                }
+                return axios(originalReq);
+              });
+            resolve(res);
+          return Promise.reject(err);
+        });
+      } else {
         return Promise.reject(err);
-      });
+      }
     });
   }
   addJobDetails(resourceInfo) {
