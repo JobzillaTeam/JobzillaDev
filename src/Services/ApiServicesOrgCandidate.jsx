@@ -401,7 +401,7 @@ class ApiServicesOrgCandidate {
 
   //Get candidate Email notifications Settings
   getCandidateSettings() {
-    const candidateId = JSON.parse(localStorage.getItem('userDetails')).id;
+    const candidateId = localStorage.getItem('candidateId');
     return (
       axios
         .get(ApiBaseUrl + '/candidate/notificationSettingForCandidate?candidateId=' + candidateId, this.getToken())
