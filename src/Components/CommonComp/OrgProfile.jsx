@@ -172,7 +172,7 @@ class Profile extends Component {
               </div>
             </div>
             <div className="text-right">
-              <button className="btn btn-blue" onClick={this.editProfileCall}>
+              <button className="btn btn-blue marB-50" onClick={this.editProfileCall}>
                 Edit Profile
               </button>
             </div>

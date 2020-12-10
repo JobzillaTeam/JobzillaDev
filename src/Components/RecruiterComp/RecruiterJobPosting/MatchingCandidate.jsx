@@ -145,8 +145,8 @@ export default class MatchingCandidate extends Component {
                                             </td>
                                             <td>
                                                 
-                                                <button className="btn btn-blue1 mr-2" onClick={() => this.acceptInvite(data.candidateId)}>Invite</button>
-                                                <button className="btn btn-border1" onClick={() => this.declineInvite(data.candidateId)}>Remove</button>
+                                                <button className="btn btn-blue1 mr-2 marB10" onClick={() => this.acceptInvite(data.candidateId)}>Invite</button>
+                                                <button className="btn btn-border1 marB10" onClick={() => this.declineInvite(data.candidateId)}>Remove</button>
                                                 
                                             </td>
                                         </tr>

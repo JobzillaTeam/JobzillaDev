@@ -189,7 +189,7 @@ const SearchJobs = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 px-0 text-right"><Link to={getPath(jobDetails.jobId, jobDetails.applicationStatus)}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div class="col-12 px-0 text-right marB10"><Link to={getPath(jobDetails.jobId, jobDetails.applicationStatus)}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </section>
                       </div>
                     )

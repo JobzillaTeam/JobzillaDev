@@ -233,7 +233,7 @@ class UploadProfile extends Component {
                                         
                                     </div>    
                                 </section>
-                                <div className="ml-2 mt-4">
+                                <div className="ml-2 mt-4 marB-40">
                                     <button type="button" className="btn btn-blue" onClick={this.uploadFile}>Upload</button>
                                 </div>
                             </div>

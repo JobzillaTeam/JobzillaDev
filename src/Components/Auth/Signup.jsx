@@ -41,6 +41,9 @@ export default class Signup extends Component {
            });
        }
      }
+     onLogin = () => {
+        this.props.history.push('/login')
+      }
 
     submituserRegistrationForm = (e) => {
         e.preventDefault();
@@ -286,9 +289,16 @@ validateForm = () => {
                                         </div>  
                                     </div>
                                 {/* Create Button */}
-                                <div className="form-group mt-5">
-                                    <button className="btn btn-blue w-50"  >Create</button>
-                                </div>  
+                                <div className="form-group">
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <button className="btn btn-blue mr-3 w-100" >Create</button>
+                                            </div>
+                                            {<div className="col-6">
+                                                <button className="btn btn-border w-100" onClick={() => this.onLogin()}>Back To login</button>
+                                            </div>}
+                                        </div>
+                                    </div>  
                                 {/* <div className="terms" ><Link to="/termsofUse">Terms of use</Link></div>  */}
                             </div>
                             {/* image on sign up */}

@@ -667,11 +667,11 @@ export default class CreateJob extends React.Component {
                 </div>
               </div>
               <div className="pull-right">
-                <Link to="/activeJob" class="ml-4 btn btn-light float-right   border border-primary">
+                <Link to="/activeJob" class="ml-4 btn btn-light float-right border border-primary marB-50">
                   Cancel
                 </Link>
                 <button
-                  className="btn btn-primary float-right right3 "
+                  className="btn btn-primary float-right right3 marB-50"
                   onClick={this.handleSubmit}
                 >
                   Post

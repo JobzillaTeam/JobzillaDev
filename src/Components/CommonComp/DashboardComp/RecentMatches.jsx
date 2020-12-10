@@ -48,7 +48,7 @@ export default class RecentMatches extends Component {
         <div className="row ml-0 mr-1">
           <div className="col col-sm-12 col-md-12 col-lg-12">
             <h4 className="wid100 ml-3 marT30">Recent Matches</h4>
-            <section className="recent_matches_section1">
+            <section className="recent_matches_section1 marB-40">
               {matchingJobs.constructor === Array && matchingJobs && matchingJobs[0] ? matchingJobs.map((data, index) => {
                 return (
                   <div key={index} className="row align-items-center">

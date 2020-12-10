@@ -44,6 +44,11 @@ footer {
     font-size: 0.8rem;
     border-top: 1px solid #eee;
     color: #818181;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff !important;
+    padding-right: 10rem;
 }
 
 .sub-title {
@@ -324,6 +329,9 @@ nav a {
     border: 1px solid #ccc;
 }
 
+.chart_section{
+    margin-bottom: 40px !important;
+}
 .media-body {
     font-size: 16px;
     color: #52575C;
@@ -792,10 +800,20 @@ nav a {
     margin-top: 50px;
 }
 
+.marB10 {
+    margin-bottom: 10px;
+}
+
 .marB30 {
     margin-bottom: 30px;
 }
+.marB-40{
+    margin-bottom: 40px;
+}
+.marB-50{
+    margin-bottom: 50px;
 
+}
 .marR5 {
     margin-right: 5px;
 }
@@ -819,7 +837,9 @@ nav a {
 .mt-2rem {
     margin-top: 2rem;
 }
-
+.mb-4{
+    margin-bottom: 4rem;
+}
 @media only screen and (max-width: 576px) {
     .p-datatable-header .table-header {
         display: block!important;
