@@ -119,7 +119,7 @@ export default class CandidateApplication extends Component {
                                             <td>
                                                 <Link to={`/candidateProfileToOpen/${data.user.id}`}><p className="tb-title-text">{data.firstName} {data.lastName}</p> </Link>
                                                 <p>{data.currentRole} at {data.company}</p>
-                                                <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address},{data.city}</p>
+                                                <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address}</p>
                                             </td>
                                             <td>
                                               {data1.candidateSkillsList && data1.candidateSkillsList[0] && data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}

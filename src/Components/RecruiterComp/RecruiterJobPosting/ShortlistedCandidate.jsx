@@ -139,7 +139,7 @@ class ShortlistedCandidate extends Component {
                                         <p>{data.candidate.currentRole} at {data.candidate.company}</p>
                                         <p><i className="pi pi-envelope mr-2"></i>{data.candidate.emailId}</p>
                                         <p><i className="pi pi-mobile mr-2"></i>{data.candidate.mobileNumber}</p>
-                                        <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.candidate.address},{data.candidate.city}</p>
+                                        <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.candidate.address}</p>
                                     </td>
                                     <td>
                                         <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID} candidateId={this.state.candidateIdForUpdateStatus}></InterviewStatusPopUp>
