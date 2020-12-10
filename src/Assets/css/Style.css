@@ -3496,3 +3496,9 @@ p.text-center1{
 .paddingBottom {
     padding-bottom: 14rem !important;
 }
+
+.content1 {
+    display: flex;
+    flex-direction: column;
+    height: 73vh;
+}

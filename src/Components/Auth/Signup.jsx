@@ -4,6 +4,7 @@ import Header from '../CommonComp/Header'
 import Footer from '../CommonComp/Footer'
 import ApiServicesOrg from '../../Services/ApiServicesOrg'
 import { Toast } from 'primereact/toast';
+import TermsOfUse from '../Auth/TermsOfUse'
 
 //import TermsOfUse from '../Auth/TermsOfUse'
 //import PrivacyPolicy from '../Auth/PrivacyPolicy'
@@ -19,10 +20,12 @@ export default class Signup extends Component {
             errors: {},
             touched: {},
             formSubmitted: false,
+            userDialog: false,
 
         }
         this.handleChange = this.handleChange.bind(this);
         this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
+        this.onTermsConditionsModalRef= this.onTermsConditionsModalRef.bind(this);
     }
     handleChange = (e) => {
         let fields = this.state.fields;
@@ -44,6 +47,14 @@ export default class Signup extends Component {
      onLogin = () => {
         this.props.history.push('/login')
       }
+
+    onTermsConditionsModalRef = (obj) => { 
+        this.showModal = obj&&obj.showModal 
+     }
+     
+     onTermsConditionsClick = () => {
+       this.showModal();
+     }
 
     submituserRegistrationForm = (e) => {
         e.preventDefault();
@@ -283,8 +294,10 @@ validateForm = () => {
                                 <div className="form-group">
                                         <div className="form-check">
                                             <input className="form-check-input" type="checkbox" id="agreeTerms" ref="check" required/>
+                                            <TermsOfUse ref={this.onTermsConditionsModalRef} ></TermsOfUse>
                                             <label className="form-check-label" htmlFor="agreeTerms">
-<Link to="/termsofUse">I agree to terms and conditions</Link>
+                                            {/* <Link to="/termsofUse">I agree to terms and conditions</Link> */}
+                                            <a href="#" onClick={this.onTermsConditionsClick}>I agree to terms and conditions</a>
                                             </label>
                                         </div>  
                                     </div>
