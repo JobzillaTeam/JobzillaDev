@@ -107,7 +107,6 @@ export default class CandidateApplication extends Component {
                                     <th>Candidates</th>
                                     <th>Skills</th>
                                     <th>Experience</th>
-                                    <th>AvailableFrom</th>
                                     <th>Match</th>
                                     <th>Action</th>
                                 </tr>
@@ -128,9 +127,6 @@ export default class CandidateApplication extends Component {
                                             <td>
                                                 {data.yearsofExp}
                                             </td>
-                                            <td>
-                                                {data.availableFrom}
-                                            </td>
                                             <td className='candidateProgress'>                                       
                                                 <div style={{ width: 65, height: 65 }}>
                                                     <CircularProgressbarWithChildren styles={{
@@ -148,10 +144,8 @@ export default class CandidateApplication extends Component {
                                                 </div>
                                             </td>
                                             <td>
-                                                <p>
                                                 <button className="btn btn-blue1 mr-2 marB10" onClick={() => this.acceptInvite(data.candidateId)}>Accept</button>
                                                 <button className="btn btn-border1 marB10" onClick={() => this.declineInvite(data.candidateId)}>Decline</button>
-                                                </p>
                                             </td>
                                         </tr>
                                     );
