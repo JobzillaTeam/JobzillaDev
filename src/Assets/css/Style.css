@@ -365,6 +365,7 @@ nav a {
     background: #fff;
     padding: 15px;
     margin: 10px;
+    word-break: break-all !important;
 }
 
 .uploadedProfile_section_Card,
@@ -406,6 +407,7 @@ nav a {
     font-size: 18px;
     color: #2E2E2E;
     font-family: Montserrat-SemiBold !important;
+    word-break: break-all !important;
 }
 
 .recent_matches_section1 .row .job-title-header,
@@ -413,6 +415,7 @@ nav a {
     font-size: 14px !important;
     color: #2C3E50 !important;
     font-family: Montserrat-Medium !important;
+    word-break: break-all !important;
 }
 
 .hiredProfile_section_Card h5 {
@@ -1180,6 +1183,7 @@ input:checked+.slider:before {
 
 .p-datatable-tbody td {
     font-size: 14px;
+    word-break: break-all !important;
 }
 
 .p-datatable-tbody .fa {
@@ -1592,6 +1596,7 @@ input:checked+.slider:before {
     font-size: 18px;
     color: #2E2E2E;
     font-family: Montserrat-SemiBold !important;
+    word-break: break-all !important;
 }
 
 .recent_matches_section .row .job-title-header,
@@ -2147,6 +2152,7 @@ textarea.form-control {
     font-size: 12px;
     padding: 15px 27px 15px 1px;
     margin-bottom: -9rem;
+    word-break: break-all !important;
 }
 
 .job-skills img {
@@ -2158,6 +2164,7 @@ textarea.form-control {
     color: #007EFF;
     font-weight: bold;
     font-size: 18px;
+    word-break: break-all !important;
 }
 
 .job-posting {
