@@ -1,31 +1,63 @@
-import React from 'react';
+import { Modal } from 'react-bootstrap'
+import React, { Component } from 'react';
 import Header from '../CommonComp/Header'
 import Footer from '../CommonComp/Footer'
 import { Link } from 'react-router-dom'
 
-const TermsofUse =()=>{
-    return(
+class TermsOfUse extends Component {
+    constructor(props) {
+        super(props);
 
-    <div className="content">
-        <Header></Header>
-        <div className="main px-5 py-4">
-        <div class="pb-4"><Link to="/signup"> <span> {'<'} </span> Back to signup </Link></div>
-      <p class="modal-body-title">
-      Terms and Conditions:
-      </p>
-      <ul class="paddingBottom">
+        this.state = {
+            show: false,
+        }
+    }
+    showModal = () => {
+        this.setState({ show: true });
+    }
 
-        <li class="modal-body-content">All data pertaining to the Client, such as, Company details, employee details and details of roles and vacancies will be kept confidential and will not be discussed with anyone ex-cept the Client or representatives of the Client.</li>
+    hideModal = () => {
+        this.setState({ show: false });
+    }
 
-        <li class="pt-2 modal-body-content">Similarly, all the details related to the system, iSwitch, must be kept confidential by the Client. All candidate information shared to the client by Ecoss through their system, iSwitch, should remain confidential with the Client and should not be shared with anyone else within or outside Ecoss’ client list.</li>
 
-        <li class="pt-2 modal-body-content">However, a detailed agreement will be signed between the Client and Ecoss before onboarding of a Client</li>
-    
-      </ul>
-    
-    <Footer></Footer>
-    </div>  
-    </div>
-    )}
+    render() {
+        return (
+            <>
+                <Modal
+                    show={this.state.show}
+                    onHide={() => this.hideModal(false)}
+                    aria-labelledby="contained-modal-title-vcenter">
+                    <Modal.Header closeButton>
+                        <Modal.Title className="sub-title" id="contained-modal-title-vcenter">
+                            Terms and Conditions
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="content1">
+                            {/* <Header></Header> */}
+                            <div className="main px-5 py-4">
+                                {/* <div class="pb-4"><Link to="/signup"> <span> {'<'} </span> Back to signup </Link></div> */}
+                                {/* <p class="modal-body-title">
+                                    Terms and Conditions:
+                                </p> */}
+                                <ul class="paddingBottom">
 
-export default TermsofUse
+                                    <li class="modal-body-content">All data pertaining to the Client, such as, Company details, employee details and details of roles and vacancies will be kept confidential and will not be discussed with anyone ex-cept the Client or representatives of the Client.</li>
+
+                                    <li class="pt-2 modal-body-content">Similarly, all the details related to the system, iSwitch, must be kept confidential by the Client. All candidate information shared to the client by Ecoss through their system, iSwitch, should remain confidential with the Client and should not be shared with anyone else within or outside Ecoss’ client list.</li>
+
+                                    <li class="pt-2 modal-body-content">However, a detailed agreement will be signed between the Client and Ecoss before onboarding of a Client</li>
+
+                                </ul>
+                                {/* <Footer></Footer> */}
+                            </div>
+                        </div>
+                    </Modal.Body>
+                </Modal>
+            </>
+        );
+    }
+}
+
+export default TermsOfUse
