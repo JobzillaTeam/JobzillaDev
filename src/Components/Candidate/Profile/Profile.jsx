@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import LeftNavCandidate from '../../CommonComp/LeftNavCandidate'
 import HeaderAll from '../../CommonComp/HeaderAll'
+import Footer from "../../CommonComp/Footer";
 import { Information, NavBar, LanguageKnown } from './details';
 import { Breadcrumbs } from '../../CommonComp/breadcrumbs/index';
 import { PopupContent } from './PopupContent';
@@ -57,6 +58,7 @@ export const Profile = () => {
                     />
                     <ScrollUpButton />
                 </div>
+                <Footer></Footer>
             </div>
         </div>
     )
