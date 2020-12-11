@@ -38,7 +38,7 @@ class ActiveJobCandidates extends React.Component {
                         <p id="body">{match.candidate.currentRole} at {match.candidate.company}</p>
                       </div>
                       <hr></hr>
-                      <i className="pi pi-map-marker mr-2"></i>{match.candidate.city}, {match.candidate.country}
+                      <i className="pi pi-map-marker mr-2"></i>{match.candidate.address}
                     </div>
                     <div className="col-md-4">
                       <div style={{ width: 65, height: 65 }}>
