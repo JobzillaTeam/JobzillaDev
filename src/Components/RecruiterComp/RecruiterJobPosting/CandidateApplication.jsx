@@ -107,7 +107,6 @@ export default class CandidateApplication extends Component {
                                     <th>Candidates</th>
                                     <th>Skills</th>
                                     <th>Experience</th>
-                                    <th>AvailableFrom</th>
                                     <th>Match</th>
                                     <th>Action</th>
                                 </tr>
@@ -120,16 +119,13 @@ export default class CandidateApplication extends Component {
                                             <td>
                                                 <Link to={`/candidateProfileToOpen/${data.user.id}`}><p className="tb-title-text">{data.firstName} {data.lastName}</p> </Link>
                                                 <p>{data.currentRole} at {data.company}</p>
-                                                <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address},{data.city}</p>
+                                                <p><img src="/images/icons/location.svg" alt="location" className="pr-2" />{data.address}</p>
                                             </td>
                                             <td>
                                               {data1.candidateSkillsList && data1.candidateSkillsList[0] && data1.candidateSkillsList.map(skill => skill.skillName).join(', ')}
                                             </td>
                                             <td>
                                                 {data.yearsofExp}
-                                            </td>
-                                            <td>
-                                                {data.availableFrom}
                                             </td>
                                             <td className='candidateProgress'>                                       
                                                 <div style={{ width: 65, height: 65 }}>
@@ -148,10 +144,8 @@ export default class CandidateApplication extends Component {
                                                 </div>
                                             </td>
                                             <td>
-                                                <p>
                                                 <button className="btn btn-blue1 mr-2 marB10" onClick={() => this.acceptInvite(data.candidateId)}>Accept</button>
                                                 <button className="btn btn-border1 marB10" onClick={() => this.declineInvite(data.candidateId)}>Decline</button>
-                                                </p>
                                             </td>
                                         </tr>
                                     );

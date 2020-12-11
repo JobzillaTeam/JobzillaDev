@@ -75,17 +75,17 @@ class InterviewStatusPopUp extends Component{
               this.interViewStatus.updateInterviewStatus(this.state.fields, this.props.jobID, this.props.candidateId)
                 .then(Response=>{
                   // console.log(Response)
-                  this.hideModal()
+                if(Response.status===208){
+                  this.toast.show({severity: 'error', summary: 'Error', detail: 'User already Joined '},20000);
+                  }else{
+                    this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Status is updated Successfully'},20000);
+                  }
+                  //this.hideModal()
                   window.location.reload()
-                
                 })
                 .catch(error=>{
                 this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},20000);})
-                this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Status is updated Successfully'},20000);
-                
-              
-                    
-             localStorage.setItem("Interview Status",JSON.stringify(this.state.fields))
+                localStorage.setItem("Interview Status",JSON.stringify(this.state.fields))
         }
       }    
 
