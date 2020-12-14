@@ -73,7 +73,7 @@ class Profile extends Component {
         {/*  Header */}
         <HeaderAll isProfile={true}></HeaderAll>
         {/* Main Content on the page */}
-        <div className="content_section main top-padding">
+        <div className="content_section main marT60 top-padding">
           <div className="mt-3 mb-3 setting_text1 top-margin">
             <Link to="/providerDashboard">
               <img

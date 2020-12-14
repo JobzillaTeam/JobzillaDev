@@ -164,7 +164,7 @@ class UploadProfile extends Component {
                 <Toast ref={(el) => this.toast = el} />
                     <div className="row  main">
                         {/* Content on the page */}
-                        <section className="content_section">
+                        <section className="content_section upload_profile_padding">
                             <div className="ml-0 mr-1">
                                 <div className="bulkUploadText">
                                 <h5 className="font-weight-400 mt-3">Bulk Profile Upload</h5>

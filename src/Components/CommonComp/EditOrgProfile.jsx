@@ -189,7 +189,7 @@ class EditProfile extends Component {
         {/*  Header */}
         <HeaderAll isProfile={true}></HeaderAll>
         {/* Main Content on the page */}
-        <div className="content_section main top-padding">
+        <div className="content_section marT60 main top-padding">
           <Toast ref={(el) => (this.toast = el)} />
           <div className="mt-3 mb-3 setting_text1">
             <Link to="/providerDashboard">

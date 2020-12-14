@@ -38,7 +38,7 @@ export const Profile = () => {
             <LeftNavCandidate />
             <div className="maincontent">
                 <HeaderAll isCandidate={true} />
-                <div className='container-fluid px-5 py-4 right-panel'>
+                <div className='container-fluid profile_top px-5 right-panel'>
                     {isPopupVisible ? <PopupContent
                         title={popupTitle}
                         showPopup={setPopupVisible}

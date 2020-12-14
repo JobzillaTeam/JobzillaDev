@@ -5,7 +5,7 @@ const Header = ()=>{
     return(
 
         /*Login and Signup Header */
-        <div className="Header login_header_bottom">
+        <div className="Header bg-white login_header_bottom">
             <div className="float-left col-xs-2">
                 <img src="../../images/login/logo.png" className="logo"/>
             </div>

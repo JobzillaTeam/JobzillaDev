@@ -185,14 +185,20 @@ label {
     width: 100%;
     height: 60px;
     line-height: 60px;
-    float: left;
+    /* float: left; */
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    border-bottom: 2px solid #f1f1f1;
 }
 
 .Header ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
-    float: right;
+    /* float: right; */
+    position: fixed;
+    right: 5px;
 }
 
 .Header ul li {
@@ -216,7 +222,7 @@ label {
 }
 
 .login.content_section {
-    padding: 4rem 2rem 4rem 4rem;
+    padding: 7rem 2rem 4rem 4rem;
 }
 
 .header_telephone,
@@ -386,6 +392,7 @@ nav a {
     background: #FFFFFF;
     /* padding: 15px; */
     margin: 24px;
+    margin-bottom: 15px !important;
     border-radius: 0px;
 }
 
@@ -606,8 +613,10 @@ nav a {
 
 .content_section {
     background: #f1f1f1;
-    padding: 1rem 3rem;
-    width: 100%
+    padding: 5rem 3rem 2rem 3rem;
+    width: 100%;
+    padding-bottom: 5rem !important;
+
 }
 
 .content_section .overview {
@@ -801,7 +810,9 @@ nav a {
 .marT50 {
     margin-top: 50px;
 }
-
+.marT60{
+    margin-top: 60px;
+}
 .marB10 {
     margin-bottom: 10px;
 }
@@ -2538,6 +2549,8 @@ textarea.form-control {
 
 .container-fluid {
     background-color: #F4F4F4 !important;
+    margin-top: 60px;
+    padding-bottom: 50px;
 }
 
 #main {
@@ -3269,6 +3282,7 @@ tr td:first-child {
 
 .white-middle-section {
     padding: 40px;
+    margin-bottom: 2rem;
     background: #fff;
     border-radius: 0px !important;
 }
@@ -3513,4 +3527,16 @@ p.text-center1{
     position: absolute;
     top: 50%;
     margin-top: .5rem !important;
+}
+
+.modal-content{
+    margin-top: 80px;
+}
+.upload_profile_padding{
+    padding: 1rem 3rem 0rem 3rem !important;
+}
+.profile_top{
+    padding-bottom: 60px !important;
+    padding-top: 2px !important;
+
 }
