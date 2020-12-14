@@ -9,7 +9,7 @@ class EmailSetting extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            candidateId: localStorage.getItem('userId'),
+            userId: JSON.parse(localStorage.getItem('userDetails')).id,
             id: '',
             canAllowNotificationForProvider: false,
             canCandidateHasAcceptedTermsAndConditions: false,
@@ -73,7 +73,7 @@ class EmailSetting extends Component {
                 if (Response && Response.data) {
                     this.setState({
                         id: Response.data.responseObject.id,
-                        candidateId: Response.data.responseObject.candidateId,
+                        userId: Response.data.responseObject.userId,
                         canAllowNotificationForProvider: Response.data.responseObject.canAllowNotificationForProvider,
                         canAllowNotificationForRecruite: Response.data.responseObject.canAllowNotificationForRecruite,
                         canCandidateHasAcceptedTermsAndConditions: Response.data.responseObject.canCandidateHasAcceptedTermsAndConditions,

@@ -100,10 +100,10 @@ class ApiServicesOrg extends Component {
 
   //3.3 Get Email Setting for Organization (Provider/Recruiter)
   getEmailSettings() {
-    const candidateId = JSON.parse(localStorage.getItem('userDetails')).id;
+    const userId = JSON.parse(localStorage.getItem('userDetails')).id;
     return (
       axios
-        .get(ApiBaseUrl + '/organization/notificationSettingForOrganization?candidateId=' + candidateId, this.getToken())
+        .get(ApiBaseUrl + '/organization/notificationSettingForOrganization?userId=' + userId, this.getToken())
         .then(Response => Response)
     )
   }
