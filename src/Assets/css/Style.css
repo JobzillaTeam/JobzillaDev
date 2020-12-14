@@ -2549,7 +2549,7 @@ textarea.form-control {
     float: right;
     display: inline-flex;
     cursor: pointer;
-    position: absolute;
+    position: relative !important;
     user-select: none;
 }
 
@@ -3507,4 +3507,10 @@ p.text-center1{
     display: flex;
     flex-direction: column;
     height: 73vh;
+}
+
+.p-input-icon-left>i, .p-input-icon-right>i {
+    position: absolute;
+    top: 50%;
+    margin-top: .5rem !important;
 }
