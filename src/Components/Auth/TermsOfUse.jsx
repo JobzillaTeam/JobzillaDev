@@ -36,7 +36,7 @@ class TermsOfUse extends Component {
                     <Modal.Body>
                         <div className="content1">
                             {/* <Header></Header> */}
-                            <div className="main px-5 py-4">
+                            <div className="main ">
                                 {/* <div class="pb-4"><Link to="/signup"> <span> {'<'} </span> Back to signup </Link></div> */}
                                 {/* <p class="modal-body-title">
                                     Terms and Conditions:

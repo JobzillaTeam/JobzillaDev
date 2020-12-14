@@ -5,6 +5,7 @@ import { Toast } from "primereact/toast";
 import { Link } from "react-router-dom";
 import ChangePasswordOrg from "../Auth/ChangePasswordOrg";
 import ApiServicesOrg from "../../Services/ApiServicesOrg";
+import RenderLoader from '../CommonComp/Loader';
 class EditProfile extends Component {
   constructor() {
     super();
@@ -16,6 +17,7 @@ class EditProfile extends Component {
       contactPersonName: "",
       gstin: "",
       mobile: "",
+      isLoading: false
       // userRole: ""
     };
     this.viewImage = new ApiServicesOrg();
@@ -45,8 +47,8 @@ class EditProfile extends Component {
       id: localStorage.getItem("organizationId"),
     };
     // console.log("employee => " + JSON.stringify(employee));
-
-    this.viewImage.updateOrganizationProfile(employee).then((res) => {
+  
+    this.viewImage.updateOrganizationProfile(employee).then((res) => {    
       this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully'},20000);
       setTimeout(() => {
         this.props.history.push("/orgProfile");
@@ -148,10 +150,16 @@ class EditProfile extends Component {
           Authorization: "Bearer " + token,
         },
       };
+      this.setState({
+        isLoading: true
+    });
       // Calling Upload profile photo File Service from Service file:-
       this.fileService
         .postProfilePhoto(formData, formheader)
         .then((Response) => {
+         this.setState({
+            isLoading: false
+        })
           // console.log(Response);
           // this.toast.show(
           //   {
@@ -231,7 +239,7 @@ class EditProfile extends Component {
                     accept=".gif,.jpg,.png,.tif|image/*"
                     id="picture"
                     onChange={this.uploadHandler}
-                  />
+                  />               
                 </form>
                 {this.state.imageUrl ? (
                   <img
@@ -251,8 +259,9 @@ class EditProfile extends Component {
                   />
                 )}
               </div>
+              {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
               <div className="pt-3">
-                <div class="orgProfileFont">{this.state.contactPersonName}</div>
+                <div class="orgProfileFont">{this.state.contactPersonName}</div>              
                 <p class="orgProfileFont">{JSON.parse(localStorage.getItem("userDetails")).userRole}</p>
               </div>
             </div>
