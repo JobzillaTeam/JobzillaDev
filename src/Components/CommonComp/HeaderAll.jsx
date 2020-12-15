@@ -46,7 +46,8 @@ class HeaderAll extends Component {
     const { status } = this.state
     const userName = localStorage.getItem('userName');
     const providerRecruiterStatus = localStorage.getItem('status')
-    if (localStorage.userRole === "candidate_role") {
+    const userRole = localStorage.userRole === "candidate_role"
+    if (userRole) {
       if (this.context.state instanceof Promise) {
         this.context.state.then((data) => {
           if (data) {
@@ -67,7 +68,7 @@ class HeaderAll extends Component {
           }
         })
       }
-    } else {
+    } else if (userRole === 'Owner') {
       new ApiServicesOrg().getOrganizationProfile().then((response) => {
         const responseObject = response && response.data && response.data.responseObject;
         const userNameValue = responseObject && responseObject.contactPerson ? responseObject.contactPerson : localStorage.getItem('userName');
