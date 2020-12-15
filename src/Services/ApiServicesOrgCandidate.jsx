@@ -12,7 +12,7 @@ class ApiServicesOrgCandidate {
       return response;
     }, err => {
       const originalReq = err.config;
-      if (err.response.data.responseCode === "403" && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')) {
+      if (err && err.response && err.response.data.responseCode === "403" && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')) {
         swal({
           title: 'Error',
           text: 'You are no more authorized to login to the system',
@@ -24,7 +24,7 @@ class ApiServicesOrgCandidate {
         });
         return Promise.reject(err);
       }
-      if (err.response.data.responseCode === "403 FORBIDDEN") {
+      if (err && err.response && err.response.data.responseCode === "403 FORBIDDEN") {
         swal({
           title: 'Error',
           text: 'You are no more authorized to login to the system',
