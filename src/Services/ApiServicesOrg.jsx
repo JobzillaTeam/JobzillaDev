@@ -237,12 +237,15 @@ class ApiServicesOrg extends Component {
 
 
   //5.6 Uploading Profile Photo
-  postProfilePhoto(formData, formheader) {
+  postProfilePhoto(formData, formheader, getProfileRefresh) {
     const userId = JSON.parse(localStorage.getItem('userDetails')).id
     return (
       axios
         .post(ApiBaseUrl + "/user/uploadImage/" + userId, formData, formheader)
-        .then(Response => Response)
+        .then(Response => {
+          if(getProfileRefresh) getProfileRefresh();
+           return Response;
+        })
     )
   }
 

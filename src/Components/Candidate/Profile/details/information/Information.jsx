@@ -4,24 +4,23 @@ import { EDIT_PROFILE_NAME } from '../../../../../Utils/AppConst'
 import RenderLoader from '../../../../CommonComp/Loader';
 import { Context } from '../../../../../Context/ProfileContext';
 import { Toast } from 'primereact/toast';
-import ApiServicesOrgCandidate from '../../../../../Services/ApiServicesOrgCandidate';
 
 const InformationComponent = ({ showPopup, candidateProfile }) => {
-  const { state } = React.useContext(Context);
-  const [candidateInfo, setCandidateInfo] = React.useState();
+  const { state, getProfileInfo } = React.useContext(Context);
+  const [fullCandidateInfo, setCandidateInfo] = React.useState();
+  const candidateInfo = fullCandidateInfo && fullCandidateInfo.candidateInfo;
   const [progressbar, setProgressbar] = useState();
   const toast = useRef(null);
   if (state instanceof Promise) {
     state.then((data) => {
       if (data) {
-        setCandidateInfo(data.candidateInfo)
+        setCandidateInfo(data)
         setProgressbar(data.progressBarCompletion)
       }
     })
   }
   const apiServicesOrg = new ApiServicesOrg();
-  const apiServicesOrgCandidate = ApiServicesOrgCandidate;
-  const [imagUrl, setImageUrl] = React.useState();
+  const imagUrl = fullCandidateInfo && fullCandidateInfo.userImage;
   const uploadHandler = (e) => {
     const files = e.target.files;
     var fileInput= files[0]
@@ -45,29 +44,15 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
       }
     }
 
-    apiServicesOrg.postProfilePhoto(formData, formheader)
+    apiServicesOrg.postProfilePhoto(formData, formheader, getProfileInfo)
       .then(Response => {
-        // console.log(Response)
         toast.current.show({ severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully' }, 60000);
-        setAvatar();
-        // window.location.reload();
       })
       .catch(error => {
-        // console.log(error)
         toast.current.show({ severity: 'error', summary: 'Error', detail: 'Server Error ' }, 50000)
       })
   }
 }
-  React.useEffect(() => {
-    setAvatar();
-  }, [])
-
-  const setAvatar = () => {
-    apiServicesOrg.viewProfileImage()
-      .then(Response => {
-        setImageUrl(Response.data.responseObject)
-      })
-  }
 
   if (candidateInfo) {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
@@ -95,7 +80,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
           <div class="col col-md-9 col-xs-12 align-items-center">
             <div>
               <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_PROFILE_NAME, true)} />
-              <h3 class="mb-2 wd-ba">{firstName} {lastName}</h3>
+              <h3 class="mb-2 wd-ba">{`${firstName} ${lastName}`}</h3>
             </div>
             <span class="visible-lg-inline  wd-ba">{currentRole} at {company}</span>
             <hr class="mb-4" />
