@@ -142,6 +142,7 @@ const InterviewInvites = () => {
                                   {jobDetails.jobTitle}
                                 </Link>
                                 <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
+                                <span class="ml-3 job-posting">{jobDetails.orgName}</span>
                               </div>
                             </div>
                             <ul class="job-skills">

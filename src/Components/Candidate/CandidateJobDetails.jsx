@@ -117,6 +117,7 @@ const CandidateJobDetails = (props) => {
                         <div  style={{ display: 'flex' }}>
                         <a href="#"><h5 class="mb-0"> {jobDetails.jobTitle}</h5></a>
                         <span class="job-posting"> Posted {jobDetails.postedAt} day ago</span>
+                        <span class="ml-3 job-posting">{jobDetails.orgName}</span>
                         </div>
                         {isInterviewStatus ? <div><img src="/images/icons/interview_status.svg" /><span class="ml-2"><strong>Interview Status:</strong></span><span class="ml-2" style={{color: '#768594'}}>{interviewStatus}</span></div> : ''}
                         
