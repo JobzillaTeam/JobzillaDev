@@ -6,7 +6,6 @@ import HeaderAll from '../CommonComp/HeaderAll';
 import ScrollUpButton from "react-scroll-up-button";
 import OverviewCardCandidate from '../CommonComp/DashboardComp/OverviewCardCandidate';
 import Popup from '../CommonComp/Popup';
-import TermsCandidate from '../CommonComp/DashboardComp/TermsCandidate';
 import TopSkillsCandidate from '../CommonComp/DashboardComp/TopSkillsCandidate';
 
 const Dashboard = () => {

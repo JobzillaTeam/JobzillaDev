@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 
 
-const TermsCandidate = ({ showPopup }) => {
+const TermsCandidate = ({ showPopup, setTemplateName }) => {
   let history = useHistory();
   const apiServicesOrg = new ApiServicesOrg();
   const handleOnDecline = e => {
@@ -13,11 +13,16 @@ const TermsCandidate = ({ showPopup }) => {
     history.replace({ pathname: "/logout" })
   }
   const handleOnAccepted = e => {
+  
     apiServicesOrg.updateAcceptedTC().then(Response => {
       const acceptedTC = Response && Response.data && Response.data.responseObject && Response.data.responseObject.acceptedTC
       if (acceptedTC) {
         localStorage.setItem('acceptedTC', true)
         showPopup(false);
+        setTemplateName('CHANGE_PASSWORD')
+        setTimeout(() => {
+          showPopup(true);
+        }, 200)
       }
     }
     ).catch(
