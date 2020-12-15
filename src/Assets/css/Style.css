@@ -3520,7 +3520,7 @@ p.text-center1{
 .content1 {
     display: flex;
     flex-direction: column;
-    height: 73vh;
+    height: 55vh;
 }
 
 .p-input-icon-left>i, .p-input-icon-right>i {
@@ -3542,4 +3542,7 @@ p.text-center1{
 }
 .toast_padding{
     margin-top: 50px;
+}
+.padding{
+    padding: 1.4rem 2rem 1rem 0rem!important
 }
