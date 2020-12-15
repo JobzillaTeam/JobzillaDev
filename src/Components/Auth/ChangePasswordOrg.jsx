@@ -137,12 +137,12 @@ class ChangePasswordOrg extends Component {
       <div>
         {/* Below button is used to call the modal popup .please remove once you call this from manage user */}
         {/*<Button onClick={() =>this.showModal(true)}>Small modal</Button>*/}
-        <Toast ref={(el) => this.toast = el} />
+        <Toast className="toast_padding" ref={(el) => this.toast = el} />
         <Modal className="modal-dialog"
           show={this.state.show}
           onHide={() => this.hideModal(false)}
           aria-labelledby="contained-modal-title-vcenter">
-          <Toast ref={(el) => this.toast = el} />
+          <Toast className="toast_padding" ref={(el) => this.toast = el} />
           <Modal.Header closeButton>
             <Modal.Title className="sub-title" id="contained-modal-title-vcenter">
               Change Password

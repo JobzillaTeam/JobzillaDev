@@ -128,7 +128,7 @@ class InterviewStatusPopUp extends Component{
           </Modal.Header>
           <Modal.Body>
           <form>
-          <Toast ref={(el) => this.toast = el} />
+          <Toast className="toast_padding" ref={(el) => this.toast = el} />
           
                   <div className="form-group">
                       <label htmlFor="interviewStatus">Interview Status</label>

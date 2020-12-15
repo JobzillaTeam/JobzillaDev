@@ -161,7 +161,7 @@ class UploadProfile extends Component {
 				<div className="maincontent">
                 <HeaderAll></HeaderAll>
                 <div className="container-fluid">
-                <Toast ref={(el) => this.toast = el} />
+                <Toast className="toast_padding" ref={(el) => this.toast = el} />
                     <div className="row  main">
                         {/* Content on the page */}
                         <section className="content_section upload_profile_padding">

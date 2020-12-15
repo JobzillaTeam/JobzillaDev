@@ -132,7 +132,7 @@ class ActiveJob extends React.Component {
         <div className="maincontent">
           <HeaderAll></HeaderAll>
           <section class="content_section">
-            <Toast ref={(el) => this.toast = el}></Toast>
+            <Toast className="toast_padding" ref={(el) => this.toast = el}></Toast>
             <div class="row py-4">
               <div class="col-md-6">
                 <h5 class="job-heading">Active Jobs</h5>

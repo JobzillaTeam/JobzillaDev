@@ -190,7 +190,7 @@ class EditProfile extends Component {
         <HeaderAll isProfile={true}></HeaderAll>
         {/* Main Content on the page */}
         <div className="content_section marT60 main top-padding">
-          <Toast ref={(el) => (this.toast = el)} />
+          <Toast className="toast_padding" ref={(el) => (this.toast = el)} />
           <div className="mt-3 mb-3 setting_text1">
             <Link to="/providerDashboard">
               <img

@@ -167,7 +167,7 @@ class CandidateEmailSetting extends Component {
         //console.log(status)
         return (
             <div className="content">
-                <Toast ref={(el) => this.toast = el} />
+                <Toast className="toast_padding" ref={(el) => this.toast = el} />
                 <HeaderAll isSetting={true} isCandidate={true}></HeaderAll>
                 <div className="content_section main">
 

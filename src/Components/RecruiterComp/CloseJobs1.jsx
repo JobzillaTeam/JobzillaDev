@@ -73,7 +73,7 @@ class CloseJobs extends Component {
             <HeaderAll></HeaderAll>
             {/* Main Content on the page */}
             <div className="content_section main">
-              <Toast ref={(el) => (this.toast = el)}></Toast>
+              <Toast className="toast_padding" ref={(el) => (this.toast = el)}></Toast>
               <div className=" main">
                 {/* top title */}
                 <div className="row">

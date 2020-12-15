@@ -240,7 +240,7 @@ class ManageUser extends Component{
                 <HeaderAll></HeaderAll>
                 {/* Main Content on the page */}
                 <div className="content_section main">
-                <Toast ref={(el) => this.toast = el} />
+                <Toast className="toast_padding" ref={(el) => this.toast = el} />
                     <div className="mt-3">
                         <h4>Manage Users</h4>
                         <p className="mb-0">Recruitment is not a one-person job; therefore, we have got you covered! </p>

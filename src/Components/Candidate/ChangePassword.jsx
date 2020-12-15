@@ -142,7 +142,7 @@ class ChangePassword extends Component {
          const {oldPasswordValue, newPasswordValue,  confirmPasswordValue, revealOldPassword, revealNewPassword  } = this.state;
         return (
             <Fragment>
-                 <Toast ref={(el) => this.toast = el} /> 
+                 <Toast className="toast_padding" ref={(el) => this.toast = el} /> 
                 {/* <LeftNavCandidate></LeftNavCandidate> */}
                 <div className="content">
                 {/* <div className="maincontent toggled"> */}

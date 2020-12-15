@@ -73,7 +73,7 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
     return (
       <div class="bg-white pl-3 pr-5 py-5 section-divider align-items-center">
-        <Toast ref={toast} />
+        <Toast className="toast_padding" ref={toast} />
         <div class="row align-items-center">
           <div class="col col-md-3 col-xs-12 align-items-center">
             {imagUrl ? <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />

@@ -154,7 +154,7 @@ class ForgotPassword extends Component {
           {/*  Header */}
           <Header></Header>
           {/* Main Content on the page */}
-          <Toast ref={(el) => this.toast = el} />
+          <Toast className="toast_padding" ref={(el) => this.toast = el} />
           <div className="content_section main login">
             <div className="row">
               {this.state.forgotPasswordSuccessPage ? this.forgotPasswordSuccessPage() : this.forgotPasswordForm() }

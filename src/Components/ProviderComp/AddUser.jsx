@@ -165,7 +165,7 @@ showError= (e) => {
         show={this.state.show}
         onHide={() => this.hideModal(false)}
         aria-labelledby="contained-modal-title-vcenter"> 
-        <Toast ref={(el) => this.toast = el} />
+        <Toast className="toast_padding" ref={(el) => this.toast = el} />
           <Modal.Header closeButton>
             <Modal.Title className="sub-title" id="contained-modal-title-vcenter">
               Add user

@@ -198,7 +198,7 @@ validateForm = () => {
                     {/*  Header */}
                     <Header></Header>
                     {/* Main Content on the page */}
-                    <Toast ref={(el) => this.toast = el} />
+                    <Toast className="toast_padding" ref={(el) => this.toast = el} />
                     <div className="content_section main login">
                         <h2>Sign Up</h2>
                         <p className="small-title">Welcome to iSWITCH</p>

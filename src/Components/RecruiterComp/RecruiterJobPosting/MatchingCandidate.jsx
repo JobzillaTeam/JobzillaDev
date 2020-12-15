@@ -90,7 +90,7 @@ export default class MatchingCandidate extends Component {
     render() {
         return (
             <div className="datatable-editing-demo"> 
-                <Toast ref={(el) => this.toast = el} />
+                <Toast className="toast_padding" ref={(el) => this.toast = el} />
                 <InfiniteScroll
                     dataLength={this.state.candidate.length}
                     next={this.loadMore}

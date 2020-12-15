@@ -234,7 +234,7 @@ class Resume extends Component {
     return (
 
       <div class="bg-white px-4 py-4 section-divider align-items-center">
-        <Toast ref={(el) => this.toast = el} />
+        <Toast className="toast_padding" ref={(el) => this.toast = el} />
         <div class="col">
           <div class="mb-4 align-items-center">
             <img src="/images/Dashboard-assets/resume-icon.svg" alt="Cinque Terre" class="mr-2" />

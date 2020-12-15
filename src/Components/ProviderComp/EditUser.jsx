@@ -118,7 +118,7 @@ class EditUser extends Component{
       <>
       {/* Below button is used to call the modal popup .please remove once you call this from manage user */}
       {/*<Button onClick={() =>this.showModal(true)}>Small modal</Button>*/}
-      <Toast ref={(el) => this.toast = el} />
+      <Toast className="toast_padding" ref={(el) => this.toast = el} />
       <Modal
         show={this.state.show}
         onHide={() => this.hideModal(false)}
