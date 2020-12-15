@@ -141,6 +141,7 @@ const JobOffers = () => {
                                   {jobDetails.jobTitle}
                                 </Link>
                                 <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
+                                <span class="ml-3 job-posting">Organization Name : {jobDetails.orgName}</span>
                               </div>
                             </div>
                             <ul class="job-skills">
