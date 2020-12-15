@@ -36,6 +36,7 @@ class HeaderAll extends Component {
 
 
   render() {
+    console.log('Render Header')
     const { isCandidate } = this.props;
     const { isSetting } = this.props;
     const {isProfile} = this.props;
