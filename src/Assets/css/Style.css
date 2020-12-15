@@ -188,7 +188,7 @@ label {
     /* float: left; */
     position: fixed;
     top: 0;
-    z-index: 9999;
+    z-index: 999;
     border-bottom: 2px solid #f1f1f1;
 }
 

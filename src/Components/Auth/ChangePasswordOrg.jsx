@@ -141,6 +141,7 @@ class ChangePasswordOrg extends Component {
         <Modal className="modal-dialog"
           show={this.state.show}
           onHide={() => this.hideModal(false)}
+          backdrop="static"
           aria-labelledby="contained-modal-title-vcenter">
           <Toast className="toast_padding" ref={(el) => this.toast = el} />
           <Modal.Header closeButton>
@@ -160,13 +161,11 @@ class ChangePasswordOrg extends Component {
                     <input ref={this.oldPasswordRef} onChange={this.onChange} type={revealOldPassword ? "text" : "password"} id="oldPassword" className="form-control" name="oldPassword"
                       value={this.state.fields.oldPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
                       onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
-                    <span onClick={this.toggleOldPassword}>
-                      <span>
+                    <span className="input-group-append"  style={{height: 0}} onClick={this.toggleOldPassword}>
                         {revealOldPassword ?
                           <i className="pi pi-eye showOldPasswordIcon" /> :
                           <i className="pi pi-eye-slash showOldPasswordIcon" />
                         }
-                      </span>
                     </span>
                     {
                       this.state.formSubmitted || this.state.touched.oldPassword ? <div className="errorMsg">{this.state.errors.oldPassword}</div> : ''
@@ -179,13 +178,11 @@ class ChangePasswordOrg extends Component {
                     <label htmlFor="newPassword">New Password</label>
                     <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text" : "password"} id="newPassword" className="form-control" name="newPassword" value={this.state.fields.newPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
                       onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
-                    <span className="input-group-append" onClick={this.toggleNewPassword}>
-                      <span>
+                    <span className="input-group-append" style={{height: 0}} onClick={this.toggleNewPassword}>
                         {revealNewPassword ?
-                          <i className="pi pi-eye showNewPasswordIcon" /> :
-                          <i className="pi pi-eye-slash showNewPasswordIcon" />
+                          <i className="pi pi-eye showOldPasswordIcon" /> :
+                          <i className="pi pi-eye-slash showOldPasswordIcon" />
                         }
-                      </span>
                     </span>
                     {
                       this.state.formSubmitted || this.state.touched.newPassword ? <div className="errorMsg">{this.state.errors.newPassword}</div> : ''

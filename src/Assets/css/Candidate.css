@@ -348,16 +348,25 @@ select {
 }
 
 .showOldPasswordIcon {
-    position: absolute;
-    left: 25.3rem;
-    top: 2.95rem;
+    position: relative;
+    right: 0px;
+    top: -33px;
     font-size: 1.2rem !important;
 }
 
 .showNewPasswordIcon {
-    position: absolute;
-    left: 25.3rem;
-    top: 9.1rem;
+    position: relative;
+    right: 0;
+    top: 0;
+    font-size: 1.2rem !important;
+    top: -28px;
+    margin-left: -10px;
+}
+
+.showPasswordIcon {
+    position: relative;
+    right: 0;
+    top: -32px;
     font-size: 1.2rem !important;
 }
 
