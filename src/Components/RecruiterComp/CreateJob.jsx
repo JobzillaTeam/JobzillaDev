@@ -63,7 +63,11 @@ export default class CreateJob extends React.Component {
       })
     }
     if (value) {
-      delete errors[name];
+      if (name === 'noOfPositionsAvailable' && parseInt(value) === 0) {
+        errors[name] = this.getErrorMsg(name)
+      } else {
+        delete errors[name];
+      }
     } else {
       if (!isFormValid) errors[name] = this.getErrorMsg(name)
     }
@@ -100,7 +104,7 @@ export default class CreateJob extends React.Component {
         return 'Salary cannot be left blank'
       }
       case 'noOfPositionsAvailable': {
-        return 'No Of Positions cannot be left blank'
+        return 'No Of Positions cannot be left blank and always be greater than zero'
       }
       case 'jobCountry': {
         return 'Country cannot be left blank'
@@ -220,7 +224,7 @@ export default class CreateJob extends React.Component {
     } else {
       errors && delete errors.experienceReqTo;
     }
-    if (!noOfPositionsAvailable) {
+    if (!noOfPositionsAvailable || parseInt(noOfPositionsAvailable) === 0) {
       errors.noOfPositionsAvailable = this.getErrorMsg('noOfPositionsAvailable')
     } else {
       errors && delete errors.noOfPositionsAvailable;
@@ -273,7 +277,7 @@ export default class CreateJob extends React.Component {
     if (!primarySkills && isPrimarySkillFocus) this.primarySkills.focus();
     if (experienceReqFrom !== 0 && !experienceReqFrom && isExperienceReqFromFocus) this.experienceReqFrom.focus();
     if (experienceReqTo !== 0 && !experienceReqTo && isExperienceReqToFocus) this.experienceReqTo.focus();
-    if (!noOfPositionsAvailable && isNoOfPositionsAvailableFocus) this.noOfPositionsAvailable.focus();
+    if ((!noOfPositionsAvailable || parseInt(noOfPositionsAvailable) === 0) && isNoOfPositionsAvailableFocus) this.noOfPositionsAvailable.focus();
     if (annualSalaryFrom !== 0 && !annualSalaryFrom && isAnnualSalaryFromFocus) this.annualSalaryFrom.focus();
     if (annualSalaryTo !== 0 && !annualSalaryTo && isAnnualSalaryToFocus) this.annualSalaryTo.focus();
     if (!jobCountry && isCountryFocus) this.jobCountry.focus();
