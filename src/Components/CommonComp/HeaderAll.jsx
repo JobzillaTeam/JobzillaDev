@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import ApiServicesOrg from '../../Services/ApiServicesOrg'
+import { Context } from '../../Context/ProfileContext'
 
 class HeaderAll extends Component {
+  static contextType = Context;
   constructor() {
     super()
     this.state = {
@@ -38,8 +40,27 @@ class HeaderAll extends Component {
     const { isSetting } = this.props;
     const {isProfile} = this.props;
     const { status } = this.state
+    const userName = '';
     const providerRecruiterStatus = localStorage.getItem('status')
-    const userName= localStorage.getItem('userName')
+    if (localStorage.userRole === "candidate_role") {
+      if (this.context.state instanceof Promise) {
+        this.context.state.then((data) => {
+          if (data) {
+            const imageUrlPath = data.userImage ? `data:image/jpeg;base64,${data.userImage}` : '/images/Dashboard-assets/user-f.png'
+            const userNameValue = data.candidateInfo && `${data.candidateInfo.firstName} ${data.candidateInfo.lastName}` 
+            document.getElementById("_userImageAvatarIcon").src = imageUrlPath
+            document.getElementById("_currentUserName").innerHTML = userNameValue
+          }
+        })
+      }
+    } else {
+      new ApiServicesOrg().getOrganizationProfile().then((response) => {
+        const responseObject = response && response.data && response.data.responseObject;
+        const userNameValue = responseObject && responseObject.contactPerson;
+        document.getElementById("_currentUserName").innerHTML = userNameValue;
+      });
+    }
+    
     return (
       <div>
         {this.state.status === "provider" && <Redirect to="/providerDashboard" />}
@@ -73,13 +94,13 @@ class HeaderAll extends Component {
               </div>
             </div> : null}
           <ul className="nav mr-3">
-            <li>
-            {this.state.imageUrl ? <img className="rounded-circle profile-icon mr-2" src={`data:image/jpeg;base64,${this.state.imageUrl}`} width="35" height="35"/>
-            : <img className="rounded-circle profile-icon mr-2" src="/images/Dashboard-assets/user-f.png"width="35" height="35" alt="User profile"/>}
+          <li>
+            {this.state.imageUrl ? <img id="_userImageAvatarIcon" className="rounded-circle profile-icon mr-2" src={`data:image/jpeg;base64,${this.state.imageUrl}`} width="35" height="35"/>
+            : <img id="_userImageAvatarIcon" className="rounded-circle profile-icon mr-2" src="/images/Dashboard-assets/user-f.png"width="35" height="35" alt="User profile"/>}
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#" data-toggle="dropdown">
-                <span className="font-blue text-small marL10" >{userName}<i className="fa fa-angle-down pl-2" aria-hidden="true"></i></span>
+                <span className="font-blue text-small marL10" ><span id="_currentUserName">{userName}</span><i className="fa fa-angle-down pl-2" aria-hidden="true"></i></span>
               </a>
               <ul className="dropdown-menu">
               {(!isCandidate)?
@@ -130,4 +151,4 @@ class HeaderAll extends Component {
     )
   }
 }
-export default HeaderAll
+export default React.memo(HeaderAll)
