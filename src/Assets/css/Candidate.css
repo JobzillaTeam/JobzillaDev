@@ -286,9 +286,9 @@ select {
 .profile__button_group {
     display: flex;
     background: white;
-    padding: 0px 60px;
+    padding: 0px 60px 0px 60px;
     margin-bottom: 1px;
-    z-index: 999;
+    z-index: 799;
 }
 
 .profile__button_group .profileTabs {
@@ -312,6 +312,7 @@ select {
     top: 0;
     width: 100%;
     border-bottom: 2px solid #f1f1f1;
+    margin-top: 60px;
 }
 
 
