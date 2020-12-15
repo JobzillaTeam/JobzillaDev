@@ -50,7 +50,7 @@ class HeaderAll extends Component {
             const imageUrlPath = data.userImage ? `data:image/jpeg;base64,${data.userImage}` : '/images/Dashboard-assets/user-f.png'
             const firstNameValue = data.candidateInfo && data.candidateInfo.firstName ? data.candidateInfo.firstName : '';
             const lastNameValue = data.candidateInfo && data.candidateInfo.lastName ? data.candidateInfo.lastName : ''; 
-            const userNameValue = `${firstNameValue} ${lastNameValue}` 
+            const userNameValue = (firstNameValue || lastNameValue) ? `${firstNameValue} ${lastNameValue}` : localStorage.getItem('userName')
             document.getElementById("_userImageAvatarIcon").src = imageUrlPath
             document.getElementById("_currentUserName").innerHTML = userNameValue
           }
@@ -59,7 +59,7 @@ class HeaderAll extends Component {
     } else {
       new ApiServicesOrg().getOrganizationProfile().then((response) => {
         const responseObject = response && response.data && response.data.responseObject;
-        const userNameValue = responseObject && responseObject.contactPerson ? responseObject.contactPerson : '';
+        const userNameValue = responseObject && responseObject.contactPerson ? responseObject.contactPerson : localStorage.getItem('userName');
         document.getElementById("_currentUserName").innerHTML = userNameValue;
       });
     }
