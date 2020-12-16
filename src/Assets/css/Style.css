@@ -2573,7 +2573,7 @@ textarea.form-control {
 }
 
 .p-inputtext {
-    margin-top: 30px;
+    margin-top: 0px !important;
 }
 
 .p-input-icon-right .p-inputtext {
@@ -3526,7 +3526,7 @@ p.text-center1{
 .p-input-icon-left>i, .p-input-icon-right>i {
     position: absolute;
     top: 50%;
-    margin-top: .5rem !important;
+    margin-top: -.5rem !important;
 }
 
 .modal-content{
