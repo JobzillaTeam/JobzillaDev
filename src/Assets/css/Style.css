@@ -421,7 +421,6 @@ nav a {
     font-size: 14px !important;
     color: #2C3E50 !important;
     font-family: Montserrat-Medium !important;
-    word-break: break-all !important;
 }
 
 .hiredProfile_section_Card h5 {
@@ -2162,7 +2161,6 @@ textarea.form-control {
     font-size: 12px;
     padding: 15px 27px 15px 1px;
     margin-bottom: -9rem;
-    word-break: break-all !important;
 }
 
 .job-skills img {
@@ -3546,3 +3544,4 @@ p.text-center1{
 .padding{
     padding: 1.4rem 2rem 1rem 0rem!important
 }
+

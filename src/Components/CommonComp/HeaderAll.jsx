@@ -80,6 +80,19 @@ class HeaderAll extends Component {
         }
       });
     }
+    else if(userRole === 'Admin'|| userRole==="User"){
+      new ApiServicesOrg().getUserProfile().then((response) => {
+        const responseObject = response && response.data && response.data.responseObject;
+        const userNameValue = responseObject && responseObject.userName ? responseObject.userName : localStorage.getItem('userName');
+        const innerHtmlElement = document.getElementById("_currentUserName")
+        const innerHtmlText = innerHtmlElement.innerHTML
+        if (innerHtmlText !== userNameValue) {
+          innerHtmlElement.innerHTML = userNameValue;
+        }
+      });  
+    }
+
+  
 
     return (
       <div>

@@ -17,8 +17,8 @@ class EditProfile extends Component {
       contactPersonName: "",
       gstin: "",
       mobile: "",
-      isLoading: false
-      // userRole: ""
+      isLoading: false,
+      userRole:localStorage.getItem("userRole")
     };
     this.viewImage = new ApiServicesOrg();
     this.fileService = new ApiServicesOrg();
@@ -46,8 +46,16 @@ class EditProfile extends Component {
       phoneNumber: this.state.mobile,
       id: localStorage.getItem("organizationId"),
     };
+
+    let data = {
+      userName: this.state.contactPersonName,
+      contactNumber: this.state.mobile,
+      id: JSON.parse(localStorage.getItem('userDetails')).id,
+    };
     // console.log("employee => " + JSON.stringify(employee));
-  
+
+    const userRole=this.state.userRole
+    if(userRole==="Owner"){
     this.viewImage.updateOrganizationProfile(employee).then((res) => {    
       this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully'},20000);
       setTimeout(() => {
@@ -58,7 +66,20 @@ class EditProfile extends Component {
       if(error){
         this.toast.show({severity: 'success', summary: 'Error Message', detail: 'Something Went Wrong'},20000);
       }
-     })
+     })}else {
+      this.viewImage.putUserProfile(data).then((res) => {    
+        this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully'},20000);
+        setTimeout(() => {
+          this.props.history.push("/orgProfile");
+      }, 1000)
+      
+      }) .catch(error =>{
+        if(error){
+          this.toast.show({severity: 'success', summary: 'Error Message', detail: 'Something Went Wrong'},20000);
+        }
+       })
+
+     }
   }
 
   changeOrgNameHandler = (event) => {
@@ -96,27 +117,25 @@ class EditProfile extends Component {
       });
     });
 
-    this.viewImage.getOrganizationProfile().then((Response) => {
+    this.viewImage.getUserProfile().then((Response) => {
       let getOrgName = "";
       let getOfficialEmail = "";
       let getContactPersonName = "";
       let getGstin = "";
       let getMobile = "";
-      // let getRole = "";
+      let getRole = "";
       if (Response) {
         getOrgName = JSON.stringify(
           Response.data.responseObject.organizationName
         );
         getOfficialEmail = JSON.stringify(Response.data.responseObject.email);
-        getContactPersonName = JSON.stringify(
-          Response.data.responseObject.contactPerson
-        );
-        //getGstin = JSON.stringify(Response.data.responseObject.gstin);
+        getContactPersonName = JSON.stringify(Response.data.responseObject.userName);
+        getGstin = JSON.stringify(Response.data.responseObject.gstin);
         getGstin = Response.data.responseObject.gstin
         ? JSON.stringify(Response.data.responseObject.gstin)
         : "";
-        getMobile = JSON.stringify(Response.data.responseObject.phoneNumber);
-        // getRole = JSON.stringify(Response.data.responseObject.userRole);
+        getMobile = JSON.stringify(Response.data.responseObject.contactNumber);
+        getRole = JSON.stringify(Response.data.responseObject.userRole);
       }
 
       this.setState({
@@ -125,7 +144,7 @@ class EditProfile extends Component {
         contactPersonName: getContactPersonName.slice(1, -1),
         gstin: getGstin.slice(1, -1),
         mobile: getMobile.slice(1, -1),
-        // userRole: getRole.slice(1, -1)
+        userRole: getRole.slice(1, -1)
       });
     });
   }
@@ -184,6 +203,7 @@ class EditProfile extends Component {
   };
 
   render() {
+    const userRole=this.state.userRole
     return (
       <div className="content">
         {/*  Header */}
@@ -269,7 +289,20 @@ class EditProfile extends Component {
             <form>
               <div className="row">
                 <div className="col-md-6">
+                {(userRole==="Admin" || userRole==="User") ?
                   <div className="form-group">
+                    <label htmlFor="orgName">Organisation Name</label>
+                    <input
+                      type="text"
+                      id="orgName"
+                      name="orgName"
+                      placeholder="ABC Agency"
+                      className="form-control"
+                      disabled
+                      defaultValue={this.state.orgName}
+                      onChange={this.changeOrgNameHandler}
+                    />
+                  </div>: <div className="form-group">
                     <label htmlFor="orgName">Organisation Name</label>
                     <input
                       type="text"
@@ -280,7 +313,7 @@ class EditProfile extends Component {
                       defaultValue={this.state.orgName}
                       onChange={this.changeOrgNameHandler}
                     />
-                  </div>
+                  </div>}
                   <div className="form-group">
                     <label htmlFor="officialEmail">Official Email</label>
                     <input
@@ -322,7 +355,20 @@ class EditProfile extends Component {
                       onChange={this.changeContactPersonNameHandler}
                     />
                   </div>
+                  {(userRole==="Admin" || userRole==="User") ?
                   <div className="form-group">
+                    <label htmlFor="gstin">GSTIN</label>
+                    <input
+                      type="text"
+                      id="gstin"
+                      name="gstin"
+                      placeholder="GSTIN (optional)"
+                      className="form-control"
+                      disabled
+                      defaultValue={this.state.gstin}
+                      onChange={this.changeGstInHandler}
+                    />
+                  </div>: <div className="form-group">
                     <label htmlFor="gstin">GSTIN</label>
                     <input
                       type="text"
@@ -333,7 +379,7 @@ class EditProfile extends Component {
                       defaultValue={this.state.gstin}
                       onChange={this.changeGstInHandler}
                     />
-                  </div>
+                  </div>}
                 </div>
               </div>
               <div className="top-margin mt-3 text-right">

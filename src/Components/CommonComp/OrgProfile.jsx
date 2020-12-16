@@ -30,25 +30,23 @@ class Profile extends Component {
       });
     });
 
-    this.viewImage.getOrganizationProfile().then((Response) => {
+    this.viewImage.getUserProfile().then((Response) => {
       let getOrgName = "";
       let getOfficialEmail = "";
       let getContactPersonName = "";
       let getGstin = "";
       let getMobile = "";
-      // console.log(Response)
+      console.log(Response)
       if (Response && Response.data && Response.data.responseObject) {
         getOrgName = JSON.stringify(
           Response.data.responseObject.organizationName
-        );
+       );
         getOfficialEmail = JSON.stringify(Response.data.responseObject.email);
-        getContactPersonName = JSON.stringify(
-          Response.data.responseObject.contactPerson
-        );
+        getContactPersonName = JSON.stringify(Response.data.responseObject.userName);
         getGstin = Response.data.responseObject.gstin
           ? JSON.stringify(Response.data.responseObject.gstin)
           : "";
-        getMobile = JSON.stringify(Response.data.responseObject.phoneNumber);
+        getMobile = JSON.stringify(Response.data.responseObject.contactNumber);
       }
 
       this.setState({

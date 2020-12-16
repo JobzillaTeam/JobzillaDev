@@ -159,6 +159,23 @@ class ApiServicesOrg extends Component {
     )
   }
 
+  getUserProfile() {
+    const userId = JSON.parse(localStorage.getItem('userDetails')).id;
+    return (
+      axios
+        .get(ApiBaseUrl + "/user/user/" + userId, this.getToken())
+        .then(Response => Response)
+    )
+  }
+
+  putUserProfile(data) {
+    return (
+      axios
+        .put(ApiBaseUrl + "/user/user" , data, this.getToken())
+        .then(Response => Response)
+    )
+  }
+
   //4.5 Delete User - Multiple Users- Admin/User
   //     deleteMultiUser(updatedUserId){
   //         console.log(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
