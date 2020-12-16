@@ -46,8 +46,9 @@ class HeaderAll extends Component {
     const { status } = this.state
     const userName = localStorage.getItem('userName');
     const providerRecruiterStatus = localStorage.getItem('status')
-    const userRole = localStorage.userRole === "candidate_role"
-    if (userRole) {
+    const userRole = localStorage.userRole
+
+    if (userRole === "candidate_role") {
       if (this.context.state instanceof Promise) {
         this.context.state.then((data) => {
           if (data) {
