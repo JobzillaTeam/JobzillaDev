@@ -34,7 +34,7 @@ class ActiveJobCandidates extends React.Component {
                     <div className="location" className="col-md-8">
                       {/* {console.log(match)} */}
                       <div class="activeJobCardItems">
-                        <h5 id="name">{match.candidate.firstName} {match.candidate.lastName}</h5>
+                        <div id="name">{match.candidate.firstName} {match.candidate.lastName}</div>
                         <p id="body">{match.candidate.currentRole} at {match.candidate.company}</p>
                       </div>
                       <hr></hr>

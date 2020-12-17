@@ -158,7 +158,7 @@ class Profile extends Component {
               <div className="col-md-6">
                 <div className="form-group row">
                   <div className="col-sm-4 orgProfileFont">
-                    Contact Person Name :{" "}
+                    Contact Person Name:{" "}
                   </div>
                   <div className="col-sm-8">{this.state.contactPersonName}</div>
                 </div>

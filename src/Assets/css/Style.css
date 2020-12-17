@@ -519,7 +519,7 @@ meter {
     font-size: 20px;
     font-family: 'Montserrat-Medium' !important;
     color: #2E2E2E;
-    opacity: 100%;
+   
 }
 
 .more_ico {
@@ -3545,3 +3545,6 @@ p.text-center1{
     padding: 1.4rem 2rem 1rem 0rem!important
 }
 
+:-moz-placeholder {
+    text-align: center;
+  }
