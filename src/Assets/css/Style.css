@@ -2209,6 +2209,7 @@ textarea.form-control {
 
 .job-heading {
     font-size: 24px;
+    font-family: 'Montserrat-Medium' !important;
 }
 
 .job-match p {
@@ -2218,8 +2219,9 @@ textarea.form-control {
 
 .job-desc {
     font-size: 16px;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #2E2E2E;
+    font-family: 'Montserrat-Medium' !important;
 }
 
 .job-full-detail {
@@ -2237,7 +2239,11 @@ textarea.form-control {
 .job-accepted {
     font-size: 16px;
     text-transform: uppercase;
-    font-weight: bold;
+    /* font-weight: bold; */
+    font-family: 'Montserrat-Medium' !important;
+}
+.job-accepted .a {
+    font-family: 'Montserrat-Medium' !important;
 }
 
 .btn-secondary {
@@ -2442,7 +2448,8 @@ textarea.form-control {
 /*for  name field in card*/
 
 #name {
-    font-weight: bold;
+    /* font-weight: bold; */
+    font-family: 'Montserrat-Medium' !important;
     font-size: 20px;
     color: #2E2E2EE5;
 }
@@ -2451,7 +2458,8 @@ textarea.form-control {
 /*for location field in card*/
 
 #location {
-    font-weight: bold;
+    /* font-weight: bold; */
+    font-family: 'Montserrat-Medium' !important;
     font-size: 14px;
     color: #2E2E2EE5;
 }
@@ -3053,7 +3061,7 @@ textarea {
     justify-content: center;
     font-size: 14px;
     color: #333333;
-    font-family: Montserrat-Medium!important;
+    font-family: 'Montserrat-Medium'!important;
 }
 
 .mr-4 {
@@ -3289,12 +3297,14 @@ tr td:first-child {
     color: #7b7b7b;
     font-size: 12px;
     padding-left: 20px !important;
+    font-family: 'Montserrat-Medium' !important;
 }
 
 .job-title {
     color: #007eff;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 20px;
+    font-family: 'Montserrat-Medium' !important;
 }
 
 
@@ -3355,7 +3365,10 @@ tr td:first-child {
 } 
  
 .bulkUploadText.font-weight-400 .mt-3{
-    margin-top: 1rem !important
+    margin-top: 1rem !important;
+    font-family: 'Montserrat-Medium' !important;
+    
+    
 }
 .white-middle-section3.col-md-6 .offset-md-3 .p-4{
     padding-bottom: 1rem !important;
@@ -3377,7 +3390,9 @@ tr td:first-child {
 }
   
 .orgProfileFont {
-    font-weight: bold;
+   
+    font-family: 'Montserrat-Medium' !important;
+    
 }
   
 .profileDetailFont {
@@ -3506,7 +3521,7 @@ p.text-center1{
     justify-content: center;
     font-size: 14px;
     color: #333333;
-    font-family: Montserrat-Medium!important;
+    font-family: 'Montserrat-Medium'!important;
     margin-top: -30px;
     margin-bottom: 10px;
 }

@@ -48,7 +48,8 @@
 
 .subtitle-semi-bold {
     font-size: 16px;
-    font-weight: 600;
+    /* font-weight: 600; */
+    font-family: 'Montserrat-Medium' !important;
 }
 
 .normal-text-light {
@@ -297,7 +298,8 @@ select {
     padding: 10px 0px;
     margin-right: 20px;
     font-size: 14px;
-    font-weight: 600;
+    /* font-weight: 600; */
+    font-family: 'Montserrat-Medium' !important;
     border-bottom: 2px solid white;
 }
 
@@ -388,4 +390,9 @@ select {
 }
 .first-letter {
     text-transform:capitalize;
+}
+
+.font-weight-bold{
+    font-weight: 0px !important;
+    font-family: 'Montserrat-Medium' !important;
 }
