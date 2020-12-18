@@ -3545,6 +3545,15 @@ p.text-center1{
     padding: 1.4rem 2rem 1rem 0rem!important
 }
 
-:-moz-placeholder {
-    text-align: center;
-  }
+.modal{
+    display: block !important; /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+ .duplicateID{
+    height: 60vh;
+    overflow-y: auto;
+}
