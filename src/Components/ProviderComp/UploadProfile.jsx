@@ -7,15 +7,12 @@ import LeftNavProvider from '../CommonComp/LeftNavProvider'
 import ApiServicesOrg from '../../Services/ApiServicesOrg'
 import RenderLoader from '../CommonComp/Loader';
 import { Modal } from 'react-bootstrap'
-import { INITIAL_ITEM_LENGTH } from '../../Utils/AppConst.jsx';
-import { isEmptyArray } from 'formik';
 //import axios from 'axios'
 
 class UploadProfile extends Component {
     constructor(props) {
         super(props);
         this.fileService = new ApiServicesOrg()
-        this.loadMore = this.loadMore.bind(this)
     }
 
     downloadEmployeeData = () => {
@@ -40,8 +37,6 @@ class UploadProfile extends Component {
         isLoading: false,
         show: false,
         duplicateId: [],
-        pageDataLength: INITIAL_ITEM_LENGTH,
-        hasMore: true
     };
 
     showModal = () => {
@@ -50,15 +45,6 @@ class UploadProfile extends Component {
 
     hideModal = () => {
         this.setState({ show: false });
-    }
-
-    loadMore() {
-        setTimeout(() => {
-            this.setState({
-                duplicateId: [...this.state.duplicateId.slice(0, (this.state.pageDataLength + INITIAL_ITEM_LENGTH))],
-                pageDataLength: this.state.pageDataLength + INITIAL_ITEM_LENGTH
-            });
-        }, 100);
     }
 
     onUploadClick = () => {
@@ -192,7 +178,7 @@ class UploadProfile extends Component {
                     <Toast className="toast_padding" ref={(el) => this.toast = el} />
                     <Modal.Header closeButton>
                         <Modal.Title className="sub-title" id="contained-modal-title-vcenter">
-                            Duplicate ID
+                           Already Exists Email ID(s)
                 </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="duplicateID">
