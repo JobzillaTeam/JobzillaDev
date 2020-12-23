@@ -303,7 +303,7 @@ class Resume extends Component {
                           {/* { showing ? */}
 
                           <div className="file-path-wrapper">
-                            <input className="file-path validate" type="text" value={this.state.selectedFile.name} placeholder="No file choosen" />
+                            <input className="file-path validate text-center" type="text" value={this.state.selectedFile.name} placeholder="No file choosen" />
                             {console.log(showing)}
 
                           </div>
@@ -312,8 +312,8 @@ class Resume extends Component {
                       </div>
                     </form>
                     <p className="text-center1 mt-6"></p>
-
-                    <p className="text-center mt-4">Upload Resume with file extention .doc, .docx and .pdf with file size less than 2 MB.</p>
+                    <p className="text-center1 mt-4">Supported file formats DOC, DOCX. PDF </p>
+                    <p className="text-center1 mt-1">Maximum File size 2MB</p>
                   </div>
                 </div>
                 {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
