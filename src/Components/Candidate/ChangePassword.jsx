@@ -180,9 +180,12 @@ class ChangePassword extends Component {
                                 </div>
                                 <div className="form-group new-password">
                                 <label htmlFor="newPassword">New Password</label>
-                                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text":"password"} placeholder="Enter New Password" id="newPassword" className="form-control" name="newPassword"  value={this.state.fields.newPassword}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text":"password"} title="Password must contain atleast 8 characters 
+                                       including Uppercase,lowercase and numbers." placeholder="Enter New Password" id="newPassword" className="form-control" name="newPassword"  value={this.state.fields.newPassword}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
-                                    <span className="input-group-append" style={{height: 0}} onClick={this.toggleNewPassword}>
+                                    <span className="input-group-append" title="Password must contain atleast 8 characters 
+                                       including Uppercase,lowercase and numbers." style={{height: 0}} onClick={this.toggleNewPassword}>
+                                    
                                     {revealNewPassword ? 
                                     <i className="pi pi-eye showOldPasswordIcon"/>:
                                     <i className="pi pi-eye-slash showOldPasswordIcon"/>

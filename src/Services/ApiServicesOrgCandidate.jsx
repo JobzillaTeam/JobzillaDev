@@ -15,7 +15,7 @@ class ApiServicesOrgCandidate {
       if (err && err.response && err.response.data.responseCode === "403" && originalReq && originalReq.headers && originalReq.headers.hasOwnProperty('Authorization')) {
         swal({
           title: 'Error',
-          text: 'You are no more authorized to login to the system',
+          text: 'Your profile has been made inactive for 6 months as you have joined an organisation.',
           icon: "warning",
           button: "Ok",
           dangerMode: true,
@@ -27,7 +27,7 @@ class ApiServicesOrgCandidate {
       if (err && err.response && err.response.data.responseCode === "403 FORBIDDEN") {
         swal({
           title: 'Error',
-          text: 'You are no more authorized to login to the system',
+          text: 'Your profile has been made inactive for 6 months as you have joined an organisation.',
           icon: "warning",
           button: "Ok",
           dangerMode: true,

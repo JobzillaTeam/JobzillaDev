@@ -99,12 +99,13 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
               </div>
             </div>
             <div class="col-9 pl-0 mt-3">
-              <div className="progressbar-text" style={{ width: `${progressbar}%` }}>{progressbar}%</div>
+              <div className="progressbar-text" style={{ width: `${progressbar}%` }}>{progressbar}%</div>						
               <div className="progress progress-fashion marB20" >
                 <div className="progress-bar bg-success marT20" style={{ width: `${progressbar}%` }} role="progressbar" aria-valuenow={progressbar} aria-valuemin="0" aria-valuemax="100">
-                </div>
+                </div> 
               </div>
-
+              {progressbar<100 ?
+              <span className="completeNow">Complete your profile with all of your skills for better visibility.</span>		:<div></div>}
             </div>
           </div>
         </div>

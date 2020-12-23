@@ -7,7 +7,6 @@ import axios from 'axios'
 import ApiServicesOrgCandidate from '../../../../../Services/ApiServicesOrgCandidate';
 import RenderLoader from '../../../../CommonComp/Loader';
 
-
 class Resume extends Component {
 
   constructor(props) {
@@ -36,14 +35,12 @@ class Resume extends Component {
   //Download Resume
 
   downloadResume = () => {
-
     // Calling Download Resume File Service from Service file:-
         var blob;
         blob = this.convertBase64toBlob(this.state.data1, 'application/msword');
         var blobURL = URL.createObjectURL(blob)
         var blobURL = URL.createObjectURL(blob);
         window.open(blobURL);
-      
   }
 
   convertBase64toBlob(content, contentType) {
@@ -72,7 +69,7 @@ class Resume extends Component {
     this.fileService1.deleteSampleFile()
       .then(response => {
         if(response && response.data){
-        this.toast.show({severity:'success',summary:'Success Message',detail:'Resume Deleted Successfully'},2000);
+        this.toast.show({severity:'success',summary:'Success Message',detail:'Resume Deleted Successfully'},5000);
         window.location.reload()
         }
       },
@@ -133,11 +130,14 @@ class Resume extends Component {
     else { var fileInput = filemode2 }
 
     if (fileInput != '') {
+      // if (fileInput.size >= 2e6) {
+      //   this.toast.show({ severity: 'warn', summary: 'Error', detail: 'Please upload a file less than 2MB' }, 50000);
+      //   return false;
+      // }
       var allowedExtensions = /(\.doc|\.docx|\.pdf)$/i;
       // var allowedExtensions = /(\.doc)$/i;
       if (!allowedExtensions.exec(fileInput.name)) {
-        this.toast.show({ severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .doc and .docx only.' }, 50000);
-        // console.log("Please upload file having extensions .doc and .docx only.")
+        this.toast.show({ severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .doc,.docx and .pdf only.' }, 50000);
         fileInput.value = '';
         return false;
       }
@@ -312,6 +312,8 @@ class Resume extends Component {
                       </div>
                     </form>
                     <p className="text-center1 mt-6"></p>
+
+                    <p className="text-center mt-4">Upload Resume with file extention .doc, .docx and .pdf with file size less than 2 MB.</p>
                   </div>
                 </div>
                 {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}

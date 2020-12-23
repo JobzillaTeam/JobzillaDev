@@ -75,6 +75,7 @@ class ShortlistedCandidate extends Component {
         var blob;
         this.ShortlistedCandidateService.downloadResumeFile1()
             .then(Response => {
+                
                 if (Response && Response.data && Response.data.responseObject) {
                     var data1 = Response.data.responseObject.cvInBytes
                     blob = this.convertBase64toBlob(data1, 'application/msword');
@@ -82,6 +83,9 @@ class ShortlistedCandidate extends Component {
                     var blobURL = URL.createObjectURL(blob);
                     window.open(blobURL);
                 }
+                // else{
+                //     alert(`resume not uploaded by candidate`)
+                // }
             })
     }
 
@@ -143,8 +147,8 @@ class ShortlistedCandidate extends Component {
                                     </td>
                                     <td>
                                         <InterviewStatusPopUp ref={this.onEditStatusModalRef} jobID={this.props.jobID} candidateId={this.state.candidateIdForUpdateStatus}></InterviewStatusPopUp>
-                                        <span className="mr-2"> {data.interviewStatus==="NULL" ? getApplicationStatus(data.applicationStatus) : data.interviewStatus}</span>
-                                        <img src="/images/icons/iconfinder_Edit-01_1976055.svg" onClick={() => this.editStatus(data.candidate.candidateId)}></img>
+                                        <span className="mr-2" style={{ cursor: 'pointer' }} onClick={() => this.editStatus(data.candidate.candidateId)}> {data.interviewStatus==="NULL" ? getApplicationStatus(data.applicationStatus) : data.interviewStatus}</span>
+                                        <img src="/images/icons/iconfinder_Edit-01_1976055.svg"  style={{ cursor: 'pointer' }} onClick={() => this.editStatus(data.candidate.candidateId)}></img>
                                     </td>
                                     <td>{data.comment}</td>
                                     <td>{data.lastModifiedDate.slice(0, -19)}</td>

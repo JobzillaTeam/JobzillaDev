@@ -56,7 +56,7 @@ export default class CandidateOverviewCard extends Component {
                         </div>
                     </div>
 
-
+                   
                     {/* <div className="row ml-4 marT20 profile_strength_subtext clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ullamcorper.<span className="font-blue complete-now-text"><Link to="/candidate/profile">COMPLETE NOW</Link></span></div> */}
                     <div className=" w-100 font-blue complete-now-text ml-4 marT20"><Link to="/candidate/profile">COMPLETE NOW</Link></div>
                     <div className="wid100 ml-4 overview marT30 overview_text">Overview-2020</div>

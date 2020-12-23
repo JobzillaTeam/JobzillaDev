@@ -156,7 +156,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
               <div>
                 <section className="white-middle-section2  mt-4">
                   <TabView className="marB60">
-                    <TabPanel header="Shortlisted Candidates">
+                  <TabPanel header="Shortlisted Candidates">
                       <ShortlistedCandidate jobID={jobID}></ShortlistedCandidate>
                     </TabPanel>
                     <TabPanel header="Matching Candidates">
@@ -165,6 +165,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
                     <TabPanel header="Candidate Applications">
                       <CandidateApplication jobID={jobID}></CandidateApplication>
                     </TabPanel>
+                   
                   </TabView>
                 </section>
               </div>

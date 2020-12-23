@@ -177,10 +177,9 @@ class CandidateEmailSetting extends Component {
                             {/**  
                                  * If recruiter toggle is active then from email settings component recruiter dashboard will open else provider dashboard will open
                                  **/}
-                            <Link to="/candidate/dashboard">
-                                <img className="setting_arrow marR5" src="/images/EmailSettings/backward-link-arrow.svg" alt="arrow" />
-                            </Link>
-                            Dashboard</div>
+                         <Link className="backtodashboard" to="/candidate/dashboard">
+                                    <i className="pi pi-angle-left" />Dashboard
+                                    </Link></div>
                         <div className="settingTitle_text mb-2">Email Notification Preferences</div>
                         <div className="setting_text">You can manage your preferences for email notifications from here</div>
                         <section className="white-middle-section mt-4">
