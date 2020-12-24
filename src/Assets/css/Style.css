@@ -3596,3 +3596,10 @@ p.text-center1{
     font-family: 'Montserrat-Medium';
     color: #52575C;
 }
+
+.edit-icon {
+    float: right;
+    margin-left: 800px !important;
+    width: 12px;
+    height: 15px;
+}

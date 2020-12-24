@@ -63,7 +63,9 @@ export default class RecruiterActiveJobDetails extends React.Component {
                         <div class="col-md-12 job-title-link align-items-center" style={{ display: 'flex' }}>
                           <a href="#"><h5> {jobDetails.jobTitle}</h5></a>
                           <span class="job-posting"> Posted {jobDetails.postedAt} day ago</span>
+                          <div ><Link to={{ pathname: `/recruiter/jobDetails/editJob/${jobDetails.jobId}` }}><img src="/images/icons/iconfinder_Edit-01_1976055.svg" class="edit-icon" /></Link></div>
                         </div>
+                       
                       </div>
                       <ul class="job-skills">
                         <li><img src="/images/icons/category.svg" />{jobDetails.category}</li>

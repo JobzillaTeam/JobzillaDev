@@ -152,9 +152,10 @@ class ShortlistedCandidate extends Component {
                                     </td>
                                     <td>{data.comment}</td>
                                     <td>{data.lastModifiedDate.slice(0, -19)}</td>
+                                    {data.isResumeAvailable?
                                     <td>
                                         <div style={{ cursor: 'pointer' }} onClick={() => this.downloadResume(data.candidate.candidateId)}><img src="/images/icons/Group 555.svg"></img> Download Resume</div>
-                                    </td>
+                                    </td>:<div></div>}
                                 </tr>)}
                         </tbody>
                     </table>

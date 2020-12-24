@@ -42,6 +42,7 @@ import ForgotPassword from "../Components/Auth/ForgotPassword";
 import CandidateJobDetails from "../Components/Candidate/CandidateJobDetails";
 import RecruiterActiveJobDetails from "../Components/RecruiterComp/RecruiterActiveJobDetails";
 import RecruiterClosedJobDetails from "../Components/RecruiterComp/RecruiterClosedJobDetails";
+import EditJob from '../Components/RecruiterComp/EditJob'
 
 class RouterSettings extends Component {
 
@@ -85,6 +86,7 @@ class RouterSettings extends Component {
             <CandidateLayout path="/candidate/candidateEmailsetting" component={CandidateEmailsetting}/>
 
 
+
             <OrganizationLayout path="/recruiterDashboard" component={RecruiterDashboard} />
             <OrganizationLayout path="/activeJob" component={ActiveJob} />
             <OrganizationLayout path="/createJob" component={CreateJob} />
@@ -92,6 +94,7 @@ class RouterSettings extends Component {
             <OrganizationLayout path="/recruiter/jobDetails/active/:jobID" component={RecruiterActiveJobDetails}/>
             <OrganizationLayout path="/recruiter/jobDetails/closed/:jobID" component={RecruiterClosedJobDetails}/>
             <OrganizationLayout path="/candidateProfileToOpen/:userId" component={CandidateProfileToOpen}/>
+            <OrganizationLayout path="/recruiter/jobDetails/editJob/:jobID" component={EditJob}/>
 
           </Switch>
         </div>

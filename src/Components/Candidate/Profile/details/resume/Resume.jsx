@@ -129,7 +129,7 @@ class Resume extends Component {
     if (filemode1 != '') { var fileInput = filemode1 }
     else { var fileInput = filemode2 }
 
-    if (fileInput != '') {
+    if (fileInput != '') { 
       // if (fileInput.size >= 2e6) {
       //   this.toast.show({ severity: 'warn', summary: 'Error', detail: 'Please upload a file less than 2MB' }, 50000);
       //   return false;
@@ -313,7 +313,7 @@ class Resume extends Component {
                     </form>
                     <p className="text-center1 mt-6"></p>
                     <p className="text-center1 mt-4">Supported file formats DOC, DOCX. PDF </p>
-                    <p className="text-center1 mt-1">Maximum File size 2MB</p>
+                    <p className="text-center1 mt-1">Maximum File size 1 MB</p>
                   </div>
                 </div>
                 {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
