@@ -357,6 +357,12 @@ export default class EditJob extends React.Component {
     const annualSalaryInLakh = Array.from(Array(501).keys()).map(el => ({ value: el, label: el }));
     const annualSalaryInThousands = Array.from(Array(101).keys()).map(el => ({ value: el, label: el }));
 console.log(values)
+    const { jobDetails } = this.state;
+    const perviousLink = '/activeJob';
+    const perviousLinkText = 'Active Jobs';
+    const nextLink = '/activeJob';
+    const nextLinkText = 'Active Job Details';
+
     return (
       <div>
         <LeftNavProvider></LeftNavProvider>
@@ -366,10 +372,13 @@ console.log(values)
             <div className=" main">
               {/* top title */}
               <div className="row">
-                <div className="col-md-12 ml-10 mt-4 mb-4">
-                  {/* <div class="active_job_heading active_padding">Active Jobs > Create Job</div> */}
+                {/* <div className="col-md-12 ml-10 mt-4 mb-4">
+                  <div class="active_job_heading active_padding">Active Jobs > Create Job</div>
                   <div class="active_job_heading active_padding">Edit Job</div>
-                </div>
+                </div> */}
+               <div class="col-md-12 py-4">
+                <div class=" active_job_heading active_padding"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > <Link className="link" to={nextLink}>{nextLinkText}</Link> > Edit Job</div>
+              </div> 
               </div>
             </div>
             <form>
