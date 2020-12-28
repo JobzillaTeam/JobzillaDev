@@ -141,9 +141,11 @@ export default class RecruiterActiveJobDetails extends React.Component {
                                     pathname: `/recruiter/jobDetails/editJob/${jobDetails.jobId}`,
                                   }}
                                 >
-                                  <img
-                                    style={{ height: "15px" }}
-                                    src="/images/icons/iconfinder_Edit-01_1976055.svg"
+                                  <i
+                                    // style={{ height: "15px" }}
+                                    style={{ fontSize: "18px", color: "black"}}
+                                    aria-hidden="true"
+                                    className="fa fa-pencil-square-o mr-6"
                                   />
                                 </Link>
                               </span>

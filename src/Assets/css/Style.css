@@ -3523,5 +3523,13 @@ p.text-center1 {
   height: 15px;
 }
 .iconclass {
-  margin-left: 660px;
+  margin-left: 600px;
+}
+.mr-6{
+  margin-right: 6px;
+}
+.others_section_secondcol1 div {
+  font-family: Montserrat-SemiBold !important;
+  font-size: 14px;
+  margin: 0.5rem 1rem;
 }

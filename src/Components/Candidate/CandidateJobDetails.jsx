@@ -26,12 +26,15 @@ const CandidateJobDetails = (props) => {
     ApiServicesOrgCandidate.getJobAndCandidateDetailsByIds(jobID, isFreshJob)
     .then(response => {
         if (response) {
-          const { applicationStatus } = response;
+          const { applicationStatus,jobDetails } = response;
           console.log('applicationStatus', applicationStatus)
           if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
             if (applicationStatus === 'Application_Matched' || isFreshJob) {
               setIsActionButtonsVisible(true)
             }
+          }
+          else if (jobDetails.isDeleted === true) {
+            setIsActionButtonsVisible(false)
           }
           else if (jobStatus === 'invites' && applicationStatus === 'Invite_Sent_By_Recruiter') {
             setIsActionButtonsVisible(true)
@@ -190,6 +193,7 @@ const CandidateJobDetails = (props) => {
                           <div>{jobDetails.visa}</div>
                         </div>
                       </div>
+                      {console.log("delete", jobDetails.isDeleted)}
                       <div className="row">
                         <div className="col-xs-12 col-md-5 others_section_firstcol">
                           <div>Passport</div>
@@ -198,9 +202,11 @@ const CandidateJobDetails = (props) => {
                           <div>{jobDetails.mustHavePasport ? 'Must have Passport' : ''} </div>
                         </div>
                       </div>
+                      <div className="col-xs-12 col-md-12 others_section_secondcol1">
+                          <div>{jobDetails.isDeleted===true ? 'This job is no longer existed' : null} </div>
+                        </div>
                     </div>
                   </div>
-
                 </div>
                 {isActionButtonsVisible && <div className="action_buttons">
                   <button type="button" className="btn btn-primary" onClick={e => handleStatusUpdate(e, true)}>{primaryButtonName}</button>
