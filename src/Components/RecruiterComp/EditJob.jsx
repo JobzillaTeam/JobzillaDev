@@ -10,12 +10,13 @@ import { CURRENCY_TYPE_ENUM } from '../../Utils/AppConst';
 import { Link } from 'react-router-dom';
 import ApiServicesOrgCandidate from "../../Services/ApiServicesOrgCandidate";
 import ApiServicesOrg from "../../Services/ApiServicesOrg"
+import RenderLoader from "../CommonComp/Loader";
 
 export default class EditJob extends React.Component {
   constructor() {
     super();
     this.state = {
-      values: { jobTitle: '', employmentType:'', category:'', primarySkills:'', secondarySkills: '',experienceReqFrom:'', experienceReqTo:'' ,annualSalaryFrom:'' , annualSalaryTo:'', jobCountry:'' , jobState:'' , jobCity:'' , noOfPositionsAvailable: 1, currency: CURRENCY_TYPE_ENUM.INR, visa: '', mustHavePasport: '', jobDescription: '', responsibilities: '' },
+      values: { jobTitle: '', employmentType: '', category: '', primarySkills: '', secondarySkills: '', experienceReqFrom: '', experienceReqTo: '', annualSalaryFrom: '', annualSalaryTo: '', shift: '', jobCountry: '', jobState: '', jobCity: '', noOfPositionsAvailable: 1, currency: CURRENCY_TYPE_ENUM.INR, visa: '', mustHavePasport: '', jobDescription: '', responsibilities: '' },
       errors: {},
       remainingTextLength: {
         jobDescription: MAX_LENGTH,
@@ -26,9 +27,10 @@ export default class EditJob extends React.Component {
       states: [],
       cities: [],
       isFormValid: true,
-      EditJobDetails:[]
+      EditJobDetails: [],
+      isLoading: true
     }
-      this.ApiServicesOrg = new ApiServicesOrg();
+    this.ApiServicesOrg = new ApiServicesOrg();
   }
 
   componentDidMount() {
@@ -58,14 +60,63 @@ export default class EditJob extends React.Component {
     const jobID = this.props.match.params.jobID;
     this.ApiServicesOrg.getAllJobDetails(jobID)
       .then(Response => {
-        console.log(Response)
+        if (Response && Response.data && Response.data.responseObject) {
+          const responseObjectData = Response.data.responseObject;
           this.setState({
-            EditJobDetails: Response.data.responseObject
-          }); 
-          console.log(this.state.EditJobDetails)
+            values: {
+              jobTitle: responseObjectData.jobTitle,
+              employmentType: responseObjectData.employmentType,
+              category: responseObjectData.category,
+              primarySkills: responseObjectData.primarySkills,
+              secondarySkills: responseObjectData.secondarySkills,
+              experienceReqFrom: responseObjectData.experienceReqFrom,
+              experienceReqTo: responseObjectData.experienceReqTo,
+              annualSalaryFrom: responseObjectData.annualSalaryFrom,
+              annualSalaryTo: responseObjectData.annualSalaryTo,
+              jobCountry: responseObjectData.jobCountry,
+              jobState: responseObjectData.jobState,
+              jobCity: responseObjectData.jobCity,
+              noOfPositionsAvailable: responseObjectData.noOfPositionsAvailable,
+              currency: responseObjectData.currency, visa: responseObjectData.visa, mustHavePasport: responseObjectData.mustHavePasport, jobDescription: responseObjectData.jobDescription, responsibilities: responseObjectData.responsibilities,
+              shift: responseObjectData.shift
+            }
+          }, () => {
+            let selectedState = this.state.states && this.state.states.filter(st => st.value === this.state.values.jobState)
+            selectedState = selectedState ? selectedState[0] : null;
+            let stateCodeValue = selectedState && selectedState.stateCode;
+            if (stateCodeValue) {
+
+              ApiServicesOrgCandidate.getListOfCity(stateCodeValue).then((response) => {
+                let citiesList = [];
+                if (response) {
+                  citiesList = response.data.responseObject.map(city => ({ value: city.city_name, label: city.city_name }));
+                }
+                this.setState({ cities: citiesList });
+                this.setState({
+                  isLoading: false
+                })
+              }).catch(err => {
+                this.setState({
+                  isLoading: false
+                })
+              });
+            } else {
+              this.setState({
+                isLoading: false
+              })
+            }
+
+            
+          })
+        }
+        console.log(Response)
+        this.setState({
+          EditJobDetails: Response.data.responseObject
+        });
+        console.log(this.state.EditJobDetails)
       })
-      console.log(jobID)
-     
+    console.log(jobID)
+
   }
 
   handleChange = e => {
@@ -305,7 +356,7 @@ export default class EditJob extends React.Component {
           isFormValid: true
         }, () => {
           const jobId = this.props.match.params.jobID;
-          ApiServicesOrgRecruiter.editJobDetails(values,jobId).then(res => {
+          ApiServicesOrgRecruiter.editJobDetails(values, jobId).then(res => {
             this.props.history.push('/activeJob');
           });
         });
@@ -347,6 +398,16 @@ export default class EditJob extends React.Component {
       };
   }
 
+  getDefaultValueForSelect = (options, name) => {
+    const defaultSelected = options.filter(opt => opt.value === this.state.values[name])
+    return defaultSelected ? defaultSelected[0] : undefined;
+  }
+  getDefaultValueForMultiSelect = (options, name) => {
+    let defaultSelectedValues = this.state.values[name] ? this.state.values[name].split(',') : []
+    const defaultSelected = options.filter(opt => defaultSelectedValues.includes(opt.value))
+    return defaultSelected ? defaultSelected : [];
+  }
+
 
   render() {
     const { values, errors, categories, remainingTextLength, primarySkillsList, states, cities } = this.state;
@@ -356,7 +417,7 @@ export default class EditJob extends React.Component {
     const expRequired = Array.from(Array(31).keys()).map(el => ({ value: el, label: el }))
     const annualSalaryInLakh = Array.from(Array(501).keys()).map(el => ({ value: el, label: el }));
     const annualSalaryInThousands = Array.from(Array(101).keys()).map(el => ({ value: el, label: el }));
-console.log(values)
+    console.log(values)
     const { jobDetails } = this.state;
     const perviousLink = '/activeJob';
     const perviousLinkText = 'Active Jobs';
@@ -376,12 +437,12 @@ console.log(values)
                   <div class="active_job_heading active_padding">Active Jobs > Create Job</div>
                   <div class="active_job_heading active_padding">Edit Job</div>
                 </div> */}
-               <div class="col-md-12 py-4">
-                <div class=" active_job_heading active_padding"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > <Link className="link" to={nextLink}>{nextLinkText}</Link> > Edit Job</div>
-              </div> 
+                <div class="col-md-12 py-4">
+                  <div class=" active_job_heading active_padding"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > <Link className="link" to={nextLink}>{nextLinkText}</Link> > Edit Job</div>
+                </div>
               </div>
             </div>
-            <form>
+            {!this.state.isLoading ? <form>
               <div className="active_padding">
                 <div id="main" className="col mb-4 mt-4" >
                   <div className="row border-bottom-thin mb-4 mt-4">
@@ -391,11 +452,11 @@ console.log(values)
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Job Title</label></div>
                           <input
-                              ref={inputEl => (this.jobTitle = inputEl)}
+                            ref={inputEl => (this.jobTitle = inputEl)}
                             class={`form-control ${errors && errors.jobTitle ? 'is-invalid' : ''}`}
                             type="text"
                             name="jobTitle"
-                            defaultValue={this.state.EditJobDetails.jobTitle}
+                            value={this.state.values.jobTitle}
                             onChange={this.handleChange}
                             placeholder='Enter Job Title'
                           />
@@ -409,23 +470,26 @@ console.log(values)
                             name="employmentType"
                             className="selectone"
                             options={employmentTypes}
-                            placeholder="Select Employment type" 
+                            placeholder="Select Employment type"
+                            defaultValue={this.getDefaultValueForSelect(employmentTypes, 'employmentType')}
+                            // defaultValue={this.state.EditJobDetails.employmentType}
                             // value={this.state.EditJobDetails.employmentType}
-                            onChange={obj => this.handleSelect({ name: 'employmentType', value:obj.value})}
+                            onChange={obj => this.handleSelect({ name: 'employmentType', value: obj.value })}
                           />
                           <div class="error-message">{errors && errors.employmentType}</div>
                         </div>
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Category</label></div>
                           <CreatableSelect
-                            components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
+                            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                             ref={inputEl => (this.category = inputEl)}
                             styles={this.customStyles(errors && errors.category)}
                             name="category"
                             className="selectone"
                             options={categories}
                             placeholder="Select Category"
-                            // value={this.state.EditJobDetails.category}
+                            defaultValue={this.getDefaultValueForSelect(categories, 'category')}
+
                             onChange={obj => this.handleSelect({ name: 'category', value: obj.value })}
                           />
                           <div class="error-message">{errors && errors.category}</div>
@@ -444,7 +508,7 @@ console.log(values)
                         <div className="col-md-6 pt-3 pl-0 recruiterForm__rightSpace">
                           <div><label>Primary Skill *</label></div>
                           <CreatableSelect
-                            components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
+                            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                             ref={inputEl => (this.primarySkills = inputEl)}
                             styles={this.customStyles(errors && errors.primarySkills)}
                             name="primarySkills"
@@ -452,6 +516,7 @@ console.log(values)
                             className="selectone"
                             options={primarySkillsList}
                             placeholder="Select Primary Skill"
+                            defaultValue={this.getDefaultValueForMultiSelect(primarySkillsList, 'primarySkills')}
                             // value={ this.state.EditJobDetails.primarySkills}
                             onChange={value => this.handleMultipleSelect({ name: 'primarySkills', value: value })}
                           />
@@ -463,7 +528,7 @@ console.log(values)
                             class="form-control"
                             type="text"
                             name="secondarySkills"
-                            defaultValue={this.state.EditJobDetails.secondarySkills}
+                            value={this.state.values.secondarySkills}
                             onChange={this.handleChange}
                             placeholder='Enter Secondary Skill'
                           />
@@ -479,8 +544,10 @@ console.log(values)
                                 className="selectone"
                                 options={expRequired}
                                 placeholder="Select"
+                                defaultValue={this.getDefaultValueForSelect(expRequired, 'experienceReqFrom')}
+
                                 // value={this.state.EditJobDetails.experienceReqFrom}
-                                onChange={obj => this.handleSelect({ name: 'experienceReqFrom', value:obj.value })}
+                                onChange={obj => this.handleSelect({ name: 'experienceReqFrom', value: obj.value })}
                               />
                             </div>
                             <span>To</span>
@@ -492,6 +559,7 @@ console.log(values)
                                 className="selectone"
                                 options={expRequired}
                                 placeholder="Select"
+                                defaultValue={this.getDefaultValueForSelect(expRequired, 'experienceReqTo')}
                                 // value={this.state.EditJobDetails.experienceReqFrom}
                                 onChange={obj => this.handleSelect({ name: 'experienceReqTo', value: obj.value })}
                               />
@@ -519,6 +587,7 @@ console.log(values)
                             className="selectone"
                             options={shiftTypes}
                             placeholder="Select Shift type"
+                            defaultValue={this.getDefaultValueForSelect(shiftTypes, 'shift')}
                             // value={this.state.EditJobDetails.shift}
                             onChange={obj => this.handleSelect({ name: 'shift', value: obj.value })}
                           />
@@ -532,7 +601,7 @@ console.log(values)
                             type="number"
                             min={1}
                             name="noOfPositionsAvailable"
-                            defaultValue={this.state.EditJobDetails.noOfPositionsAvailable}
+                            value={this.state.values.noOfPositionsAvailable}
                             onChange={this.handleChange}
                             placeholder='Number of Positions Available'
                           />
@@ -545,7 +614,7 @@ console.log(values)
                             class="form-control"
                             type="text"
                             name="visa"
-                            defaultValue={this.state.EditJobDetails.visa}
+                            value={this.state.values.visa}
                             onChange={this.handleChange}
                             placeholder='Visa (Optional)'
                           />
@@ -554,7 +623,8 @@ console.log(values)
                               type="checkbox"
                               name="mustHavePasport"
                               onChange={this.handleCheckbox}
-                              defaultChecked={this.state.EditJobDetails.mustHavePasport}
+                              checked={this.state.values.mustHavePasport}
+                            // defaultChecked={this.state.EditJobDetails.mustHavePasport}
                             />
                             <label class="mb-0">Must have passport</label>
                           </div>
@@ -579,6 +649,8 @@ console.log(values)
                                 className="selectone"
                                 options={currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands}
                                 placeholder="Select"
+                                defaultValue={this.getDefaultValueForSelect(currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands, 'annualSalaryFrom')}
+
                                 // value={this.state.EditJobDetails.annualSalaryFrom} 
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryFrom', value: obj.value })}
                               />
@@ -592,8 +664,9 @@ console.log(values)
                                 className="selectone"
                                 options={currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands}
                                 placeholder="Select"
+                                defaultValue={this.getDefaultValueForSelect(currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands, 'annualSalaryTo')}
                                 // value={this.state.EditJobDetails.annualSalaryTo} 
-                                onChange={obj => this.handleSelect({ name: 'annualSalaryTo', value: obj.value})}
+                                onChange={obj => this.handleSelect({ name: 'annualSalaryTo', value: obj.value })}
                               />
                             </div>
                           </div>
@@ -631,8 +704,9 @@ console.log(values)
                             id="jobCountry"
                             options={[{ value: 'India', label: 'India' }]}
                             placeholder="Select"
+                            defaultValue={this.getDefaultValueForSelect([{ value: 'India', label: 'India' }], 'jobCountry')}
                             // value={ this.state.EditJobDetails.jobCountry}
-                            onChange={obj => this.handleSelect({ name: 'jobCountry', value: obj.value})}
+                            onChange={obj => this.handleSelect({ name: 'jobCountry', value: obj.value })}
                           />
                           <div class="error-message" >{errors && errors.jobCountry}</div>
                         </div>
@@ -645,8 +719,9 @@ console.log(values)
                             className="selectone"
                             options={states}
                             placeholder="Select"
+                            defaultValue={this.getDefaultValueForSelect(states, 'jobState')}
                             // value={ this.state.EditJobDetails.jobState}
-                            onChange={obj => this.handleSelect({ name: 'jobState', value:obj.value, stateCode: obj.stateCode })}
+                            onChange={obj => this.handleSelect({ name: 'jobState', value: obj.value, stateCode: obj.stateCode })}
                           />
                           <div class="error-message" >{errors && errors.jobState}</div>
                         </div>
@@ -659,6 +734,8 @@ console.log(values)
                             className="selectone"
                             options={cities}
                             placeholder="Select"
+                            defaultValue={this.getDefaultValueForSelect(cities, 'jobCity')}
+                            
                             // value={ this.state.EditJobDetails.jobCity}
                             onChange={obj => this.handleSelect({ name: 'jobCity', value: obj.value })}
                           />
@@ -680,7 +757,7 @@ console.log(values)
                           class="form-control mb-1"
                           rows="8"
                           name="jobDescription"
-                          defaultValue={this.state.EditJobDetails.jobDescription}
+                          value={this.state.values.jobDescription}
                           maxLength={MAX_LENGTH}
                           onChange={this.handleChange}
                         >
@@ -696,7 +773,7 @@ console.log(values)
                           class="form-control mb-1"
                           rows="8"
                           name="responsibilities"
-                          defaultValue={this.state.EditJobDetails.responsibilities}
+                          value={this.state.values.responsibilities}
                           maxLength={MAX_LENGTH}
                           onChange={this.handleChange}
                         >
@@ -718,7 +795,8 @@ console.log(values)
                   Update
                 </button>
               </div>
-            </form>
+            </form> : <RenderLoader />}
+
             <div class="pt-5" />
             <div class="pt-3" />
             <Footer></Footer>
