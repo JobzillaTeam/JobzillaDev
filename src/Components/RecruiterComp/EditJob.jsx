@@ -410,6 +410,7 @@ console.log(values)
                             className="selectone"
                             options={employmentTypes}
                             placeholder="Select Employment type" 
+                            value={ { value: this.state.EditJobDetails.employmentType, label: this.state.EditJobDetails.employmentType }}
                             // value={this.state.EditJobDetails.employmentType}
                             onChange={obj => this.handleSelect({ name: 'employmentType', value:obj.value})}
                           />
@@ -425,6 +426,7 @@ console.log(values)
                             className="selectone"
                             options={categories}
                             placeholder="Select Category"
+                            value={ { value: this.state.EditJobDetails.category, label: this.state.EditJobDetails.category }}
                             // value={this.state.EditJobDetails.category}
                             onChange={obj => this.handleSelect({ name: 'category', value: obj.value })}
                           />
@@ -479,6 +481,7 @@ console.log(values)
                                 className="selectone"
                                 options={expRequired}
                                 placeholder="Select"
+                                value={ { value: this.state.EditJobDetails.experienceReqFrom, label: this.state.EditJobDetails.experienceReqFrom }}
                                 // value={this.state.EditJobDetails.experienceReqFrom}
                                 onChange={obj => this.handleSelect({ name: 'experienceReqFrom', value:obj.value })}
                               />
@@ -492,6 +495,7 @@ console.log(values)
                                 className="selectone"
                                 options={expRequired}
                                 placeholder="Select"
+                                value={ { value: this.state.EditJobDetails.experienceReqTo, label: this.state.EditJobDetails.experienceReqTo }}
                                 // value={this.state.EditJobDetails.experienceReqFrom}
                                 onChange={obj => this.handleSelect({ name: 'experienceReqTo', value: obj.value })}
                               />
@@ -519,6 +523,7 @@ console.log(values)
                             className="selectone"
                             options={shiftTypes}
                             placeholder="Select Shift type"
+                            value={ { value: this.state.EditJobDetails.shift, label: this.state.EditJobDetails.shift }}
                             // value={this.state.EditJobDetails.shift}
                             onChange={obj => this.handleSelect({ name: 'shift', value: obj.value })}
                           />
@@ -581,6 +586,8 @@ console.log(values)
                                 placeholder="Select"
                                 // value={this.state.EditJobDetails.annualSalaryFrom} 
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryFrom', value: obj.value })}
+                                value={ { value: this.state.EditJobDetails.annualSalaryFrom, label: this.state.EditJobDetails.annualSalaryFrom }}
+
                               />
                             </div>
                             <span>To</span>
@@ -592,6 +599,7 @@ console.log(values)
                                 className="selectone"
                                 options={currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands}
                                 placeholder="Select"
+                                value={ { value: this.state.EditJobDetails.annualSalaryTo, label: this.state.EditJobDetails.annualSalaryTo }}
                                 // value={this.state.EditJobDetails.annualSalaryTo} 
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryTo', value: obj.value})}
                               />
@@ -631,6 +639,7 @@ console.log(values)
                             id="jobCountry"
                             options={[{ value: 'India', label: 'India' }]}
                             placeholder="Select"
+                            value={ { value: this.state.EditJobDetails.jobCountry, label: this.state.EditJobDetails.jobCountry }}
                             // value={ this.state.EditJobDetails.jobCountry}
                             onChange={obj => this.handleSelect({ name: 'jobCountry', value: obj.value})}
                           />
@@ -645,6 +654,7 @@ console.log(values)
                             className="selectone"
                             options={states}
                             placeholder="Select"
+                            value={ { value: this.state.EditJobDetails.jobState, label: this.state.EditJobDetails.jobState }}                           
                             // value={ this.state.EditJobDetails.jobState}
                             onChange={obj => this.handleSelect({ name: 'jobState', value:obj.value, stateCode: obj.stateCode })}
                           />
@@ -659,6 +669,7 @@ console.log(values)
                             className="selectone"
                             options={cities}
                             placeholder="Select"
+                            value={ { value: this.state.EditJobDetails.jobCity, label: this.state.EditJobDetails.jobCity }}                            
                             // value={ this.state.EditJobDetails.jobCity}
                             onChange={obj => this.handleSelect({ name: 'jobCity', value: obj.value })}
                           />
