@@ -46,19 +46,20 @@ class ApiServicesOrgRecruiter {
         })
     )
   }
-  // editJobDetails() {
-  //   const authToken = localStorage.getItem('authToken')
-  //   // new file
-  //   return (
-  //     axios
-  //       .put(`${ApiBaseUrl}/recruiter/jobDetails`,{
-  //         headers: { 'Authorization': `Bearer ${authToken}` }
-  //       })
-  //       .then(Response => Response).catch(error => {
-  //         console.log(error);
-  //       })
-  //   )
-  // }
+  editJobDetails(resourceInfo,jobId) {
+    const authToken = localStorage.getItem('authToken')
+    console.log(resourceInfo);
+    const organizationId = localStorage.getItem('organizationId')
+    return (
+      axios
+        .put(`${ApiBaseUrl}/recruiter/jobDetails`,{ ...resourceInfo, orgId: organizationId, jobId },{
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        })
+        .then(Response => Response).catch(error => {
+          console.log(error);
+        })
+    )
+  }
  
   getListOfCategories() {
     const authToken = localStorage.getItem('authToken')

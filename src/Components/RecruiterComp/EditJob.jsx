@@ -304,10 +304,10 @@ export default class EditJob extends React.Component {
         this.setState({
           isFormValid: true
         }, () => {
-          // const jobID = this.props.match.params.jobID;
-          // ApiServicesOrgRecruiter.editJobDetails(values).then(res => {
-          //   this.props.history.push('/activeJob');
-          // });
+          const jobId = this.props.match.params.jobID;
+          ApiServicesOrgRecruiter.editJobDetails(values,jobId).then(res => {
+            this.props.history.push('/activeJob');
+          });
         });
       } else {
         this.setState({
