@@ -395,7 +395,7 @@ console.log(values)
                             class={`form-control ${errors && errors.jobTitle ? 'is-invalid' : ''}`}
                             type="text"
                             name="jobTitle"
-                            value={this.state.EditJobDetails.jobTitle}
+                            defaultValue={this.state.EditJobDetails.jobTitle}
                             onChange={this.handleChange}
                             placeholder='Enter Job Title'
                           />
@@ -463,7 +463,7 @@ console.log(values)
                             class="form-control"
                             type="text"
                             name="secondarySkills"
-                            value={this.state.EditJobDetails.secondarySkills}
+                            defaultValue={this.state.EditJobDetails.secondarySkills}
                             onChange={this.handleChange}
                             placeholder='Enter Secondary Skill'
                           />
@@ -532,7 +532,7 @@ console.log(values)
                             type="number"
                             min={1}
                             name="noOfPositionsAvailable"
-                            value={this.state.EditJobDetails.noOfPositionsAvailable}
+                            defaultValue={this.state.EditJobDetails.noOfPositionsAvailable}
                             onChange={this.handleChange}
                             placeholder='Number of Positions Available'
                           />
@@ -545,7 +545,7 @@ console.log(values)
                             class="form-control"
                             type="text"
                             name="visa"
-                            value={this.state.EditJobDetails.visa}
+                            defaultValue={this.state.EditJobDetails.visa}
                             onChange={this.handleChange}
                             placeholder='Visa (Optional)'
                           />
@@ -554,7 +554,7 @@ console.log(values)
                               type="checkbox"
                               name="mustHavePasport"
                               onChange={this.handleCheckbox}
-                              value={this.state.EditJobDetails.mustHavePasport}
+                              defaultChecked={this.state.EditJobDetails.mustHavePasport}
                             />
                             <label class="mb-0">Must have passport</label>
                           </div>
@@ -680,7 +680,7 @@ console.log(values)
                           class="form-control mb-1"
                           rows="8"
                           name="jobDescription"
-                          value={this.state.EditJobDetails.jobDescription}
+                          defaultValue={this.state.EditJobDetails.jobDescription}
                           maxLength={MAX_LENGTH}
                           onChange={this.handleChange}
                         >
@@ -696,7 +696,7 @@ console.log(values)
                           class="form-control mb-1"
                           rows="8"
                           name="responsibilities"
-                          value={this.state.EditJobDetails.responsibilities}
+                          defaultValue={this.state.EditJobDetails.responsibilities}
                           maxLength={MAX_LENGTH}
                           onChange={this.handleChange}
                         >

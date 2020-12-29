@@ -3523,7 +3523,8 @@ p.text-center1 {
   height: 15px;
 }
 .iconclass {
-  margin-left: 600px;
+  margin-left: 500px;
+  cursor: pointer;
 }
 .mr-6{
   margin-right: 6px;
