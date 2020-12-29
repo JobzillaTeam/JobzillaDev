@@ -109,14 +109,10 @@ export default class EditJob extends React.Component {
             
           })
         }
-        console.log(Response)
         this.setState({
           EditJobDetails: Response.data.responseObject
         });
-        console.log(this.state.EditJobDetails)
       })
-    console.log(jobID)
-
   }
 
   handleChange = e => {
@@ -417,7 +413,6 @@ export default class EditJob extends React.Component {
     const expRequired = Array.from(Array(31).keys()).map(el => ({ value: el, label: el }))
     const annualSalaryInLakh = Array.from(Array(501).keys()).map(el => ({ value: el, label: el }));
     const annualSalaryInThousands = Array.from(Array(101).keys()).map(el => ({ value: el, label: el }));
-    console.log(values)
     const { jobDetails } = this.state;
     const perviousLink = '/activeJob';
     const perviousLinkText = 'Active Jobs';
