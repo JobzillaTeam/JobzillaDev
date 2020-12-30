@@ -3536,6 +3536,7 @@ p.text-center1 {
 }
 .fixedIcons{
 float: right;
-right: 70px;
-position: fixed;
+right: 30px;
+position: absolute;
+
 }
