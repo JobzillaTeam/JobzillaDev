@@ -123,27 +123,20 @@ export default class RecruiterActiveJobDetails extends React.Component {
                     <div class="row">
                       <div class="col-md-12">
                         <div class="row">
-                          <div
-                            class="col-md-12 job-title-link align-items-center"
-                            style={{ display: "flex" }}
-                          >
-                            <a href="#">
-                              <h5> {jobDetails.jobTitle}</h5>
-                            </a>
-                            <span class="job-posting">
-                              {" "}
+                          <div class="col-md-12 job-title-link align-items-center" style={{ display: "flex" }}>
+                            <div className="float-left d-inline-flex" style={{ display: "flex" }}>
+                              <h5 className="font-blue"> {jobDetails.jobTitle}</h5>
+                              <span class="job-posting">
+                                {" "}
                               Posted {jobDetails.postedAt} day ago
                             </span>
-                            <div className="iconclass">
+                            </div>
+                            <div className="fixedIcons">
                               <span>
-                                <Link
-                                  to={{
-                                    pathname: `/recruiter/jobDetails/editJob/${jobDetails.jobId}`,
-                                  }}
-                                >
+                                <Link to={{ pathname: `/recruiter/jobDetails/editJob/${jobDetails.jobId}` }}>
                                   <i
                                     // style={{ height: "15px" }}
-                                    style={{ fontSize: "18px", color: "black"}}
+                                    style={{ fontSize: "18px", color: "black" }}
                                     aria-hidden="true"
                                     className="fa fa-pencil-square-o mr-6"
                                   />
@@ -152,7 +145,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
                               <span>
                                 <i
                                   className="fa fa-trash-o ml-3"
-                                  style={{ fontSize: "18px" }}
+                                  style={{ fontSize: "18px", cursor: "pointer" }}
                                   aria-hidden="true"
                                   onClick={() => this.confirmDeleteJob()}
                                 />
@@ -278,8 +271,8 @@ export default class RecruiterActiveJobDetails extends React.Component {
                         </div>
                       </div>
                     ) : (
-                      <div className="viewdetails">View More Details</div>
-                    )}
+                        <div className="viewdetails">View More Details</div>
+                      )}
                   </section>
                 </div>
                 <div className="arrowButton">
@@ -289,11 +282,11 @@ export default class RecruiterActiveJobDetails extends React.Component {
                       onClick={this.toggle}
                     ></img>
                   ) : (
-                    <img
-                      src="/images/icons/view_more_icon.svg"
-                      onClick={this.toggle}
-                    ></img>
-                  )}
+                      <img
+                        src="/images/icons/view_more_icon.svg"
+                        onClick={this.toggle}
+                      ></img>
+                    )}
                 </div>
                 <div>
                   <section className="white-middle-section2  mt-4">

@@ -3534,3 +3534,8 @@ p.text-center1 {
   font-size: 14px;
   margin: 0.5rem 1rem;
 }
+.fixedIcons{
+float: right;
+right: 70px;
+position: fixed;
+}
