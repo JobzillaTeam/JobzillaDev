@@ -263,7 +263,6 @@ export default class BarGraphProvider extends Component {
                                 {/* Bar Graph Section */}
                             </div>
                         </section>
-                        <TopSkillsProvider selectValue={this.state.selectValue} />
                     </div>
                 </div>
             </div>
