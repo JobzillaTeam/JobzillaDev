@@ -437,18 +437,13 @@ class ApiServicesOrg extends Component {
   }
 
   //Recruiter Dashboard api
-  getRecruiterDashboardDetails() {
+  getRecruiterDashboardDetails(year) {
     const orgId = localStorage.getItem("organizationId");
-    const today = new Date();
-    const year = today.getFullYear();
+    // const today = new Date();
+    // const year = today.getFullYear();
     return axios
       .get(
-        ApiBaseUrl +
-          "/recruiter/recruiterDashboardDetails/" +
-          orgId +
-          "/" +
-          year,
-        this.getToken()
+        ApiBaseUrl +"/recruiter/recruiterDashboardDetails/" +orgId + "/" + year,this.getToken()
       )
       .then((Response) => Response);
   }

@@ -20,7 +20,9 @@ export default class TopSkillsRecruiter extends Component {
     }
 
     componentDidMount() {
-        this.dashboardDetails.getRecruiterDashboardDetails()
+        const today=new Date()
+        const year= today.getFullYear()     
+        this.dashboardDetails.getRecruiterDashboardDetails(year)
             .then(Response => {
                 if (Response && Response.data && Response.data.responseObject) {
                     //   console.log(Response.data.responseObject.topSkills)

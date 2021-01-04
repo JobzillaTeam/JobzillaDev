@@ -13,7 +13,9 @@ export default class OverviewCardProvider extends Component {
         this.dashboardDetails = new ApiServicesOrg();
     }
     componentDidMount(){
-        this.dashboardDetails.getProviderDashboardDetails()
+        const today=new Date()
+        const year= today.getFullYear() 
+        this.dashboardDetails.getProviderDashboardDetails(year)
         .then(Response => {
             if (Response && Response.data) {
         //   console.log(Response.data.responseObject)

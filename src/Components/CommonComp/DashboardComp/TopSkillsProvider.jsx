@@ -19,7 +19,9 @@ export default class TopSkillsProvider extends Component {
     }
 
     componentDidMount(){
-        this.dashboardDetails.getProviderDashboardDetails()
+        const today=new Date()
+        const year= today.getFullYear() 
+        this.dashboardDetails.getProviderDashboardDetails(year)
         .then(Response => {
             if (Response && Response.data && Response.data.responseObject) {
         //  console.log(Response.data.responseObject)

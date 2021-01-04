@@ -13,7 +13,9 @@ export default class RecruiterOverviewCard extends Component {
         this.dashboardDetails = new ApiServicesOrg();
     }
     componentDidMount(){
-        this.dashboardDetails.getRecruiterDashboardDetails()
+        const today=new Date()
+        const year= today.getFullYear()     
+        this.dashboardDetails.getRecruiterDashboardDetails(year)
         .then(Response => {
             if (Response && Response.data) {
          // console.log(Response.data.responseObject)

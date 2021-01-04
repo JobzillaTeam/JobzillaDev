@@ -17,7 +17,6 @@ export default class BarGraphProvider extends Component {
     }
     handleDropdownChange=(e)=>{
         this.setState({selectValue:e.target.value})
-        console.log(this.state.selectValue)
         this.dashboardDetails.getProviderDashboardDetails(e.target.value)
         .then(Response => {
             if (Response && Response.data && Response.data.responseObject && Response.data.responseObject.monthlyReport) {

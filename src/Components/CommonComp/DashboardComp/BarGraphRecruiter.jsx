@@ -18,12 +18,50 @@ export default class BarGraphRecruiter extends Component {
 
   handleDropdownChange=(e)=>{
     this.setState({selectValue:e.target.value})
-    console.log(this.state.selectValue)
+    this.dashboardDetails.getRecruiterDashboardDetails(e.target.value)
+    .then(Response => {
+      if (Response && Response.data.responseObject.monthlyReport) {
+        const responseObj = Response.data.responseObject;
+        const positions = [];
+        const candidates = [];
+        for (let i = 1; i <= 12; i++) {
+          const keys = Object.keys(responseObj.monthlyReport);
+          const integerKeys = keys.map(k => (parseInt(k)));
+          if (integerKeys.includes(i)) {
+            positions.push(parseInt(responseObj.monthlyReport[i].openPositionsForReport))
+            candidates.push(parseInt(responseObj.monthlyReport[i].hiredPositionsForReport))
+          } else {
+            positions.push(0);
+            candidates.push(0);
+          }
+        }
+        this.setState({
+          chartData: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+              {
+                label: "Number of open positions",
+                backgroundColor: "#007EFF",
+                data: positions
+              }, {
+                label: "Number of hired candidates",
+                backgroundColor: "#2AC769",
+                data: candidates
+              },
+            ]
+          }
+        })
+
+      }
+    })
+
 
 }
 
   componentDidMount() {
-    this.dashboardDetails.getRecruiterDashboardDetails()
+    const today=new Date()
+    const year= today.getFullYear() 
+    this.dashboardDetails.getRecruiterDashboardDetails(year)
       .then(Response => {
         if (Response && Response.data.responseObject.monthlyReport) {
           const responseObj = Response.data.responseObject;
