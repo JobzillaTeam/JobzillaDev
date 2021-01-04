@@ -33,11 +33,16 @@ const CandidateJobDetails = (props) => {
               setIsActionButtonsVisible(true)
             }
           }
-          else if (jobDetails.isDeleted === true) {
-            setIsActionButtonsVisible(false)
+          if(jobStatus === 'recentMatches' || jobStatus === 'searchJobs'){
+            if (jobDetails.isDeleted === true) {
+              setIsActionButtonsVisible(false)
+            }
           }
           else if (jobStatus === 'invites' && applicationStatus === 'Invite_Sent_By_Recruiter') {
-            setIsActionButtonsVisible(true)
+            if (jobDetails.isDeleted === true) {
+              setIsActionButtonsVisible(false)
+            }
+           else setIsActionButtonsVisible(true)
           }
           setJobAndCandidateDetails(response)
         }
