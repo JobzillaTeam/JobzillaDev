@@ -8,12 +8,18 @@ export default class BarGraphProvider extends Component {
     constructor(){
         super()
         this.state={
-            chartData: {}
+            chartData: {},
+            selectValue:""
         }
         this.dashboardDetails = new ApiServicesOrg();
 
     }
+    handleDropdownChange=(e)=>{
+        this.setState({selectValue:e.target.value})
+    }
     componentDidMount(){
+        const today=new Date()
+        const year= today.getFullYear() 
         this.dashboardDetails.getProviderDashboardDetails()
         .then(Response => {
             if (Response && Response.data && Response.data.responseObject && Response.data.responseObject.monthlyReport) {
@@ -89,12 +95,22 @@ export default class BarGraphProvider extends Component {
                         <section className="chart_section">
                             {/* Select Year DropDown */}
                             <div className="dropdown float-right mr-2">
-                                <button className="btn chart_section_btn dropdown-toggle font-blue" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {/* <button className="btn chart_section_btn dropdown-toggle font-blue" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Select Year
-                                </button>
-                                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                </button> */}
+                                {/* <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a className="dropdown-item" href="#">2020</a>
-                                </div>
+                                </div> */}
+                        <div class="dropdown font-blue">
+                        <select className="form-control font-blue" id="dropdown" name="dropdown"
+                          onChange={this.handleDropdownChange}
+                          >
+                          <option value="" disabled>select year</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                        </select>
+                      </div>
+
                             </div>
                             {/* Select Year DropDown */}
 
