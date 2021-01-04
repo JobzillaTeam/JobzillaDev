@@ -424,9 +424,9 @@ class ApiServicesOrg extends Component {
     }).then((Response) => Response);
   }
   //Provider Dashboard api
-  getProviderDashboardDetails() {
-    const today = new Date();
-    const year = today.getFullYear();
+  getProviderDashboardDetails(year) {
+    // const today = new Date();
+    // const year = today.getFullYear();
     const orgId = localStorage.getItem("organizationId");
     return axios
       .get(

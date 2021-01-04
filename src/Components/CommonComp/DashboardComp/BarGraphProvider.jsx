@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Bar as BarChart } from 'react-chartjs-2'
 import '../../CommonComp/DashboardComp/RoundedBars'
 import ApiServicesOrg from '../../../Services/ApiServicesOrg'
+import TopSkillsProvider from './TopSkillsProvider';
 
 export default class BarGraphProvider extends Component {
     constructor(){
@@ -16,11 +17,75 @@ export default class BarGraphProvider extends Component {
     }
     handleDropdownChange=(e)=>{
         this.setState({selectValue:e.target.value})
+        console.log(this.state.selectValue)
+        this.dashboardDetails.getProviderDashboardDetails(e.target.value)
+        .then(Response => {
+            if (Response && Response.data && Response.data.responseObject && Response.data.responseObject.monthlyReport) {
+                //console.log(Response.data.responseObject)
+                const activeProfiles = [];
+                const hiredPositions = [];
+                const profileUploads = [];
+                const { monthlyReport } = Response.data.responseObject;
+                const { reportForActiveProfiles, reportForHiredProfiles, reportForProfileUpload } = monthlyReport;
+                for (let i = 1; i<=12; i++) {
+                    let ele1, objKeys1, ele2, objKeys2, ele3, objKeys3;
+                    objKeys1 = Object.keys(reportForActiveProfiles);
+                    objKeys1 = objKeys1.map(k => (parseInt(k)));
+                    if (objKeys1.includes(i)) {
+                        ele1 = reportForActiveProfiles[i].activeProfiles
+                    } else {
+                        ele1 = 0;
+                    }
+                    objKeys2 = Object.keys(reportForHiredProfiles);
+                    objKeys2 = objKeys2.map(k => (parseInt(k)));
+                    if (objKeys2.includes(i)) {
+                        ele2 = reportForHiredProfiles[i].hiredPositions
+                    } else {
+                        ele2 = 0;
+                    }
+                    objKeys3 = Object.keys(reportForProfileUpload);
+                    objKeys3 = objKeys3.map(k => (parseInt(k)));
+                    if (objKeys3.includes(i)) {
+                        ele3 = reportForProfileUpload[i].profilesUploaded
+                    } else {
+                        ele3 = 0;
+                    }
+                    activeProfiles.push(ele1);
+                    hiredPositions.push(ele2);
+                    profileUploads.push(ele3);
+                }
+                // console.log(activeProfiles, hiredPositions, profileUploads)
+                this.setState(
+                    {
+                        chartData: {
+                            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",],
+                            datasets: [
+                                
+                                {
+                                    label: "Number of profiles uploaded",
+                                    backgroundColor: "#FFBE0B",
+                                    data: profileUploads
+                                }, {
+                                    label: "Number of active profiles",
+                                    backgroundColor: "#007EFF",
+                                    data: activeProfiles
+                                }, 
+                                {
+                                    label: "Number of Hired Candidates",
+                                    backgroundColor: "#2AC769",
+                                    data: hiredPositions
+                                }
+                            ]
+                        }
+                    }
+                )
+            }
+        });
     }
     componentDidMount(){
         const today=new Date()
         const year= today.getFullYear() 
-        this.dashboardDetails.getProviderDashboardDetails()
+        this.dashboardDetails.getProviderDashboardDetails(year)
         .then(Response => {
             if (Response && Response.data && Response.data.responseObject && Response.data.responseObject.monthlyReport) {
                 //console.log(Response.data.responseObject)
@@ -198,6 +263,7 @@ export default class BarGraphProvider extends Component {
                                 {/* Bar Graph Section */}
                             </div>
                         </section>
+                        <TopSkillsProvider selectValue={this.state.selectValue} />
                     </div>
                 </div>
             </div>
