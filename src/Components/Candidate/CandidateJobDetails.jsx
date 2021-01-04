@@ -128,7 +128,10 @@ const CandidateJobDetails = (props) => {
                         <span class="ml-3 job-posting">{jobDetails.orgName}</span>
                         </div>
                         {isInterviewStatus ? <div><img src="/images/icons/interview_status.svg" /><span class="ml-2"><strong>Interview Status:</strong></span><span class="ml-2" style={{color: '#768594'}}>{interviewStatus}</span></div> : ''}
-                        
+                        <div className="others_section_secondcol1">
+                          <div>{jobDetails.isDeleted===true ? 'This job is no longer valid' : null} </div>
+                        </div>
+
                       </div>
                     </div>
                     <ul class="job-skills">
@@ -207,9 +210,6 @@ const CandidateJobDetails = (props) => {
                           <div>{jobDetails.mustHavePasport ? 'Must have Passport' : ''} </div>
                         </div>
                       </div>
-                      <div className="col-xs-12 col-md-12 others_section_secondcol1">
-                          <div>{jobDetails.isDeleted===true ? 'This job is no longer existed' : null} </div>
-                        </div>
                     </div>
                   </div>
                 </div>

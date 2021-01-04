@@ -132,7 +132,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
                             </span>
                             </div>
                             <div className="fixedIcons">
-                              <span>
+                              {/* <span>
                                 <Link to={{ pathname: `/recruiter/jobDetails/editJob/${jobDetails.jobId}` }}>
                                   <i
                                     // style={{ height: "15px" }}
@@ -141,7 +141,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
                                     className="fa fa-pencil-square-o mr-6"
                                   />
                                 </Link>
-                              </span>
+                              </span> */}
                               <span>
                                 <i
                                   className="fa fa-trash-o ml-3"
@@ -322,7 +322,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
                   className="pi pi-exclamation-triangle mr-3"
                   style={{ fontSize: "2rem" }}
                 />
-                {<span>Are you sure you want to delete the Job</span>}
+                {<span>There might be some ongoing processes with this job. Once deleted this job will no longer be valid for the candidate. Are you sure you still want to delete it? </span>}
               </div>
             </Dialog>
           </div>
