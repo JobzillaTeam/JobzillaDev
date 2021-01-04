@@ -106,8 +106,8 @@ export default class BarGraphProvider extends Component {
                           onChange={this.handleDropdownChange}
                           >
                           <option value="" disabled>select year</option>
-                          <option value="2020">2020</option>
                           <option value="2021">2021</option>
+                          <option value="2020">2020</option>
                         </select>
                       </div>
 
