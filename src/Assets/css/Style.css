@@ -3518,7 +3518,7 @@ p.text-center1 {
 
 .edit-icon {
   float: right;
-  margin-left: 800px !important;
+  /* margin-left: 800px !important; */
   width: 12px;
   height: 15px;
 }
