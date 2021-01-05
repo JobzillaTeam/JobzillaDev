@@ -218,15 +218,18 @@ class EmailSetting extends Component {
                                  **/}
                                 {
                                     (status === "recruiter") ?
-                                        <Link to="/recruiterDashboard">
-                                            <img className="setting_arrow marR5" src="/images/EmailSettings/backward-link-arrow.svg" alt="arrow" />
+                                    <Link className="backtodashboard" to="/recruiterDashboard">
+                                    <img className="setting_arrow marR5"
+                                     src="images/EmailSettings/backward-link-arrow.svg"></img>Dashboard
                                         </Link>
                                         :
-                                        <Link to="/providerDashboard">
-                                            <img className="setting_arrow marR5" src="images/EmailSettings/backward-link-arrow.svg" alt="arrow" />
+                                        <Link className="backtodashboard" to="/providerDashboard">
+                                        <img className="setting_arrow marR5"
+                                         src="images/EmailSettings/backward-link-arrow.svg"></img>Dashboard
                                         </Link>
                                 }
-                            Dashboard</div>
+                            </div>
+                           
                             <div className="settingTitle_text mb-2">Email Notification Preferences</div>
                             <div className="setting_text">You can manage your preferences for email notifications from here</div>
                             <section className="white-middle-section mt-4">
