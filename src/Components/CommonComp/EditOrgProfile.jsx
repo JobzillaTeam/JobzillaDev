@@ -211,16 +211,15 @@ class EditProfile extends Component {
         {/* Main Content on the page */}
         <div className="content_section marT60 main top-padding">
           <Toast className="toast_padding" ref={(el) => (this.toast = el)} />
-          <div className="mt-3 mb-3 setting_text1">
-            <Link to="/providerDashboard">
-              <img
-                className="setting_arrow marR5"
-                src="images/EmailSettings/backward-link-arrow.svg"
-                alt="arrow"
-              />
-            </Link>
-            Dashboard
-          </div>
+          <div class="mt-3 mb-3 setting_text1">
+                                {/*<p className="backtodashboard">
+                                     <a href="#"> </a> </p>*/}
+                                    <Link className="backtodashboard" to="/providerDashboard">
+                                    <img className="setting_arrow marR5"
+                                     src="images/EmailSettings/backward-link-arrow.svg"></img>
+                                     Dashboard
+                                    </Link>
+                            </div>
 
           <h4>Edit Profile</h4>
           <div className="d-flex justify-content-between">
