@@ -143,6 +143,8 @@ class CandidateProfileToOpen extends Component {
 
   render() {
     const skill = this.state
+    const perviousLink = "/activeJob";
+    const perviousLinkText = "Active Jobs > Job Details";
     return (
       <div>
         <LeftNavProvider></LeftNavProvider>
@@ -151,18 +153,19 @@ class CandidateProfileToOpen extends Component {
           {/* <UploadProfile/> */}
           <div className="container-fluid">
             <div className="row flex-xl-nowrap">
-              <section className="content_section col py-md-3 pl-md-4 bd-content">
+              <section className="content_section col py-md-0 pl-md-3 bd-content">
                 {/* Importing Overview Cards, Top skills card and monthly Report Bar Graph */}
                 {/* To display login User Details */}
-                <div aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <Link to="/activeJob">Active Jobs > Job Details </Link></li>
-                    <li class="breadcrumb-item active" aria-current="page"> Profile </li>
-                  </ol>
-                </div>
+                <div class="col-md-12 py-4">
+                <h5 class="job-heading">
+                  <Link className="link" to={perviousLink}>
+                    {perviousLinkText}
+                  </Link>{" "}
+                  > Profile
+                </h5>
+              </div>
 
-                <div class="container-fashion">
+                <div class="">
                   <div class="row profile-details">
                     <div class="profile-summary-col-left">
                       <div class="pic-padding">
