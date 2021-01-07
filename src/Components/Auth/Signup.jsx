@@ -7,7 +7,6 @@ import { Toast } from 'primereact/toast';
 import TermsOfUse from '../Auth/TermsOfUse'
 
 //import TermsOfUse from '../Auth/TermsOfUse'
-//import PrivacyPolicy from '../Auth/PrivacyPolicy'
 //import axios from 'axios'
 // import Toast from 'light-toast';
 

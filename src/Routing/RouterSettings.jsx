@@ -6,7 +6,6 @@ import ChangePasswordOrg from '../Components/Auth/ChangePasswordOrg'
 import ProviderDashboard from '../Components/ProviderComp/ProviderDashboard'
 import UploadProfile from '../Components/ProviderComp/UploadProfile'
 import TermsOfUse from '../Components/Auth/TermsOfUse'
-import PrivacyPolicy from '../Components/Auth/PrivacyPolicy'
 import AddUser from '../Components/ProviderComp/AddUser'
 import EmailSetting from '../Components/ProviderComp/EmailSetting'
 import ManageUser from "../Components/ProviderComp/ManageUser";
@@ -53,7 +52,6 @@ class RouterSettings extends Component {
 
           <Switch>
             <Route path="/termsOfUse" component={TermsOfUse} />
-            <Route path="/privacyPolicy" component={PrivacyPolicy} />
             <AuthLayout path="/signup" component={Signup} />
             <AuthLayout exact path="/" component={LoginComp} />
             <AuthLayout path="/login" component={LoginComp} />

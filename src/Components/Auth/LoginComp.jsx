@@ -6,7 +6,6 @@ import ApiServicesOrg from '../../Services/ApiServicesOrg'
 import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate'
 
 //import TermsOfUse from '../Auth/TermsOfUse'
-//import PrivacyPolicy from '../Auth/PrivacyPolicy'
 //import axios from 'axios'
 
 class LoginComp extends Component {
