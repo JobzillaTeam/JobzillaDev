@@ -9,58 +9,61 @@ export default class BarGraphRecruiter extends Component {
   constructor() {
     super()
     this.state = {
-      selectValue:"",
+      selectValue: "",
       chartData: {
       }
     }
     this.dashboardDetails = new ApiServicesOrg();
   }
 
-  apiCall=(value)=>{
+  apiCall = (value) => {
+    // To call recruiter's dashboard api
     this.dashboardDetails.getRecruiterDashboardDetails(value)
-    .then(Response => {
-      if (Response && Response.data.responseObject.monthlyReport) {
-        const responseObj = Response.data.responseObject;
-        const positions = [];
-        const candidates = [];
-        for (let i = 1; i <= 12; i++) {
-          const keys = Object.keys(responseObj.monthlyReport);
-          const integerKeys = keys.map(k => (parseInt(k)));
-          if (integerKeys.includes(i)) {
-            positions.push(parseInt(responseObj.monthlyReport[i].openPositionsForReport))
-            candidates.push(parseInt(responseObj.monthlyReport[i].hiredPositionsForReport))
-          } else {
-            positions.push(0);
-            candidates.push(0);
+      .then(Response => {
+        if (Response && Response.data.responseObject.monthlyReport) {
+          const responseObj = Response.data.responseObject;
+          const positions = [];
+          const candidates = [];
+          for (let i = 1; i <= 12; i++) {
+            const keys = Object.keys(responseObj.monthlyReport);
+            const integerKeys = keys.map(k => (parseInt(k)));
+            if (integerKeys.includes(i)) {
+              positions.push(parseInt(responseObj.monthlyReport[i].openPositionsForReport))
+              candidates.push(parseInt(responseObj.monthlyReport[i].hiredPositionsForReport))
+            } else {
+              positions.push(0);
+              candidates.push(0);
+            }
           }
+          this.setState({
+            chartData: {
+              labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+              datasets: [
+                {
+                  label: "Number of open positions",
+                  backgroundColor: "#007EFF",
+                  data: positions
+                }, {
+                  label: "Number of hired candidates",
+                  backgroundColor: "#2AC769",
+                  data: candidates
+                },
+              ]
+            }
+          })
         }
-        this.setState({
-          chartData: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [
-              {
-                label: "Number of open positions",
-                backgroundColor: "#007EFF",
-                data: positions
-              }, {
-                label: "Number of hired candidates",
-                backgroundColor: "#2AC769",
-                data: candidates
-              },
-            ]
-          }
-        })
-      }
-    })
+      })
   }
-  handleDropdownChange=(e)=>{
-    this.setState({selectValue:e.target.value})
+  //To set data according to selected year from dropdown 
+  handleDropdownChange = (e) => {
+    this.setState({ selectValue: e.target.value })
     this.apiCall(e.target.value)
-}
+  }
 
+  //To get by default data of current year from api
   componentDidMount() {
-    const today=new Date()
-    const year= today.getFullYear() 
+    const today = new Date()
+    const year = today.getFullYear()
     this.apiCall(year)
 
   }
@@ -75,18 +78,17 @@ export default class BarGraphRecruiter extends Component {
             <section className="chart_section">
               {/* Select Year DropDown */}
               <div className="dropdown float-right mr-2">
-                        <div class="dropdown font-blue">
-                        <select className="form-control font-blue" id="dropdown" name="dropdown"
-                          onChange={this.handleDropdownChange}
-                          >
-                          <option value="" disabled>select year</option>
-                          <option value="2021">2021</option>
-                          <option value="2020">2020</option>
-                        </select>
-                      </div>
+                <div class="dropdown font-blue">
+                  <select className="form-control font-blue" id="dropdown" name="dropdown"
+                    onChange={this.handleDropdownChange}
+                  >
+                    <option value="" disabled>select year</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                  </select>
+                </div>
               </div>
               {/* Select Year DropDown */}
-
 
               {/* Bar Graph Section */}
               <div id='chartjsLegend' className="chart-container chartjsLegend" width="100" height="100">
@@ -109,20 +111,14 @@ export default class BarGraphRecruiter extends Component {
                         }],
                         yAxes: [{
                           ticks: {
-                            //suggestedMin: 0,
-                            //stepSize: 30
                           },
                           gridLines: {
-                            //display: false,
                             drawBorder: false,
                             zeroLineColor: '#fff'
                           },
                         }]
                       },
                       title: {
-                        //position: 'bottom',
-                        //display: true,
-                        // text: 'Population growth (millions)'
                       },
                       legend: {
                         position: 'bottom',
@@ -138,9 +134,6 @@ export default class BarGraphRecruiter extends Component {
                       tooltips: {
                         callbacks: {
                           title: function () { },
-                          //     label: function(tooltipItems, data) {
-                          //         return tooltipItems.yLabel + ' Job posted';
-                          // },
                           labelTextColor: function (tooltipItem, chart) {
                             return '#543453';
                           }

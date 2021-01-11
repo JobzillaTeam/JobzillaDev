@@ -3,7 +3,6 @@ import $ from 'jquery'
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const LeftNavProvider = () => {
-
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
@@ -16,7 +15,7 @@ const LeftNavProvider = () => {
     let location = useLocation();
     const matchUrls = ['/activeJob', '/closeJobs', '/recruiter/jobDetails/active/', '/recruiter/jobDetails/closed/']
     let isJobDropdownOpen = false;
-    for (let i = 0; i < matchUrls.length; i++ ) {
+    for (let i = 0; i < matchUrls.length; i++) {
         if (location.pathname.includes(matchUrls[i])) {
             isJobDropdownOpen = true;
             break;

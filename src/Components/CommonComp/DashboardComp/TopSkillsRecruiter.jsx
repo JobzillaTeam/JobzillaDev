@@ -20,12 +20,12 @@ export default class TopSkillsRecruiter extends Component {
     }
 
     componentDidMount() {
-        const today=new Date()
-        const year= today.getFullYear()     
+        const today = new Date()
+        const year = today.getFullYear()
+        //Calling provider's dashboard api to get current year data 
         this.dashboardDetails.getRecruiterDashboardDetails(year)
             .then(Response => {
                 if (Response && Response.data && Response.data.responseObject) {
-                    //   console.log(Response.data.responseObject.topSkills)
                     this.setState({
                         data: Response.data.responseObject.topSkills,
                         skill1: Response.data.responseObject.topSkills[0] && Response.data.responseObject.topSkills[0].skill,

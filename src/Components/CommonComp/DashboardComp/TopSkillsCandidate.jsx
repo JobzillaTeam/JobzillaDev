@@ -90,7 +90,7 @@ export default class TopSkillsCandidate extends Component {
                     </div>
                     {/* <!--TOP Skills published section-->  */}
 
-                    {/* <!--TOP Skills Unfulfilled section-->    */}
+                    {/* <!--TOP Skills section-->    */}
                     <div className="col-12 col-sm-12 col-md-12 col-lg-6 pl-0">
                         <h4 className="wid100 ml-3 marT30 topSkillsRequired_Text">&nbsp;</h4>
                         <section className="skillsUnfulfilled_section">
@@ -137,7 +137,7 @@ export default class TopSkillsCandidate extends Component {
                             </table>
                         </section>
                     </div>
-                    {/* <!--TOP Skills Unfulfilled section--> */}
+                    {/* <!--TOP Skills section--> */}
                 </div>
                 {/* <!--TOP Skills section--> */}
             </div>

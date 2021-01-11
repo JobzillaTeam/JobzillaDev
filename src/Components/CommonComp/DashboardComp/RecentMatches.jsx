@@ -15,9 +15,9 @@ export default class RecentMatches extends Component {
     this.candidateDashboard = ApiServicesOrgCandidate;
   }
   componentDidMount() {
+    //Calling candidate dashboard api from ApiServicesOrgCandidate
     this.candidateDashboard.getcandidateDashboardDetails(this.state.candidateId)
       .then(Response => {
-        //console.log(Response.data.responseObject.matchingJobs)
         if (Response && Response.data) {
           this.setState({
             matchingJobs: Response.data.responseObject.matchingJobs
@@ -25,7 +25,6 @@ export default class RecentMatches extends Component {
         }
       });
   }
-
 
   render() {
     const matchingJobs = this.state.matchingJobs
