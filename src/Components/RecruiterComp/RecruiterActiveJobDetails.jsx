@@ -51,8 +51,6 @@ export default class RecruiterActiveJobDetails extends React.Component {
   deleteUser() {
     //Calling  File Service delete single data from Service file:-
     const deleteJobId = this.props.match.params.jobID;
-
-    console.log(deleteJobId);
     this.ApiServicesOrg.deleteJobs(deleteJobId)
       .then((Response) => {
         this.toast.show(
@@ -66,7 +64,6 @@ export default class RecruiterActiveJobDetails extends React.Component {
         window.location.href = "/activeJob";
       })
       .catch((error) => {
-        console.log("Error Occured...", error);
       });
   }
 

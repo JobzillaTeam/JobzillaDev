@@ -42,7 +42,6 @@ const CTCComponent = ({ showPopup }) => {
     if (!values.currentCtcInLakh || !values.currentCtcInLakh[0]) values.currentCtcInLakh = "0"
     const cTCInFormat = getCTCInFormat(values.currentCtcInLakh, values.currentCtcInThousand)
     const eTCInFormat = getCTCInFormat(values.expectedCtcInLakh, values.expectedCtcInThousand)
-    console.log(cTCInFormat)
     if (cTCInFormat > 0) {
       clearErrors('currentCtcInLakh');
       const data = {

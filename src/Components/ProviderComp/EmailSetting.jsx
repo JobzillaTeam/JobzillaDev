@@ -90,11 +90,9 @@ class EmailSetting extends Component {
         return (
             this.emailSetting.putEmailSettings(this.state)
                 .then(Response => {
-                    // console.log(Response)
                     this.toast.show({ severity: 'success',summary: 'Success Message', detail: 'Data Saved Successfully', life: 2000 })
                 })
                 .catch(error => {
-                    // console.log("Error Occured..", error)
                     this.toast.show({ severity: 'error',summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
@@ -202,7 +200,6 @@ class EmailSetting extends Component {
 
     render() {
         const status = localStorage.getItem('status')
-        // console.log(status)
         return (
             <div>
                 <div className="content">

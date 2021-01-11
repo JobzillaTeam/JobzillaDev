@@ -15,7 +15,6 @@ import EditOrgProfile from "../Components/CommonComp/EditOrgProfile"
 import Logout from "../Components/Auth/Logout";
 import LeftNavCandidate from "../Components/CommonComp/LeftNavCandidate";
 import Dashboard from "../Components/Candidate/Dashboard";
-import Profile1 from "../Components/Candidate/Profile/Profile1";
 import {Profile as CandidateProfile} from "../Components/Candidate/Profile";
 // import Invites from "../Components/Candidate/Interviews/Invites";
 // import Accepted from "../Components/Candidate/Interviews/Accepted";
@@ -76,7 +75,6 @@ class RouterSettings extends Component {
             <CandidateLayout path="/candidate/jobOffers" component={JobOffers} />
             <CandidateLayout path="/candidate/searchJobs" component={SearchJobs} />
             <CandidateLayout path="/candidate/profile" component={CandidateProfile} />
-            <CandidateLayout path="/candidate/profile1" component={Profile1} />
             <CandidateLayout path="/candidate/interviews/interviewInvites" component={InterviewInvites}/>
             <CandidateLayout path="/candidate/jobDetails/:jobStatus/:jobID" component={CandidateJobDetails}/>
             <CandidateLayout path="/candidate/interviews/acceptedInterviews" component={AcceptedInterviews}/>

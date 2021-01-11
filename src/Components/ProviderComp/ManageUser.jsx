@@ -112,7 +112,6 @@ class ManageUser extends Component{
     }
     
     deleteUser() {
-    
         //Calling  File Service delete single data from Service file:- 
         this.userService.deleteUser(this.state.user.id)
         .then(Response=> {window.location.reload()})
@@ -135,18 +134,17 @@ class ManageUser extends Component{
 
     deleteSelectedUsers() {
         const updatedUserId=[]
-        // console.log(this.state.selectedUsers)
         const data = this.state.selectedUsers.map((user)=>
         updatedUserId.push(user.id))
-        // console.log(updatedUserId)
 
         //API call for multiple delete  {data: {userIds: updatedUserId}}, options)
         //Calling  File Service delete single data from Service file:- 
         this.userService.deleteMultiUser(updatedUserId)
         .then(Response=>{
-            // console.log("Success..",Response)
         })
-        .catch(error=>{console.log("Error Occured...",error)})
+        .catch(error=>{
+            // console.log("Error Occured...",error)
+        })
 
         this.toast.show({severity: 'success', summary: 'Success Message', detail: 'User deleted Successfully'},50000);
         

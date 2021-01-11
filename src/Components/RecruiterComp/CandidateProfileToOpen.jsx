@@ -38,7 +38,6 @@ class CandidateProfileToOpen extends Component {
     const userId = this.props.match.params.userId;
 
     this.viewImage.viewProfileImage1(userId).then(Response => {
-      console.log(Response)
       this.setState({
         imageUrl: Response.data.responseObject,
       });
@@ -46,7 +45,6 @@ class CandidateProfileToOpen extends Component {
 
     this.fileService2.downloadResumeFile()
       .then(Response => {
-        console.log(Response)
         this.setState({
           data1: Response.data.responseObject,
         });
@@ -63,7 +61,7 @@ class CandidateProfileToOpen extends Component {
             employmentDetailsList: Response.data.responseObject.employmentDetailsList,
             candidateCertificatesList: Response.data.responseObject.candidateCertificatesList,
             candidateLanguageList: Response.data.responseObject.candidateLanguageList  
-          }, () => { console.log(this.state.candidateInfo) })
+          },)
         }
       })
 
@@ -99,7 +97,7 @@ class CandidateProfileToOpen extends Component {
       align: 'top',
       duration: 1500,
     });
-    scroller.on('end', () => console.log('Scrolling end!'));
+    scroller.on('end');
   }
 
   downloadResume = () => {
@@ -107,11 +105,6 @@ class CandidateProfileToOpen extends Component {
     // Calling Download Resume File Service from Service file:-
     var blob;
     var data2;
-    //alert("Download")
-    // this.fileService2.downloadResumeFile()
-    // .then(Response => {
-    //     var data1=Response.data.responseObject
-    console.log(this.state.data1)
     data2 = this.state.data1
     blob = this.convertBase64toBlob(data2, 'application/msword');
     var blobURL = URL.createObjectURL(blob)

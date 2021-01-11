@@ -69,10 +69,8 @@ class ChangePasswordPopup extends Component {
       return (
         this.updatePassword.putChangePassword(this.state.fields.oldPassword, this.state.fields.newPassword)
           .then(Response => {
-            // this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully', life: 4000 })
             this.props.toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully'},50000);
             this.props.showPopup(false)
-            // window.location.reload()
           })
           .catch(error => {
             const errorMessage =  error && error.response && error.response.data && error.response.data.responseDescription
@@ -80,9 +78,6 @@ class ChangePasswordPopup extends Component {
             this.setState({
               formError: errorMessage 
             })
-
-            // this.toast.show({ severity: 'error', summary: 'Error', detail: 'Old Password does not match', life: 4000 });
-            // window.location.reload()
           })
       )
 

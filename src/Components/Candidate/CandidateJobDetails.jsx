@@ -27,7 +27,7 @@ const CandidateJobDetails = (props) => {
     .then(response => {
         if (response) {
           const { applicationStatus,jobDetails } = response;
-          console.log('applicationStatus', applicationStatus)
+          // console.log('applicationStatus', applicationStatus)
           if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
             if (applicationStatus === 'Application_Matched' || isFreshJob) {
               setIsActionButtonsVisible(true)
@@ -201,7 +201,7 @@ const CandidateJobDetails = (props) => {
                           <div>{jobDetails.visa}</div>
                         </div>
                       </div>
-                      {console.log("delete", jobDetails.isDeleted)}
+                      {/* {console.log("delete", jobDetails.isDeleted)} */}
                       <div className="row">
                         <div className="col-xs-12 col-md-5 others_section_firstcol">
                           <div>Passport</div>
