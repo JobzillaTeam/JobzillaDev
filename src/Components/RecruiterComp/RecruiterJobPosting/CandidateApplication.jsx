@@ -49,7 +49,6 @@ export default class CandidateApplication extends Component {
                         candidate: Response.data.responseObject.slice(0, INITIAL_ITEM_LENGTH),                       
                     },
                         () => {
-                            // console.log(this.state.candidateData)
                             },
                     )
                 }
@@ -61,12 +60,10 @@ export default class CandidateApplication extends Component {
         return (
             new ApiServicesOrg().updateApplicationStatus(this.props.jobID, candidateID, 'Application_Accepted_By_Recruiter')
                 .then(Response => {
-                    console.log(Response)
                     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Application accepted successfully', life: 2000 })
                     window.location.reload()
                 })
                 .catch(error => {
-                    console.log("Error Ocurred...", error)
                     this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
@@ -76,12 +73,10 @@ export default class CandidateApplication extends Component {
         return (
             new ApiServicesOrg().updateApplicationStatus(this.props.jobID, candidateID, 'Application_Declined_By_Recruiter')
                 .then(Response => {
-                    console.log(Response)
                     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Application Declined', life: 2000 })
                      window.location.reload()
                 })
                 .catch(error => {
-                    console.log("Error Occured..", error)
                     this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )

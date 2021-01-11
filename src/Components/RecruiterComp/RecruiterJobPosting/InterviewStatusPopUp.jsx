@@ -3,8 +3,6 @@ import React,{ Component } from 'react';
 import  {Toast} from 'primereact/toast'
 import ApiServicesOrg from '../../../Services/ApiServicesOrg'
 import { MAX_LENGTH } from "../../../Utils/AppConst";
-//import axios from 'axios'
-//import { Toast } from 'primereact/toast';
 class InterviewStatusPopUp extends Component{
     constructor(props) {
       super(props);
@@ -70,17 +68,13 @@ class InterviewStatusPopUp extends Component{
           this.setState({ 
             fields: fields,
           });
-          // this.state.fields['candidateId'] = localStorage.getItem('candidateId');
-          // this.state.fields['jobId'] = localStorage.getItem('JobId');
               this.interViewStatus.updateInterviewStatus(this.state.fields, this.props.jobID, this.props.candidateId)
                 .then(Response=>{
-                  // console.log(Response)
                 if(Response.status===208){
                   this.toast.show({severity: 'error', summary: 'Error', detail: 'User already Joined '},20000);
                   }else{
                     this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Status is updated Successfully'},20000);
                   }
-                  //this.hideModal()
                   window.location.reload()
                 })
                 .catch(error=>{
@@ -115,8 +109,6 @@ class InterviewStatusPopUp extends Component{
         return (
           <>
           {/* Below button is used to call the modal popup .please remove once you call this from manage user */}
-          {/*<Button onClick={() =>this.showModal(true)}>Small modal</Button>*/}
-          {/* <Toast ref={(el) => this.toast = el} /> */}
           <Modal
         show={this.state.show}
         onHide={() => this.hideModal(false)}

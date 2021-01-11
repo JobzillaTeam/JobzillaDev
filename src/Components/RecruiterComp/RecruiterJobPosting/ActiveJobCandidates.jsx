@@ -26,13 +26,11 @@ class ActiveJobCandidates extends React.Component {
         <div className="row px-4 mb-4 mx-0">
           {(matchingCandidates) ? matchingCandidates.map((match, index) =>
             <div className={`col-md-4 active-job ${index === 0 && 'pl-0'} ${index === 2 && 'pr-0'}`} key={index} >
-              {/* {console.log(jobDescription.jobId)} */}
 
               {(match.matchingCandidates === "undefined") ? <h6 className="noMatchingcandidateText">You have no matching candidates</h6> :
                 (<Card className="custom h-100" >
                   <div className="row">
                     <div className="location" className="col-md-8">
-                      {/* {console.log(match)} */}
                       <div class="activeJobCardItems">
                         <div id="name">{match.candidate.firstName} {match.candidate.lastName}</div>
                         <p id="body">{match.candidate.currentRole} at {match.candidate.company}</p>

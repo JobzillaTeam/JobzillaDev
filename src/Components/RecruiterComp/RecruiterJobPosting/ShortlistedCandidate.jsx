@@ -44,10 +44,6 @@ class ShortlistedCandidate extends Component {
                         candidate: Response.data.responseObject.slice(0, INITIAL_ITEM_LENGTH),
                         candidateLength: Response.data.responseObject.length
                     },
-                        //  this.loadMore(),
-                        // () => {
-                        //     console.log(this.state.candidate1)
-                        // }
                     )
                 }
             }
@@ -62,10 +58,6 @@ class ShortlistedCandidate extends Component {
             candidateIdForUpdateStatus: candidateId
         });
         this.showModal();
-    }
-
-    click() {
-        alert(`hii`)
     }
 
     /**Download Resume */
@@ -83,9 +75,6 @@ class ShortlistedCandidate extends Component {
                     var blobURL = URL.createObjectURL(blob);
                     window.open(blobURL);
                 }
-                // else{
-                //     alert(`resume not uploaded by candidate`)
-                // }
             })
     }
 

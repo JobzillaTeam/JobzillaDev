@@ -49,7 +49,6 @@ export default class MatchingCandidate extends Component {
                         matchingCandidateLength: Response.data.responseObject.length,                      
                     },
                         () => {
-                            // console.log(this.state.  matchingCandidateData)
                         },
                     )
                 }
@@ -61,12 +60,10 @@ export default class MatchingCandidate extends Component {
         return (
             this.MatchingCandidate.updateApplicationStatus(this.props.jobID, candidateID, 'Invite_Sent_By_Recruiter')
                 .then(Response => {
-                    console.log(Response)
                     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite send Successfully', life: 2000 })
                     window.location.reload()
                 })
                 .catch(error => {
-                    console.log("Error Ocurred..", error)
                     this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
@@ -76,12 +73,10 @@ export default class MatchingCandidate extends Component {
         return (
             this.MatchingCandidate.updateApplicationStatus(this.props.jobID, candidateID, 'Invite_Removed_By_Recruiter')
                 .then(Response => {
-                    console.log(Response)
                     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Invite Removed', life: 2000 })
                     window.location.reload()
                 })
                 .catch(error => {
-                    console.log("Error Ocurred..", error)
                     this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
