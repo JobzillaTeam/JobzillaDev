@@ -106,7 +106,7 @@ export default class EditJob extends React.Component {
               })
             }
 
-            
+
           })
         }
         this.setState({
@@ -426,12 +426,7 @@ export default class EditJob extends React.Component {
           <HeaderAll></HeaderAll>
           <div className="container-fluid">
             <div className=" main">
-              {/* top title */}
               <div className="row">
-                {/* <div className="col-md-12 ml-10 mt-4 mb-4">
-                  <div class="active_job_heading active_padding">Active Jobs > Create Job</div>
-                  <div class="active_job_heading active_padding">Edit Job</div>
-                </div> */}
                 <div class="col-md-12 py-4">
                   <div class=" active_job_heading active_padding"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > <Link className="link" to={nextLink}>{nextLinkText}</Link> > Edit Job</div>
                 </div>
@@ -467,8 +462,6 @@ export default class EditJob extends React.Component {
                             options={employmentTypes}
                             placeholder="Select Employment type"
                             defaultValue={this.getDefaultValueForSelect(employmentTypes, 'employmentType')}
-                            // defaultValue={this.state.EditJobDetails.employmentType}
-                            // value={this.state.EditJobDetails.employmentType}
                             onChange={obj => this.handleSelect({ name: 'employmentType', value: obj.value })}
                           />
                           <div class="error-message">{errors && errors.employmentType}</div>
@@ -484,7 +477,6 @@ export default class EditJob extends React.Component {
                             options={categories}
                             placeholder="Select Category"
                             defaultValue={this.getDefaultValueForSelect(categories, 'category')}
-
                             onChange={obj => this.handleSelect({ name: 'category', value: obj.value })}
                           />
                           <div class="error-message">{errors && errors.category}</div>
@@ -512,7 +504,6 @@ export default class EditJob extends React.Component {
                             options={primarySkillsList}
                             placeholder="Select Primary Skill"
                             defaultValue={this.getDefaultValueForMultiSelect(primarySkillsList, 'primarySkills')}
-                            // value={ this.state.EditJobDetails.primarySkills}
                             onChange={value => this.handleMultipleSelect({ name: 'primarySkills', value: value })}
                           />
                           <div class="error-message" >{errors && errors.primarySkills}</div>
@@ -540,8 +531,6 @@ export default class EditJob extends React.Component {
                                 options={expRequired}
                                 placeholder="Select"
                                 defaultValue={this.getDefaultValueForSelect(expRequired, 'experienceReqFrom')}
-
-                                // value={this.state.EditJobDetails.experienceReqFrom}
                                 onChange={obj => this.handleSelect({ name: 'experienceReqFrom', value: obj.value })}
                               />
                             </div>
@@ -555,7 +544,6 @@ export default class EditJob extends React.Component {
                                 options={expRequired}
                                 placeholder="Select"
                                 defaultValue={this.getDefaultValueForSelect(expRequired, 'experienceReqTo')}
-                                // value={this.state.EditJobDetails.experienceReqFrom}
                                 onChange={obj => this.handleSelect({ name: 'experienceReqTo', value: obj.value })}
                               />
                             </div>
@@ -583,7 +571,6 @@ export default class EditJob extends React.Component {
                             options={shiftTypes}
                             placeholder="Select Shift type"
                             defaultValue={this.getDefaultValueForSelect(shiftTypes, 'shift')}
-                            // value={this.state.EditJobDetails.shift}
                             onChange={obj => this.handleSelect({ name: 'shift', value: obj.value })}
                           />
                           <div class="error-message">{errors && errors.employmentType}</div>
@@ -619,7 +606,6 @@ export default class EditJob extends React.Component {
                               name="mustHavePasport"
                               onChange={this.handleCheckbox}
                               checked={this.state.values.mustHavePasport}
-                            // defaultChecked={this.state.EditJobDetails.mustHavePasport}
                             />
                             <label class="mb-0">Must have passport</label>
                           </div>
@@ -645,8 +631,6 @@ export default class EditJob extends React.Component {
                                 options={currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands}
                                 placeholder="Select"
                                 defaultValue={this.getDefaultValueForSelect(currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands, 'annualSalaryFrom')}
-
-                                // value={this.state.EditJobDetails.annualSalaryFrom} 
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryFrom', value: obj.value })}
                               />
                             </div>
@@ -660,7 +644,6 @@ export default class EditJob extends React.Component {
                                 options={currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands}
                                 placeholder="Select"
                                 defaultValue={this.getDefaultValueForSelect(currency === CURRENCY_TYPE_ENUM.INR ? annualSalaryInLakh : annualSalaryInThousands, 'annualSalaryTo')}
-                                // value={this.state.EditJobDetails.annualSalaryTo} 
                                 onChange={obj => this.handleSelect({ name: 'annualSalaryTo', value: obj.value })}
                               />
                             </div>
@@ -700,7 +683,6 @@ export default class EditJob extends React.Component {
                             options={[{ value: 'India', label: 'India' }]}
                             placeholder="Select"
                             defaultValue={this.getDefaultValueForSelect([{ value: 'India', label: 'India' }], 'jobCountry')}
-                            // value={ this.state.EditJobDetails.jobCountry}
                             onChange={obj => this.handleSelect({ name: 'jobCountry', value: obj.value })}
                           />
                           <div class="error-message" >{errors && errors.jobCountry}</div>
@@ -715,7 +697,6 @@ export default class EditJob extends React.Component {
                             options={states}
                             placeholder="Select"
                             defaultValue={this.getDefaultValueForSelect(states, 'jobState')}
-                            // value={ this.state.EditJobDetails.jobState}
                             onChange={obj => this.handleSelect({ name: 'jobState', value: obj.value, stateCode: obj.stateCode })}
                           />
                           <div class="error-message" >{errors && errors.jobState}</div>
@@ -730,8 +711,6 @@ export default class EditJob extends React.Component {
                             options={cities}
                             placeholder="Select"
                             defaultValue={this.getDefaultValueForSelect(cities, 'jobCity')}
-                            
-                            // value={ this.state.EditJobDetails.jobCity}
                             onChange={obj => this.handleSelect({ name: 'jobCity', value: obj.value })}
                           />
                           <div class="error-message" >{errors && errors.jobCity}</div>

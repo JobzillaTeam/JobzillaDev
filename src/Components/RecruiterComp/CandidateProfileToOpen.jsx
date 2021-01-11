@@ -1,6 +1,5 @@
 import React, { Component, createRef } from 'react';
 import scrollToComponent from 'react-scroll-to-component';
-import RenderLoader from '../CommonComp/Loader';
 import { Link } from 'react-router-dom'
 import LeftNavProvider from '../CommonComp/LeftNavProvider';
 import HeaderAll from '../CommonComp/HeaderAll'
@@ -9,7 +8,6 @@ import ScrollUpButton from "react-scroll-up-button";
 import '../Candidate/Profile/profile.css';
 import '../../Assets/css/Candidate.css'
 import ApiServicesOrg from '../../Services/ApiServicesOrg';
-//import Dropzone from 'react-dropzone'
 
 class CandidateProfileToOpen extends Component {
 
@@ -60,8 +58,8 @@ class CandidateProfileToOpen extends Component {
             educationDetailsList: Response.data.responseObject.educationDetailsList,
             employmentDetailsList: Response.data.responseObject.employmentDetailsList,
             candidateCertificatesList: Response.data.responseObject.candidateCertificatesList,
-            candidateLanguageList: Response.data.responseObject.candidateLanguageList  
-          },)
+            candidateLanguageList: Response.data.responseObject.candidateLanguageList
+          })
         }
       })
 
@@ -150,13 +148,13 @@ class CandidateProfileToOpen extends Component {
                 {/* Importing Overview Cards, Top skills card and monthly Report Bar Graph */}
                 {/* To display login User Details */}
                 <div class="col-md-12 py-4">
-                <h5 class="job-heading">
-                  <Link className="link" to={perviousLink}>
-                    {perviousLinkText}
-                  </Link>{" "}
+                  <h5 class="job-heading">
+                    <Link className="link" to={perviousLink}>
+                      {perviousLinkText}
+                    </Link>{" "}
                   > Profile
                 </h5>
-              </div>
+                </div>
 
                 <div class="">
                   <div class="row profile-details">
@@ -223,19 +221,6 @@ class CandidateProfileToOpen extends Component {
               >
                 About
           </div>
-              {/* <div
-            class={`profileTabs ${this.state.currentTabIndex === 1 ? 'profileTabsSelected' : ''}`}
-            onClick={() => {
-              scrollToComponent(this.ResumeSection, {
-                offset: this.state.offset,
-                align: 'top',
-                duration: 1500,
-              });
-              this.setState({currentTabIndex: 1})
-            }}
-          >
-            Resume
-          </div> */}
               <div
                 class={`profileTabs ${this.state.currentTabIndex === 1 ? 'profileTabsSelected' : ''}`}
                 onClick={() => {
@@ -351,13 +336,6 @@ class CandidateProfileToOpen extends Component {
                   </div>
                 </div>
               </section>
-              {/* <section class="mb-3"
-              ref={(section) => {
-              this.ResumeSection = section;
-            }}
-          >
-             <Resume showPopup={this.props.showPopup} /> 
-          </section> */}
               <section class="mb-3"
                 ref={(section) => {
                   this.SkillsSection = section;
@@ -378,7 +356,6 @@ class CandidateProfileToOpen extends Component {
                               <th class="normal-text-medium-bold">Version</th>
                               <th class="normal-text-medium-bold">Experience</th>
                               <th class="normal-text-medium-bold">Proficiency</th>
-                              {/* <th class="normal-text-medium-bold text-center">Primary Skills</th> */}
                               <th></th>
                             </tr>
                           </thead>
@@ -390,8 +367,6 @@ class CandidateProfileToOpen extends Component {
                                 <td>{skill.version}</td>
                                 <td>{skill.experience}</td>
                                 <td>{skill.proficiency}</td>
-                                {/* <td class="text-center">{skill.primarySkill ? <img src="/images/Dashboard-assets/candidate/correct_black.svg" alt="Cinque Terre" /> : null}</td> */}
-
                               </tr>
                             )) : null}
                           </tbody>
@@ -548,7 +523,6 @@ class CandidateProfileToOpen extends Component {
               </section>
             </div>
           </div>
-
           <Footer></Footer>
         </div>
         <ScrollUpButton />

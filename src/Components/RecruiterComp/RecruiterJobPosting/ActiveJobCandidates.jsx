@@ -4,8 +4,9 @@ import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import ApiServicesOrg from '../../../Services/ApiServicesOrg';
 
 class ActiveJobCandidates extends React.Component {
+  //Api call for changing application status-on click of invite
   onInviteButtonClick = (jobId, candidateId, applicationStatus) => {
-    const {toast} = this.props;
+    const { toast } = this.props;
     applicationStatus = 'Invite_Sent_By_Recruiter'
     return (
       new ApiServicesOrg().putApplicationStatus(jobId, candidateId, applicationStatus)
@@ -14,13 +15,12 @@ class ActiveJobCandidates extends React.Component {
           window.location.reload()
         })
         .catch(error => {
-          // console.log("Error Occured..", error)
           toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
         })
     )
   }
   render() {
-    const {matchingCandidates, jobId} = this.props;
+    const { matchingCandidates, jobId } = this.props;
     return (
       <React.Fragment>
         <div className="row px-4 mb-4 mx-0">

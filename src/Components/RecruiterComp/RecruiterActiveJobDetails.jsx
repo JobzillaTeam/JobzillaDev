@@ -9,7 +9,6 @@ import MatchingCandidate from "./RecruiterJobPosting/MatchingCandidate";
 import ShortlistedCandidate from "./RecruiterJobPosting/ShortlistedCandidate";
 import LeftNavProvider from "../CommonComp/LeftNavProvider";
 import { Dialog } from "primereact/dialog";
-
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 
@@ -29,6 +28,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
   }
   componentDidMount() {
     const jobID = this.props.match.params.jobID;
+    //Api call for getting all job
     this.ApiServicesOrg.getAllJobDetails(jobID).then((Response) => {
       if (Response && Response.data && Response.data.responseObject) {
         this.setState({
@@ -77,7 +77,6 @@ export default class RecruiterActiveJobDetails extends React.Component {
     const { jobDetails } = this.state;
     const perviousLink = "/activeJob";
     const perviousLinkText = "Active Jobs";
-
     const deleteUserDialogFooter = (
       <>
         <Button
@@ -129,16 +128,6 @@ export default class RecruiterActiveJobDetails extends React.Component {
                             </span>
                             </div>
                             <div className="fixedIcons">
-                              {/* <span>
-                                <Link to={{ pathname: `/recruiter/jobDetails/editJob/${jobDetails.jobId}` }}>
-                                  <i
-                                    // style={{ height: "15px" }}
-                                    style={{ fontSize: "18px", color: "black" }}
-                                    aria-hidden="true"
-                                    className="fa fa-pencil-square-o mr-6"
-                                  />
-                                </Link>
-                              </span> */}
                               <span>
                                 <i
                                   className="fa fa-trash-o ml-3"

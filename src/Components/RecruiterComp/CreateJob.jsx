@@ -29,6 +29,7 @@ export default class CreateJob extends React.Component {
   }
 
   componentDidMount() {
+    //Api call for getting list of categories
     ApiServicesOrgRecruiter.getListOfCategories().then((response) => {
       let categoriesList = [];
       if (response) {
@@ -38,6 +39,8 @@ export default class CreateJob extends React.Component {
         categories: categoriesList
       })
     });
+
+    //Api call for getting list of skills
     ApiServicesOrgCandidate.getListOfSkills().then((response) => {
       let skillsList = [];
       if (response) {
@@ -45,6 +48,8 @@ export default class CreateJob extends React.Component {
       }
       this.setState({ primarySkillsList: skillsList });
     });
+
+    //Api call for getting list of states
     ApiServicesOrgCandidate.getListOfStates().then((response) => {
       let statesList = [];
       if (response) {
@@ -77,6 +82,7 @@ export default class CreateJob extends React.Component {
     });
   }
 
+  //To display error messages
   getErrorMsg = (name) => {
     switch (name) {
       case 'jobTitle': {
@@ -157,6 +163,7 @@ export default class CreateJob extends React.Component {
       errors: errors
     }, () => {
       if (name === 'jobState') {
+        //Api call for getting list of cities
         ApiServicesOrgCandidate.getListOfCity(stateCode).then((response) => {
           let citiesList = [];
           if (response) {

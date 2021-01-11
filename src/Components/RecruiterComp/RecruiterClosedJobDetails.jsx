@@ -3,12 +3,7 @@ import HeaderAll from '../CommonComp/HeaderAll';
 import Footer from '../CommonComp/Footer'
 import { Link } from 'react-router-dom'
 import ApiServicesOrg from '../../Services/ApiServicesOrg';
-import { TabView, TabPanel } from 'primereact/tabview';
-import CandidateApplication from './RecruiterJobPosting/CandidateApplication'
-import MatchingCandidate from './RecruiterJobPosting/MatchingCandidate';
-import ShortlistedCandidate from './RecruiterJobPosting/ShortlistedCandidate'
 import LeftNavProvider from '../CommonComp/LeftNavProvider';
-import { Accordion, AccordionTab } from 'primereact/accordion';
 import ClosedJobCandidates from './RecruiterJobPosting/ClosedJobCandidates';
 import { INITIAL_ITEM_LENGTH } from '../../Utils/AppConst';
 import RenderLoader from '../CommonComp/Loader';
@@ -25,11 +20,12 @@ export default class RecruiterClosedJobDetails extends React.Component {
       joinedCandidateRecruitmentList: null,
       joinedCandidateList: null,
       pageDataLength: INITIAL_ITEM_LENGTH,
-      open:false
+      open: false
     }
   }
   componentDidMount() {
     const jobID = this.props.match.params.jobID;
+    //Api call for getting closed job and candidate with joined status
     this.ApiServicesOrg.getClosedJobsAndJoinedCandidates(jobID)
       .then(Response => {
         if (Response && Response.data && Response.data.responseObject) {
@@ -41,9 +37,10 @@ export default class RecruiterClosedJobDetails extends React.Component {
         }
       })
   }
+  //load more records when reaching to the end of page
   loadMore() {
     setTimeout(() => {
-      
+
       this.setState({
         joinedCandidateList: [...this.state.joinedCandidateRecruitmentList.slice(0, (this.state.pageDataLength + INITIAL_ITEM_LENGTH))],
         pageDataLength: this.state.pageDataLength + INITIAL_ITEM_LENGTH
@@ -51,7 +48,7 @@ export default class RecruiterClosedJobDetails extends React.Component {
     }, 100);
   }
 
-  toggle=()=>{
+  toggle = () => {
     this.setState({
       open: !this.state.open
     })
@@ -97,8 +94,8 @@ export default class RecruiterClosedJobDetails extends React.Component {
                 </div>
               </div>
               <div className="card my-4">
-              <section className="white-middle-section4  mt-4">
-                     {this.state.open ? (
+                <section className="white-middle-section4  mt-4">
+                  {this.state.open ? (
                     <div className="card-body">
                       <div className="row">
                         <div className="col-md-6">
@@ -163,13 +160,13 @@ export default class RecruiterClosedJobDetails extends React.Component {
                           </div>
                         </div>
                       </div>
-                    </div> 
-                     ) :  <div className="viewdetails">View More Details</div>}
-                 
-                  </section> 
+                    </div>
+                  ) : <div className="viewdetails">View More Details</div>}
+
+                </section>
               </div>
               <div className="arrowButton">
-                  {this.state.open ? <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img>  : <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img> }
+                {this.state.open ? <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img> : <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img>}
               </div>
               <div class="bg-white mt-4">
                 <InfiniteScroll

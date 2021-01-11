@@ -1,17 +1,13 @@
 import React, { Fragment } from 'react'
 import HeaderAll from '../CommonComp/HeaderAll';
 import Footer from '../CommonComp/Footer';
-import LeftNavCandidate from '../CommonComp/LeftNavCandidate'
 import { Link } from 'react-router-dom'
 import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollUpButton from "react-scroll-up-button";
 import RenderLoader from '../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../Utils/AppConst';
-import ApiServicesOrgRecruiter from '../../Services/ApiServicesOrgRecruiter';
-import ClosedJobCandidates from './RecruiterJobPosting/ClosedJobCandidates';
 import LeftNavProvider from '../CommonComp/LeftNavProvider';
 import ApiServicesOrg from '../../Services/ApiServicesOrg';
-import MatchingCandidate from './RecruiterJobPosting/MatchingCandidate';
 import ActiveJobCandidates from './RecruiterJobPosting/ActiveJobCandidates';
 import { Toast } from 'primereact/toast'
 
@@ -33,6 +29,7 @@ class ActiveJob extends React.Component {
   }
 
   componentDidMount() {
+    //Api to get active job details
     new ApiServicesOrg().getAllActiveJobs().then(response => {
       if (response && response.data && response.data.responseObject) {
         const { responseObject } = response.data;
@@ -46,7 +43,6 @@ class ActiveJob extends React.Component {
         })
       }
     }).catch(error => {
-      // console.log(error);
       this.setState({
         isLoading: false
       })
@@ -84,6 +80,7 @@ class ActiveJob extends React.Component {
     })
   }
 
+//Sorting
   getSortedResourceJobs = (value, resourceJobsListView) => {
     const updatedResourceJobs = resourceJobsListView && resourceJobsListView.sort((objA, objB) => {
       const dateA = new Date(objA.jobDetails.createdDate).getTime()
@@ -103,6 +100,7 @@ class ActiveJob extends React.Component {
     return updatedResourceJobs;
   }
 
+  //To change value from dropdown
   handleDropdownChange = e => {
     const { value } = e.target;
     const { cloneResourceJobs } = this.state;
@@ -114,6 +112,7 @@ class ActiveJob extends React.Component {
     })
   }
 
+   //Fetch more records after reaching to the end of page
   fetchMoreResourceJobs = () => {
     const { cloneResourceJobs, pageDataLength } = this.state;
       if (cloneResourceJobs.length >= pageDataLength) {
@@ -125,6 +124,7 @@ class ActiveJob extends React.Component {
   }
   render() {
     const { cloneResourceJobs, pageDataLength, isLoading, resourceJobs } = this.state;
+
     return (
       <Fragment>
         <LeftNavProvider></LeftNavProvider>
