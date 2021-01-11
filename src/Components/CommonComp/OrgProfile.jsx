@@ -23,8 +23,8 @@ class Profile extends Component {
   };
 
   componentDidMount() {
+    //To show image
     this.viewImage.viewProfileImage().then((Response) => {
-      //console.log(Response.data.responseObject)
       this.setState({
         imageUrl: Response.data.responseObject,
       });
@@ -40,7 +40,7 @@ class Profile extends Component {
       if (Response && Response.data && Response.data.responseObject) {
         getOrgName = JSON.stringify(
           Response.data.responseObject.organizationName
-       );
+        );
         getOfficialEmail = JSON.stringify(Response.data.responseObject.email);
         getContactPersonName = JSON.stringify(Response.data.responseObject.userName);
         getGstin = Response.data.responseObject.gstin
@@ -73,20 +73,14 @@ class Profile extends Component {
         {/* Main Content on the page */}
         <div className="content_section main marT60 top-padding">
           <div class="mt-3 mb-3 setting_text1">
-                                {/*<p className="backtodashboard">
-                                     <a href="#"> </a> </p>*/}
-                                    <Link className="backtodashboard" to="/providerDashboard">
-                                    <img className="setting_arrow marR5" 
-                                    src="images/EmailSettings/backward-link-arrow.svg"></img>
+            <Link className="backtodashboard" to="/providerDashboard">
+              <img className="setting_arrow marR5"
+                src="images/EmailSettings/backward-link-arrow.svg"></img>
                                       Dashboard
                                     </Link>
-                            </div>
+          </div>
 
           <h4>My Profile</h4>
-          {/* <p>
-            You can manage your profile details and change password from here
-          </p> */}
-
           <div className="d-flex justify-content-between">
             <div className="editHeading">
               You can manage your profile details and change password from here
@@ -110,24 +104,23 @@ class Profile extends Component {
                     height="133px"
                   />
                 ) : (
-                  <img
-                    className="mr-3 rounded-circle"
-                    src="images/Dashboard-assets/user-f.png"
-                    alt="User profile"
-                    width="133px"
-                    height="133px"
-                    alt="User profile"
-                    width="133px"
-                    height="133px"
-                  />
-                )}
+                    <img
+                      className="mr-3 rounded-circle"
+                      src="images/Dashboard-assets/user-f.png"
+                      alt="User profile"
+                      width="133px"
+                      height="133px"
+                      alt="User profile"
+                      width="133px"
+                      height="133px"
+                    />
+                  )}
               </div>
 
               <div className="pt-3 orgProfileFont">
                 {this.state.contactPersonName}
               </div>
-               <p className="orgProfileFont">{JSON.parse(localStorage.getItem("userDetails")).userRole}</p> 
-              {/* <div>rosadodson@techmahindra.com</div> */}
+              <p className="orgProfileFont">{JSON.parse(localStorage.getItem("userDetails")).userRole}</p>
             </div>
 
             <h6 className="top-padding mt-4 pt-3 border-top profileDetailFont">

@@ -18,7 +18,7 @@ class EditProfile extends Component {
       gstin: "",
       mobile: "",
       isLoading: false,
-      userRole:localStorage.getItem("userRole")
+      userRole: localStorage.getItem("userRole")
     };
     this.viewImage = new ApiServicesOrg();
     this.fileService = new ApiServicesOrg();
@@ -36,6 +36,7 @@ class EditProfile extends Component {
     this.UpdateProfile = this.UpdateProfile.bind(this);
   }
 
+  //To update profile
   UpdateProfile(e) {
     e.preventDefault();
     let employee = {
@@ -46,40 +47,40 @@ class EditProfile extends Component {
       phoneNumber: this.state.mobile,
       id: localStorage.getItem("organizationId"),
     };
-
     let data = {
       userName: this.state.contactPersonName,
       contactNumber: this.state.mobile,
       id: JSON.parse(localStorage.getItem('userDetails')).id,
     };
-    // console.log("employee => " + JSON.stringify(employee));
 
-    const userRole=this.state.userRole
-    if(userRole==="Owner"){
-    this.viewImage.updateOrganizationProfile(employee).then((res) => {    
-      this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully'},20000);
-      setTimeout(() => {
-        this.props.history.push("/orgProfile");
-    }, 1000)
-    
-    }) .catch(error =>{
-      if(error){
-        this.toast.show({severity: 'success', summary: 'Error Message', detail: 'Something Went Wrong'},20000);
-      }
-     })}else {
-      this.viewImage.putUserProfile(data).then((res) => {    
-        this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully'},20000);
+    const userRole = this.state.userRole
+    //If user role is owner
+    if (userRole === "Owner") {
+      this.viewImage.updateOrganizationProfile(employee).then((res) => {
+        this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully' }, 20000);
         setTimeout(() => {
           this.props.history.push("/orgProfile");
-      }, 1000)
-      
-      }) .catch(error =>{
-        if(error){
-          this.toast.show({severity: 'success', summary: 'Error Message', detail: 'Something Went Wrong'},20000);
-        }
-       })
+        }, 1000)
 
-     }
+      }).catch(error => {
+        if (error) {
+          this.toast.show({ severity: 'success', summary: 'Error Message', detail: 'Something Went Wrong' }, 20000);
+        }
+      })
+    } else {
+      this.viewImage.putUserProfile(data).then((res) => {
+        this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Profile Updated Successfully' }, 20000);
+        setTimeout(() => {
+          this.props.history.push("/orgProfile");
+        }, 1000)
+
+      }).catch(error => {
+        if (error) {
+          this.toast.show({ severity: 'success', summary: 'Error Message', detail: 'Something Went Wrong' }, 20000);
+        }
+      })
+
+    }
   }
 
   changeOrgNameHandler = (event) => {
@@ -110,13 +111,14 @@ class EditProfile extends Component {
   };
 
   componentDidMount() {
+    //To view image
     this.viewImage.viewProfileImage().then((Response) => {
-      //console.log(Response.data.responseObject)
       this.setState({
         imageUrl: Response.data.responseObject,
       });
     });
 
+    //To get user profile details
     this.viewImage.getUserProfile().then((Response) => {
       let getOrgName = "";
       let getOfficialEmail = "";
@@ -132,8 +134,8 @@ class EditProfile extends Component {
         getContactPersonName = JSON.stringify(Response.data.responseObject.userName);
         getGstin = JSON.stringify(Response.data.responseObject.gstin);
         getGstin = Response.data.responseObject.gstin
-        ? JSON.stringify(Response.data.responseObject.gstin)
-        : "";
+          ? JSON.stringify(Response.data.responseObject.gstin)
+          : "";
         getMobile = JSON.stringify(Response.data.responseObject.contactNumber);
         getRole = JSON.stringify(Response.data.responseObject.userRole);
       }
@@ -149,17 +151,17 @@ class EditProfile extends Component {
     });
   }
 
+  //To upload profile photo
   uploadHandler = (e) => {
-    // console.log(e.target.files);
     const files = e.target.files;
-    var fileInput= files[0]
-    var filePath =fileInput.name;
+    var fileInput = files[0]
+    var filePath = fileInput.name;
     var allowedExtensions = (/(\.jpg|\.png|\.JPG|\.PNG|\.jpeg|\.JPEG)$/);
-    if(!allowedExtensions.exec(filePath)){
-      this.toast.show({severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .jpg, jpeg or .png'},50000);
-    fileInput=""
-    return false;
-    }else{
+    if (!allowedExtensions.exec(filePath)) {
+      this.toast.show({ severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .jpg, jpeg or .png' }, 50000);
+      fileInput = ""
+      return false;
+    } else {
       const token = JSON.parse(localStorage.getItem("userDetails")).authToken;
       const formData = new FormData();
       formData.append("imageFile", files[0]);
@@ -171,30 +173,29 @@ class EditProfile extends Component {
       };
       this.setState({
         isLoading: true
-    });
+      });
       // Calling Upload profile photo File Service from Service file:-
       this.fileService
         .postProfilePhoto(formData, formheader)
         .then((Response) => {
-         this.setState({
+          this.setState({
             isLoading: false
-        })
+          })
           window.location.reload();
         })
-  
+
         .catch((error) => {
-          // console.log(error);
           this.toast.show(
             { severity: "error", summary: "Error", detail: "Server Error " },
             50000
           );
         });
-  
+
     }
   };
 
   render() {
-    const userRole=this.state.userRole
+    const userRole = this.state.userRole
     return (
       <div className="content">
         {/*  Header */}
@@ -203,14 +204,12 @@ class EditProfile extends Component {
         <div className="content_section marT60 main top-padding">
           <Toast className="toast_padding" ref={(el) => (this.toast = el)} />
           <div class="mt-3 mb-3 setting_text1">
-                                {/*<p className="backtodashboard">
-                                     <a href="#"> </a> </p>*/}
-                                    <Link className="backtodashboard" to="/providerDashboard">
-                                    <img className="setting_arrow marR5"
-                                     src="images/EmailSettings/backward-link-arrow.svg"></img>
+            <Link className="backtodashboard" to="/providerDashboard">
+              <img className="setting_arrow marR5"
+                src="images/EmailSettings/backward-link-arrow.svg"></img>
                                      Dashboard
                                     </Link>
-                            </div>
+          </div>
 
           <h4>Edit Profile</h4>
           <div className="d-flex justify-content-between">
@@ -223,8 +222,6 @@ class EditProfile extends Component {
             <button className="btn btn-blue" onClick={this.changePass}>
               Change Password
             </button>
-            {/* <div> <button className="btn btn-blue">Change Password</button>
-                    </div> */}
           </div>
           <section className="top-padding white-middle-section mt-4">
             <div className="profile text-center">
@@ -249,7 +246,7 @@ class EditProfile extends Component {
                     accept=".gif,.jpg,.png,.tif|image/*"
                     id="picture"
                     onChange={this.uploadHandler}
-                  />               
+                  />
                 </form>
                 {this.state.imageUrl ? (
                   <img
@@ -260,18 +257,18 @@ class EditProfile extends Component {
                     height="134.59px"
                   />
                 ) : (
-                  <img
-                    className="mr-3 rounded-circle"
-                    src="images/Dashboard-assets/user-f.png"                    
-                    alt="User profile"
-                    width="133px"
-                    height="134.59px"
-                  />
-                )}
+                    <img
+                      className="mr-3 rounded-circle"
+                      src="images/Dashboard-assets/user-f.png"
+                      alt="User profile"
+                      width="133px"
+                      height="134.59px"
+                    />
+                  )}
               </div>
               {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
               <div className="pt-3">
-                <div class="orgProfileFont">{this.state.contactPersonName}</div>              
+                <div class="orgProfileFont">{this.state.contactPersonName}</div>
                 <p class="orgProfileFont">{JSON.parse(localStorage.getItem("userDetails")).userRole}</p>
               </div>
             </div>
@@ -279,31 +276,31 @@ class EditProfile extends Component {
             <form>
               <div className="row">
                 <div className="col-md-6">
-                {(userRole==="Admin" || userRole==="User") ?
-                  <div className="form-group">
-                    <label htmlFor="orgName">Organisation Name</label>
-                    <input
-                      type="text"
-                      id="orgName"
-                      name="orgName"
-                      placeholder="ABC Agency"
-                      className="form-control"
-                      disabled
-                      defaultValue={this.state.orgName}
-                      onChange={this.changeOrgNameHandler}
-                    />
-                  </div>: <div className="form-group">
-                    <label htmlFor="orgName">Organisation Name</label>
-                    <input
-                      type="text"
-                      id="orgName"
-                      name="orgName"
-                      placeholder="ABC Agency"
-                      className="form-control"
-                      defaultValue={this.state.orgName}
-                      onChange={this.changeOrgNameHandler}
-                    />
-                  </div>}
+                  {(userRole === "Admin" || userRole === "User") ?
+                    <div className="form-group">
+                      <label htmlFor="orgName">Organisation Name</label>
+                      <input
+                        type="text"
+                        id="orgName"
+                        name="orgName"
+                        placeholder="ABC Agency"
+                        className="form-control"
+                        disabled
+                        defaultValue={this.state.orgName}
+                        onChange={this.changeOrgNameHandler}
+                      />
+                    </div> : <div className="form-group">
+                      <label htmlFor="orgName">Organisation Name</label>
+                      <input
+                        type="text"
+                        id="orgName"
+                        name="orgName"
+                        placeholder="ABC Agency"
+                        className="form-control"
+                        defaultValue={this.state.orgName}
+                        onChange={this.changeOrgNameHandler}
+                      />
+                    </div>}
                   <div className="form-group">
                     <label htmlFor="officialEmail">Official Email</label>
                     <input
@@ -345,31 +342,31 @@ class EditProfile extends Component {
                       onChange={this.changeContactPersonNameHandler}
                     />
                   </div>
-                  {(userRole==="Admin" || userRole==="User") ?
-                  <div className="form-group">
-                    <label htmlFor="gstin">GSTIN</label>
-                    <input
-                      type="text"
-                      id="gstin"
-                      name="gstin"
-                      placeholder="GSTIN (optional)"
-                      className="form-control"
-                      disabled
-                      defaultValue={this.state.gstin}
-                      onChange={this.changeGstInHandler}
-                    />
-                  </div>: <div className="form-group">
-                    <label htmlFor="gstin">GSTIN</label>
-                    <input
-                      type="text"
-                      id="gstin"
-                      name="gstin"
-                      placeholder="GSTIN (optional)"
-                      className="form-control"
-                      defaultValue={this.state.gstin}
-                      onChange={this.changeGstInHandler}
-                    />
-                  </div>}
+                  {(userRole === "Admin" || userRole === "User") ?
+                    <div className="form-group">
+                      <label htmlFor="gstin">GSTIN</label>
+                      <input
+                        type="text"
+                        id="gstin"
+                        name="gstin"
+                        placeholder="GSTIN (optional)"
+                        className="form-control"
+                        disabled
+                        defaultValue={this.state.gstin}
+                        onChange={this.changeGstInHandler}
+                      />
+                    </div> : <div className="form-group">
+                      <label htmlFor="gstin">GSTIN</label>
+                      <input
+                        type="text"
+                        id="gstin"
+                        name="gstin"
+                        placeholder="GSTIN (optional)"
+                        className="form-control"
+                        defaultValue={this.state.gstin}
+                        onChange={this.changeGstInHandler}
+                      />
+                    </div>}
                 </div>
               </div>
               <div className="top-margin mt-3 text-right">

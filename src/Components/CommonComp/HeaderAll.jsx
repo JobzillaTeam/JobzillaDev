@@ -20,19 +20,17 @@ class HeaderAll extends Component {
   toggleHandeler = (status) => {
     this.setState({ status });
     localStorage.setItem('status', status)
-    // console.log(status);
     const providerRecruiterStatus = status;
   }
 
   componentDidMount() {
+    //To set profile photo in header section
     this.viewImage.viewProfileImage()
       .then(Response => {
-        //console.log(Response.data.responseObject)
         if (Response && Response.data && Response.data.responseObject) {
           this.setState({
             imageUrl: Response.data.responseObject
           })
-          // localStorage.setItem('imageUrl', `${Response.data.responseObject}`)
         }
       })
   }
@@ -45,7 +43,7 @@ class HeaderAll extends Component {
     const userName = localStorage.getItem('userName');
     const providerRecruiterStatus = localStorage.getItem('status')
     const userRole = localStorage.userRole
-
+    //For candidate
     if (userRole === "candidate_role") {
       if (this.context.state instanceof Promise) {
         this.context.state.then((data) => {
@@ -67,7 +65,9 @@ class HeaderAll extends Component {
           }
         })
       }
-    } else if (userRole === 'Owner') {
+    }
+    //For Owner
+    else if (userRole === 'Owner') {
       new ApiServicesOrg().getOrganizationProfile().then((response) => {
         const responseObject = response && response.data && response.data.responseObject;
         const userNameValue = responseObject && responseObject.contactPerson ? responseObject.contactPerson : localStorage.getItem('userName');
@@ -78,7 +78,8 @@ class HeaderAll extends Component {
         }
       });
     }
-    else if(userRole === 'Admin'|| userRole==="User"){
+    //For Admin and user
+    else if (userRole === 'Admin' || userRole === "User") {
       new ApiServicesOrg().getUserProfile().then((response) => {
         const responseObject = response && response.data && response.data.responseObject;
         const userNameValue = responseObject && responseObject.userName ? responseObject.userName : localStorage.getItem('userName');
@@ -87,10 +88,8 @@ class HeaderAll extends Component {
         if (innerHtmlText !== userNameValue) {
           innerHtmlElement.innerHTML = userNameValue;
         }
-      });  
+      });
     }
-
-  
 
     return (
       <div>
@@ -98,9 +97,6 @@ class HeaderAll extends Component {
         {this.state.status === "recruiter" && <Redirect to="/recruiterDashboard" />}
 
         <header className="Header bg-white">
-          {/* <div className="float-left logo_container col-xl-2">
-                <img src="/images/Dashboard-assets/logo-white.png" className="logo"/>
-            </div> */}
           {(!isCandidate) && (!isSetting) && (!isProfile) ?
             <div className="float-left d-inline-flex marL34">
               <div className="mx-3 sub-title1 d-flex align-items-center">JOB : </div>
@@ -137,13 +133,13 @@ class HeaderAll extends Component {
                 {(!isCandidate) ?
                   <li>
                     <Link className="dropdown-item" to="/orgProfile" >
-                      {/* <i className="fa fa-user pr-2" aria-hidden="true"></i>*/} Profile
+                      Profile
                     </Link>
                   </li>
                   :
                   <li>
                     <Link className="dropdown-item" to="/candidate/changePassword" >
-                      {/* <i className="fa fa-user pr-2" aria-hidden="true"></i>*/} Change Password
+                      Change Password
                   </Link>
                   </li>}
 
@@ -152,27 +148,20 @@ class HeaderAll extends Component {
                   {
                     (!isCandidate) ?
                       (<Link className="dropdown-item" to="/emailSetting">
-                        {/* <i className="fa fa-cog pr-2" aria-hidden="true"></i>  */}
-                    Settings
+                        Settings
                       </Link>)
                       :
                       (<Link className="dropdown-item" to="/candidate/candidateEmailsetting">
                         Settings
                       </Link>)
-
                   }
                 </li>
 
 
                 <li>
                   <Link className="dropdown-item" to="/logout">
-                    {/* Toast.info("User Logout Successfully") */}
-                    {/* <i className="fa fa-sign-out pr-2" aria-hidden="true"></i>  */}
                     Logout
                           </Link>
-
-                  {/* <a className="dropdown-item" href="#">
-                   <i className="fa fa-sign-out pr-2" aria-hidden="true"></i> Logout</a> */}
                 </li>
               </ul>
             </li>

@@ -1,9 +1,6 @@
 import React from 'react';
 import ApiServicesOrg from '../../../Services/ApiServicesOrg';
-import {
-  useHistory,
-} from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 
 const TermsCandidate = ({ showPopup, setTemplateName }) => {
   let history = useHistory();
@@ -13,7 +10,6 @@ const TermsCandidate = ({ showPopup, setTemplateName }) => {
     history.replace({ pathname: "/logout" })
   }
   const handleOnAccepted = e => {
-  
     apiServicesOrg.updateAcceptedTC().then(Response => {
       const acceptedTC = Response && Response.data && Response.data.responseObject && Response.data.responseObject.acceptedTC
       if (acceptedTC) {
@@ -27,7 +23,7 @@ const TermsCandidate = ({ showPopup, setTemplateName }) => {
     }
     ).catch(
       err => console.log(err)
-      );
+    );
   }
   return (
     <React.Fragment>

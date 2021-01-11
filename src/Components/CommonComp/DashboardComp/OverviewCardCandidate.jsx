@@ -16,6 +16,7 @@ export default class CandidateOverviewCard extends Component {
 
     }
     componentDidMount() {
+        //calling candidate dashboard api
         this.candidateDashboard.getcandidateDashboardDetails()
             .then(Response => {
                 if (Response && Response.data) {
@@ -44,7 +45,6 @@ export default class CandidateOverviewCard extends Component {
             <div>
                 {/* Overview Section */}
                 <div className="row ml-0 mr-1 clearfix">
-
                     <div className="wid100 ml-4 marT20  profile_strength_text clearfix">Profile Strength</div>
                     <div className="col-6">
                         <div className="progressbar-text font-blue" style={{ width: `${this.state.progressBarPercentage}%` }}>{this.state.progressBarPercentage}%</div>
@@ -53,9 +53,6 @@ export default class CandidateOverviewCard extends Component {
                             </div>
                         </div>
                     </div>
-
-                   
-                    {/* <div className="row ml-4 marT20 profile_strength_subtext clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ullamcorper.<span className="font-blue complete-now-text"><Link to="/candidate/profile">COMPLETE NOW</Link></span></div> */}
                     <div className=" w-100 font-blue complete-now-text ml-4 marT20"><Link to="/candidate/profile">COMPLETE NOW</Link></div>
                     <div className="wid100 ml-4 overview marT30 overview_text">Overview-2021</div>
                     <div className="col-12 col-sm-12 col-md-6 col-lg-4">
@@ -67,7 +64,6 @@ export default class CandidateOverviewCard extends Component {
                                         <CountUp start={0} end={jobsApplied} duration={2.75} separator="," />
                                     </h5>
                                     Jobs Applied
-
                                 </div>
                             </div>
                         </section>
@@ -81,7 +77,6 @@ export default class CandidateOverviewCard extends Component {
                                         <CountUp start={0} end={selectedForInterviews} duration={2.75} separator="," />
                                     </h5>
                             Selected for Interviews
-                            {/* <img src="images/Dashboard-assets/more_ico.png" width="10" height="10" className="more_ico" /> */}
                                 </div>
                             </div>
                         </section>
@@ -95,7 +90,6 @@ export default class CandidateOverviewCard extends Component {
                                         <CountUp start={0} end={jobOffers} duration={2.75} separator="," />
                                     </h5>
                             Job Offers
-                            {/* <img src="images/Dashboard-assets/more_ico.png" width="10" height="10" className="more_ico" /> */}
                                 </div>
                             </div>
                         </section>

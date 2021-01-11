@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap'
 
 class Popup extends Component {
-
   constructor() {
     super()
     this.state = {
