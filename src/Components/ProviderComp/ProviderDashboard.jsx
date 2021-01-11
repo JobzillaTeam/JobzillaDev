@@ -17,7 +17,6 @@ export default class ProviderDashboard extends Component {
 		this.props.history.push("/");
 	};
 
-
 	render() {
 		const details = localStorage.getItem('emaildetails')
 		return (
@@ -34,9 +33,7 @@ export default class ProviderDashboard extends Component {
 							</section>
 						</div>
 						<ScrollUpButton />
-
 					</div>
-
 					<Footer></Footer>
 				</div>
 			</div>

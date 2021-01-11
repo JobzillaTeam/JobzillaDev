@@ -7,7 +7,6 @@ import LeftNavProvider from '../CommonComp/LeftNavProvider'
 import ApiServicesOrg from '../../Services/ApiServicesOrg'
 import RenderLoader from '../CommonComp/Loader';
 import { Modal } from 'react-bootstrap'
-//import axios from 'axios'
 
 class UploadProfile extends Component {
     constructor(props) {
@@ -37,8 +36,8 @@ class UploadProfile extends Component {
         isLoading: false,
         show: false,
         duplicateId: [],
-        successfullEmail:[],
-        rowNosWithAbsenceOfMandatoryFields:[]
+        successfullEmail: [],
+        rowNosWithAbsenceOfMandatoryFields: []
     };
 
     showModal = () => {
@@ -52,7 +51,7 @@ class UploadProfile extends Component {
     onUploadClick = () => {
         this.showModal();
         return this.state.duplicateId
-        
+
     }
 
     onFileChange = event => {
@@ -69,7 +68,6 @@ class UploadProfile extends Component {
     };
 
     onFileChange1 = (fileAccept) => {
-
         if (this.state.select == true) {
             this.toast.show({ severity: 'error', summary: 'Error', detail: 'You have already selected  a file' }, 50000);
         }
@@ -80,7 +78,6 @@ class UploadProfile extends Component {
             });
             this.fileValidation()
         };
-
     }
     // Csv extention validation check on upload button
     fileValidation = () => {
@@ -99,7 +96,6 @@ class UploadProfile extends Component {
             }
             return true
         }
-
     }
 
     //Dragging csv file to upload
@@ -142,7 +138,7 @@ class UploadProfile extends Component {
             });
             this.fileService.postSampleFile(formData, formheader, orgId, supervisorId)
                 .then(Response => {
-                     if (Response.data.responseObject.duplicateEmailList) {
+                    if (Response.data.responseObject.duplicateEmailList) {
                         this.setState({
                             duplicateId: Response.data.responseObject.duplicateEmailList,
                         })
@@ -150,25 +146,21 @@ class UploadProfile extends Component {
                             this.setState({
                                 successfullEmail: Response.data.responseObject.successfullyAddedEmailList,
                             })
-                           
                         }
                         if (Response.data.responseObject.rowNosWithAbsenceOfMandatoryFields) {
                             this.setState({
                                 rowNosWithAbsenceOfMandatoryFields: Response.data.responseObject.rowNosWithAbsenceOfMandatoryFields,
                             })
-                           
                         }
                         this.onUploadClick()
-                       
+
                     }
-                   
+
                     this.setState({
                         isLoading: false
                     })
                 })
                 .catch(error => {
-                    // console.log(error)
-                   // this.toast.show({ severity: 'error', summary: 'Error', detail: 'Please fill data in each coloumn of CSV file ' }, 50000);
                 })
         }
         this.setState({
@@ -180,47 +172,45 @@ class UploadProfile extends Component {
     render() {
         return (
             <Fragment>
-               
                 <Modal className=" modal1 modal-dialog modal-lg"
-                
                     show={this.state.show}
                     onHide={() => this.hideModal(false)}
                     aria-labelledby="contained-modal-title-vcenter">
                     <Toast className="toast_padding" ref={(el) => this.toast = el} />
                     <Modal.Header closeButton>
                         <Modal.Title className="modal-title-csv" id="contained-modal-title-vcenter">
-                          File Upload Report
+                            File Upload Report
                 </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="duplicateID ">
-                        {this.state.duplicateId.length >0 ?
-                        <>
-                            <p className=" marL38 modal-body-title">Candidate profile(s) that could not be created as the email id(s) already exists in system:</p>
-                            <ol className= "marL50 modal-body-content">
-                            {this.state.duplicateId.map(duplicateId => {
-                                return <li className="modal-body-content">{duplicateId}</li>
-                            })}</ol>
-                        </>:<div></div>}
-                      
-                        {this.state.successfullEmail.length>0 ?
-                        <>
-                        <p className=" marL38 modal-body-title">Candidate profile(s) that were successfully created:</p>
-                            <ol className=" marL50 modal-body-title">
-                            {this.state.successfullEmail.map(successfullEmail => {
-                                return <li className="modal-body-content">{successfullEmail}</li>
-                            })} 
-                            </ol>
-                        </>:<div></div>}
-                                
-                        {this.state.rowNosWithAbsenceOfMandatoryFields.length>0 ?
-                        <>
-                        <p className=" marL38 modal-body-title">Candidate profile(s) that could not be created for the following record(s) in CSV as mandatory fields were missed out:</p>
-                            <ol className="marL50 modal-body-title">
-                            {this.state.rowNosWithAbsenceOfMandatoryFields.map(rowNosWithAbsenceOfMandatoryFields => {
-                                return <li className="modal-body-content"> Row:{rowNosWithAbsenceOfMandatoryFields}</li>
-                            })}
-                            </ol>
-                        </>:<div></div>}
+                        {this.state.duplicateId.length > 0 ?
+                            <>
+                                <p className=" marL38 modal-body-title">Candidate profile(s) that could not be created as the email id(s) already exists in system:</p>
+                                <ol className="marL50 modal-body-content">
+                                    {this.state.duplicateId.map(duplicateId => {
+                                        return <li className="modal-body-content">{duplicateId}</li>
+                                    })}</ol>
+                            </> : <div></div>}
+
+                        {this.state.successfullEmail.length > 0 ?
+                            <>
+                                <p className=" marL38 modal-body-title">Candidate profile(s) that were successfully created:</p>
+                                <ol className=" marL50 modal-body-title">
+                                    {this.state.successfullEmail.map(successfullEmail => {
+                                        return <li className="modal-body-content">{successfullEmail}</li>
+                                    })}
+                                </ol>
+                            </> : <div></div>}
+
+                        {this.state.rowNosWithAbsenceOfMandatoryFields.length > 0 ?
+                            <>
+                                <p className=" marL38 modal-body-title">Candidate profile(s) that could not be created for the following record(s) in CSV as mandatory fields were missed out:</p>
+                                <ol className="marL50 modal-body-title">
+                                    {this.state.rowNosWithAbsenceOfMandatoryFields.map(rowNosWithAbsenceOfMandatoryFields => {
+                                        return <li className="modal-body-content"> Row:{rowNosWithAbsenceOfMandatoryFields}</li>
+                                    })}
+                                </ol>
+                            </> : <div></div>}
                     </Modal.Body>
                 </Modal>
 
@@ -247,7 +237,6 @@ class UploadProfile extends Component {
                                                 <div className="text-center mt-5">
                                                     <Dropzone
                                                         onDrop={this.onFileChange1}
-                                                    // accept=".csv"
                                                     >
                                                         {({ getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles }) => {
                                                             return (
@@ -284,12 +273,6 @@ class UploadProfile extends Component {
                                                                 <input className="file-path validate" type="text" value={this.state.selectedFile.name} placeholder="No file choosen" />
                                                             </div>
                                                         </div>
-
-                                                        {/* <div className="d-flex-inline">
-                                                    <img src="/images/Dashboard-assets/csv.svg" className="pt-1" alt="csv icon" />
-                                                    <span className="pl-2 fontMiddle">CSV File</span>
-                                                </div> */}
-
                                                     </div>
                                                 </form>
                                                 <p className="text-center mt-4">Upload the CSV file with candidate details here. All * marked fields in the CSV file are mandatory for successful creation of Candidate profile.</p>
@@ -297,12 +280,9 @@ class UploadProfile extends Component {
                                                 <a className="download_sample_link d-block text-center" href="#" onClick={this.downloadEmployeeData}>Download CSV file template</a>
                                                 {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
                                             </div>
-
-
                                         </div>
                                     </section>
                                     <div className="ml-2 mt-4 marB-40">
-                                        {/* <CsvDuplicatePopup ref={this.onaAddUSerModalRef} ></CsvDuplicatePopup> */}
                                         <button type="button" className="btn btn-blue" onClick={this.uploadFile}>Upload</button>
                                     </div>
                                 </div>

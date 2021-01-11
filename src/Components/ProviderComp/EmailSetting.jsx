@@ -90,10 +90,10 @@ class EmailSetting extends Component {
         return (
             this.emailSetting.putEmailSettings(this.state)
                 .then(Response => {
-                    this.toast.show({ severity: 'success',summary: 'Success Message', detail: 'Data Saved Successfully', life: 2000 })
+                    this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Data Saved Successfully', life: 2000 })
                 })
                 .catch(error => {
-                    this.toast.show({ severity: 'error',summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
+                    this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
     }
@@ -106,8 +106,8 @@ class EmailSetting extends Component {
             if (this.state.canCandidateHasAcceptedTermsAndConditions && this.state.canOfferMadeToTheirCandidate) {
                 this.setState({
                     canAllowNotificationForProvider: true
-                })    
-            } 
+                })
+            }
         }
         )
         /* If Candidate Terms and conditions checkbox is disabled then allow notification is also disabled */
@@ -126,7 +126,7 @@ class EmailSetting extends Component {
             if (this.state.canCandidateHasAcceptedTermsAndConditions && this.state.canOfferMadeToTheirCandidate) {
                 this.setState({
                     canAllowNotificationForProvider: true
-                })    
+                })
             }
         }
         )
@@ -145,7 +145,7 @@ class EmailSetting extends Component {
         }), () => {
             if (this.state.canSuccessfulJobPost && this.state.canNewApplicationOnPostedJobs && this.state.canInterviewInviteAcceptedDeclinedByCandidate) {
                 this.setState({
-                  canAllowNotificationForRecruite: true
+                    canAllowNotificationForRecruite: true
                 })
             }
         }
@@ -165,9 +165,9 @@ class EmailSetting extends Component {
         }), () => {
             if (this.state.canSuccessfulJobPost && this.state.canNewApplicationOnPostedJobs && this.state.canInterviewInviteAcceptedDeclinedByCandidate) {
                 this.setState({
-                  canAllowNotificationForRecruite: true
+                    canAllowNotificationForRecruite: true
                 })
-              }
+            }
         }
         )
         /* If new Application Job Post is disabled then allow notification is also disabled */
@@ -185,9 +185,9 @@ class EmailSetting extends Component {
         }), () => {
             if (this.state.canSuccessfulJobPost && this.state.canNewApplicationOnPostedJobs && this.state.canInterviewInviteAcceptedDeclinedByCandidate) {
                 this.setState({
-                  canAllowNotificationForRecruite: true
+                    canAllowNotificationForRecruite: true
                 })
-              }
+            }
         }
         )
         /* If new interview accepted/declined is disabled then recruiter allow notification is also disabled */
@@ -215,18 +215,18 @@ class EmailSetting extends Component {
                                  **/}
                                 {
                                     (status === "recruiter") ?
-                                    <Link className="backtodashboard" to="/recruiterDashboard">
-                                    <img className="setting_arrow marR5"
-                                     src="images/EmailSettings/backward-link-arrow.svg"></img>Dashboard
+                                        <Link className="backtodashboard" to="/recruiterDashboard">
+                                            <img className="setting_arrow marR5"
+                                                src="images/EmailSettings/backward-link-arrow.svg"></img>Dashboard
                                         </Link>
                                         :
                                         <Link className="backtodashboard" to="/providerDashboard">
-                                        <img className="setting_arrow marR5"
-                                         src="images/EmailSettings/backward-link-arrow.svg"></img>Dashboard
+                                            <img className="setting_arrow marR5"
+                                                src="images/EmailSettings/backward-link-arrow.svg"></img>Dashboard
                                         </Link>
                                 }
                             </div>
-                           
+
                             <div className="settingTitle_text mb-2">Email Notification Preferences</div>
                             <div className="setting_text">You can manage your preferences for email notifications from here</div>
                             <section className="white-middle-section mt-4">
