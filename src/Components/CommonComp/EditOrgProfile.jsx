@@ -179,15 +179,6 @@ class EditProfile extends Component {
          this.setState({
             isLoading: false
         })
-          // console.log(Response);
-          // this.toast.show(
-          //   {
-          //     severity: "success",
-          //     summary: "Success Message",
-          //     detail: "Profile Photo uploaded Successfully",
-          //   },
-          //   60000
-          // );
           window.location.reload();
         })
   

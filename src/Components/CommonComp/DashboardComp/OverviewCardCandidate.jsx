@@ -18,7 +18,6 @@ export default class CandidateOverviewCard extends Component {
     componentDidMount() {
         this.candidateDashboard.getcandidateDashboardDetails()
             .then(Response => {
-                // console.log(Response.data.responseObject.matchingJobs)
                 if (Response && Response.data) {
                     this.setState({
                         jobsApplied: Response.data.responseObject.jobApplied,
@@ -30,7 +29,6 @@ export default class CandidateOverviewCard extends Component {
 
         this.candidateDashboard.candidateGetProfileInfo()
             .then(Response => {
-                //console.log(Response.data.responseObject)
                 if (Response && Response.data) {
                     this.setState({
                         progressBarPercentage: Response.data.responseObject.progressBarCompletion

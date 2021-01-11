@@ -52,7 +52,6 @@ class CandidateEmailSetting extends Component {
         return (
             this.emailNotificationSetting.putCandidateEmailSettings(this.state)
                 .then(Response => {
-                    console.log(Response)
                     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Data Saved Successfully', life: 2000 })
                 })
                 .catch(error => {
@@ -66,7 +65,6 @@ class CandidateEmailSetting extends Component {
     componentDidMount() {
         this.emailNotificationSetting.getCandidateSettings(this.state.candidateId)
             .then(Response => {
-                console.log(Response)
                 if (Response && Response.data) {
                     this.setState({
                         allowNotification: Response.data.responseObject.allowNotification,

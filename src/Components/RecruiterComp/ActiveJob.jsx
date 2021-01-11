@@ -125,7 +125,6 @@ class ActiveJob extends React.Component {
   }
   render() {
     const { cloneResourceJobs, pageDataLength, isLoading, resourceJobs } = this.state;
-    console.log(this.state.allResourceJobs)
     return (
       <Fragment>
         <LeftNavProvider></LeftNavProvider>

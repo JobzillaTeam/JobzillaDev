@@ -23,7 +23,6 @@ class Resume extends Component {
       .then(Response => {
         if (Response && Response.data && Response.data.responseObject) {
         var data2 = Response.data.responseObject
-        // console.log(data2)
         this.setState({
           data1:Response.data.responseObject.cvInBytes,
           fileName: Response.data.responseObject.fileName,
@@ -151,7 +150,6 @@ class Resume extends Component {
     if (this.fileValidation()) {
       const formData = new FormData();
       const token = localStorage.getItem('authToken');
-      // console.log(token)
       const formheader = {
         headers: {
           //'Content-Type':'multipart/form-data',
@@ -247,8 +245,7 @@ class Resume extends Component {
             day = d.getDate(),
             month = d.getMonth() + 1,
             year = d.getFullYear(),
-            fullDate = day + '-' + month + '-' + year,
-            console.log(fullDate)
+            fullDate = day + '-' + month + '-' + year
           }
           <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class={`ml-4 mr-2 left-sec-icon profile__editIcon ${hasAttachedDocument ? '' : 'disabledCursorOnIcon'}`} onClick={this.downloadResume} />
           <span class="mr-3" style={{ color: '#007EFF' }}>{this.state.fileName}</span>
@@ -304,8 +301,6 @@ class Resume extends Component {
 
                           <div className="file-path-wrapper">
                             <input className="file-path validate text-center" type="text" value={this.state.selectedFile.name} placeholder="No file choosen" />
-                            {console.log(showing)}
-
                           </div>
                           {/* /* : null */}
                         </div>
