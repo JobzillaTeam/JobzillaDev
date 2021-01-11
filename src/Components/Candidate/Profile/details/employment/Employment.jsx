@@ -4,6 +4,7 @@ import { Context } from '../../../../../Context/ProfileContext';
 import moment from 'moment';
 
 const EmploymentComponent = ({ showPopup }) => {
+  //Getting employment data from fetchProfileInfo api from profileContext
   const { state } = useContext(Context);
   const [employmentInfo, setEmploymentInfo] = React.useState('');
   state.then((data) => {
@@ -12,7 +13,7 @@ const EmploymentComponent = ({ showPopup }) => {
   const { employmentDetailsList } = employmentInfo;
   const employmentDetailsListSorted = employmentDetailsList && employmentDetailsList.sort((empA, empB) => {
     const newDate = new Date();
-    const fullMonth = newDate.getMonth() -1;
+    const fullMonth = newDate.getMonth() - 1;
     const fullYear = newDate.getFullYear();
     if (empA.currentCompany) {
       empA.workedTillMonth = fullMonth;

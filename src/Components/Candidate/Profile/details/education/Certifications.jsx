@@ -5,6 +5,7 @@ import moment from 'moment';
 
 export const Certifications = ({ showPopup }) => {
   const { state } = useContext(Context);
+  //Getting Certifications data from fetchProfileInfo api from profileContext
   const [profileInfo, setProfileInfo] = React.useState('');
   state.then((data) => {
     setProfileInfo(data)
@@ -29,10 +30,9 @@ export const Certifications = ({ showPopup }) => {
           {(candidateCertificatesListSorted) ? candidateCertificatesListSorted.map((data) => (
             <div class="col-12 px-0 py-3">
               <div>
-                <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_CERTIFICATE, true, {resourceId: data.certificationId})} />
+                <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_CERTIFICATE, true, { resourceId: data.certificationId })} />
                 <span class="subtitle-semi-bold">{data.certificationName}</span>
               </div>
-              {/* <p class="normal-text-light mb-0">Quisque congue dignissim efficitur. Vestibulum ultrices pulvinar ex, a dignissim neque tincidunt sed.</p> */}
               <div><span class="normal-text-light">Issued on {data.issueMonth}{data.issueYear && data.issueMonth ? ' , ' : ''}{data.issueYear} | {data.expirationMonth || data.expirationYear ? `${data.expirationMonth} ${data.expirationMonth && data.expirationYear ? ' , ' : ''} ${data.expirationYear}` : 'No Expiration Date'}</span></div>
               {(data.credentialId) ? (<div><span class="normal-text-light">Credential ID {data.credentialId}</span></div>) : null}
               <a className="forgot_link" target="_blank" href={data.credentialURL}>{data.credentialURL}</a>

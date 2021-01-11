@@ -5,7 +5,6 @@ import Footer from '../CommonComp/Footer'
 import { Link, useHistory } from 'react-router-dom'
 import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate';
 import ApiServicesOrg from '../../Services/ApiServicesOrg';
-import { getApplicationStatus } from '../../Utils/AppHelper';
 
 const CandidateJobDetails = (props) => {
   const jobID = props.match.params.jobID;
@@ -24,16 +23,15 @@ const CandidateJobDetails = (props) => {
   }
   useEffect(() => {
     ApiServicesOrgCandidate.getJobAndCandidateDetailsByIds(jobID, isFreshJob)
-    .then(response => {
+      .then(response => {
         if (response) {
-          const { applicationStatus,jobDetails } = response;
-          // console.log('applicationStatus', applicationStatus)
+          const { applicationStatus, jobDetails } = response;
           if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
             if (applicationStatus === 'Application_Matched' || isFreshJob) {
               setIsActionButtonsVisible(true)
             }
           }
-          if(jobStatus === 'recentMatches' || jobStatus === 'searchJobs'){
+          if (jobStatus === 'recentMatches' || jobStatus === 'searchJobs') {
             if (jobDetails.isDeleted === true) {
               setIsActionButtonsVisible(false)
             }
@@ -42,7 +40,7 @@ const CandidateJobDetails = (props) => {
             if (jobDetails.isDeleted === true) {
               setIsActionButtonsVisible(false)
             }
-           else setIsActionButtonsVisible(true)
+            else setIsActionButtonsVisible(true)
           }
           setJobAndCandidateDetails(response)
         }
@@ -122,14 +120,14 @@ const CandidateJobDetails = (props) => {
                   <div class="col-md-12">
                     <div class="row">
                       <div class="col-md-12 job-title-link align-items-center" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <div  style={{ display: 'flex' }}>
-                        <a href="#"><h5 class="mb-0"> {jobDetails.jobTitle}</h5></a>
-                        <span class="job-posting"> Posted {jobDetails.postedAt} day ago</span>
-                        <span class="ml-3 job-posting">{jobDetails.orgName}</span>
+                        <div style={{ display: 'flex' }}>
+                          <a href="#"><h5 class="mb-0"> {jobDetails.jobTitle}</h5></a>
+                          <span class="job-posting"> Posted {jobDetails.postedAt} day ago</span>
+                          <span class="ml-3 job-posting">{jobDetails.orgName}</span>
                         </div>
-                        {isInterviewStatus ? <div><img src="/images/icons/interview_status.svg" /><span class="ml-2"><strong>Interview Status:</strong></span><span class="ml-2" style={{color: '#768594'}}>{interviewStatus}</span></div> : ''}
+                        {isInterviewStatus ? <div><img src="/images/icons/interview_status.svg" /><span class="ml-2"><strong>Interview Status:</strong></span><span class="ml-2" style={{ color: '#768594' }}>{interviewStatus}</span></div> : ''}
                         <div className="others_section_secondcol1">
-                          <div>{jobDetails.isDeleted===true ? 'This job is no longer valid' : null} </div>
+                          <div>{jobDetails.isDeleted === true ? 'This job is no longer valid' : null} </div>
                         </div>
 
                       </div>
@@ -201,7 +199,6 @@ const CandidateJobDetails = (props) => {
                           <div>{jobDetails.visa}</div>
                         </div>
                       </div>
-                      {/* {console.log("delete", jobDetails.isDeleted)} */}
                       <div className="row">
                         <div className="col-xs-12 col-md-5 others_section_firstcol">
                           <div>Passport</div>
@@ -217,11 +214,9 @@ const CandidateJobDetails = (props) => {
                   <button type="button" className="btn btn-primary" onClick={e => handleStatusUpdate(e, true)}>{primaryButtonName}</button>
                   <button type="button" className="btn btn-outline-primary ml-4" onClick={e => jobStatus === 'searchJobs' || jobStatus === 'recentMatches' ? history.goBack() : handleStatusUpdate(e, false)}>{secondaryButtonName}</button>
                 </div>}
-
               </div>
             </div>
           </div>}
-
         </div>
         <Footer></Footer>
       </div>

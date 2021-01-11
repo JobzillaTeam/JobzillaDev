@@ -3,6 +3,7 @@ import { EDIT_PROFILE_NAME, EDIT_ABOUT } from '../../../../../Utils/AppConst'
 import { Context } from '../../../../../Context/ProfileContext';
 
 const AboutComponent = ({ showPopup }) => {
+  //Getting about data from fetchProfileInfo api from profileContext
   const { state } = useContext(Context);
   const [about, setAbout] = React.useState('');
   state.then((data) => {

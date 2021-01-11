@@ -6,6 +6,7 @@ import { Context } from '../../../../../Context/ProfileContext';
 import { Toast } from 'primereact/toast';
 
 const InformationComponent = ({ showPopup, candidateProfile }) => {
+  //Getting personal information data and progressbar percentage from fetchProfileInfo api from profileContext
   const { state, getProfileInfo } = React.useContext(Context);
   const [fullCandidateInfo, setCandidateInfo] = React.useState();
   const candidateInfo = fullCandidateInfo && fullCandidateInfo.candidateInfo;
@@ -23,36 +24,36 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
   const imagUrl = fullCandidateInfo && fullCandidateInfo.userImage;
   const uploadHandler = (e) => {
     const files = e.target.files;
-    var fileInput= files[0]
-    var filePath =fileInput.name;
+    var fileInput = files[0]
+    var filePath = fileInput.name;
     var allowedExtensions = (/(\.jpg|\.png|\.JPG|\.PNG|\.jpeg|\.JPEG)$/);
-    if(!allowedExtensions.exec(filePath)){
-      toast.current.show({severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .jpg, jpeg or .png'},50000);
-    fileInput=""
-    return false;
-    }else{
-    const token = localStorage.getItem('authToken');
-    const formData = new FormData()
-    formData.append(
-      'imageFile',
-      files[0]
-    )
-    const formheader = {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': 'Bearer ' + token
+    if (!allowedExtensions.exec(filePath)) {
+      toast.current.show({ severity: 'warn', summary: 'Error', detail: 'Please upload file having extensions .jpg, jpeg or .png' }, 50000);
+      fileInput = ""
+      return false;
+    } else {
+      const token = localStorage.getItem('authToken');
+      const formData = new FormData()
+      formData.append(
+        'imageFile',
+        files[0]
+      )
+      const formheader = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer ' + token
+        }
       }
-    }
 
-    apiServicesOrg.postProfilePhoto(formData, formheader, getProfileInfo)
-      .then(Response => {
-        toast.current.show({ severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully' }, 60000);
-      })
-      .catch(error => {
-        toast.current.show({ severity: 'error', summary: 'Error', detail: 'Server Error ' }, 50000)
-      })
+      apiServicesOrg.postProfilePhoto(formData, formheader, getProfileInfo)
+        .then(Response => {
+          toast.current.show({ severity: 'success', summary: 'Success Message', detail: 'Profile Photo uploaded Successfully' }, 60000);
+        })
+        .catch(error => {
+          toast.current.show({ severity: 'error', summary: 'Error', detail: 'Server Error ' }, 50000)
+        })
+    }
   }
-}
 
   if (candidateInfo) {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
@@ -99,13 +100,13 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
               </div>
             </div>
             <div class="col-9 pl-0 mt-3">
-              <div className="progressbar-text" style={{ width: `${progressbar}%` }}>{progressbar}%</div>						
+              <div className="progressbar-text" style={{ width: `${progressbar}%` }}>{progressbar}%</div>
               <div className="progress progress-fashion marB20" >
                 <div className="progress-bar bg-success marT20" style={{ width: `${progressbar}%` }} role="progressbar" aria-valuenow={progressbar} aria-valuemin="0" aria-valuemax="100">
-                </div> 
+                </div>
               </div>
-              {progressbar<100 ?
-              <span className="completeNow">Complete your profile with all of your skills for better visibility.</span>		:<div></div>}
+              {progressbar < 100 ?
+                <span className="completeNow">Complete your profile with all of your skills for better visibility.</span> : <div></div>}
             </div>
           </div>
         </div>

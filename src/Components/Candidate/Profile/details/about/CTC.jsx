@@ -4,10 +4,10 @@ import { Context } from '../../../../../Context/ProfileContext';
 import { getCTCInLakhAndThousand } from '../../../../../Utils/ProfileFormHelper';
 
 const CTCComponent = ({ showPopup }) => {
+  //Getting CTC data from fetchProfileInfo api from profileContext
   const { state } = useContext(Context);
   const [ctc, setCtc] = useState('');
   state.then((data) => {
-    // console.log(data.candidateInfo.currencyType)
     setCtc(data)
   })
   if (ctc && ctc.candidateInfo) {

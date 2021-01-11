@@ -11,7 +11,6 @@ import '../../../Assets/css/Candidate.css'
 import ApiServicesOrgCandidate from '../../../Services/ApiServicesOrgCandidate'
 import { Context } from '../../../Context/ProfileContext';
 export const Profile = () => {
-    // console.log('profileComponent')
     const [isPopupVisible, setPopupVisible] = React.useState(false);
     const [popupTitle, setPopupTitle] = React.useState('');
     const [id, setId] = useState('');

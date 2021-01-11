@@ -55,7 +55,6 @@ class CandidateEmailSetting extends Component {
                     this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Data Saved Successfully', life: 2000 })
                 })
                 .catch(error => {
-                    // console.log("Error Occured..", error)
                     this.toast.show({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong', life: 2000 });
                 })
         )
@@ -69,7 +68,6 @@ class CandidateEmailSetting extends Component {
                     this.setState({
                         allowNotification: Response.data.responseObject.allowNotification,
                         candidateId: Response.data.responseObject.candidateId,
-                        // id: Response.data.responseObject.id,
                         newInvite: Response.data.responseObject.newInvite,
                         inviteAcceptedDeclinedByRecruiter: Response.data.responseObject.inviteAcceptedDeclinedByRecruiter,
                         changeInApplicationStatus: Response.data.responseObject.changeInApplicationStatus,
@@ -87,9 +85,9 @@ class CandidateEmailSetting extends Component {
         }), () => {
             if (this.state.newInvite && this.state.inviteAcceptedDeclinedByRecruiter && this.state.changeInApplicationStatus && this.state.newOffer) {
                 this.setState({
-                  allowNotification: true
+                    allowNotification: true
                 })
-              }
+            }
         }
         )
         /* If new invite checkbox is disabled then allow notification is also disabled */
@@ -107,9 +105,9 @@ class CandidateEmailSetting extends Component {
         }), () => {
             if (this.state.newInvite && this.state.inviteAcceptedDeclinedByRecruiter && this.state.changeInApplicationStatus && this.state.newOffer) {
                 this.setState({
-                  allowNotification: true
+                    allowNotification: true
                 })
-              }
+            }
         }
         )
         /* If Invite Accepted/Declined by recruiter checkbox is disabled then allow notification is also disabled */
@@ -127,9 +125,9 @@ class CandidateEmailSetting extends Component {
         }), () => {
             if (this.state.newInvite && this.state.inviteAcceptedDeclinedByRecruiter && this.state.changeInApplicationStatus && this.state.newOffer) {
                 this.setState({
-                  allowNotification: true
+                    allowNotification: true
                 })
-              }
+            }
         }
         )
         /* If change in application status is disabled then allow notification is also disabled */
@@ -147,9 +145,9 @@ class CandidateEmailSetting extends Component {
         }), () => {
             if (this.state.newInvite && this.state.inviteAcceptedDeclinedByRecruiter && this.state.changeInApplicationStatus && this.state.newOffer) {
                 this.setState({
-                  allowNotification: true
+                    allowNotification: true
                 })
-              }
+            }
         }
         )
         /* If new Offer is disabled then allow notification is also disabled */
@@ -162,7 +160,6 @@ class CandidateEmailSetting extends Component {
 
     render() {
         const status = localStorage.getItem('status')
-        //console.log(status)
         return (
             <div className="content">
                 <Toast className="toast_padding" ref={(el) => this.toast = el} />
@@ -175,8 +172,8 @@ class CandidateEmailSetting extends Component {
                             {/**  
                                  * If recruiter toggle is active then from email settings component recruiter dashboard will open else provider dashboard will open
                                  **/}
-                         <Link className="backtodashboard" to="/candidate/dashboard">
-                                    <i className="pi pi-angle-left" />Dashboard
+                            <Link className="backtodashboard" to="/candidate/dashboard">
+                                <i className="pi pi-angle-left" />Dashboard
                                     </Link></div>
                         <div className="settingTitle_text mb-2">Email Notification Preferences</div>
                         <div className="setting_text">You can manage your preferences for email notifications from here</div>

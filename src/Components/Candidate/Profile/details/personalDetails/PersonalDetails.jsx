@@ -3,8 +3,8 @@ import { EDIT_PERSONAL } from '../../../../../Utils/AppConst'
 import { Context } from '../../../../../Context/ProfileContext';
 import moment from 'moment';
 
-
 const PersonalDetailsComponent = ({ showPopup }) => {
+  //Getting personal information data from fetchProfileInfo api from profileContext
   const { state } = useContext(Context);
   const [personalInfo, setPersonalInfo] = React.useState('');
   state.then((data) => {

@@ -4,6 +4,7 @@ import { Context } from '../../../../../Context/ProfileContext';
 
 export const Education = ({ showPopup }) => {
   const { state } = useContext(Context);
+  //Getting education data from fetchProfileInfo api from profileContext
   const [profileInfo, setProfileInfo] = React.useState('');
   state.then((data) => {
     setProfileInfo(data)
