@@ -8,7 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollUpButton from "react-scroll-up-button";
 import RenderLoader from '../CommonComp/Loader';
 import { INITIAL_ITEM_LENGTH } from '../../Utils/AppConst';
-import {CircularProgressbarWithChildren} from 'react-circular-progressbar'
+import { CircularProgressbarWithChildren } from 'react-circular-progressbar'
 
 const SearchJobs = () => {
   const [resourceJobs, setResourceJobs] = useState([]);
@@ -21,15 +21,14 @@ const SearchJobs = () => {
   useEffect(() => {
     setIsLoading(true)
     ApiServicesOrgCandidate.fetchJobListForCandidate().then(response => {
-      const jobListResponse = response && response[0] ? response.map(res =>  ({jobDetails: res})) : [];
-      setAllResourceJobs(jobListResponse );
-      const sortJobs = getSortedResourceJobs('recent_First', jobListResponse )
+      const jobListResponse = response && response[0] ? response.map(res => ({ jobDetails: res })) : [];
+      setAllResourceJobs(jobListResponse);
+      const sortJobs = getSortedResourceJobs('recent_First', jobListResponse)
       setCloneResourceJobs([...sortJobs]);
       setResourceJobs([...sortJobs].slice(0, INITIAL_ITEM_LENGTH));
       setPageDataLength(INITIAL_ITEM_LENGTH)
       setIsLoading(false);
     }).catch(error => {
-      // console.log(error);
       setIsLoading(false);
     });
   }, []);
@@ -59,6 +58,7 @@ const SearchJobs = () => {
     }
   }
 
+  //For sorting of jobs
   const getSortedResourceJobs = (value, resourceJobsListView) => {
     const updatedResourceJobs = resourceJobsListView && resourceJobsListView.sort((objA, objB) => {
       const dateA = new Date(objA.jobDetails.createdDate).getTime()
@@ -99,7 +99,7 @@ const SearchJobs = () => {
       });
     }
   }
-  
+
   return (
     <Fragment>
       <LeftNavCandidate></LeftNavCandidate>
@@ -124,7 +124,7 @@ const SearchJobs = () => {
                       </span>
                     </div>
                     <div className="sortDropdown mx-10 justify-content-between">
-                    <div className="input-group sortBy"></div>
+                      <div className="input-group sortBy"></div>
                       <select ref={input => sortMethod = input} className="form-control" id="dropdown" name="dropdown"
                         onChange={handleDropdownChange}>
                         <option value="" disabled>Sort by</option>
@@ -173,17 +173,17 @@ const SearchJobs = () => {
                           <div class="col-md-3 px-0">
                             <div class="job-circle float-right">
                               <div class="job-text-wrap">
-                              <div style={{ width: 65, height: 65 }}>
+                                <div style={{ width: 65, height: 65 }}>
                                   <CircularProgressbarWithChildren styles={{
-                                      path: {
-                                              stroke: '#147AD6',
-                                      }
+                                    path: {
+                                      stroke: '#147AD6',
+                                    }
                                   }} strokeWidth={4} value={jobDetails.matchingPercentage} >
                                     <strong><span style={{ fontSize: 12 }}>
-                                    {jobDetails.matchingPercentage}%
+                                      {jobDetails.matchingPercentage}%
                                       </span></strong>
-                                      <span className="Circular_ProgressBar_text">
-                                          Match
+                                    <span className="Circular_ProgressBar_text">
+                                      Match
                                       </span>
                                   </CircularProgressbarWithChildren>
                                 </div>

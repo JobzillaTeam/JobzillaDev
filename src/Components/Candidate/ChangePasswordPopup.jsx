@@ -1,10 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import HeaderAll from '../CommonComp/HeaderAll';
-import Footer from '../CommonComp/Footer'
-import { Link } from 'react-router-dom'
-import { Toast } from 'primereact/toast';
 import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate';
-
 
 class ChangePasswordPopup extends Component {
   constructor(props) {
@@ -69,14 +64,14 @@ class ChangePasswordPopup extends Component {
       return (
         this.updatePassword.putChangePassword(this.state.fields.oldPassword, this.state.fields.newPassword)
           .then(Response => {
-            this.props.toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully'},50000);
+            this.props.toast.current.show({ severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully' }, 50000);
             this.props.showPopup(false)
           })
           .catch(error => {
-            const errorMessage =  error && error.response && error.response.data && error.response.data.responseDescription
+            const errorMessage = error && error.response && error.response.data && error.response.data.responseDescription
 
             this.setState({
-              formError: errorMessage 
+              formError: errorMessage
             })
           })
       )
@@ -132,17 +127,17 @@ class ChangePasswordPopup extends Component {
     const { oldPasswordValue, newPasswordValue, confirmPasswordValue, revealOldPassword, revealNewPassword } = this.state;
     return (
       <Fragment>
-        <div className="errorMsg">{this.state.formError}</div>       
+        <div className="errorMsg">{this.state.formError}</div>
         <div className="form-group old-password">
           <label htmlFor="oldPassword">Old Password</label>
           <input id="oldPassword" className="form-control" name="oldPassword" value={this.state.fields.oldPassword} onChange={this.onChange} type={revealOldPassword ? "text" : "password"} placeholder="Enter Old Password" ref={this.oldPasswordRef}
             value={this.state.fields.oldPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
             onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
-          <span className="input-group-append" style={{height: 0}} onClick={this.toggleOldPassword}>
-              {revealOldPassword ?
-                <i className="pi pi-eye showNewPasswordIcon" /> :
-                <i className="pi pi-eye-slash showNewPasswordIcon" />
-              }
+          <span className="input-group-append" style={{ height: 0 }} onClick={this.toggleOldPassword}>
+            {revealOldPassword ?
+              <i className="pi pi-eye showNewPasswordIcon" /> :
+              <i className="pi pi-eye-slash showNewPasswordIcon" />
+            }
           </span>
           {
             this.state.formSubmitted || this.state.touched.oldPassword ? <div className="errorMsg">{this.state.errors.oldPassword}</div> : ''
@@ -154,11 +149,11 @@ class ChangePasswordPopup extends Component {
                                        including Uppercase,lowercase and numbers." placeholder="Enter New Password" id="newPassword" className="form-control" name="newPassword" value={this.state.fields.newPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
             onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
           <span className="input-group-append" title="Password must contain atleast 8 characters 
-                                       including Uppercase,lowercase and numbers." style={{height: 0}} onClick={this.toggleNewPassword}>
-              {revealNewPassword ?
-                <i className="pi pi-eye showNewPasswordIcon" /> :
-                <i className="pi pi-eye-slash showNewPasswordIcon" />
-              }
+                                       including Uppercase,lowercase and numbers." style={{ height: 0 }} onClick={this.toggleNewPassword}>
+            {revealNewPassword ?
+              <i className="pi pi-eye showNewPasswordIcon" /> :
+              <i className="pi pi-eye-slash showNewPasswordIcon" />
+            }
           </span>
           {
             this.state.formSubmitted || this.state.touched.newPassword ? <div className="errorMsg">{this.state.errors.newPassword}</div> : ''

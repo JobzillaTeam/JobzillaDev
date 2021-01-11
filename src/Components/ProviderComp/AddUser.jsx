@@ -3,7 +3,6 @@ import React,{ Component } from 'react';
 import {Messages} from 'primereact/messages'
 import { Toast } from 'primereact/toast';
 import ApiServicesOrg from '../../Services/ApiServicesOrg'
-//import axios from 'axios'
 
 class AddUser extends Component{
   constructor(props) {
@@ -21,16 +20,14 @@ class AddUser extends Component{
     this.showSuccess = this.showSuccess.bind(this);
     this.showError = this.showError.bind(this);
   }
-/**Show toaster message */
+/**Show toast message */
 showSuccess= () =>  {
   this.messages.show ({severity: 'success', summary: 'User Added Successfully..', detail: ''});
 }
 showError= (e) => {
   this.messages.show({severity: 'error', summary: 'Something went wrong..', detail: ''});
 }
-/**Show toaster message */
-
-  
+/**Show toast message */
   showModal = () => {
     this.setState({ show: true });
   }
@@ -69,24 +66,19 @@ showError= (e) => {
       fields["email"] = "";
       fields["contactNumber"] = "";
       fields["userRole"] = "";
-           
-
+    
       this.setState({ 
         fields:fields,
             
       });
-
       this.state.fields['orgnaizationId'] = localStorage.getItem('organizationId');
       const superID = JSON.parse(localStorage.getItem('userDetails')).id;
       this.state.fields['supervisorId']= superID
-      //this.state.fields['password']= "Test@1234";
         
    // Calling Add user Service from Service file:-   
         this.addUser.postAddUser(this.state.fields)
          .then(Response=>{
-              //this.hideModal()
               if(Response.status===208){
-
                 this.toast.show({severity: 'error', summary: 'Error', detail: 'User already exist'},80000);
             }
             else {
@@ -95,13 +87,9 @@ showError= (e) => {
         window.location.reload()
         })
           .catch(error=>{
-            this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},20000);})
-            
-        
-                
+            this.toast.show({severity: 'error', summary: 'Error', detail: 'Server Error '},20000);})  
          localStorage.setItem("hobzilla",JSON.stringify(this.state.fields))
     }
-    
     }
     
   validateForm = () => {
@@ -183,7 +171,6 @@ showError= (e) => {
                           <div className="errorMsg">{this.state.errors.userName}</div>:''                   
                       }
                   </div>
-                  
                   <div className="form-group">
                       <label htmlFor="userEmail">Official Email</label>
                       <input type="email" id="email" name="email"  className="form-control"   onChange={ (e) => {this.handleChange(e);this.validateForm();} }
@@ -193,7 +180,6 @@ showError= (e) => {
                           <div className="errorMsg">{this.state.errors.userEmail}</div>:''                   
                       }
                   </div>
-                   
                   <div className="form-group">
                       <label htmlFor="userMobile">Mobile/Landline</label>
                       <input type="text" id="contactNumber" name="contactNumber"  className="form-control"   onChange={ (e) => {this.handleChange(e);this.validateForm();} }
@@ -202,8 +188,7 @@ showError= (e) => {
                           this.state.formSubmitted || this.state.touched.contactNumber?
                           <div className="errorMsg">{this.state.errors.contactNumber}</div>:''                   
                       }
-                  </div>
-                     
+                  </div>   
                   <div className="form-group">
                       <label htmlFor="userRole">Role</label>
                       <select id="userRole" name="userRole" className="form-control"  onChange={ (e) => {this.handleChange(e); this.validateForm()} }
@@ -215,12 +200,9 @@ showError= (e) => {
                       <option>Select Role</option>
                       <option>Admin</option>
                       <option>User</option>
-                      {/* <option>Recruiter</option> */}
                       </select>
                   </div> 
-                  
                   <button className="btn btn-blue float-right px-4" disabled={this.state.submitDisabled}  onClick={this.onAddUser}>Add User</button> 
-                  
           </form>
           </Modal.Body>
       </Modal>

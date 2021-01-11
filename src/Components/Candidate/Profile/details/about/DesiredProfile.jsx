@@ -4,6 +4,7 @@ import { Context } from '../../../../../Context/ProfileContext';
 
 const DesiredProfileComponent = ({ showPopup }) => {
   const { state } = useContext(Context);
+  //Getting Desired career profile data from fetchProfileInfo api from profileContext
   const [careerInfo, setCareerInfo] = React.useState('');
   state.then((data) => {
     setCareerInfo(data)

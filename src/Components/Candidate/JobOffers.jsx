@@ -27,7 +27,6 @@ const JobOffers = () => {
       setPageDataLength(INITIAL_ITEM_LENGTH)
       setIsLoading(false);
     }).catch(error => {
-      // console.log(error);
       setIsLoading(false);
     });
   }, []);
@@ -57,6 +56,7 @@ const JobOffers = () => {
     }
   }
 
+  //For sorting
   const getSortedResourceJobs = (value, resourceJobsListView) => {
     const updatedResourceJobs = resourceJobsListView && resourceJobsListView.sort((objA, objB) => {
       const dateA = new Date(objA.createdDate).getTime()
@@ -109,7 +109,7 @@ const JobOffers = () => {
                       </span>
                     </div>
                     <div className="sortDropdown mx-10 justify-content-between">
-                    <div className="input-group sortBy"></div>
+                      <div className="input-group sortBy"></div>
                       <select ref={input => sortMethod = input} className="form-control" id="dropdown" name="dropdown"
                         onChange={handleDropdownChange}>
                         <option value="" disabled>Sort by</option>

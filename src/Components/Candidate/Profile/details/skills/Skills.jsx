@@ -5,12 +5,15 @@ import ApiServicesOrgCandidate from '../../../../../Services/ApiServicesOrgCandi
 import swal from 'sweetalert';
 
 const SkillsComponent = ({ showPopup }) => {
+  //Getting skills data from fetchProfileInfo api from profileContext
   const { state } = useContext(Context);
   const [skill, setSkill] = React.useState('');
   state.then((data) => {
     setSkill(data);
   })
   const { getProfileInfo } = useContext(Context);
+
+  //To delete skill
   const deleteSkill = (id) => {
     swal({
       title: "Are you sure?",
