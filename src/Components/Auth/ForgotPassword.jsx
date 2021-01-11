@@ -43,6 +43,7 @@ class ForgotPassword extends Component {
       submitDisabled: false
     });
     if (this.validateForm()) {
+      //Calling forgot password api
       this.loginService.putForgotPassword(this.state.fields.emailId).then(Response=>{
         if(Response && Response.data){
           let fields = {};
@@ -56,7 +57,6 @@ class ForgotPassword extends Component {
         } else {
           this.toast.show({ severity: 'error', summary: 'Error Message', detail: 'Something went wrong' }, 80000);
         }
-        //console.log(error)
       });
     }
   }

@@ -6,10 +6,6 @@ import ApiServicesOrg from '../../Services/ApiServicesOrg'
 import { Toast } from 'primereact/toast';
 import TermsOfUse from '../Auth/TermsOfUse'
 
-//import TermsOfUse from '../Auth/TermsOfUse'
-//import axios from 'axios'
-// import Toast from 'light-toast';
-
 export default class Signup extends Component {
     constructor() {
         super()
@@ -81,7 +77,6 @@ export default class Signup extends Component {
                 } 
                 };
     // Calling Signup Service from Service file:-
-    
     this.signupService.postSignup(this.state.fields)
     .then(Response => {
         localStorage.setItem('jobzilla', JSON.stringify(this.state.fields));
@@ -96,7 +91,6 @@ export default class Signup extends Component {
         }
     })
     .catch(error => {
-        // console.log(error)
         this.toast.show({ severity: 'error', summary: 'Error', detail: 'Internal server error' }, 80000);
     })
 }
@@ -265,15 +259,6 @@ validateForm = () => {
                                         this.state.formSubmitted || this.state.touched.password?<div className="errorMsg">{this.state.errors.password}</div>:''                    
                                     }
                                 </div>
-
-                                {/* <div className="form-group">
-                                    <label htmlFor="signup_pwd">Password</label>
-                                    <input type="password" id="signup_pwd" className="form-control" name="password"  value={this.state.fields.password}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
-                                    onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
-                                    {
-                                       this.state.formSubmitted || this.state.touched.password?<div className="errorMsg">{this.state.errors.password}</div>:''                    
-                                    }
-                                </div> */}
                                 {/* Confirm Password */}
                                 <div className="form-group">
                                     <label htmlFor="signup_cnfpwd">Confirm Password</label>
@@ -311,7 +296,6 @@ validateForm = () => {
                                             </div>}
                                         </div>
                                     </div>  
-                                {/* <div className="terms" ><Link to="/termsofUse">Terms of use</Link></div>  */}
                             </div>
                             {/* image on sign up */}
                             <div className="col-md-7">

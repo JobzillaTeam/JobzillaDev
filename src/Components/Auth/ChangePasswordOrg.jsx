@@ -73,12 +73,10 @@ class ChangePasswordOrg extends Component {
       return (
         this.updatePassword.putChangePassword(this.state.fields.oldPassword, this.state.fields.newPassword)
           .then(Response => {
-            // console.log(Response)
             this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully', life: 4000 })
            window.location.reload()
           })
           .catch(error => {
-            // console.log("Error Occured..", error)
             this.toast.show({ severity: 'error', summary: 'Error', detail: 'Old Password does not match', life: 4000 });
            window.location.reload()
           })
@@ -87,6 +85,7 @@ class ChangePasswordOrg extends Component {
     }
   }
 
+  //To check validations
   validateForm = () => {
     let fields = this.state.fields;
     let errors = {};

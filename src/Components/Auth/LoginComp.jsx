@@ -5,9 +5,6 @@ import Footer from '../CommonComp/Footer'
 import ApiServicesOrg from '../../Services/ApiServicesOrg'
 import ApiServicesOrgCandidate from '../../Services/ApiServicesOrgCandidate'
 
-//import TermsOfUse from '../Auth/TermsOfUse'
-//import axios from 'axios'
-
 class LoginComp extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +39,7 @@ class LoginComp extends Component {
     }
   }
 
+  // To handle remember me checkbox
   onChangeCheckbox = event => {
     this.setState({
       isChecked: event.target.checked
@@ -59,15 +57,7 @@ class LoginComp extends Component {
       fields["emailid"] = "";
       fields["password"] = "";
       this.setState({ fields: fields});    
-      // console.log(this.state.fields.emailid)            
       
-     // Calling Login Service from Service file:-
-
-      // this.loginService.putLogin(this.state.fields.emailid, this.state.fields.password)
-      // let loginDetails={};
-      // loginDetails["password"] = this.state.fields.password;
-      // loginDetails["userName"] = this.state.fields.emailid;
-      // console.log(loginDetails)
       this.loginService.putLogin(this.state.fields)
           .then(Response=>{
             if(Response){
@@ -106,7 +96,6 @@ class LoginComp extends Component {
               this.setState({errorLoginMsg: 'Invalid Email Or Password'})
             }
             setTimeout(() => {
-              //window.location.reload(false)
             }, 3000);
           })   
     }
@@ -150,19 +139,13 @@ class LoginComp extends Component {
       formIsValid = false;
       errors["password"] = "*Please enter your password.";
     }
-    // if (typeof fields["password"] !== "undefined") {
-    //   if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
-    //     formIsValid = false;
-    //     errors["password"] = "*Please enter secure and strong password.";
-    //   }
-    //}
     this.setState({
       errors: errors,
       submitDisabled: !formIsValid
     });
     return formIsValid;
   }
-  /* Render functionation  */
+  /* Render function  */
   isSignupButtonVisible = () => {
     const {location} = this.props;
     const {search} = location;
