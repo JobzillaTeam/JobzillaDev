@@ -19,14 +19,10 @@ const CareerProfileComponent = ({ showPopup }) => {
   const [addPreferredLocation, setAddPreferredLocation] = useState([]);
   const [cities, setCities] = useState([]);
 
-  // const [isPreferredShift, setPreferredShift] = useState('day');
-  // const [tags, setPreferredLocations] = useState([]);
-  // const [employmentType, setEmploymentType] = useState('');
-  // const [addPreferredLocation, setAddPreferredLocation] = useState([]);
-  // const [candidateInfo, setCandidateInfo] = useState('');
-  // const { register, errors, handleSubmit } = useForm({ mode: 'all' });
+  
   useEffect(() => {
     setFormOnFetchCites([])
+    //Api call for getting list of cities
     ApiServicesOrgCandidate.getListOfCity('0').then((response) => {
       if (response) {
         var resultArray = response.data.responseObject.map((city) => {
@@ -62,6 +58,7 @@ const CareerProfileComponent = ({ showPopup }) => {
     })
   }
 
+  //Add preferred Location
   const onAddition = (preferredLocation) => {
     const preferredLocationCnt = [].concat(preferredLocations, preferredLocation);
     if (addPreferredLocation.length < 3) {
@@ -79,6 +76,7 @@ const CareerProfileComponent = ({ showPopup }) => {
     }
   }
 
+  //Delete Added location
   const onDelete = (i) => {
     const preferredLocationCnt = preferredLocations.slice(0)
     const removedLocation = preferredLocationCnt.splice(i, 1)
@@ -101,6 +99,7 @@ const CareerProfileComponent = ({ showPopup }) => {
       "preferredLocation": addPreferredLocation.join(),
       "candidateId": candidateId
     }
+    //Api call for update employment type,preferred location,and shift
     ApiServicesOrgCandidate.updateCareerInfo(data, getProfileInfo, showPopup);
   }
 

@@ -18,6 +18,7 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
   const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   React.useEffect(() => {
+    //Api call for getting list of languages
     ApiServicesOrgCandidate.getListOfLanguages().then((response) => {
       if (response) {
         const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].languages);
@@ -53,7 +54,7 @@ const LanguageComponent = ({ dataAttributes, showPopup }) => {
       setCustomInputValues({ ...customInputValues, [name]: [] })
     }
   }
-
+// on change handle ablility- Read,write,speak
   const handleAbilityOnChange = e => {
     const { name } = e.target;
     setCustomInputValues({ ...customInputValues, [name]: e.target.checked ? true : false })

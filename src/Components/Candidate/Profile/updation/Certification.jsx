@@ -22,6 +22,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
   const [hasNoExpirationDate, setHasNoExpirationDate] = React.useState(false);
   const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   React.useEffect(() => {
+    //Api cal for get list of certificates
     ApiServicesOrgCandidate.getListOfCertificates().then((response) => {
       if (response) {
         const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].certificates);
@@ -77,12 +78,13 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
       });
     }
   }
+  //Handle no expiration date
   const handleHasNoExpirationDate = e => {
     setHasNoExpirationDate(!hasNoExpirationDate);
     clearErrors('endDate');
     clearErrors('startDate');
   }
-
+//Start Date and end date validation
   const starDateEndDateValidation = (startMonth, startYear, endMonth, endYear, isEndDateChange) => {
     let isValid = true;
     if (startMonth && startYear && endMonth && endYear) {
@@ -103,7 +105,7 @@ const CertificationComponent = ({ dataAttributes, showPopup }) => {
     }
     return isValid;
   }
-
+//onchange Handle month and date 
   const monthAndDateOnChange = e => {
     const { name, value } = e.target;
     const startMonth = name === 'issueMonth' ? value : values.issueMonth;

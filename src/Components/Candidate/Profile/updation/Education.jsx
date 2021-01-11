@@ -51,6 +51,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   React.useEffect(() => {
+    //Api call for getting list of institute
     ApiServicesOrgCandidate.getListOfInstitutes().then((response) => {
       if (response) {
         const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].institute);
@@ -59,6 +60,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
         setInstitutes([]);
       }
     })
+     //Api call for getting list of Boards
     ApiServicesOrgCandidate.getListOfBoards().then((response) => {
       if (response) {
         const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].board_name);
@@ -120,6 +122,7 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
     }
   }
 
+  //Chage educatuon type from dropdown
   const onChangeEducationType = e => {
     const value = e.target.value;
     if (value) {
@@ -158,6 +161,8 @@ const EducationComponent = ({ dataAttributes, showPopup }) => {
       });
     }
   }
+
+  //Select course type from dropdown
   const onChangeCourseType = (e) => {
     const value = e.target.value;
     if (value === COURSE_TYPE_ENUM.FULL_TIME || value === COURSE_TYPE_ENUM.PART_TIME || value === COURSE_TYPE_ENUM.CORRESPONDENCE) {

@@ -22,24 +22,25 @@ class Resume extends Component {
     this.fileService1.fetchResumeFile()
       .then(Response => {
         if (Response && Response.data && Response.data.responseObject) {
-        var data2 = Response.data.responseObject
-        this.setState({
-          data1:Response.data.responseObject.cvInBytes,
-          fileName: Response.data.responseObject.fileName,
-          createdDate:Response.data.responseObject.createdDate
-        });
-      }
-  })
-}
+          var data2 = Response.data.responseObject
+          // console.log(data2)
+          this.setState({
+            data1: Response.data.responseObject.cvInBytes,
+            fileName: Response.data.responseObject.fileName,
+            createdDate: Response.data.responseObject.createdDate
+          });
+        }
+      })
+  }
   //Download Resume
 
   downloadResume = () => {
     // Calling Download Resume File Service from Service file:-
-        var blob;
-        blob = this.convertBase64toBlob(this.state.data1, 'application/msword');
-        var blobURL = URL.createObjectURL(blob)
-        var blobURL = URL.createObjectURL(blob);
-        window.open(blobURL);
+    var blob;
+    blob = this.convertBase64toBlob(this.state.data1, 'application/msword');
+    var blobURL = URL.createObjectURL(blob)
+    var blobURL = URL.createObjectURL(blob);
+    window.open(blobURL);
   }
 
   convertBase64toBlob(content, contentType) {
@@ -67,13 +68,13 @@ class Resume extends Component {
   deleteResume = () => {
     this.fileService1.deleteSampleFile()
       .then(response => {
-        if(response && response.data){
-        this.toast.show({severity:'success',summary:'Success Message',detail:'Resume Deleted Successfully'},5000);
-        window.location.reload()
+        if (response && response.data) {
+          this.toast.show({ severity: 'success', summary: 'Success Message', detail: 'Resume Deleted Successfully' }, 5000);
+          window.location.reload()
         }
       },
       ).catch(error => {
-         this.toast.show({severity:'error',summary:'Error Message',detail:'Something Went Wrong'},200)
+        this.toast.show({ severity: 'error', summary: 'Error Message', detail: 'Something Went Wrong' }, 200)
       })
     this.setState({
       deleteProductDialog: false
@@ -128,11 +129,7 @@ class Resume extends Component {
     if (filemode1 != '') { var fileInput = filemode1 }
     else { var fileInput = filemode2 }
 
-    if (fileInput != '') { 
-      // if (fileInput.size >= 2e6) {
-      //   this.toast.show({ severity: 'warn', summary: 'Error', detail: 'Please upload a file less than 2MB' }, 50000);
-      //   return false;
-      // }
+    if (fileInput != '') {
       var allowedExtensions = /(\.doc|\.docx|\.pdf)$/i;
       // var allowedExtensions = /(\.doc)$/i;
       if (!allowedExtensions.exec(fileInput.name)) {
@@ -150,6 +147,7 @@ class Resume extends Component {
     if (this.fileValidation()) {
       const formData = new FormData();
       const token = localStorage.getItem('authToken');
+      // console.log(token)
       const formheader = {
         headers: {
           //'Content-Type':'multipart/form-data',
@@ -185,7 +183,7 @@ class Resume extends Component {
         ).catch(error => {
           this.setState({
             isLoading: false
-        })
+          })
           this.toast.show({ severity: 'error', summary: 'Error', detail: 'Server Error ' }, 50000);
         })
     }
@@ -218,10 +216,10 @@ class Resume extends Component {
   }
 
   render() {
-    var day, month, year, fullDate,d;
+    var day, month, year, fullDate, d;
     const { showing } = this.state
     const deleteProductDialogFooter = (
-      <>  
+      <>
         <Button label="No" icon="pi pi-times" className="p-button-text" onClick={this.hideDeleteProductDialog} />
         <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={this.deleteResume} />
       </>
@@ -240,18 +238,19 @@ class Resume extends Component {
           </div>
         </div>
         <div class="col-12 mb-3">
-          { 
+          {
             d = new Date(this.state.createdDate),
             day = d.getDate(),
             month = d.getMonth() + 1,
             year = d.getFullYear(),
-            fullDate = day + '-' + month + '-' + year
+            fullDate = day + '-' + month + '-' + year,
+            console.log(fullDate)
           }
           <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class={`ml-4 mr-2 left-sec-icon profile__editIcon ${hasAttachedDocument ? '' : 'disabledCursorOnIcon'}`} onClick={this.downloadResume} />
           <span class="mr-3" style={{ color: '#007EFF' }}>{this.state.fileName}</span>
           {/* <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span> */}
-          
-        <span>{this.state.createdDate ?<span> Last updated on {fullDate}</span> :<span></span> }</span>
+
+          <span>{this.state.createdDate ? <span> Last updated on {fullDate}</span> : <span></span>}</span>
 
           <span class="float-right"> {hasAttachedDocument
             ? <a className="download_sample_link d-block" href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>
@@ -301,6 +300,8 @@ class Resume extends Component {
 
                           <div className="file-path-wrapper">
                             <input className="file-path validate text-center" type="text" value={this.state.selectedFile.name} placeholder="No file choosen" />
+                            {console.log(showing)}
+
                           </div>
                           {/* /* : null */}
                         </div>

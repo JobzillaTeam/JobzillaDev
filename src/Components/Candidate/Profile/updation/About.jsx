@@ -30,6 +30,7 @@ const AboutComponent = ({ showPopup }) => {
 
   const onSubmit = values => {
     const candidateId = localStorage.getItem('candidateId');
+    // Api call for updating profile information
     ApiServicesOrgCandidate.updateProfileInfo({ ...values, candidateId: candidateId }, getProfileInfo, showPopup);
   }
 
@@ -46,10 +47,6 @@ const AboutComponent = ({ showPopup }) => {
             maxlength={MAX_LENGTH}
             ref={register({
               required: false,
-              // maxLength: {
-              //   value: MAX_LENGTH,
-              //   message: `Profile Summary must not exceed ${MAX_LENGTH} characters`
-              // }
             })}
           ></textarea>
           <div class="row m-0 p-0 mt-2">
