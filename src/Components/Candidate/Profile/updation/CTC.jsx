@@ -15,6 +15,7 @@ const CTCComponent = ({ showPopup }) => {
     defaultValues: cTCFormDefaultValues
   });
   const values = getValues();
+  //Change currency type
   const onChangeCurrencyType = (e) => {
     const value = e.target.value;
     if (value === CURRENCY_TYPE_ENUM.INR || value === CURRENCY_TYPE_ENUM.USD) {
@@ -50,6 +51,7 @@ const CTCComponent = ({ showPopup }) => {
         expectedCTC: eTCInFormat,
         candidateId: candidateId
       }
+      //Api call for update profile
       ApiServicesOrgCandidate.updateProfileInfo(data, getProfileInfo, showPopup);
     } else {
       setError('currentCtcInLakh', {

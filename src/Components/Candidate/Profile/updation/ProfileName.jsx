@@ -42,9 +42,11 @@ const ProfileNameComponent = ({ showPopup }) => {
   const onSubmit = values => {
     const candidateId = localStorage.getItem('candidateId');
     delete values.emailId;
+    //Api call for update profile information
     ApiServicesOrgCandidate.updateProfileInfo({...values, candidateId: candidateId, mobileNumber: customInputValues.mobileNumber }, getProfileInfo, showPopup);
   }
 
+  //validation for mobile number
   const handleMobileNumberChange = value => {
     if (value) {
       clearErrors('mobileNumber')

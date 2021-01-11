@@ -31,8 +31,6 @@ const PersonalComponent = ({ showPopup }) => {
   const [city, setCity] = useState('');
   const { register, errors, handleSubmit } = useForm({mode: 'all'});
   const onSubmit = (d) => {
-    // console.log(d)
-    // e.preventDefault();
     const candidateId = localStorage.getItem('candidateId');
     const DOB = Moment(startDate);
     let data = {
@@ -75,11 +73,13 @@ const PersonalComponent = ({ showPopup }) => {
         });
       }
     });
+    //Api call for getting list of states
     ApiServicesOrgCandidate.getListOfStates().then((response) => {
       setStateName(response.data.responseObject);
     });
   }, []);
 
+  //Select gender
   const onValueChange = (event) => {
     setGender(event.target.value);
   }
@@ -103,8 +103,8 @@ const PersonalComponent = ({ showPopup }) => {
 
   const handleFormInputData = (e) => {
     if (e.target.name === 'state') {
+      //Api call for getting list of cities
       ApiServicesOrgCandidate.getListOfCity(e.target.value).then((response) => {
-        // console.log(response)
         if (response) {
           setCity(response.data.responseObject);
         } else {
@@ -119,7 +119,7 @@ const PersonalComponent = ({ showPopup }) => {
       })
     )
   }
-  // console.log(errors)
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -131,7 +131,6 @@ const PersonalComponent = ({ showPopup }) => {
                 value={startDate}
                 format='dd-MM-yy'
                 onChange={date => { setStartDate(date); 
-                  // console.log(date) 
                 }}
                 calendarIcon={<img src="../images/profile/calendar.png" style={{ width: '16px' }} />}
                 clearIcon={null}
@@ -187,9 +186,7 @@ const PersonalComponent = ({ showPopup }) => {
               name="passportId"
               value={inputData.passportId}
               onChange={(e) => handleFormInputData(e)}
-              // ref={register({ required: true })}
             />
-            {/* {errors.passportId && <div class="errorMsg">Please Enter Valid Passport Id</div>} */}
           </div>
           <div className="form-group">
             <label className="modal-label" htmlFor="University">Address</label>
@@ -199,9 +196,7 @@ const PersonalComponent = ({ showPopup }) => {
               name="address"
               value={inputData.address}
               onChange={(e) => handleFormInputData(e)}
-              // ref={register({ required: true })}
             />
-            {/* {errors.address && <div class="errorMsg">Please Enter Valid Address</div>} */}
           </div>
           <div className="form-group">
             <label className="modal-label" htmlFor="maritalStatus">Marital Status</label>
@@ -228,13 +223,6 @@ const PersonalComponent = ({ showPopup }) => {
               value={inputData.workPermit}
               onChange={(e) => handleFormInputData(e)}
             />
-            {/* <ReactTags
-              placeholderText={'Add New Country'}
-              minQueryLength={1}
-              tags={tags}
-              suggestions={COUNTRY_LIST}
-              onDelete={onDelete}
-              onAddition={onAddition} /> */}
           </div>
         </div>
         <button class="btn lightBlue float-right px-5"> Save</button>

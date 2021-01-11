@@ -22,17 +22,16 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   const [isTypeHeadInputReady, setIsTypeHeadInputReady] = React.useState(!resourceId);
   React.useEffect(() => {
+    //Api call for getting list of orgnization
     ApiServicesOrgCandidate.getListOfOrganizations().then((response) => {
       if (response) {
         const result = Object.keys(response.data.responseObject).map((key, index) => response.data.responseObject[key].organizations);
-        // console.log(result)
         setOrganizations(result);
       } else {
         setOrganizations('');
       }
     })
     state.then((response) => {
-      // console.log(resourceId)
       if (response && response.employmentDetailsList && resourceId) {
         const resourceObj = response.employmentDetailsList.filter(resObj => {
           return resObj.employmentId === resourceId
@@ -73,12 +72,14 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
   const onSubmit = values => {
     const organization = customInputValues.organization && customInputValues.organization[0]
     if (resourceId) {
+      //Api call for update Employment
       ApiServicesOrgCandidate.updateEmployment({ ...values, currentCompany: customInputValues.currentCompany, organization: organization, employmentId: resourceId }, getProfileInfo, showPopup);
     } else {
+       //Api call for Add Employment details
       ApiServicesOrgCandidate.addEmployment({ ...values, currentCompany: customInputValues.currentCompany, organization: organization }, getProfileInfo, showPopup);
     }
   }
-
+  //Start and end date validation
   const starDateEndDateValidation = (startMonth, startYear, endMonth, endYear, isEndDateChange) => {
     if (startMonth && startYear && endMonth && endYear) {
       const startMonthValue = parseInt(moment().month(startMonth).format("M")) - 1;
@@ -98,14 +99,14 @@ const EmploymentComponent = ({ dataAttributes, showPopup }) => {
   }
 
 
-
+  //Add company is current company or not
   const onChangeIsCurrentCompany = (e) => {
     const value = JSON.parse(e.target.value.toLowerCase());
     setCustomInputValues({ ...customInputValues, currentCompany: value })
     clearErrors('endDate');
     clearErrors('startDate');
   }
-
+// Change date and month
   const monthAndDateOnChange = e => {
     const { name, value } = e.target;
     const startMonth = name === 'startedWorkingFromMonth' ? value : values.startedWorkingFromMonth;
