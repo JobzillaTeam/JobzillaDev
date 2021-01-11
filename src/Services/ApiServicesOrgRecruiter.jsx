@@ -16,7 +16,6 @@ class ApiServicesOrgRecruiter {
               .then(res => res.json()).then(res => {
                 if (res && res.responseObject) {
                   const authToken = res.responseObject;
-                  // console.log(res);
                   localStorage.setItem('authToken', authToken);
                   originalReq.headers['Authorization'] = `Bearer ${authToken}`;
                 }
@@ -32,7 +31,7 @@ class ApiServicesOrgRecruiter {
   }
   addJobDetails(resourceInfo) {
     const authToken = localStorage.getItem('authToken')
-    console.log(resourceInfo);
+    // console.log(resourceInfo);
     const organizationId = localStorage.getItem('organizationId')
 
     // new file
@@ -42,7 +41,7 @@ class ApiServicesOrgRecruiter {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -56,7 +55,7 @@ class ApiServicesOrgRecruiter {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -69,7 +68,7 @@ class ApiServicesOrgRecruiter {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -83,7 +82,7 @@ class ApiServicesOrgRecruiter {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     );
   }

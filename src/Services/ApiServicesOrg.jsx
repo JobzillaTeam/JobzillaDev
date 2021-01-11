@@ -29,7 +29,6 @@ class ApiServicesOrg extends Component {
               .then((res) => {
                 if (res && res.responseObject) {
                   const authToken = res.responseObject;
-                  // console.log(res);
                   localStorage.setItem("authToken", authToken);
                   originalReq.headers["Authorization"] = `Bearer ${authToken}`;
                 }
@@ -62,19 +61,6 @@ class ApiServicesOrg extends Component {
       .then((Response) => Response);
   }
 
-  // //2. Sending Login details to backend and get Role
-  // putLogin (emailid, password) {
-  //     return (
-  //         axios
-  //           .put(`${ApiBaseUrl}/user/login`, {userName: emailid, password: password})
-  //           .then(resp => {
-  //               console.log(resp);
-  //               return resp;
-  //           } ).catch(error => {
-  //             console.log(error);
-  //           })
-  //       )
-  // }
 
   //2. Sending Login details to backend and get Role
   putLogin(fields) {
@@ -144,7 +130,6 @@ class ApiServicesOrg extends Component {
   //4.2 Add User-  Admin/User
 
   postAddUser(fields) {
-    // console.log(fields)
     return axios
       .post(ApiBaseUrl + "/user/user", fields, this.getToken())
       .then((Response) => Response);
@@ -177,17 +162,7 @@ class ApiServicesOrg extends Component {
       .then((Response) => Response);
   }
 
-  //4.5 Delete User - Multiple Users- Admin/User
-  //     deleteMultiUser(updatedUserId){
-  //         console.log(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
-  //         return(
-  //             axios
-  //             .delete(ApiBaseUrl+ "/user/multipleUsersById/", {data:updatedUserId}, this.getToken())
-  //             .then(Response => Response)
-  //         )
-  // }
   deleteMultiUser(updatedUserId) {
-    // console.log(ApiBaseUrl + "/user/multipleUsersById/" + updatedUserId)
     return axios
       .delete(
         ApiBaseUrl + "/user/multipleUsersById/" + updatedUserId,
@@ -212,7 +187,6 @@ class ApiServicesOrg extends Component {
 
   //5.2 post api for active job-- invite button
   putApplicationStatus(jobId, candidateId, applicationStatus) {
-    // console.log(ApiBaseUrl + `/recruiter/updateApplicationStatus/${jobId}/${candidateId}/${applicationStatus}`, this.getToken())
     return axios
       .put(
         ApiBaseUrl +
@@ -230,7 +204,6 @@ class ApiServicesOrg extends Component {
 
   //5.3 Active Job- VeiwDetails- View Matching Candidate list- Job Details Component
   getViewAllMatchingCandidate(jobId) {
-    // const jobId = localStorage.getItem('matchingId')
     return axios
       .get(
         ApiBaseUrl + "/recruiter/listOfMatchingCandidateApplications/" + jobId,
@@ -297,7 +270,6 @@ class ApiServicesOrg extends Component {
       .get(`${ApiBaseUrl}/user/organizationProfile/${orgId}`, this.getToken())
       .then((Response) => Response)
       .catch((error) => {
-        // console.log(error);
       });
   }
 
@@ -305,14 +277,10 @@ class ApiServicesOrg extends Component {
   updateOrganizationProfile(employee) {
     const orgId = localStorage.getItem("organizationId");
     return axios
-      .put(
-        `${ApiBaseUrl}/user/updateOrganizationProfile`,
-        employee,
-        this.getToken()
+      .put(`${ApiBaseUrl}/user/updateOrganizationProfile`, employee, this.getToken()
       )
-      .then((Response) => console.log(Response))
+      .then((Response) => (Response))
       .catch((error) => {
-        // console.log(error);
       });
   }
 
@@ -400,7 +368,6 @@ class ApiServicesOrg extends Component {
   //5.8 Download Resume For Candidate Profile
 
   downloadResumeFile() {
-    // const candidateId = JSON.parse(localStorage.getItem('candidateId'));
     const authToken = localStorage.getItem("authToken");
     const candidateId = 1428;
     return axios({
@@ -423,6 +390,7 @@ class ApiServicesOrg extends Component {
       },
     }).then((Response) => Response);
   }
+
   //Provider Dashboard api
   getProviderDashboardDetails(year) {
     // const today = new Date();
@@ -460,14 +428,12 @@ class ApiServicesOrg extends Component {
   deleteJobs(deleteJobId) {
     const authToken = localStorage.getItem("authToken");
 
-    console.log(deleteJobId);
     return axios
       .delete(`${ApiBaseUrl}/recruiter/jobDetails/${deleteJobId}`, {
         headers: { Authorization: `Bearer ${authToken}` },
       })
       .then((Response) => Response)
       .catch((error) => {
-        console.log(error);
       });
   }
 }

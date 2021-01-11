@@ -42,7 +42,6 @@ class ApiServicesOrgCandidate {
               .then(res => res.json()).then(res => {
                 if (res && res.responseObject) {
                   const authToken = res.responseObject;
-                  // console.log(res);
                   localStorage.setItem('authToken', authToken);
                   originalReq.headers['Authorization'] = `Bearer ${authToken}`;
                 }
@@ -77,7 +76,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -90,7 +89,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -104,7 +103,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -118,7 +117,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -132,14 +131,13 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileInfo()).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
 
   updateCertification(certificationInfo, getProfileRefresh, showPopup) {
     const candidateId = localStorage.getItem('candidateId')
-    // console.log(certificationInfo);
     const authToken = localStorage.getItem('authToken')
     return (
       axios
@@ -147,7 +145,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -161,14 +159,13 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
 
   addCertification(certificationInfo, getProfileRefresh, showPopup) {
     const candidateId = localStorage.getItem('candidateId')
-    // console.log(certificationInfo);
     const authToken = localStorage.getItem('authToken')
     return (
       axios
@@ -176,7 +173,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -190,7 +187,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -205,7 +202,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileInfo()).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -219,7 +216,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -233,14 +230,13 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
 
   updateEducation(educationInfo, getProfileRefresh, showPopup) {
     const candidateId = localStorage.getItem('candidateId')
-    // console.log(educationInfo);
     const authToken = localStorage.getItem('authToken')
     return (
       axios
@@ -248,7 +244,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -262,7 +258,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(resp => getProfileRefresh(), showPopup(false)).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -275,7 +271,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -288,7 +284,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -301,7 +297,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -314,7 +310,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -327,7 +323,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -340,7 +336,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -353,7 +349,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -366,7 +362,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -379,7 +375,7 @@ class ApiServicesOrgCandidate {
           headers: { 'Authorization': `Bearer ${authToken}` }
         })
         .then(Response => Response).catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -504,17 +500,6 @@ class ApiServicesOrgCandidate {
     )
   }
 
-  // fetchJobOffersForCandidate() {
-  //   const candidateId = localStorage.getItem('candidateId')
-  //   const authToken = localStorage.getItem('authToken')
-  //   return (
-  //     axios
-  //       .get(`${ApiBaseUrl}/candiadate/jobOffersForCandidate/${candidateId}`, {
-  //         headers: {'Authorization': `Bearer ${authToken}`}
-  //       })
-  //       .then(Response => Response.data.responseObject)
-  //   )
-  // }
 
   //candidate Dashboard
   getcandidateDashboardDetails() {
@@ -538,7 +523,7 @@ class ApiServicesOrgCandidate {
         }
       ).then(Response => Response.data.responseObject)
         .catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }
@@ -556,7 +541,7 @@ class ApiServicesOrgCandidate {
         }
       ).then(Response => Response.data.responseObject)
         .catch(error => {
-          console.log(error);
+          // console.log(error);
         })
     )
   }

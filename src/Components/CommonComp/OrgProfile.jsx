@@ -36,7 +36,6 @@ class Profile extends Component {
       let getContactPersonName = "";
       let getGstin = "";
       let getMobile = "";
-      console.log(Response)
       if (Response && Response.data && Response.data.responseObject) {
         getOrgName = JSON.stringify(
           Response.data.responseObject.organizationName
