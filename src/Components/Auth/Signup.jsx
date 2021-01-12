@@ -203,7 +203,7 @@ validateForm = () => {
                                 <div className="form-group">
                                     <label htmlFor="signup_OrgName">Organization Name</label>
                                     <input type="text" id="signup_OrgName" className="form-control" name="organizationName"
-                                        value={this.state.fields.organizationName} onChange={ (e) => {this.handleChange(e);this.validateForm();} }
+                                        value={this.state.fields.organizationName || ""} onChange={ (e) => {this.handleChange(e);this.validateForm();} }
                                         onBlur = {(e) => {this.handleTouch(e);this.validateForm();} } />
                                         {
                                             this.state.formSubmitted || this.state.touched.organizationName?<div className="errorMsg">{this.state.errors.organizationName}</div>:''                   
@@ -213,7 +213,7 @@ validateForm = () => {
                                 <div className="form-group">
                                     <label htmlFor="signup_email">Official Email</label>
                                     <input type="text" id="signup_email" className="form-control" name="email" 
-                                        value={this.state.fields.email} onChange={ (e) => {this.handleChange(e);this.validateForm();} }
+                                        value={this.state.fields.email || "" } onChange={ (e) => {this.handleChange(e);this.validateForm();} }
                                         onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }  />
                                         {
                                             this.state.formSubmitted || this.state.touched.email?<div className="errorMsg">{this.state.errors.email}</div>:''                  
@@ -222,7 +222,7 @@ validateForm = () => {
                                 {/* Mobile/Landline */}
                                 <div className="form-group">
                                     <label htmlFor="signup_mobilenumber">Mobile/Landline</label>
-                                    <input type="text" id="signup_mobilenumber" className="form-control" name="phoneNumber"  value={this.state.fields.phoneNumber}  onChange={ (e) => {this.handleChange(e);this.validateForm();} }
+                                    <input type="text" id="signup_mobilenumber" className="form-control" name="phoneNumber"  value={this.state.fields.phoneNumber || ""}  onChange={ (e) => {this.handleChange(e);this.validateForm();} }
                                         onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
                                         {
                                             this.state.formSubmitted || this.state.touched.phoneNumber?<div className="errorMsg">{this.state.errors.phoneNumber}</div>:''                     
@@ -231,7 +231,7 @@ validateForm = () => {
                                 {/* Contact Person's Name */}
                                 <div className="form-group">
                                     <label htmlFor="signup_name">Contact Person's Name</label>
-                                    <input type="text" id="signup_name" className="form-control" name="contactPerson" value={this.state.fields.contactPerson} onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                    <input type="text" id="signup_name" className="form-control" name="contactPerson" value={this.state.fields.contactPerson || ""} onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }/>
                                     {
                                        this.state.formSubmitted || this.state.touched.contactPerson?<div className="errorMsg">{this.state.errors.contactPerson}</div>:''                     
@@ -242,14 +242,14 @@ validateForm = () => {
                                 {/* GSTIN */}
                                 <div className="form-group">
                                     <label htmlFor="signup_gstin">GSTIN (optional)</label>
-                                    <input type="text" id="signup_gstin" className="form-control" name="gstin" value={this.state.fields.gstin} onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                    <input type="text" id="signup_gstin" className="form-control" name="gstin" value={this.state.fields.gstin || ""} onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                      />
                                 </div>
                                 {/* Password */}
                                 <div className="form-group ">
                                     <label htmlFor="signup_pwd">Password</label>
                                     <div className="input-group">
-                                    <input type="password" id="signup_pwd" className="form-control" name="password"  value={this.state.fields.password}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                    <input type="password" id="signup_pwd" className="form-control" name="password"  value={this.state.fields.password || ""}  onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
                                     
                                     <span className="input-group-append">
@@ -262,7 +262,7 @@ validateForm = () => {
                                 {/* Confirm Password */}
                                 <div className="form-group">
                                     <label htmlFor="signup_cnfpwd">Confirm Password</label>
-                                    <input type="password" id="signup_cnfpwd" className="form-control" name="confirm_password"  value={this.state.fields.confirm_password} onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
+                                    <input type="password" id="signup_cnfpwd" className="form-control" name="confirm_password"  value={this.state.fields.confirm_password || ""} onChange={ (e) => {this.handleChange(e);this.validateForm();} } 
                                     onBlur = {(e) => {this.handleTouch(e);this.validateForm();} }   />
                                     {
                                        this.state.formSubmitted || this.state.touched.password?

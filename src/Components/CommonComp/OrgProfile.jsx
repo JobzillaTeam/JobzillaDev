@@ -71,7 +71,7 @@ class Profile extends Component {
         <HeaderAll isProfile={true}></HeaderAll>
         {/* Main Content on the page */}
         <div className="content_section main marT60 top-padding">
-          <div class="mt-3 mb-3 setting_text1">
+          <div className="mt-3 mb-3 setting_text1">
             <Link className="backtodashboard" to="/providerDashboard">
               <img className="setting_arrow marR5"
                 src="images/EmailSettings/backward-link-arrow.svg"></img>
