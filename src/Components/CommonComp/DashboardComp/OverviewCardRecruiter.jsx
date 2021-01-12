@@ -42,7 +42,7 @@ export default class RecruiterOverviewCard extends Component {
                                 <img className="ml-5 mr-4" src="/images/Dashboard-assets/recruiter-dashboard/job-posted-icon.svg" alt="Profile Uploaded image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={jobsPosted} duration={2.75} separator="," />
+                                        <CountUp start={0} end={parseInt(jobsPosted)} duration={2.75} separator="," />
                                     </h5>
                                     Jobs Posted
                                 </div>
@@ -55,7 +55,7 @@ export default class RecruiterOverviewCard extends Component {
                                 <img className="ml-5 mr-4" src="images/Dashboard-assets/active-profile.svg" alt="Active Profile image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={openPositions} duration={2.75} separator="," />
+                                        <CountUp start={0} end={parseInt(openPositions)} duration={2.75} separator="," />
                                     </h5>
                             Open Positions
                                 </div>
@@ -68,7 +68,7 @@ export default class RecruiterOverviewCard extends Component {
                                 <img className="ml-5 mr-4 mt-2" src="images/Dashboard-assets/offer-ico.svg" alt="Hired Profile image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={hiredPositions} duration={2.75} separator="," />
+                                        <CountUp start={0} end={parseInt(hiredPositions)} duration={2.75} separator="," />
                                     </h5>
                             Hired Positions
                                 </div>

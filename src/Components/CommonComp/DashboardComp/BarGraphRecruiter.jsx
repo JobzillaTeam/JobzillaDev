@@ -78,7 +78,7 @@ export default class BarGraphRecruiter extends Component {
             <section className="chart_section">
               {/* Select Year DropDown */}
               <div className="dropdown float-right mr-2">
-                <div class="dropdown font-blue">
+                <div className="dropdown font-blue">
                   <select className="form-control font-blue" id="dropdown" name="dropdown"
                     onChange={this.handleDropdownChange}
                   >

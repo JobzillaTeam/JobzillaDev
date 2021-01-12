@@ -42,7 +42,7 @@ export default class OverviewCardProvider extends Component {
                                 <img className="ml-5 mr-4" src="/images/Dashboard-assets/recruiter-dashboard/job-posted-icon.svg" alt="Profile Uploaded image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={profileUploaded} duration={2.75} separator="," />
+                                        <CountUp start={0} end={parseInt(profileUploaded)} duration={2.75} separator="," />
                                     </h5>
                             Profiles Uploaded
                                 </div>
@@ -55,7 +55,7 @@ export default class OverviewCardProvider extends Component {
                                 <img className="ml-5 mr-4" src="/images/Dashboard-assets/active-profile.svg" alt="Active Profile image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={activeProfile} duration={2.75} separator="," />
+                                        <CountUp start={0} end={parseInt(activeProfile)} duration={2.75} separator="," />
                                     </h5>
                             Active Profiles
                                 </div>
@@ -68,7 +68,7 @@ export default class OverviewCardProvider extends Component {
                                 <img className="ml-5 mr-4 mt-2" src="/images/Dashboard-assets/offer-ico.svg" alt="Hired Profile image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={hiredProfile} duration={2.75} separator="," />
+                                        <CountUp start={0} end={parseInt(hiredProfile)} duration={2.75} separator="," />
                                     </h5>
                             Hired Profiles
                                 </div>
