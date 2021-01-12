@@ -127,7 +127,7 @@ class ShortlistedCandidate extends Component {
                             </thead>
                             <tbody>
                                 {this.state.candidate.map((data, index) =>
-                                    <tr className="candidateTable  wd-ba">
+                                    <tr className="candidateTable  wd-ba" key={data.candidate.user.id}>
                                         {/* <td>{data.candidate.candidateId}</td> */}
                                         <td>
                                             <Link to={`/candidateProfileToOpen/${data.candidate.user.id}`}><p className="tb-title-text">{data.candidate.firstName} {data.candidate.lastName}</p> </Link>

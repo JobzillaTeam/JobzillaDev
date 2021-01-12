@@ -65,23 +65,23 @@ export default class RecruiterClosedJobDetails extends React.Component {
         <div className="maincontent">
           <HeaderAll></HeaderAll>
           <div className="content_section">
-            <div class="row">
-              <div class="col-md-12 py-4">
-                <h5 class="job-heading"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
+            <div className="row">
+              <div className="col-md-12 py-4">
+                <h5 className="job-heading"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
               </div>
             </div>
             {jobDetails && <div>
               <div className="card mb-4">
                 <div className="card-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="row">
-                        <div class="col-md-12 job-title-link align-items-center" style={{ display: 'flex' }}>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="row">
+                        <div className="col-md-12 job-title-link align-items-center" style={{ display: 'flex' }}>
                           <a href="#"><h5> {jobDetails.jobTitle}</h5></a>
-                          <span class="job-posting"> Posted {jobDetails.postedAt} day ago</span>
+                          <span className="job-posting"> Posted {jobDetails.postedAt} day ago</span>
                         </div>
                       </div>
-                      <ul class="job-skills">
+                      <ul className="job-skills">
                         <li><img src="/images/icons/category.svg" />{jobDetails.category}</li>
                         <li><img src="/images/icons/experience.svg" />{jobDetails.experienceReqFrom}-{jobDetails.experienceReqTo} years</li>
                         <li><img src="/images/icons/job_role.svg" />{jobDetails.employmentType}</li>
@@ -168,7 +168,7 @@ export default class RecruiterClosedJobDetails extends React.Component {
               <div className="arrowButton">
                 {this.state.open ? <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img> : <img src="/images/icons/view_more_icon.svg" onClick={this.toggle}></img>}
               </div>
-              <div class="bg-white mt-4">
+              <div className="bg-white mt-4">
                 <InfiniteScroll
                   dataLength={this.state.joinedCandidateList.length}
                   next={this.loadMore}

@@ -67,7 +67,7 @@ const LeftNavProvider = () => {
                     {localStorage.getItem('status') === "recruiter" ?
                         (
                             <li data-toggle="tooltip" data-placement="right" title="Jobs">
-                                <Link className={`subMenu ${!isJobDropdownOpen ? 'collapsed' : ''}`} id="navbarDropdown" role="button"
+                                <Link to="#" className={`subMenu ${!isJobDropdownOpen ? 'collapsed' : ''}`} id="navbarDropdown" role="button"
                                     data-toggle="collapse" data-target="#submenu1sub1">
                                     <i><img src="/images/Candidate-Navbar-assets/job-offers.svg" aria-hidden="true" /></i>
                                     <span className="menuText">Jobs</span>
@@ -84,7 +84,7 @@ const LeftNavProvider = () => {
                                                 <span className="menuText">Active Jobs</span>
                                             </NavLink>
                                         </li>
-                                        <li class="dropdown-item" data-toggle="tooltip" data-placement="right" title="Closed Jobs">
+                                        <li className="dropdown-item" data-toggle="tooltip" data-placement="right" title="Closed Jobs">
                                             <NavLink to="/closeJobs"
                                                 activeClassName="active"
                                                 className={`${location.pathname.includes('/recruiter/jobDetails/closed/') && 'active'}`}

@@ -102,9 +102,9 @@ export default class RecruiterActiveJobDetails extends React.Component {
           <HeaderAll></HeaderAll>
           <div className="content_section">
             <Toast className="toast_padding" ref={(el) => (this.toast = el)} />
-            <div class="row">
-              <div class="col-md-12 py-4">
-                <h5 class="job-heading">
+            <div className="row">
+              <div className="col-md-12 py-4">
+                <h5 className="job-heading">
                   <Link className="link" to={perviousLink}>
                     {perviousLinkText}
                   </Link>{" "}
@@ -116,13 +116,13 @@ export default class RecruiterActiveJobDetails extends React.Component {
               <div>
                 <div className="card mb-4">
                   <div className="card-body">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="row">
-                          <div class="col-md-12 job-title-link align-items-center" style={{ display: "flex" }}>
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="row">
+                          <div className="col-md-12 job-title-link align-items-center" style={{ display: "flex" }}>
                             <div className="float-left d-inline-flex" style={{ display: "flex" }}>
                               <h5 className="font-blue"> {jobDetails.jobTitle}</h5>
-                              <span class="job-posting">
+                              <span className="job-posting">
                                 {" "}
                               Posted {jobDetails.postedAt} day ago
                             </span>
@@ -139,7 +139,7 @@ export default class RecruiterActiveJobDetails extends React.Component {
                             </div>
                           </div>
                         </div>
-                        <ul class="job-skills">
+                        <ul className="job-skills">
                           <li>
                             <img src="/images/icons/category.svg" />
                             {jobDetails.category}
