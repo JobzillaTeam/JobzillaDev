@@ -103,7 +103,7 @@ class HeaderAll extends Component {
               <div className="btn-group btn-group-toggle my-auto" data-toggle="buttons">
                 <label className={`btn btn-toggler ${providerRecruiterStatus === "provider" ? " active" : " "}`}>                  <input type="radio"
                   value="provider"
-                  checked={providerRecruiterStatus === "provider"}
+                  // checked={providerRecruiterStatus === "provider"}
                   autoComplete="off"
                   onClick={(e) => this.toggleHandeler("provider")}
                   defaultChecked="provider"
@@ -112,7 +112,7 @@ class HeaderAll extends Component {
                 <label className={`btn btn-toggler ${providerRecruiterStatus === "recruiter" ? "active" : " "}`}>
                   <input type="radio"
                     value="recruiter"
-                    checked={providerRecruiterStatus === "recruiter"}
+                    // checked={providerRecruiterStatus === "recruiter"}
                     autoComplete="off"
                     onClick={(e) => this.toggleHandeler("recruiter")}
                   /> Recruiter

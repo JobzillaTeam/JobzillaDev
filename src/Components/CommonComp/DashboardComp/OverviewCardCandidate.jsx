@@ -61,7 +61,7 @@ export default class CandidateOverviewCard extends Component {
                                 <img className="ml-5 mr-4" src="/images/Dashboard-assets/recruiter-dashboard/job-posted-icon.svg" alt="Profile Uploaded image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={parseInt(jobsApplied)} duration={2.75} separator="," />
+                                        <CountUp start={0} end={(jobsApplied)} duration={2.75} separator="," />
                                     </h5>
                                     Jobs Applied
                                 </div>
@@ -74,7 +74,7 @@ export default class CandidateOverviewCard extends Component {
                                 <img className="ml-4 mr-3" src="/images/Dashboard-assets/active-profile.svg" alt="Active Profile image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={parseInt(selectedForInterviews)} duration={2.75} separator="," />
+                                        <CountUp start={0} end={(selectedForInterviews)} duration={2.75} separator="," />
                                     </h5>
                             Selected for Interviews
                                 </div>
@@ -87,7 +87,7 @@ export default class CandidateOverviewCard extends Component {
                                 <img className="ml-5 mr-4 mt-2" src="/images/Dashboard-assets/offer-ico.svg" alt="Hired Profile image" />
                                 <div className="media-body">
                                     <h5 className="mt-0 overview_numbers">
-                                        <CountUp start={0} end={parseInt(jobOffers)} duration={2.75} separator="," />
+                                        <CountUp start={0} end={(jobOffers)} duration={2.75} separator="," />
                                     </h5>
                             Job Offers
                                 </div>
