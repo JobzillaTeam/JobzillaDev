@@ -168,7 +168,7 @@ class LoginComp extends Component {
                 {/* User Name */}
                 <div className="form-group">
                   <label htmlFor="emailid">Email Id</label>
-                  <input type="text" id="emailid" value={this.state.fields.emailid} name="emailid" className="form-control"
+                  <input type="text" id="emailid" value={this.state.fields.emailid || ""} name="emailid" className="form-control"
                     onChange={(e) => { this.handleInputChange(e); this.validateForm(); }}
                     onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                 </div>
@@ -176,7 +176,7 @@ class LoginComp extends Component {
                 {/* Password */}
                 <div className="form-group">
                   <label htmlFor="loginPwd">Password</label>
-                  <input type="password" id="loginPwd" value={this.state.fields.password} className="form-control" name="password"
+                  <input type="password" id="loginPwd" value={this.state.fields.password || ""} className="form-control" name="password"
                     onChange={(e) => { this.handleInputChange(e); this.validateForm(); }}
                     onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                 </div>

@@ -101,7 +101,7 @@ class ForgotPassword extends Component {
         {/* User Name */}
         <div className="form-group">
           <label htmlFor="emailId">EmailId</label>
-          <input type="text" id="emailId" value={this.state.fields.emailId} name="emailId" className="form-control"
+          <input type="text" id="emailId" value={this.state.fields.emailId || ""} name="emailId" className="form-control"
             onChange={(e) => { this.handleInputChange(e); this.validateForm(); }}
             onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
         </div>

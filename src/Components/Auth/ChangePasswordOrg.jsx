@@ -158,7 +158,7 @@ class ChangePasswordOrg extends Component {
                   <div className="form-group">
                     <label htmlFor="oldPassword">Old Password</label>
                     <input ref={this.oldPasswordRef} onChange={this.onChange} type={revealOldPassword ? "text" : "password"} id="oldPassword" className="form-control" name="oldPassword"
-                      value={this.state.fields.oldPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
+                      value={this.state.fields.oldPassword || ""} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
                       onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                     <span className="input-group-append"  style={{height: 0}} onClick={this.toggleOldPassword}>
                         {revealOldPassword ?
@@ -175,7 +175,7 @@ class ChangePasswordOrg extends Component {
                   <div className="form-group">
 
                     <label htmlFor="newPassword">New Password</label>
-                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text" : "password"} id="newPassword" className="form-control" name="newPassword" value={this.state.fields.newPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
+                    <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text" : "password"} id="newPassword" className="form-control" name="newPassword" value={this.state.fields.newPassword || ""} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
                       onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                     <span className="input-group-append" style={{height: 0}} onClick={this.toggleNewPassword}>
                         {revealNewPassword ?
@@ -192,7 +192,7 @@ class ChangePasswordOrg extends Component {
                   <div className="form-group">
 
                     <label htmlFor="confirmPassword">Confirm New Password</label>
-                    <input ref={this.confirmPasswordRef} onChange={this.onChange} type="password" id="confirmPassword" className="form-control" name="confirmPassword" value={this.state.fields.confirmPassword}
+                    <input ref={this.confirmPasswordRef} onChange={this.onChange} type="password" id="confirmPassword" className="form-control" name="confirmPassword" value={this.state.fields.confirmPassword || ""}
                       onChange={(e) => { this.handleChange(e); this.validateForm(); }}
                       onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
                     {
