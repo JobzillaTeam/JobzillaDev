@@ -31,7 +31,7 @@ class ActiveJobCandidates extends React.Component {
                 (<Card className="custom h-100" >
                   <div className="row">
                     <div className="location" className="col-md-8">
-                      <div class="activeJobCardItems">
+                      <div className="activeJobCardItems">
                         <div id="name">{match.candidate.firstName} {match.candidate.lastName}</div>
                         <p id="body">{match.candidate.currentRole} at {match.candidate.company}</p>
                       </div>

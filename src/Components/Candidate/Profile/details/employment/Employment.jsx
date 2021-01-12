@@ -23,7 +23,7 @@ const EmploymentComponent = ({ showPopup }) => {
       empB.workedTillMonth = fullMonth;
       empB.workedTillYear = fullYear
     }
-    if (empA.workedTillMonth && empA.workedTillYear && empB.workedTillMonth, empB.workedTillYear) {
+    if (empA.workedTillMonth && empA.workedTillYear && empB.workedTillMonth && empB.workedTillYear) {
       const startMonthValue = parseInt(moment().month(empA.workedTillMonth).format("M")) - 1;
       const endMonthValue = parseInt(moment().month(empB.workedTillMonth).format("M")) - 1;
       const startDate = new Date(parseInt(empA.workedTillYear), empA.currentCompany ? empA.workedTillMonth : startMonthValue).getTime();
@@ -32,27 +32,27 @@ const EmploymentComponent = ({ showPopup }) => {
     }
   })
   return (
-    <div class="bg-white px-4 py-4 section-divider align-items-center">
-      <div class="col">
-        <div class="mb-4 align-items-center">
-          <img src="/images/Dashboard-assets/employment-icon.svg" alt="Cinque Terre" class="mr-2" />
-          <span class="subtitle-semi-bold">Employment</span>
+    <div className="bg-white px-4 py-4 section-divider align-items-center">
+      <div className="col">
+        <div className="mb-4 align-items-center">
+          <img src="/images/Dashboard-assets/employment-icon.svg" alt="Cinque Terre" className="mr-2" />
+          <span className="subtitle-semi-bold">Employment</span>
         </div>
-        <div class="px-4 mb-3">
+        <div className="px-4 mb-3">
           {(employmentDetailsListSorted) ? employmentDetailsListSorted.map((employment, i) => (
-            <div class="col-12 px-0 py-3">
+            <div className="col-12 px-0 py-3" key={employment.employmentId}>
               <div>
-                <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_EMPLOYMENT, true, { resourceId: employment.employmentId })} />
-                <span class="subtitle-semi-bold">{employment.designation}</span>
+                <img src="/images/Dashboard-assets/iconfinder_edit.svg" className="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_EMPLOYMENT, true, { resourceId: employment.employmentId })} />
+                <span className="subtitle-semi-bold">{employment.designation}</span>
               </div>
-              <div><span class="normal-text-semi-bold">{employment.organization}</span></div>
-              <div><span class="normal-text-light">{employment.startedWorkingFromMonth}{employment.startedWorkingFromYear && employment.startedWorkingFromMonth ? ' , ' : ''}{employment.startedWorkingFromYear} | {!employment.currentCompany ? `${employment.workedTillMonth} ${employment.workedTillYear && employment.workedTillMonth ? ' , ' : ''} ${employment.workedTillYear}` : ' - Present'} ({employment.employmentType})</span></div>
-              <p class="normal-text-light">{employment.description}</p>
+              <div><span className="normal-text-semi-bold">{employment.organization}</span></div>
+              <div><span className="normal-text-light">{employment.startedWorkingFromMonth}{employment.startedWorkingFromYear && employment.startedWorkingFromMonth ? ' , ' : ''}{employment.startedWorkingFromYear} | {!employment.currentCompany ? `${employment.workedTillMonth} ${employment.workedTillYear && employment.workedTillMonth ? ' , ' : ''} ${employment.workedTillYear}` : ' - Present'} ({employment.employmentType})</span></div>
+              <p className="normal-text-light">{employment.description}</p>
             </div>
           )) : null}
         </div>
-        <div class="d-flex flex-row-reverse">
-          <button class="btn btn-outline-info btn-add" onClick={() => showPopup(ADD_NEW_EMPLOYMENT, true)}>Add</button>
+        <div className="d-flex flex-row-reverse">
+          <button className="btn btn-outline-info btn-add" onClick={() => showPopup(ADD_NEW_EMPLOYMENT, true)}>Add</button>
         </div>
       </div>
     </div>

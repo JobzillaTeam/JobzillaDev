@@ -43,7 +43,7 @@ const LeftNavCandidate = () => {
                         </NavLink>
                     </li>
                     <li data-toggle="tooltip" data-placement="right" title="Interviews">
-                        <Link className={`subMenu ${!isJobDropdownOpen ? 'collapsed' : ''}`} id="navbarDropdown" role="button"
+                        <Link to="#" className={`subMenu ${!isJobDropdownOpen ? 'collapsed' : ''}`} id="navbarDropdown" role="button"
                             data-toggle="collapse" data-target="#submenu1sub1">
                             <i><img src="/images/Candidate-Navbar-assets/interviews-icon.svg" aria-hidden="true" /></i>
                             <span className="menuText">Interviews</span>

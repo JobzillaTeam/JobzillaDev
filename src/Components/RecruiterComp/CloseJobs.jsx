@@ -127,10 +127,10 @@ class CloseJobs extends React.Component {
         <div className="maincontent">
           <HeaderAll></HeaderAll>
           <section class="content_section">
-            <div class="row py-4">
-              <div class="col-md-6">
-                <h5 class="job-heading">Closed Jobs</h5>
-                <p class="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} closed jobs, View <span class="job-accepted"><Link to="/activeJob" class="job-accept">Active</Link></span></p>
+            <div className="row py-4">
+              <div className="col-md-6">
+                <h5 className="job-heading">Closed Jobs</h5>
+                <p className="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} closed jobs, View <span class="job-accepted"><Link to="/activeJob" class="job-accept">Active</Link></span></p>
               </div>
               <div className="col-md-6 text-md-right">
                 <Link to="/createJob">
@@ -138,15 +138,15 @@ class CloseJobs extends React.Component {
                 </Link>
               </div>
             </div>
-            <section class="ml-0">
-              <div class="bg-white">
-                <div class="col-md-12 mx-0 py-4 px-4" style={{marginBottom: '1px'}}>
+            <section className="ml-0">
+              <div className="bg-white">
+                <div className="col-md-12 mx-0 py-4 px-4" style={{marginBottom: '1px'}}>
                   <div className="form-group mb-0">
-                    <div class="row mx-0 d-flex justify-content-between">
-                      <div class="input-group job-search">
-                        <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search by job title, skills, location" id="example-search-input" onChange={this.handleInputChange} />
-                        <span class="input-group-append">
-                          <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+                    <div className="row mx-0 d-flex justify-content-between">
+                      <div className="input-group job-search">
+                        <input className="form-control py-2 border-right-0 border" type="search" placeholder="Search by job title, skills, location" id="example-search-input" onChange={this.handleInputChange} />
+                        <span className="input-group-append">
+                          <div className="input-group-text bg-transparent"><i className="fa fa-search"></i></div>
                         </span>
                       </div>
                       <div class="dropdown">
@@ -178,18 +178,18 @@ class CloseJobs extends React.Component {
                     resourceJobs && resourceJobs[0] ? resourceJobs.map((resourceJob, resourceIndex) => {
                       const { jobDetails } = resourceJob;
                       return (
-                        <div class="bg-white mb-4">
-                          <section class={`row mx-0 px-4 pt-4 pb-4`}>
-                            <div class="col-md-12 px-0">
-                              <div class="row">
-                                <div class="col-md-12 job-title">
+                        <div className="bg-white mb-4" key={jobDetails.jobId}>
+                          <section className={`row mx-0 px-4 pt-4 pb-4`}>
+                            <div className="col-md-12 px-0">
+                              <div className="row">
+                                <div className="col-md-12 job-title">
                                   <Link to={`/recruiter/jobDetails/closed/${jobDetails.jobId}`}>
                                     {jobDetails.jobTitle}
                                   </Link>
-                                  <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
+                                  <span className="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
                                 </div>
                               </div>
-                              <ul class="job-skills">
+                              <ul className="job-skills">
                                 <li><img src="/images/icons/category.svg" />{jobDetails.category}</li>
                                 <li><img src="/images/icons/experience.svg" />{jobDetails.experienceReqFrom}-{jobDetails.experienceReqTo} years</li>
                                 <li><img src="/images/icons/job_role.svg" />{jobDetails.employmentType}</li>
@@ -200,7 +200,7 @@ class CloseJobs extends React.Component {
                             </div>
                           </section>
                           <ClosedJobCandidates joinedCandidates={resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList[0] && resourceJob.joinedCandidateRecruitmentList.slice(0, 3)} />
-                          <div class="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/recruiter/jobDetails/closed/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div className="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/recruiter/jobDetails/closed/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
                         </div>
                       )
                     }) : null

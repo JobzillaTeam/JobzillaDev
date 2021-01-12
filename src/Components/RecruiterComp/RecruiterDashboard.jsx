@@ -9,9 +9,6 @@ import BarGraphRecruiter from '../CommonComp/DashboardComp/BarGraphRecruiter';
 import TopSkillsRecruiter from '../CommonComp/DashboardComp/TopSkillsRecruiter';
 
 export default class RecruiterDashboard extends Component {
-    constructor(props){
-        super(props)
-    }
     render() {  
         return (
             <div>    
