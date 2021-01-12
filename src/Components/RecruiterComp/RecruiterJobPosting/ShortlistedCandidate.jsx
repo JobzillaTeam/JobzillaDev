@@ -146,7 +146,7 @@ class ShortlistedCandidate extends Component {
                                         {data.isResumeAvailable ?
                                             <td>
                                                 <div style={{ cursor: 'pointer' }} onClick={() => this.downloadResume(data.candidate.candidateId)}><img src="/images/icons/Group 555.svg"></img> Download Resume</div>
-                                            </td> : <div></div>}
+                                            </td> : <td></td>}
                                     </tr>)}
                             </tbody>
                         </table>

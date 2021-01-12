@@ -130,12 +130,14 @@ class EditUser extends Component {
               <fieldset disabled="disabled">
                 <div className="form-group">
                   <label htmlFor="userName">Name</label>
-                  <input type="text" id="userName" name="userName" className="form-control" value={this.state.fields.userName} />
+                  <input type="text" id="userName" name="userName" className="form-control" 
+                  defaultValue={this.state.fields.userName} />
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="userEmail">Official Email</label>
-                  <input type="email" id="userEmail" name="email" className="form-control" value={this.state.fields.email} />
+                  <input type="email" id="userEmail" name="email" className="form-control" 
+                  defaultValue={this.state.fields.email} />
                 </div>
               </fieldset>
               <div className="form-group">
@@ -150,13 +152,15 @@ class EditUser extends Component {
 
               <div className="form-group">
                 <label htmlFor="userRole">Role</label>
-                <select id="userRole" name="userRole" className="form-control" value={this.state.fields.userRole} onChange={(e) => { this.handleChange(e); this.validateForm() }}
+                <select id="userRole" name="userRole" className="form-control" 
+                defaultValue={this.state.fields.userRole} 
+                onChange={(e) => { this.handleChange(e); this.validateForm() }}
                   onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} >
                   {
                     this.state.formSubmitted ?
                       <div className="errorMsg">{this.state.errors.userRole}</div> : ''
                   }
-                  <option value="select role" selected>Select Role </option>
+                  <option defaultValue="select role">Select Role </option>
                   <option value="Admin">Admin</option>
                   <option value="User">User</option>
                 </select>
