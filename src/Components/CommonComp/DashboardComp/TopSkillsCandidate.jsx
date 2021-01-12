@@ -67,7 +67,11 @@ export default class TopSkillsCandidate extends Component {
                                                 </div>
                                             </td>
                                         </tr>
-                                        : null
+                                        : 
+                                        <tr>
+                                        <td className="skills-section mt-4 skills-section-padding">No Skills Found</td>
+                                        </tr>
+    
                                     }
                                     {(this.state.skill2 && this.state.skill2Count) ?
                                         <tr>

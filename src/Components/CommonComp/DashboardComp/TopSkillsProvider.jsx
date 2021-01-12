@@ -70,7 +70,10 @@ export default class TopSkillsProvider extends Component {
                                                 </div>
                                             </td>
                                         </tr>
-                                        : <div className="skills-section mt-4 skills-section-padding">No Skills Found</div>
+                                        : 
+                                        <tr>
+                                    <td className="skills-section mt-4 skills-section-padding">No Skills Found</td>
+                                       </tr>
                                     }
                                     {(this.state.skill2 && this.state.skill2Count) ?
                                         <tr>
