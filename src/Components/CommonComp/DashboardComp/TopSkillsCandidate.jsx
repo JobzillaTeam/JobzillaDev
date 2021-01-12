@@ -62,7 +62,7 @@ export default class TopSkillsCandidate extends Component {
                                             <td className="border-top-0">
                                                 <div className="progressbar-text" style={{ width: `${(this.state.skill1Count / this.state.totalOpenPositions) * 100}%` }}>{this.state.skill1Count}</div>
                                                 <div className="progress2 progress-fashion2 marB20" >
-                                                    <div className="progress-bar2 color-blue marT20" style={{ width: `${(this.state.skill1Count / this.state.totalOpenPositions) * 100}%` }} role="progressbar" aria-valuenow={this.state.skill2Count} aria-valuemin="0" aria-valuemax="5">
+                                                    <div className="progress-bar2 color-blue marT20" style={{ width: `${(this.state.skill1Count / this.state.totalOpenPositions) * 100}%` }} role="progressbar"  aria-valuemin="0" aria-valuemax="5">
                                                     </div>
                                                 </div>
                                             </td>
@@ -77,7 +77,7 @@ export default class TopSkillsCandidate extends Component {
                                             <td className="border-top-0">
                                                 <div className="progressbar-text" style={{ width: `${(this.state.skill2Count / this.state.totalOpenPositions) * 100}%` }}>{this.state.skill2Count}</div>
                                                 <div className="progress2 progress-fashion2 marB20" >
-                                                    <div className="progress-bar2 color-pink marT20" style={{ width: `${(this.state.skill2Count / this.state.totalOpenPositions) * 100}%` }} role="progressbar" aria-valuenow={this.state.angular} aria-valuemin="0" aria-valuemax="100">
+                                                    <div className="progress-bar2 color-pink marT20" style={{ width: `${(this.state.skill2Count / this.state.totalOpenPositions) * 100}%` }} role="progressbar" aria-valuemin="0" aria-valuemax="100">
                                                     </div>
                                                 </div>
                                             </td>
@@ -110,7 +110,7 @@ export default class TopSkillsCandidate extends Component {
                                             <td className="border-top-0">
                                                 <div className="progressbar-text" style={{ width: `${(this.state.skill3Count / this.state.totalOpenPositions) * 100}%` }}>{this.state.skill3Count}</div>
                                                 <div className="progress2 progress-fashion2 marB20 " >
-                                                    <div className="progress-bar2 color-green marT20" style={{ width: `${(this.state.skill3Count / this.state.totalOpenPositions) * 100}%` }} role="progressbar" aria-valuenow={this.state.mongoDb} aria-valuemin="0" aria-valuemax="3000">
+                                                    <div className="progress-bar2 color-green marT20" style={{ width: `${(this.state.skill3Count / this.state.totalOpenPositions) * 100}%` }} role="progressbar"  aria-valuemin="0" aria-valuemax="3000">
                                                     </div>
                                                 </div>
                                             </td>
@@ -125,7 +125,7 @@ export default class TopSkillsCandidate extends Component {
                                             <td className="border-top-0">
                                                 <div className="progressbar-text" style={{ width: `${(this.state.skill4Count / this.state.totalOpenPositions) * 100}%` }}>{this.state.skill4Count}</div>
                                                 <div className="progress2 progress-fashion2 marB20" >
-                                                    <div className="progress-bar2 color-yellow marT20" style={{ width: `${(this.state.skill4Count / this.state.totalOpenPositions) * 100}%` }} role="progressbar" aria-valuenow="80%" aria-valuemin="0" aria-valuemax="3000">
+                                                    <div className="progress-bar2 color-yellow marT20" style={{ width: `${(this.state.skill4Count / this.state.totalOpenPositions) * 100}%` }} role="progressbar" aria-valuemin="0" aria-valuemax="3000">
                                                     </div>
                                                 </div>
 

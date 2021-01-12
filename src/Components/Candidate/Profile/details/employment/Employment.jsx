@@ -23,7 +23,7 @@ const EmploymentComponent = ({ showPopup }) => {
       empB.workedTillMonth = fullMonth;
       empB.workedTillYear = fullYear
     }
-    if (empA.workedTillMonth && empA.workedTillYear && empB.workedTillMonth, empB.workedTillYear) {
+    if (empA.workedTillMonth && empA.workedTillYear && empB.workedTillMonth && empB.workedTillYear) {
       const startMonthValue = parseInt(moment().month(empA.workedTillMonth).format("M")) - 1;
       const endMonthValue = parseInt(moment().month(empB.workedTillMonth).format("M")) - 1;
       const startDate = new Date(parseInt(empA.workedTillYear), empA.currentCompany ? empA.workedTillMonth : startMonthValue).getTime();

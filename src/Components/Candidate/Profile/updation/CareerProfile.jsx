@@ -11,7 +11,7 @@ const CareerProfileComponent = ({ showPopup }) => {
   const { state, getProfileInfo } = useContext(Context);
   const initialCustomInputValues = { preferredShift: '', preferredLocations: [] };
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
-  const { handleSubmit, register, errors, setValue, clearErrors, getValues } = useForm({
+  const { handleSubmit, register, errors, setValue } = useForm({
     mode: 'onSubmit',
     defaultValues: careerProfileFormDefaultValues
   });

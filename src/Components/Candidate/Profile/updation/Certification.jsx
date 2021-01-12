@@ -9,7 +9,7 @@ import moment from 'moment';
 
 const CertificationComponent = ({ dataAttributes, showPopup }) => {
   let certificationNameInput = '';
-  const { handleSubmit, getValues, register, errors, setValue, reset, setError, clearErrors } = useForm({
+  const { handleSubmit, getValues, register, errors, setValue, setError, clearErrors } = useForm({
     mode: 'onSubmit',
     defaultValues: certificationFormDefaultValues
   });

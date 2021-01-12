@@ -10,7 +10,7 @@ const ProfileNameComponent = ({ showPopup }) => {
   const initialCustomInputValues = {mobileNumber: ''}
   const [customInputValues, setCustomInputValues] = React.useState(initialCustomInputValues);
   const { state, getProfileInfo } = React.useContext(Context);
-  const { handleSubmit, register, errors, setValue, clearErrors, getValues, setError } = useForm({
+  const { handleSubmit, register, errors, setValue, clearErrors, setError } = useForm({
     mode: 'onSubmit',
     defaultValues: profileNameFormDefaultValues
   });

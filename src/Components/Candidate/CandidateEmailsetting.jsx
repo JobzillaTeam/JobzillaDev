@@ -159,7 +159,6 @@ class CandidateEmailSetting extends Component {
     }
 
     render() {
-        const status = localStorage.getItem('status')
         return (
             <div className="content">
                 <Toast className="toast_padding" ref={(el) => this.toast = el} />
