@@ -121,18 +121,18 @@ const CandidateJobDetails = (props) => {
                     <div className="row">
                       <div className="col-md-12 job-title-link align-items-center" style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <div style={{ display: 'flex' }}>
-                          <a href="#"><h5 class="mb-0"> {jobDetails.jobTitle}</h5></a>
+                          <a href="#"><h5 className="mb-0"> {jobDetails.jobTitle}</h5></a>
                           <span className="job-posting"> Posted {jobDetails.postedAt} day ago</span>
                           <span className="ml-3 job-posting">{jobDetails.orgName}</span>
                         </div>
-                        {isInterviewStatus ? <div><img src="/images/icons/interview_status.svg" /><span class="ml-2"><strong>Interview Status:</strong></span><span class="ml-2" style={{ color: '#768594' }}>{interviewStatus}</span></div> : ''}
+                        {isInterviewStatus ? <div><img src="/images/icons/interview_status.svg" /><span className="ml-2"><strong>Interview Status:</strong></span><span className="ml-2" style={{ color: '#768594' }}>{interviewStatus}</span></div> : ''}
                         <div className="others_section_secondcol1">
                           <div>{jobDetails.isDeleted === true ? 'This job is no longer valid' : null} </div>
                         </div>
 
                       </div>
                     </div>
-                    <ul class="job-skills">
+                    <ul className="job-skills">
                       <li><img src="/images/icons/category.svg" />{jobDetails.category}</li>
                       <li><img src="/images/icons/experience.svg" />{jobDetails.experienceReqFrom}-{jobDetails.experienceReqTo} years</li>
                       <li><img src="/images/icons/job_role.svg" />{jobDetails.employmentType}</li>

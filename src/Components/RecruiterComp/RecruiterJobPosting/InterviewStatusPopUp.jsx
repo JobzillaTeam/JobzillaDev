@@ -130,7 +130,7 @@ class InterviewStatusPopUp extends Component {
                   onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} >
                   {
                     this.state.formSubmitted ?
-                      <div className="errorMsg">{this.state.errors.interViewStatus}</div> : ''
+                      <option className="errorMsg">{this.state.errors.interViewStatus}</option> : ''
                   }
                   <option>Select Status</option>
                   <option value="Interviewed">Interviewed</option>
