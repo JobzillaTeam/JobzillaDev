@@ -58,12 +58,12 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
   if (candidateInfo) {
     const { firstName, lastName, currentRole, company, address, mobileNumber, emailId } = candidateInfo;
     return (
-      <div class="bg-white pl-3 pr-5 py-5 section-divider align-items-center">
+      <div className="bg-white pl-3 pr-5 py-5 section-divider align-items-center">
         <Toast className="toast_padding" ref={toast} />
-        <div class="row align-items-center">
-          <div class="col col-md-3 col-xs-12 align-items-center">
-            {imagUrl ? <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" class="rounded-circle" alt="usera avatar" />
-              : <img src="/images/Dashboard-assets/user-f.png" height="175" width="175" class="rounded-circle" alt="User profile" />}
+        <div className="row align-items-center">
+          <div className="col col-md-3 col-xs-12 align-items-center">
+            {imagUrl ? <img src={`data:image/jpeg;base64,${imagUrl}`} height="175" width="175" className="rounded-circle" alt="usera avatar" />
+              : <img src="/images/Dashboard-assets/user-f.png" height="175" width="175" className="rounded-circle" alt="User profile" />}
 
             <label htmlFor='picture'>
               <img src="/images/Dashboard-assets/ar_camera.svg" style={{ cursor: "pointer" }}
@@ -78,28 +78,28 @@ const InformationComponent = ({ showPopup, candidateProfile }) => {
               />
             </form>
           </div>
-          <div class="col col-md-9 col-xs-12 align-items-center">
+          <div className="col col-md-9 col-xs-12 align-items-center">
             <div>
-              <img src="/images/Dashboard-assets/iconfinder_edit.svg" class="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_PROFILE_NAME, true)} />
-              <h3 class="mb-2 wd-ba">{`${firstName} ${lastName}`}</h3>
+              <img src="/images/Dashboard-assets/iconfinder_edit.svg" className="float-right profile__editIcon" alt="Cinque Terre" onClick={() => showPopup(EDIT_PROFILE_NAME, true)} />
+              <h3 className="mb-2 wd-ba">{`${firstName} ${lastName}`}</h3>
             </div>
-            <span class="visible-lg-inline  wd-ba">{currentRole} at {company}</span>
-            <hr class="mb-4" />
-            <div class="row">
-              <div class="col col-md-4 col-xs-12">
+            <span className="visible-lg-inline  wd-ba">{currentRole} at {company}</span>
+            <hr className="mb-4" />
+            <div className="row">
+              <div className="col col-md-4 col-xs-12">
                 <img src="/images/Dashboard-assets/candidate/location.png" alt="Cinque Terre" />
-                <span class="normal-text-medium mgl-10  wd-ba">{address}</span>
+                <span className="normal-text-medium mgl-10  wd-ba">{address}</span>
               </div>
-              <div class="col col-md-4 col-xs-12 pl-0">
+              <div className="col col-md-4 col-xs-12 pl-0">
                 <img src="/images/Dashboard-assets/candidate/mobile.png" alt="Cinque Terre" />
-                <span class="normal-text-medium mgl-10  wd-ba">{mobileNumber}</span>
+                <span className="normal-text-medium mgl-10  wd-ba">{mobileNumber}</span>
               </div>
-              <div class="col col-md-4 col-xs-12 pl-0">
+              <div className="col col-md-4 col-xs-12 pl-0">
                 <img src="/images/Dashboard-assets/candidate/message.png" alt="Cinque Terre" />
-                <span class="normal-text-medium mgl-10  wd-ba">{emailId}</span>
+                <span className="normal-text-medium mgl-10  wd-ba">{emailId}</span>
               </div>
             </div>
-            <div class="col-9 pl-0 mt-3">
+            <div className="col-9 pl-0 mt-3">
               <div className="progressbar-text" style={{ width: `${progressbar}%` }}>{progressbar}%</div>
               <div className="progress progress-fashion marB20" >
                 <div className="progress-bar bg-success marT20" style={{ width: `${progressbar}%` }} role="progressbar" aria-valuenow={progressbar} aria-valuemin="0" aria-valuemax="100">

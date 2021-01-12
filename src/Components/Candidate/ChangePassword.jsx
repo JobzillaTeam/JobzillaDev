@@ -128,20 +128,20 @@ class ChangePassword extends Component {
         <Toast className="toast_padding" ref={(el) => this.toast = el} />
         <div className="content">
           <HeaderAll isCandidate={true}></HeaderAll>
-          <section class="content_section main">
-            <div class="row">
-              <div class="col-md-12 pb-2 pt-2">
+          <section className="content_section main">
+            <div className="row">
+              <div className="col-md-12 pb-2 pt-2">
                 <Link className="backtodashboard" to="/candidate/dashboard">
                   <i className="pi pi-angle-left" />Dashboard
                                     </Link>
               </div>
-              <div class="col-md-12 pb-2 pt-2">
-                <p class="pass-header">Change Password</p>
-                <p class="pass-headerhelptext">You can change password from here</p>
+              <div className="col-md-12 pb-2 pt-2">
+                <p className="pass-header">Change Password</p>
+                <p className="pass-headerhelptext">You can change password from here</p>
               </div></div>
 
-            <section class="white-middle-section ml-0 mr-1">
-              <section class="password-card">
+            <section className="white-middle-section ml-0 mr-1">
+              <section className="password-card">
                 <div className="form-group old-password">
                   <label htmlFor="oldPassword">Old Password</label>
                   <input id="oldPassword" className="form-control" name="oldPassword" value={this.state.fields.oldPassword} onChange={this.onChange} type={revealOldPassword ? "text" : "password"} placeholder="Enter Old Password" ref={this.oldPasswordRef}

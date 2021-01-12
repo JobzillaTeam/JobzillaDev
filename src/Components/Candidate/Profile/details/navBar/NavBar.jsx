@@ -59,7 +59,7 @@ export class NavBar extends React.Component {
       <div className='main'>
         <div className='profile__button_group' id="profileNavbar">
           <div
-            class={`profileTabs ${this.state.currentTabIndex === 0 ? 'profileTabsSelected' : ''}`}
+            className={`profileTabs ${this.state.currentTabIndex === 0 ? 'profileTabsSelected' : ''}`}
             onClick={() => {
               scrollToComponent(this.AboutSection, {
                 offset: this.state.offset,
@@ -72,7 +72,7 @@ export class NavBar extends React.Component {
             About
           </div>
           <div
-            class={`profileTabs ${this.state.currentTabIndex === 1 ? 'profileTabsSelected' : ''}`}
+            className={`profileTabs ${this.state.currentTabIndex === 1 ? 'profileTabsSelected' : ''}`}
             onClick={() => {
               scrollToComponent(this.ResumeSection, {
                 offset: this.state.offset,
@@ -85,7 +85,7 @@ export class NavBar extends React.Component {
             Resume
           </div>
           <div
-            class={`profileTabs ${this.state.currentTabIndex === 2 ? 'profileTabsSelected' : ''}`}
+            className={`profileTabs ${this.state.currentTabIndex === 2 ? 'profileTabsSelected' : ''}`}
             onClick={() => {
               scrollToComponent(this.SkillsSection, {
                 offset: this.state.offset,
@@ -98,7 +98,7 @@ export class NavBar extends React.Component {
             Skills
           </div>
           <div
-            class={`profileTabs ${this.state.currentTabIndex === 3 ? 'profileTabsSelected' : ''}`}
+            className={`profileTabs ${this.state.currentTabIndex === 3 ? 'profileTabsSelected' : ''}`}
             onClick={() => {
               scrollToComponent(this.EducationSection, {
                 offset: this.state.offset,
@@ -111,7 +111,7 @@ export class NavBar extends React.Component {
             Education & Certifications
           </div>
           <div
-            class={`profileTabs ${this.state.currentTabIndex === 4 ? 'profileTabsSelected' : ''}`}
+            className={`profileTabs ${this.state.currentTabIndex === 4 ? 'profileTabsSelected' : ''}`}
             onClick={() => {
               scrollToComponent(this.EmploymentSection, {
                 offset: this.state.offset,
@@ -124,7 +124,7 @@ export class NavBar extends React.Component {
             Employment
           </div>
           <div
-            class={`profileTabs ${this.state.currentTabIndex === 5 ? 'profileTabsSelected' : ''}`}
+            className={`profileTabs ${this.state.currentTabIndex === 5 ? 'profileTabsSelected' : ''}`}
             onClick={() => {
               scrollToComponent(this.PersonalDetailsSection, {
                 offset: this.state.offset,
@@ -138,12 +138,12 @@ export class NavBar extends React.Component {
           </div>
         </div >
         {(!this.props.candidateProfile) ? (
-          <div class='mt-5'>
+          <div className='mt-5'>
             <RenderLoader />
           </div>
         ) : (
             <div>
-              <section class="mb-3"
+              <section className="mb-3"
                 ref={(section) => {
                   this.AboutSection = section;
                 }}
@@ -161,21 +161,21 @@ export class NavBar extends React.Component {
                   careerProfile={this.props.candidateProfile.careerProfile}
                 />
               </section>
-              <section class="mb-3"
+              <section className="mb-3"
                 ref={(section) => {
                   this.ResumeSection = section;
                 }}
               >
                 <Resume showPopup={this.props.showPopup} />
               </section>
-              <section class="mb-3"
+              <section className="mb-3"
                 ref={(section) => {
                   this.SkillsSection = section;
                 }}
               >
                 <Skills showPopup={this.props.showPopup} />
               </section>
-              <section class="mb-3"
+              <section className="mb-3"
                 ref={(section) => {
                   this.EducationSection = section;
                 }}
@@ -183,14 +183,14 @@ export class NavBar extends React.Component {
                 <Education showPopup={this.props.showPopup} />
                 <Certifications showPopup={this.props.showPopup} />
               </section>
-              <section class="mb-3"
+              <section className="mb-3"
                 ref={(section) => {
                   this.EmploymentSection = section;
                 }}
               >
                 <Employment showPopup={this.props.showPopup} />
               </section>
-              <section class="mb-3"
+              <section className="mb-3"
                 ref={(section) => {
                   this.PersonalDetailsSection = section;
                 }}

@@ -229,15 +229,15 @@ class Resume extends Component {
 
     return (
 
-      <div class="bg-white px-4 py-4 section-divider align-items-center">
+      <div className="bg-white px-4 py-4 section-divider align-items-center">
         <Toast className="toast_padding" ref={(el) => this.toast = el} />
-        <div class="col">
-          <div class="mb-4 align-items-center">
-            <img src="/images/Dashboard-assets/resume-icon.svg" alt="Cinque Terre" class="mr-2" />
-            <span class="subtitle-semi-bold">Upload Resume</span>
+        <div className="col">
+          <div className="mb-4 align-items-center">
+            <img src="/images/Dashboard-assets/resume-icon.svg" alt="Cinque Terre" className="mr-2" />
+            <span className="subtitle-semi-bold">Upload Resume</span>
           </div>
         </div>
-        <div class="col-12 mb-3">
+        <div className="col-12 mb-3">
           {
             d = new Date(this.state.createdDate),
             day = d.getDate(),
@@ -246,17 +246,17 @@ class Resume extends Component {
             fullDate = day + '-' + month + '-' + year,
             console.log(fullDate)
           }
-          <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" class={`ml-4 mr-2 left-sec-icon profile__editIcon ${hasAttachedDocument ? '' : 'disabledCursorOnIcon'}`} onClick={this.downloadResume} />
-          <span class="mr-3" style={{ color: '#007EFF' }}>{this.state.fileName}</span>
-          {/* <span class="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span> */}
+          <img src="/images/Dashboard-assets/candidate/push-chevron-down-o.png" alt="Cinque Terre" className={`ml-4 mr-2 left-sec-icon profile__editIcon ${hasAttachedDocument ? '' : 'disabledCursorOnIcon'}`} onClick={this.downloadResume} />
+          <span className="mr-3" style={{ color: '#007EFF' }}>{this.state.fileName}</span>
+          {/* <span className="mr-3" style={{ color: '#007EFF' }}>{localStorage.getItem("DraggedFile")}</span> */}
 
           <span>{this.state.createdDate ? <span> Last updated on {fullDate}</span> : <span></span>}</span>
 
-          <span class="float-right"> {hasAttachedDocument
+          <span className="float-right"> {hasAttachedDocument
             ? <a className="download_sample_link d-block" href="#" onClick={this.confirmDeleteProduct}>Delete Resume</a>
             : <a className="download_sample_link d-block disabledCursor " href="#" >Delete Resume</a>}</span>
         </div>
-        <div class="col">
+        <div className="col">
           <section className="content_section1">
             <div className="ml-0 mr-1">
               <section className="white-middle-section5 mt-7">
@@ -312,7 +312,7 @@ class Resume extends Component {
                     <p className="text-center1 mt-1">Maximum File size 1 MB</p>
                   </div>
                 </div>
-                {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
+                {this.state.isLoading ? <div className="pt-4"><RenderLoader /></div> : null}
               </section>
               <div className="ml-2 mt-6">
                 <button type="button" className="btn btn-blue-upload" onClick={this.uploadFile}>Upload</button>

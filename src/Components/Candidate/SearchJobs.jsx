@@ -105,22 +105,22 @@ const SearchJobs = () => {
       <LeftNavCandidate></LeftNavCandidate>
       <div className="maincontent">
         <HeaderAll isCandidate={true}></HeaderAll>
-        <section class="content_section">
-          <div class="row">
-            <div class="col-md-12 py-4">
-              <h5 class="job-heading">Job Listings</h5>
-              <p class="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} Jobs</p>
+        <section className="content_section">
+          <div className="row">
+            <div className="col-md-12 py-4">
+              <h5 className="job-heading">Job Listings</h5>
+              <p className="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} Jobs</p>
             </div>
           </div>
-          <section class="bg-white ml-0">
-            <div class="">
-              <div class="col-md-12 mx-0 py-4 px-4">
+          <section className="bg-white ml-0">
+            <div className="">
+              <div className="col-md-12 mx-0 py-4 px-4">
                 <div className="form-group">
-                  <div class="row mx-0 d-flex justify-content-between">
-                    <div class="input-group job-search">
-                      <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search by job title, skills, location" id="example-search-input" onChange={handleInputChange} />
-                      <span class="input-group-append">
-                        <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+                  <div className="row mx-0 d-flex justify-content-between">
+                    <div className="input-group job-search">
+                      <input className="form-control py-2 border-right-0 border" type="search" placeholder="Search by job title, skills, location" id="example-search-input" onChange={handleInputChange} />
+                      <span className="input-group-append">
+                        <div className="input-group-text bg-transparent"><i className="fa fa-search"></i></div>
                       </span>
                     </div>
                     <div className="sortDropdown mx-10 justify-content-between">
@@ -142,24 +142,24 @@ const SearchJobs = () => {
               hasMore={cloneResourceJobs.length >= pageDataLength}
               loader={<RenderLoader />}
             >
-              <div class='jobListItems'>
+              <div className='jobListItems'>
                 {
                   resourceJobs && resourceJobs[0] ? resourceJobs.map((resourceJob, resourceIndex) => {
                     const { jobDetails } = resourceJob;
                     return (
-                      <div class="jobListItem">
-                        <section class={`row mx-0 px-4 ${resourceIndex !== 0 && 'pt-4'} pb-4`}>
-                          <div class="col-md-9 px-0">
-                            <div class="row">
-                              <div class="col-md-12 job-title">
+                      <div className="jobListItem" key={jobDetails.jobId}>
+                        <section className={`row mx-0 px-4 ${resourceIndex !== 0 && 'pt-4'} pb-4`}>
+                          <div className="col-md-9 px-0">
+                            <div className="row">
+                              <div className="col-md-12 job-title">
                                 <Link to={getPath(jobDetails.jobId, jobDetails.applicationStatus)}>
                                   {jobDetails.jobTitle}
                                 </Link>
-                                <span class="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
-                                <span class="ml-3 job-posting">{jobDetails.orgName}</span>
+                                <span className="ml-3 job-posting">Posted {jobDetails.postedAt} day ago</span>
+                                <span className="ml-3 job-posting">{jobDetails.orgName}</span>
                               </div>
                             </div>
-                            <ul class="job-skills">
+                            <ul className="job-skills">
                               <li><img src="/images/icons/category.svg" />{jobDetails.category}</li>
                               <li><img src="/images/icons/experience.svg" />{jobDetails.experienceReqFrom}-{jobDetails.experienceReqTo} years</li>
                               <li><img src="/images/icons/job_role.svg" />{jobDetails.employmentType}</li>
@@ -167,12 +167,12 @@ const SearchJobs = () => {
                               <li><img src="/images/icons/technology.svg" /> {jobDetails.primarySkills}</li>
                               <li><img src="/images/icons/vaccency.svg" />{jobDetails.noOfPositionsAvailable}</li>
                             </ul>
-                            <h6 class="job-desc mt-3">Job Description</h6>
+                            <h6 className="job-desc mt-3">Job Description</h6>
                             {jobDetails.jobDescription}
                           </div>
-                          <div class="col-md-3 px-0">
-                            <div class="job-circle float-right">
-                              <div class="job-text-wrap">
+                          <div className="col-md-3 px-0">
+                            <div className="job-circle float-right">
+                              <div className="job-text-wrap">
                                 <div style={{ width: 65, height: 65 }}>
                                   <CircularProgressbarWithChildren styles={{
                                     path: {
@@ -190,7 +190,7 @@ const SearchJobs = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 px-0 text-right marB10"><Link to={getPath(jobDetails.jobId, jobDetails.applicationStatus)}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div className="col-12 px-0 text-right marB10"><Link to={getPath(jobDetails.jobId, jobDetails.applicationStatus)}>view details <img src="/images/icons/view_details_arrow.svg" className="detail-arrow" /></Link></div>
                         </section>
                       </div>
                     )
