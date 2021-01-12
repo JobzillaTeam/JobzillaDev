@@ -108,22 +108,22 @@ const CandidateJobDetails = (props) => {
       <div className="maincontent">
         <HeaderAll isCandidate={true}></HeaderAll>
         <div className="content_section">
-          <div class="row">
-            <div class="col-md-12 py-4">
-              <h5 class="job-heading"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
+          <div className="row">
+            <div className="col-md-12 py-4">
+              <h5 className="job-heading"><Link className="link" to={perviousLink}>{perviousLinkText}</Link> > Job Details</h5>
             </div>
           </div>
           {jobDetails && <div>
             <div className="card mb-4">
               <div className="card-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="row">
-                      <div class="col-md-12 job-title-link align-items-center" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="row">
+                      <div className="col-md-12 job-title-link align-items-center" style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <div style={{ display: 'flex' }}>
                           <a href="#"><h5 class="mb-0"> {jobDetails.jobTitle}</h5></a>
-                          <span class="job-posting"> Posted {jobDetails.postedAt} day ago</span>
-                          <span class="ml-3 job-posting">{jobDetails.orgName}</span>
+                          <span className="job-posting"> Posted {jobDetails.postedAt} day ago</span>
+                          <span className="ml-3 job-posting">{jobDetails.orgName}</span>
                         </div>
                         {isInterviewStatus ? <div><img src="/images/icons/interview_status.svg" /><span class="ml-2"><strong>Interview Status:</strong></span><span class="ml-2" style={{ color: '#768594' }}>{interviewStatus}</span></div> : ''}
                         <div className="others_section_secondcol1">

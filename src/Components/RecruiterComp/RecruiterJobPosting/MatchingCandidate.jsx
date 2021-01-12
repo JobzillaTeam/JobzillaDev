@@ -108,7 +108,7 @@ export default class MatchingCandidate extends Component {
                                     {this.state.candidate.map((data1, index) => {
                                         const data = data1.candidate;
                                         return (
-                                            <tr className="candidateTable  wd-ba">
+                                            <tr className="candidateTable  wd-ba" key={data.user.id}>
                                                 <td>
                                                     <Link to={`/candidateProfileToOpen/${data.user.id}`}><p className="tb-title-text">{data.firstName} {data.lastName}</p> </Link>
                                                     <p>{data.currentRole} at {data.company}</p>
