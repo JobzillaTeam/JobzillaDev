@@ -130,8 +130,8 @@ class ChangePasswordPopup extends Component {
         <div className="errorMsg">{this.state.formError}</div>
         <div className="form-group old-password">
           <label htmlFor="oldPassword">Old Password</label>
-          <input id="oldPassword" className="form-control" name="oldPassword" value={this.state.fields.oldPassword} onChange={this.onChange} type={revealOldPassword ? "text" : "password"} placeholder="Enter Old Password" ref={this.oldPasswordRef}
-            value={this.state.fields.oldPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
+          <input id="oldPassword" className="form-control" name="oldPassword"  type={revealOldPassword ? "text" : "password"} placeholder="Enter Old Password" ref={this.oldPasswordRef}
+            value={this.state.fields.oldPassword ||""} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
             onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
           <span className="input-group-append" style={{ height: 0 }} onClick={this.toggleOldPassword}>
             {revealOldPassword ?
@@ -146,7 +146,7 @@ class ChangePasswordPopup extends Component {
         <div className="form-group new-password">
           <label htmlFor="newPassword">New Password</label>
           <input ref={this.newPasswordRef} onChange={this.onChange} type={revealNewPassword ? "text" : "password"} title="Password must contain atleast 8 characters 
-                                       including Uppercase,lowercase and numbers." placeholder="Enter New Password" id="newPassword" className="form-control" name="newPassword" value={this.state.fields.newPassword} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
+                                       including Uppercase,lowercase and numbers." placeholder="Enter New Password" id="newPassword" className="form-control" name="newPassword" value={this.state.fields.newPassword ||""} onChange={(e) => { this.handleChange(e); this.validateForm(); }}
             onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
           <span className="input-group-append" title="Password must contain atleast 8 characters 
                                        including Uppercase,lowercase and numbers." style={{ height: 0 }} onClick={this.toggleNewPassword}>
@@ -161,7 +161,7 @@ class ChangePasswordPopup extends Component {
         </div>
         <div className="form-group confirm-password">
           <label htmlFor="confirmPassword">Confirm New Password</label>
-          <input ref={this.confirmPasswordRef} onChange={this.onChange} type="password" id="confirmPassword" placeholder="Enter Comfirm Password" className="form-control" name="confirmPassword" value={this.state.fields.confirmPassword}
+          <input ref={this.confirmPasswordRef} onChange={this.onChange} type="password" id="confirmPassword" placeholder="Enter Comfirm Password" className="form-control" name="confirmPassword" value={this.state.fields.confirmPassword ||""}
             onChange={(e) => { this.handleChange(e); this.validateForm(); }}
             onBlur={(e) => { this.handleTouch(e); this.validateForm(); }} />
           {
