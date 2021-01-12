@@ -62,6 +62,7 @@ class UploadProfile extends Component {
             this.setState({
                 selectedFile: event.target.files[0],
                 select: true
+                
             });
         }
 
@@ -187,8 +188,8 @@ class UploadProfile extends Component {
                             <>
                                 <p className=" marL38 modal-body-title">Candidate profile(s) that could not be created as the email id(s) already exists in system:</p>
                                 <ol className="marL50 modal-body-content">
-                                    {this.state.duplicateId.map(duplicateId => {
-                                        return <li className="modal-body-content">{duplicateId}</li>
+                                    {this.state.duplicateId.map((duplicateId,i) => {
+                                        return <li key ={i} className="modal-body-content">{duplicateId}</li>
                                     })}</ol>
                             </> : <div></div>}
 
@@ -196,8 +197,8 @@ class UploadProfile extends Component {
                             <>
                                 <p className=" marL38 modal-body-title">Candidate profile(s) that were successfully created:</p>
                                 <ol className=" marL50 modal-body-title">
-                                    {this.state.successfullEmail.map(successfullEmail => {
-                                        return <li className="modal-body-content">{successfullEmail}</li>
+                                    {this.state.successfullEmail.map((successfullEmail,i) => {
+                                        return <li key={i} className="modal-body-content">{successfullEmail}</li>
                                     })}
                                 </ol>
                             </> : <div></div>}
@@ -206,8 +207,8 @@ class UploadProfile extends Component {
                             <>
                                 <p className=" marL38 modal-body-title">Candidate profile(s) that could not be created for the following record(s) in CSV as mandatory fields were missed out:</p>
                                 <ol className="marL50 modal-body-title">
-                                    {this.state.rowNosWithAbsenceOfMandatoryFields.map(rowNosWithAbsenceOfMandatoryFields => {
-                                        return <li className="modal-body-content"> Row:{rowNosWithAbsenceOfMandatoryFields}</li>
+                                    {this.state.rowNosWithAbsenceOfMandatoryFields.map((rowNosWithAbsenceOfMandatoryFields,i) => {
+                                        return <li key={i} className="modal-body-content"> Row:{rowNosWithAbsenceOfMandatoryFields}</li>
                                     })}
                                 </ol>
                             </> : <div></div>}
@@ -246,7 +247,7 @@ class UploadProfile extends Component {
 
                                                                     {!isDragActive && 'Click here or drop a file to upload!'}
                                                                     <div className="file-path-wrapper font-blue">
-                                                                        <input className="file-path validate" type="text" value={this.state.DraggedFile.name} placeholder="" />
+                                                                        <input className="file-path validate" type="text" value={this.state.DraggedFile.name ||""} onChange={this.fileValidation} placeholder="" />
 
                                                                     </div>
 
@@ -266,11 +267,11 @@ class UploadProfile extends Component {
                                                         <div className="file-field d-flex-inline">
                                                             <div className="btn btn-blue btn-sm float-left waves-effect waves-light">
                                                                 <span>Choose file</span>
-                                                                <input type="file" id="myFile" name="filename" accept=".csv" files multiple onChange={this.onFileChange} />
+                                                                <input type="file" id="myFile" name="filename" accept=".csv" files="true" multiple onChange={this.onFileChange} />
 
                                                             </div>
                                                             <div className="file-path-wrapper">
-                                                                <input className="file-path validate" type="text" value={this.state.selectedFile.name} placeholder="No file choosen" />
+                                                                <input className="file-path validate" type="text" value={this.state.selectedFile.name ||""} onChange={this.fileValidation} placeholder="No file choosen" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -278,7 +279,7 @@ class UploadProfile extends Component {
                                                 <p className="text-center mt-4">Upload the CSV file with candidate details here. All * marked fields in the CSV file are mandatory for successful creation of Candidate profile.</p>
                                                 {/* Download sample file with API input */}
                                                 <a className="download_sample_link d-block text-center" href="#" onClick={this.downloadEmployeeData}>Download CSV file template</a>
-                                                {this.state.isLoading ? <div class="pt-4"><RenderLoader /></div> : null}
+                                                {this.state.isLoading ? <div className="pt-4"><RenderLoader /></div> : null}
                                             </div>
                                         </div>
                                     </section>
