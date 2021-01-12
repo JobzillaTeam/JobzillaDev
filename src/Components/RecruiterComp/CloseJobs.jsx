@@ -126,11 +126,11 @@ class CloseJobs extends React.Component {
         <LeftNavProvider></LeftNavProvider>
         <div className="maincontent">
           <HeaderAll></HeaderAll>
-          <section class="content_section">
+          <section className="content_section">
             <div className="row py-4">
               <div className="col-md-6">
                 <h5 className="job-heading">Closed Jobs</h5>
-                <p className="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} closed jobs, View <span class="job-accepted"><Link to="/activeJob" class="job-accept">Active</Link></span></p>
+                <p className="job-invite mb-0">You have {cloneResourceJobs && cloneResourceJobs.length ? cloneResourceJobs.length : 0} closed jobs, View <span className="job-accepted"><Link to="/activeJob" className="job-accept">Active</Link></span></p>
               </div>
               <div className="col-md-6 text-md-right">
                 <Link to="/createJob">
@@ -149,7 +149,7 @@ class CloseJobs extends React.Component {
                           <div className="input-group-text bg-transparent"><i className="fa fa-search"></i></div>
                         </span>
                       </div>
-                      <div class="dropdown">
+                      <div className="dropdown">
                         <select ref={input => this.sortMethod = input} className="form-control" id="dropdown" name="dropdown"
                           onChange={this.handleDropdownChange}>
                           <option value="" disabled>Sort by</option>
@@ -200,7 +200,7 @@ class CloseJobs extends React.Component {
                             </div>
                           </section>
                           <ClosedJobCandidates joinedCandidates={resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList && resourceJob.joinedCandidateRecruitmentList[0] && resourceJob.joinedCandidateRecruitmentList.slice(0, 3)} />
-                          <div className="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/recruiter/jobDetails/closed/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" class="detail-arrow" /></Link></div>
+                          <div className="mx-0 px-4 col-12 text-right pb-3"><Link to={{ pathname: `/recruiter/jobDetails/closed/${jobDetails.jobId}` }}>view details <img src="/images/icons/view_details_arrow.svg" className="detail-arrow" /></Link></div>
                         </div>
                       )
                     }) : null
